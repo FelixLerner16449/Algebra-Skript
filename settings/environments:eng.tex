@@ -1,0 +1,200 @@
+
+%Colors for definition
+\definecolor{def_color}			{RGB}{0,84,159}
+\definecolor{def_shade_color}	{RGB}{199,221,242}
+%\definecolor{def_title_color}	{RGB}{0,84,159}
+\definecolor{def_title_color}	{RGB}{0,0,0}
+\definecolor{def_frame_color}	{RGB}{64,127,183}
+
+
+\definecolor{thm_shade_color}	{RGB}{254, 200, 190}
+\definecolor{thm_title_color}	{RGB}{0,0,0}
+\definecolor{thm_frame_color}	{RGB}{255, 40, 10}
+
+
+%color for corollary
+\definecolor{Corollary_color}   {RGB}{120, 82, 168}
+
+%color for remark
+\definecolor{Remark_color}      {RGB}{244, 96, 54}
+
+%color for theorem
+\definecolor{AltTheorem_color}  {RGB}{55, 34, 72}
+
+%color for example
+\definecolor{Example_color}     {RGB}{2, 129, 29}
+
+%color for lemma
+\definecolor{Lemma_color}       {RGB}{254, 228, 140}
+
+%color for proposition
+\definecolor{Proposition_color} {RGB}{66, 179, 173}
+
+%additional colors
+\definecolor{indigo_dye}        {RGB}{0, 72, 124}
+\definecolor{orangepeel}        {rgb}{1.0, 0.62, 0.0}
+\definecolor{blazeorange}       {rgb}{1.0, 0.4, 0.0}
+\definecolor{ferrarired}        {rgb}{1.0, 0.11, 0.0}
+\definecolor{fouriergray}       {RGB}{229,229,229}
+\definecolor{darkfouriergray}       {RGB}{150,150,150}
+
+
+
+
+\newtcbtheorem[number within=section]{definition}{Definition}
+{enhanced jigsaw,breakable,colback=def_shade_color, colframe=def_frame_color,
+coltitle=def_title_color,fonttitle=\bfseries, colbacktitle=def_shade_color,
+borderline={0.5mm}{0mm}{def_frame_color},
+borderline={0.5mm}{0mm}{def_frame_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{def}
+
+
+
+\newtcbtheorem[use counter from=definition]{theorem}{Theorem}
+{enhanced jigsaw,breakable,colback=thm_shade_color,colframe=thm_frame_color,
+coltitle=thm_title_color,fonttitle=\bfseries ,colbacktitle=thm_shade_color,
+borderline={0.5mm}{0mm}{thm_frame_color},
+borderline={0.5mm}{0mm}{thm_frame_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{thm}
+
+
+
+\newtcbtheorem[use counter from=definition]{lemma}{Lemma}
+{enhanced jigsaw,breakable,colback=Lemma_color!50,colframe=Lemma_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Lemma_color!50,
+borderline={0.5mm}{0mm}{Lemma_color},
+borderline={0.5mm}{0mm}{Lemma_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{lem}
+
+
+
+\newtcbtheorem[use counter from=definition]{remark}{Remark}
+{enhanced jigsaw,breakable,colback=blazeorange!40,colframe=blazeorange,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=blazeorange!40,
+borderline={0.5mm}{0mm}{blazeorange},
+borderline={0.5mm}{0mm}{blazeorange},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{rem}
+
+
+
+\newtcbtheorem[use counter from=definition]{corollary}{Corollary}
+{enhanced jigsaw,breakable,colback=Corollary_color!45,colframe=Corollary_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Corollary_color!45,
+borderline={0.5mm}{0mm}{Corollary_color!85},
+borderline={0.5mm}{0mm}{Corollary_color!85},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{cor}
+
+
+
+\newtcbtheorem[use counter from=definition]{proposition}{Proposition}
+{enhanced jigsaw,breakable,colback=Proposition_color!40,colframe=Proposition_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Proposition_color!40,
+borderline={0.5mm}{0mm}{Proposition_color},
+borderline={0.5mm}{0mm}{Proposition_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{prop}
+
+
+
+\newtcbtheorem[use counter from=definition]{example}{Example}
+{enhanced jigsaw,breakable,colback=Example_color!30,colframe=Example_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Example_color!30,
+borderline={0.5mm}{0mm}{Example_color},
+borderline={0.5mm}{0mm}{Example_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{exa}
+
+
+\newtcbtheorem[use counter from=definition]{hypothesis}{Hypothesis}
+{enhanced jigsaw,breakable,colback=Proposition_color!40,colframe=Proposition_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Proposition_color!40,
+borderline={0.5mm}{0mm}{Proposition_color},
+borderline={0.5mm}{0mm}{Proposition_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{hyp}
+
+\newtcbtheorem[use counter from=definition]{claim}{Claim}
+{enhanced jigsaw,breakable,colback=Proposition_color!40,colframe=Proposition_color,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=Proposition_color!40,
+borderline={0.5mm}{0mm}{Proposition_color},
+borderline={0.5mm}{0mm}{Proposition_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{clm}
+
+
+\newtcbtheorem[use counter from=definition]{conjecture}{Conjecture}
+{enhanced jigsaw,breakable,colback=thm_shade_color,colframe=thm_frame_color,
+coltitle=thm_title_color,fonttitle=\bfseries ,colbacktitle=thm_shade_color,
+borderline={0.5mm}{0mm}{thm_frame_color},
+borderline={0.5mm}{0mm}{thm_frame_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{conj}
+
+\newtcbtheorem{exercise}{Exercise}
+{enhanced jigsaw,breakable,colback=fouriergray,colframe=darkfouriergray,
+coltitle=black,fonttitle=\bfseries ,colbacktitle=fouriergray,
+borderline={0.5mm}{0mm}{darkfouriergray},
+borderline={0.5mm}{0mm}{darkfouriergray},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{exc}
+
+\renewcommand*\proofname{Beweis}
+\makeatletter
+\newenvironment{beweis}[1][\proofname]{
+	\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item[\hskip\labelsep
+		\bfseries #1\@addpunct{:}]~\newline\ignorespaces
+}{
+	\popQED\endtrivlist\@endpefalse
+	\noindent\ignorespacesafterend
+}
+\newenvironment{pwoof}[1][\proofname]{
+	\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item[\hskip\labelsep
+		\bfseries #1\@addpunct{:}]~\newline\ignorespaces
+}{
+	\popQED\endtrivlist\@endpefalse
+	\noindent\ignorespacesafterend
+}
+\makeatother
+
+
+
+\newsavebox{\informationbox}
+\newenvironment{information}
+{\begin{center}\begin{lrbox}{\informationbox}\begin{minipage}{0.8\textwidth}\small}
+{\end{minipage}\end{lrbox}
+\begin{tikzpicture}
+\draw[fill] (-0.5*\wd\informationbox - 1cm, - 0.3cm) ellipse (0.3cm and 0.15cm);
+\shadedraw[ball color=white] (-0.5*\wd\informationbox -  1cm, 0cm) circle (0.3cm);
+\draw[color=black] (-0.5*\wd\informationbox - 1cm + 0.01cm, 0cm) node {\rotatebox{10}{\bfseries i}};
+
+\draw (0,0) node {\usebox{\informationbox}};
+\end{tikzpicture}\end{center}
+}
+
+\newsavebox{\wichtigbox}
+\newenvironment{wichtig}
+{\begin{center}\begin{lrbox}{\wichtigbox}\begin{minipage}{0.8\textwidth}}
+{\end{minipage}\end{lrbox}
+\begin{tikzpicture}
+\shadedraw[ball color=white,rotate=-5] (-0.5*\wd\wichtigbox - 1cm - 0.3cm, -0.4cm) -- (-0.5*\wd\wichtigbox - 1cm + 0.3cm, -0.4cm) -- (-0.5*\wd\wichtigbox - 1cm, -1.3cm) -- (-0.5*\wd\wichtigbox - 1cm - 0.3cm, -0.4cm);
+\shadedraw[color=black] (-0.5*\wd\wichtigbox - 1cm - 0.04cm, -0.05cm) node {\rotatebox{-5}{\bfseries\Large !}};
+\begin{scope}
+\clip[rotate=-5] (-0.5*\wd\wichtigbox - 1cm + 0.3cm, -0.4cm) -- (-0.5*\wd\wichtigbox - 1cm, -1.3cm) -- (-0.5*\wd\wichtigbox + 1cm, -1.3cm) -- (-0.5*\wd\wichtigbox - 1cm + 0.3cm, -0.4cm);
+\draw[fill,rotate=-5] (-0.5*\wd\wichtigbox - 1cm, -1.3cm) -- (-0.5*\wd\wichtigbox - 0.5cm, -0.5cm) -- (-0.5*\wd\wichtigbox - 1.95cm, -0.5cm);
+\end{scope}
+\draw (0,0) node {\usebox{\wichtigbox}};
+\end{tikzpicture}\end{center}
+}

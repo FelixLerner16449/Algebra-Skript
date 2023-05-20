@@ -1,0 +1,2250 @@
+\documentclass[twoside = false,	%a4paper, 		% paper size
+		%12pt, 			% font size
+% 		BCOR = \usrBCOR,	% binding correction
+% 		DIV=15, 		% used for typearea calculation
+		headsepline,		% add head line to border calculation
+% 		oneside, 		% one- or twosided document
+% 		footnotes = multiple,	% visually separate two consecutive footnotes
+% 		toc = index,		% add index to table of contents
+% 		numbers = auto,		% automatic placing of end dot in numbering
+% 		pagesize,		% used for flexibility
+		%twocolumn		
+		parskip = true,
+ 		%draft
+		]{scrbook}						% KOMA book class
+\title{Algebra Skript}	
+\author{Elias Cleusters; Felix Lerner}					
+\input{settings/preambleBook}	% general settings and packages
+\input{settings/abbreviations}		    % predefined macros
+\input{settings/environmentsbook:eng}		    % predefined environments 
+\usepackage[top=3cm,bottom=3cm,left=2cm,right=2cm,marginparwidth=1cm]{geometry}
+
+\usepackage[english]{babel}             %language declaration
+\setlength{\parskip}{5pt}
+\addbibresource{literatur.bib}
+
+\begin{document}
+
+%titlepage
+\thispagestyle{plain}
+\begin{titlepage}
+	\centering
+	
+    {\rule{15cm}{3pt}\par}
+    \vspace*{-5.5mm}
+    {\rule{15cm}{1pt} \par}
+    
+	{\scshape\Huge Algebra \par}
+	
+    \vspace*{-2.5mm}
+    {\rule{15cm}{1pt}\par}
+    \vspace*{-4.8mm}
+    {\rule{15cm}{3pt}\par}
+    
+	\vspace{2cm}
+	
+	{\scshape\Large Dr. Xin Fang \par}
+	
+	\vspace{1.5cm}
+	
+	{\Large read during \\
+    Summer Term 2023 \par}
+    
+    \vspace{3cm}
+    {\Large written by \\
+    \itshape Elias Cleusters \\
+    and Felix Lerner}
+    
+	\vfill
+	
+	\begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.27]{img/rwth_art_en_cmyk.jpg}
+    \end{figure}
+\end{titlepage}
+\clearpage
+
+\setcounter{page}{1}                           %to not count the titlepage
+\tableofcontents                               %creates a table of contents 
+\chapter{Galois theory}
+    The goal of this chapter can be summarized as follows:
+    
+    Given a polynomial $f(x) = x^n + a_{n-1}x^{n-1} + \dots + a_1x + x_0 \in K[x]$, $K \in \{\Q,\R\}$, determine whether it can be solved by radicals. That means all roots of $f(x)$ can expressed in terms of its coefficients only using $+,-,\cdot,$ \textdiv, $\sqrt[k]{\cdot}$.
+
+    For $\deg f(x) = 2$, we have the $pq$-formula and for $\deg f(x) \in \{3,4\}$ there are the Cardano-Ferrari formulae. But if $\deg f(x) \geq 5$ for a general $f(x)$ the answer is \textit{no} (Abel-Ruffini theorem). Later Galois gave a criterion on the solvability by radicals using the solvability of the Galois group of the polynomial.
+    
+    Although nowadays people call it Galois' theorem, the notion of groups is introduced only 40 years after Galois' work. It took people about $100$ years to write Galois' work in the current form.
+    We state and prove Galois' theorem in this chapter.
+    
+\section{Galois extensions}
+    \subsection{Fields and extensions}
+        We briefly recall what we have done in the Cobra lecture \cite{Cobra} last semester.
+        
+        In Algebra people study algebraic structures (like groups, rings, fields, vector spaces) and the maps between them preserving these structures (grouphom., ringhom, etc.). For fields such maps are field extensions.
+        
+        A \textbf{field} $K$ is a commutative ring with exactly two ideals ($\{0\}$ and $K$).
+        Given two fields $K$ and $L$, a \textbf{field homomorphism} between them is a ring homomorphism $\varphi: K \rightarrow L$. The kernel of such a field homomorphism is a ($K$-)ideal in the ring $K$, hence either $\ker(\varphi) = \{0\}$ or $\ker(\varphi) = K$. That is to say, either $\varphi$ is the zero map, or $\varphi$ is injective.
+        
+        To summarize: For $\varphi \neq 0$, $\varphi(K)$ is a subfield of $L$ and $L/\varphi(K)$ is a field extension.
+        
+        Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space form the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover $L$ is also a $K$-algebra.
+        
+        Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-homomorphisms. Similarly we have the notion of $K$-isomorphisms.
+        
+        \begin{exercise}{}{1}
+                Let $L_1/K, \, L_2/K$ be two field extensions of $K$. Show that:
+                $\varphi \in \Hom_K(L_1,L_2)$ iff (if and only if) $\varphi:L_1 \rightarrow L_2$ is a field homomorphism such that $\forall \alpha \in K: \varphi(\alpha) = \alpha$.
+        \end{exercise}
+        \begin{proof}
+            If $\varphi$ is a $K$-algebra homomorphism, then $\varphi$ is also $K$-linear which means $\varphi(k) = k\varphi(1) = k$ for all $k \in K$. Conversely if $\varphi(\alpha)=\alpha$ for all $\alpha \in K$, then $\varphi$ is $K$-linear since $\varphi(\alpha l+l') = \varphi(\alpha) \varphi(l) + \varphi(l') = \alpha \varphi(l) + \varphi(l')$. Thus $\varphi$ is a $K$-algebra homomorphism.
+        \end{proof}
+        
+        \begin{definition*}{Galois group}
+                For a field extension $L/K$ we denote the \textbf{Galois group} of the field extension $L/K$ as $\Gal{L/K}:= \{\varphi \in \Hom_K(L,L) \ | \ \varphi \ K\text{-isomorphism}\}$. Together with the composition of maps $\Gal{L/K}$ is a group.
+        \end{definition*}
+        \textbf{Examples:}
+            \begin{enumerate}
+                \item $\Gal{\C/\R} = \{\id,\sigma\} \left(\cong \Z/2\Z\right)$, where $\sigma(z) = \overline{z}$
+                \item $\Gal{\Q\round{\sqrt[3]{2}}/\Q} = \{\id\}$
+            \end{enumerate}
+        
+    \subsection{Algebraic extensions}
+        Given a polynomial $f(x) \in K[x]$ we are interested in the symmetries between the roots of $f(x)$. Therefore we need a field containing roots of $f(x)$. Such a field can be obtained from adding all roots of $f(x)$, one after the other to the field $K$.
+        
+        We describe the procedure of "adjoining a root":
+        Let $L/K$ be a field extension and $\alpha \in L$. The point is to consider the evaluation map
+        \begin{align*}
+            \mathrm{ev}_\alpha: K[x] &\rightarrow L \\
+                                f(x) &\mapsto f(\alpha)
+        \end{align*}
+        The map $\mathrm{ev}_\alpha$ is a ring homomorphism. By the isomorphism theorem we get:
+        \begin{equation*}
+            \faktor{K[x]}{\Ker(\ev_\alpha)} \cong \Img(\ev_\alpha)
+        \end{equation*}
+        The kernel $\ker(\ev_\alpha)$ is a $K-$ideal in $K[x]$, which is a PID (prinicpal ideal domain), hence either there exists a monic polynomial $p_\alpha(x) \in K[x]$ (monic means $\LK(p_\alpha(x))=1$) of positive degree such that $\Ker(\ev_\alpha) = (p_\alpha(x))$ or $\ker(\ev_\alpha) = \{0\}$.
+        
+        In the second case $\alpha$ is not a root of any polynomial in $K[x]$, hence the set $\{1,\alpha,\alpha^2,\dots\}$ is linearly independent over $K$ and thus the $K$-vector space $L$ is of infinite dimension. In this case we say $\alpha$ is \textbf{transcendental} over $K$.
+        
+        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
+        
+        Moreover, in a principal ideal ring prime ideals are maximal. so $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
+        
+        Generalising this notation: for a subset $S \subseteq L$ we will denote $K(S)$ as the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $S$. If $S$ is a finite set we call $K(S)$ finitely generated.
+        
+        For a finite extension $L/K$ any element $\alpha \in L$ is algebraic over $K$ since $\dim_K K(\alpha) \leq \dim_K(L) < \infty$, so we are never in the second case above.
+        
+        In general the extension $L/K$ is finite iff there exist $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$.
+        
+        A field extension $L/K$ is called algebraic, if all elements in $L$ are algebraic over $K$. Any finite extension is algebraic, but not vice versa. For example take $S = \left\{\sqrt{p} \ | \ p \text{ prime} \right\} \subseteq \R$ and consider the field extension $\Q(S)/\Q$.
+        
+        \begin{exercise}{}{2}
+            Show that $\Q(S)/\Q$ is algebraic but not finite.
+        \end{exercise}
+        
+        \begin{proof}
+            Let $p_1,\dots,p_n$ be distinct prime numbers. We show that $[\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q] = 2^s$. For this we proceed with induction on $s$.
+            
+            If $s=1$, then $\sqrt{p_1}$ has minimal polynomial $x^2-p_1$, which is irreducible by the Eisenstein-criterion. Thus $[\Q(\sqrt{p_1}):\Q] = 2$.
+            
+            Lets assume we proved the assertion for $s-1 \in \N$. We have:
+            \begin{align*}
+                [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q] &= [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] \cdot [\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}}):\Q] \\
+                &\overset{\text{IH}}{=} [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] \cdot 2^{s-1}
+            \end{align*}
+            By induction we get for all $1<i<s$:
+            \begin{equation}\tag{$\star$}\label{*}
+                [\Q(\sqrt{p_1},\dots,\sqrt{p_i}):\Q(\sqrt{p_1},\dots,\sqrt{p_{i-1}})] = 2
+            \end{equation}
+            
+            What remains to show is that $[\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] = 2$.
+            For the sake of contradiction let us assume that $\sqrt{p_s} \in \Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})$. Because of \eqref{*} there exist $q,a_1,\dots,a_{s-1} \in \Q$ where we assume wlog (without loss of generality) that $a_{s-1} \neq 0$:
+            \begin{align*}
+                \sqrt{p_s} &= q + \sum_{i=1}^{s-1} a_i \sqrt{p_i} \\
+                \implies p_s &= \left(q + \sum_{i=1}^{s-2} a_i \sqrt{p_i}\right)^2 + 2  \left(q + \sum_{i=1}^{s-2} a_i \sqrt{p_i}\right) \sqrt{p_{s-1}} + a_{s-1}^2 p_{s-1}
+            \end{align*}
+            Now either $\sqrt{p_{s-1}} \in \Q(\sqrt{p_1},\dots,\sqrt{p_{s-2}})$ or $q + \sum_{i=1}^{s-2} a_i \sqrt{p_i} = 0$. The first statement contradicts \eqref{*} and the second statement contradicts that $p_s$ and $p_{s-1}$ are distinct primes.
+            
+            Thus $\Q(S)/\Q$ is infinite. And since $S$ is algebraic $\Q(S)/\Q$ is also algebraic (since any element of $\Q(S)$ can be written as a $\Q$-rational function using only finitely many elements of $S$).
+        \end{proof}
+        
+        For a finite extension $L/K$ we define the degree of the extension to be $[L:K] = \dim_K L$. For any intermediate field extension $K \subseteq M \subseteq L$, the extensions $L/M$ and $M/K$ are finite and we have the degree formula $[L:K] = [L:M] \cdot [M:K]$.
+        
+        \begin{exercise}{}{3}
+            Let $L/K$ and $L'/K$ be two extensions of $K$.
+            \begin{enumerate}
+                \item Let $\varphi \in \Hom_K(L,L')$ and $\alpha \in L$ be algebraic over $K$. Show that: $\alpha' = \varphi(\alpha) \in L'$ is algebraic over $K$ with $p_\alpha(x) = p_{\alpha'}(x) \in K[x]$.
+                \item Let $\alpha \in L$ and $\beta \in L'$ with $p_\alpha(x) = p_\beta(x) \in K[x]$. Show that: There exists unique $\varphi \in \Hom_K\left(K(\alpha),L'\right)$ such that $\varphi(\alpha) = \beta$. Moreover $\Img(\varphi) = K(\beta)$.
+            \end{enumerate}
+        \end{exercise}
+        
+        \begin{proof}
+            Let $p_\alpha(x) = \sum_{i=0}^{n} a_i x^i \in K[x]$. We have:
+            \begin{align*}
+                p_\alpha(\varphi(\alpha)) = \sum_{i=0}^{n} a_i \varphi(\alpha)^i = \sum_{i=0}^{n} \varphi(a_i \alpha^i) =  \varphi\left( \sum_{i=0}^{n} a_i \alpha^i\right) = \varphi(p_\alpha(\alpha)) = 0
+            \end{align*}
+            Thus $\alpha' = \varphi(\alpha)$ is algebraic over $K$ with minimal polynomial $p_\alpha(x)$.
+            
+            For the second part notice that $\varphi(\alpha)$ completely determines the map $\varphi \in \Hom_K(K(\alpha),L')$, if it exists. Since $p_\alpha(x) = p_\beta(x)$ we have:
+            \begin{alignat*}{3}
+                K(\alpha) &\cong \faktor{K[x]}{\round{p_\alpha(x)}} &&= \faktor{K[x]}{\round{p_\beta(x)}} &&\cong K(\beta)\\
+                 \alpha &\mapsto [x] &&=[x] &&\mapsto \beta
+            \end{alignat*}
+            Call this $K$-isomorphism $\psi: K(\alpha) \rightarrow K(\beta)$. Then $\varphi = \iota \circ \psi$, where $\iota: K(\beta) \hookrightarrow L'$. So $\Img(\varphi) = \Img(\iota) = K(\beta)$.
+        \end{proof}
+        
+        \begin{exercise}{}{4}
+            Let $L/K$ be an algebraic extension, show that $\Hom_K(L,L) = \Gal{L/K}$.
+        \end{exercise}
+        \begin{proof}
+            We only need to show that any $\varphi \in \Hom_K(L,L)$ is surjective. Take $\alpha \in L$ and set $M:= \left\{\beta \ | \ \beta \in L, p_\alpha(\beta) = 0 \right\} \subseteq L$ and consider the map
+            \begin{align*}
+                \varphi': K(M) &\rightarrow K(M) \\
+                            m &\mapsto \varphi(m)
+            \end{align*}
+        This is well defined because of \ref{exc:3}. Since $p_\alpha(x)$ has only finitely many roots $[K(M):K] < \infty$ and thus $\varphi'$ is surjective. Since $\alpha$ was arbitrary $\varphi$ is surjective.
+        \end{proof}
+            
+    \subsection{Galois extensions}
+        Our goal of this chapter is to study the solvability of algebraic equation of radicals, hence we will concentrate on the finite extensions.
+        
+        We have seen the following Lemma in Cobra \cite{Cobra} (Satz 1.3.33 with $M=L$ and its proof).
+        \begin{lemma}{}{1.1}
+            Let $L/K$ be a finite extension. Then:
+            \begin{enumerate}
+                \item $1 \leq \# \Hom_K(L,L) \leq [L:K]$
+                \item if $\#\Hom_K(L,L) = [L:K]$, then for any intermediate field $L/N/K$ we have:\\ $\#\Hom_K(N,L) = [N:K], \, \#\Hom_N(L,L) = [L:N]$
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof}
+            We sketch the proof of (2) since it does not follow from the statement of \textit{Satz 1.3.33} but its proof. From that proof we have the estimation for the extension $L/N/K$:
+            \begin{align*}
+                \#\Hom_K(L,L) &\leq \#\Hom_N(L,L) \cdot \# \Hom_K(N,L) \\
+                &\leq [L:N] \cdot [N:K] = [L:K]
+            \end{align*}
+            If the equality holds, then $\#\Hom_N(L,L) = [L:N]$ and $\#\Hom_K(N,L) = [N:K]$.
+        \end{proof}
+        
+        Applying the above exercise, we have a first estimation of the Galois group:
+        \begin{align*}
+            \# \Gal{L/K} \leq [L:K]
+        \end{align*}
+        
+        \begin{definition}{Galois extension}{1.2}
+            A finite field extension $L/K$ is called \textbf{Galois} if $\#\Gal{L/K} = [L:K]$.
+        \end{definition}
+        We can rephrase the Lemma above as:
+        
+        \begin{corollary}{}{1.3}
+            Let $L/K$ be a Galois extension and $N$ be an intermediate field. Then $L/N$ is Galois.
+        \end{corollary}
+        
+        Note that in this case the extension $N/K$ is not necessarily Galois (example comes later).
+        
+        \begin{equation*}
+            \xymatrix
+            {
+            L\ar@{-}[d]\ar@/_1.5pc/@{-}[dd]_{\text{Galois}}\ar@/^1pc/@{-}[d]^{\text{Galois}} \\
+            N\ar@{-}[d]\ar@/^1pc/@{-}[d]^{\text{not always Galois}} \\
+            K
+            }
+        \end{equation*}
+        
+        For better understanding of the definition we try to figure out what obstructs an extension from being Galois?
+        \begin{example}{}{1.4}
+            We consider the extension $\Q\left(\sqrt[3]{2}\right)/\Q$. We have $p_{\sqrt[3]{2}}(x) = x^3-2$. Let $\sigma \in \Gal{\Q\left(\sqrt[3]{2}\right)/\Q }$. By Exercise \ref{exc:3}, $\sigma$ must send $\sqrt[3]{2}$ to an element in $\Q(\sqrt[3]{2})$ with minimal polynomial $x^3-2$. The only root of $x^3-2$ in $\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$ (the others are complex). Hence $\sigma$ must be the identity map. In this case $\Gal{ \Q(\sqrt[3]{2})/\Q} = \{\id\}$ and the extension is not Galois since $\left[\Q\left(\sqrt[3]{2}\right):\Q\right]=3$.
+        \end{example}
+        
+        What goes wrong in this example? The point is that $\Q\left( \sqrt[3]{2}\right)$ does not contain all roots of $x^3-2$.
+        
+        So to get a Galois extension, we need that the minimal polynomial splits into linear factors.
+        
+        Even if we assume that $L$ is a splitting field of $K$ the equality $\#\Gal{L/K} = [L:K]$ may still fail. We consider $K = \F_p(t)$ and $L= \F_p\left( \sqrt[p]{t}\right)$, where $\alpha:=\sqrt[p]{t}$ has minimal polynomial $p_\alpha = x^p - t \in K[x]$. This polynomial is irreducible but since $\F_p$ has characteristic $p$ we get $x^p-t = (x-\alpha)^p$. Let $\sigma \in \Gal {L/K}$ then $\sigma$ sends $\alpha$ to a root of $p_\alpha$ in $L$ which can only be $\alpha$. Therefore again $\#\Gal {L/K} = 1$.
+        
+        What goes wrong here is that the minimal polynomial has multiple, non distinct roots, i.e. the extension is not separable.
+        
+        Luckily these are all the obstructions. Before starting this investigation we briefly recall normal and separable extensions.
+        
+        \begin{definition}{normal, separable}{1.5}
+            A finite extension $L/K$ is called
+            \begin{enumerate}
+                \item \textbf{normal}, if any irreducible polynomial in $K[x]$ having a root in $L$ splits into linear factors in $L[x]$.
+                \item \textbf{separable}, if every $\alpha \in L$ is separable over $K$ i.e. the roots of its minimal polynomial are pairwise nonequal.
+            \end{enumerate}
+        \end{definition}
+
+        \begin{proposition}{}{1.6}
+            Let $L/K$ be a finite extension.
+            \begin{enumerate}
+                \item The extension $L/K$ is normal iff there exists $f(x) \in K[x]$ such that $L$ is a splitting field of $f(x)$ over $K$.
+                \item The following statements are equivalent:
+                    \begin{enumerate}
+                        \item $L/K$ is separable
+                        \item There exists a field extension $N/K$ such that $\#\Hom_K(L,N) = [L:K]$
+                        \item There exist separable elements $\alpha_1,\dots,\alpha_m \in L$ such that $L = K(\alpha_1,\dots,\alpha_m)$
+                    \end{enumerate}
+                \item (Primitive element) If $L/K$ is separable, there exists $\alpha \in L$ such that $L = K (\alpha)$.
+                \item If $\cha(K)=0$, the extension $L/K$ is separable
+            \end{enumerate}
+        \end{proposition}
+        
+        The definition of the Galois extension is not easy to use when determining whether a given extension is Galois or not, because computing $\Gal{L/K}$ is usually a hard task. The following proposition gives a convenient way to determine Galois extensions.
+
+        \begin{proposition}{}{1.7}
+        	Let $L/K$ be a finite extension. The following statements are equivalent:
+        	\begin{enumerate}
+        		\item The extension $L/K$ is Galois.
+        		\item The extension $L/K$ is normal and separable.
+        		\item $L$ is a splitting field of a separable polynomial in $K[x]$.
+        	\end{enumerate}
+        \end{proposition}
+        \begin{proof}
+        	$1 \Rightarrow 2$: Assume that $\#\Gal{L/K} = [L:K]$.
+        	
+        	\underline{separable:} Take $N=L$ in Proposition \ref{prop:1.6}, the equality above gives us that $L/K$ is separable.
+        	
+        	\underline{normal:} We take an irreducible polynomial $f(x) \in K[x]$ which has a root $\alpha \in L$. Then $f(x)$ is the minimal polynomial $p_\alpha(x)$ of $\alpha$ over $K[x]$. We show that $f(x)$ splits into linear factors in $L[x]$.
+        	From Cobra, Proposition 1.3.31, we have a bijection of sets
+        	\begin{align*}
+        			\Hom_K(K(\alpha),L) &\leftrightarrow \{\beta \in L \ | \ p_\alpha(\beta) = 0\} \\
+        			\varphi &\mapsto \varphi(\alpha)
+        	\end{align*}
+        	Since $L/K$ is Galois, the assumption in \ref{lem:1.1} (2) is fulfilled. Then for $N=K(\alpha)$, we get:
+        	
+        	\begin{equation*}
+        	    \#\Hom_K(K(\alpha),L) = [K(\alpha):K]
+        	\end{equation*}
+        	
+        	Since $[K(\alpha):K] = \deg p_\alpha(x) $, combined with the bijection above gives: $p_\alpha(x)$ has $\deg p_\alpha(x)$ roots in $L$ and hence $p_\alpha(x)$ splits into linear factors in $L[x]$.
+        	
+        	$2 \Rightarrow 3$: Since $L/K$ is separable, from Proposition \ref{prop:1.6} (2c), we choose separable elements $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$. The minimal polynomials $p_{\alpha_1}(x),\dots,p_{\alpha_k}$ have roots in $L$. Since $L/K$ is normal, they split into linear factors in $L[x]$.
+        	We denote $p(x) = \lcm(p_{\alpha_1}(x),\dots,p_{\alpha_k}(x))$. Then $p(x) \in K[x]$ and it has no multiple roots. Denote the roots of $p(x)$ in $L$ as $\beta_1, \dots, \beta_n$ . Then we have:
+        	\begin{align*}
+        		L = K(\alpha_1, \dots, \alpha_k) \subseteq K(\beta_1,\dots,\beta_n)\subseteq L
+        	\end{align*}
+        	Hence $L = K(\beta_1,\dots,\beta_n)$ and $L$ is a splitting field of $p(x)$ over $K$.
+        	
+        	$3 \Rightarrow 1:$ We immediately get that $L$ is normal and separable (since $L$ is generated by separable elements over $K$). Letting $N=L$ for theorem 1.3.46 of Cobra \cite{Cobra}, we get that $L/K$ is Galois. 
+        \end{proof}
+        
+        \begin{corollary}{}{1.8}
+            Assume that $\cha K = 0$ and $f(x) \in K[x]$. Let $K_f$ be the splitting field of $f(x)$ over $K$. Then the extension $K_f/K$ is Galois.
+        \end{corollary}
+        \begin{proof}
+            Clearly the extension is normal. Since $K$ is perfect the extension is also separable (because it is finite). Using \ref{prop:1.7} yields that $K_f/K$ is Galois.
+        \end{proof}
+        
+        According to this corollary, if we want to study the symmetries of roots of a polynomial $f(x) \in K[x]$. $K \in \{\Q,\R\}$, we can always work inside $K_f$, where we have the Galois property.
+        
+        In the next corollary, we show that the Galois group encodes symmetries between roots.
+        
+        \begin{corollary}{}{1.9}
+            Let $L/K$ be a Galois extension where $L$ is a splitting field of a separable polynomial $p(x) \in K[x]$ of degree $n$. Then there exists an invective group hom. $\varphi: \Gal{L/K} \rightarrow S_n$. In particular $[L:K]|n!$
+        \end{corollary}
+        
+        \begin{proof}
+            We first construct the map $\varphi: \Gal{L/K} \rightarrow S_n$. since $p(x)$ is separable, we let $r_1,\dots,r_n$ denote the distinct roots of $p(x)$. Since $L$ is the splitting field of $p(x)$, we have $r_1,\dots,r_n \in L$.
+            
+            Let $g \in \Gal{L/K}$. Then for a fixed $r_k, g(r_k)$ is also a root of $p(x)$. Hence there exists a map:
+            \begin{align*}
+                \sigma_g: [n] &\rightarrow [n], \text{ such that } g(r_k) = r_{\sigma_g(k)}
+            \end{align*}
+            Since $g$ is invertible $\sigma_g$ is invertible with inverse $\sigma_{g^{-1}}$. Hence $\sigma_g \in S_n$. We define $\varphi(g) = \sigma_g$.
+            
+            This is a group hom. because the action of $S_n$ on $L$ is well defined:
+            \begin{align*}
+                &r_{\sigma_{g \circ h}(k)} = (g \circ h)(r_k) = g(h(r_k)) = g(r_{\sigma_h(k)}) = r_{\sigma_g(\sigma_h(k))} \\
+                \implies &\sigma_{g \circ h} = \sigma_g \circ \sigma_h \\
+                \implies &\varphi(g \circ h) = \varphi(g) \circ \varphi(h)
+            \end{align*}
+            
+            It remains to show that $\varphi$ is injective. Indeed if $\varphi(g) =\id$, the for any $1 \leq k \leq n$: $g(r_k) = r_k$. Since $L = K(r_1, \dots, r_n)$, we have $g = \id$.
+        \end{proof}
+        
+        The idea in this Corollary is helpful in the computation of Galois groups, since it realises and abstract group of automorphisms as permutations of roots. This is the fundamental idea of representation theory, which we will discuss in the next Chapter.
+        
+        Usually $\varphi$ is not an isomorphism. But when $K = \Q$  we have the following theorem:
+        
+        \begin{theorem}{}{1.10}
+        \begin{enumerate}
+            \item Hilbert: For any $n \leq 2$, there exists a separable polynomial $p(x) \in \Q[x]$ of degree $n$ such that the Galois group $\Gal{L/\Q}$ with $L = \Q_p(x)$, is isomorphic to $S_n$.
+            \item Nart, Vila: $p(x) = x^n - x -1$ does this job.
+        \end{enumerate}
+        \end{theorem}
+        
+        We will not prove the theorem in general, but we will see examples for $n=3,5$ (same idea for $n$ prime).
+        
+        We finish this section by the following examples. Computations of Galois groups will be discussed later.
+        
+        \begin{example}{}{1.11}
+            \begin{enumerate}
+                \item Let $K=\Q$ and $L = \Q(\zeta,\sqrt[3]{2})$, where $\zeta = \exp{\frac{2\pi i}{3}}$ is a root of unity. The field $L$ is a splitting field of the polynomial $x^3-2 \in \Q[x]$. The $L/K$ is Galois (since $\Q$ is perfect). We consider an intermediate field $N = \Q(\sqrt[3]{2})$. The $N/K$ is not Galois since it is not normal.
+                \item Let $K$ be a finite field with $\cha K = p > 0$. We claim that any finite extension $L/K$ is Galois. Indeed there exists an $n$ such that $[K:\F_p] = n$. Let $m = [L:K]$. Then $[L:\F_p] = mn$ and from Cobra \cite{Cobra} Lemma 1.3.26, $L$ is a splitting field of the separable polynomial $x^{p^{mn}}-x\in \F_p[x]$. By Proposition \ref{prop:1.7} $L/\F_p$ is Galois and by Corollary \ref{cor:1.3} $L/K$ is Galois. %$\}ether$ 
+            \end{enumerate}
+        \end{example}
+        
+\section{Galois correspondence}
+        In this section we will state and prove the fundamental theorem of Galois theory. Roughly speaking it gives a correspondence (called Galois correspondence) between intermediate field in a Galois extension and the subgroups of the Galois group. This correspondence translates problems in field theory to group theory, which is the key idea of Galois.
+    
+    \subsection{Fundamental theorem}
+        We need to introduce certain notations to state the main result.
+        
+        For a field $L$ let $Aut(L)$ be the \textbf{group of automorphisms} of $L$, together with the composition of maps. For a finite extension $L/K$ the Galois group $\Gal{L/K}$ is a subgroup of $\Aut(L)$.
+        
+        \begin{definition}{}{1.12}
+            Let $H \leq \Aut(L)$ be a subgroup. We set $L^H = \{\alpha \in L \ | \ \forall \sigma \in H: \sigma(\alpha) = \alpha \}$ and call it the \textbf{fixed field} of $L$ under $H$.
+        \end{definition}
+        
+        \begin{exercise}{}{5}
+            \begin{enumerate}
+                \item The set $L^H$ is a subfield of $L$
+                \item Let $L/K$ be a finite extension and $H \subseteq \Gal{L/K}$. Show that $K \subseteq L^H$
+            \end{enumerate}
+        \end{exercise}
+        \begin{proof}
+            \textit{Ad} $(1)$: Since the $\sigma$ are a field homomorphisms we get that $(L^H,+)$ is an subgroup of $L,+$, since:
+            \begin{align*}
+                \sigma(\alpha - \beta) = \sigma(\alpha) - \sigma(\beta) = \alpha - \beta
+            \end{align*}
+            and $0 \in L^H$. Furthermore:
+            \begin{align*}
+                1 = \sigma(\alpha) \sigma (\alpha^{-1}) \implies \alpha^{-1} = \sigma(\alpha)^{-1} = \sigma (\alpha^{-1})
+            \end{align*}
+            This means:
+            \begin{align*}
+                \sigma(\alpha \beta^{-1}) = \sigma(\alpha) \sigma(\beta^{-1}) = \alpha \beta^{-1}
+            \end{align*}
+            Because $1 \in L^H$, we also get that $L^H,\cdot$ is a subgroup of $(L,\cdot)$. The other properties are inherited.
+            
+            \textit{Ad} $(2)$: Since $\Gal{L/K}$ only contains $K$-automorphisms of $L$, for any $k \in K, \sigma \in H \subseteq \Gal{L/K}: \sigma(k) = k$ and thus $K \subseteq L^H$.
+        \end{proof}
+        
+        Let $G$ be a group. We denote $\Gamma(G) = \{U \ | \ U \leq G\}$. The set $\Gamma(G)$ has a partial order:
+        \begin{align*}
+            H_1,H_2 \in \Gamma(G), \quad H_1 \prec H_2 :\Leftrightarrow H_1 \subseteq H_2
+        \end{align*}
+        
+        Let $L/K$ be a field extension. We let $\Sigma(L/K) = \{M \ | \ L/M/K \text{ intermediate extension}\}$. The set $\Sigma(L/K)$ has a partial order:
+        \begin{align*}
+            M_1,M_2 \in \Sigma(L/K), \quad M_1 \succ M_2 :\Leftrightarrow M_1 \supseteq M_2
+        \end{align*}
+        
+        If we consider a finite extension $L/K$ then the Galois group is finite (it is bounded by $[L:K]$). For a finite group there exist only finitely many subgroups (i.e. $\Gamma(\Gal{L/K})$) is a finite set). If there were a correspondence between $\Gamma(\Gal{L/K})$ and $\Sigma(\Gal{L/K})$, then there should only be finitely many intermediate fields. According to Korollar 1.3.51 of Cobra \cite{Cobra}, the extensions $L/K$ has to be primitive or we should at least assume that $L/K$ is separable.
+        
+        \begin{theorem}{Galois correspondence}{1.13}
+            Let $L/K$ be a Galois extension and $G:= \Gal{L/K}$ be its Galois group.
+            \begin{enumerate}
+                \item The map \[\mathrm{Fix}: \Gamma(G) \rightarrow \Sigma(L/K), \quad H \mapsto L^H\] is an order reversing bijection with inverse \[\Gal{L/\_}: \Sigma(L/K) \rightarrow \Gamma(G), \quad M \mapsto \Gal{L/M}\] Moreover $[L^H:K] = \#G/\#H$.
+                \item When restricted to the subset of normal subgroups in $G$, $\Fix$ gives a bijection
+                \[\Fix|_{N(G)}: N(G):= \{ N \ | \ N \trianglelefteq G\} \longleftrightarrow \{M \in \Sigma(L/K) \ | \ M/K \text{ Galois}\}\]
+                \item Given a normal subgroup $N$ of $G$ the restriction map $\Gal{L/K} \rightarrow \Gal{L^N/K}$ is well defined, surjective with kernel isomorphic to $N$. In particular:
+                \begin{equation*}
+                    G/N \cong_{\text{group}} \Gal{L^N/K}
+                \end{equation*}
+            \end{enumerate}
+        \end{theorem}
+        
+        So (2) gives us (in comparison to \ref{cor:1.3}) that all of that also the lower extension is Galois.
+        
+        \begin{equation*}
+            \xymatrix
+            {
+            L\ar@{-}[d]\ar@/_1.5pc/@{-}[dd]_{G\text{ Galois}}
+            \ar@/^1pc/@{-}[d]^{N \text{ Galois}}\\
+            L^N\ar@{-}[d]\ar@/^1pc/@{-}[d]^{G/N\text{ Galois}} \\
+            K
+            }
+        \end{equation*}
+        
+        Before we proof this theorem we first look at a few consequences of it.
+        
+        \begin{corollary}{}{1.14}
+            Let $L/K$ be a Galois extension and $M$ be an intermediate field such that $M/K$ is Galois. Then:
+            \begin{equation*}
+                \faktor{\Gal{L/K}}{\Gal{L/M}} \cong \Gal{M/K}
+            \end{equation*}
+        \end{corollary}
+        
+        \begin{proof}
+            From $(2)$ of \ref{thm:1.13}, $\Gal{L/M}$ is a normal subgroup in $\Gal{L/K}$.\\ From $(1)$ of \ref{thm:1.13}, $L^{\Gal{L/M}} = M$. Now we take $N = \Gal{L/M}$ in $(3)$ of \ref{thm:1.13}, which yields the isomorphism of groups above.
+        \end{proof}
+        
+        \begin{remark}{}{1.15}
+            Usually determining $\Gamma(G)$ is not an easy task. But later we will use group representation theory to compute normal subgroups of a finite group.
+        \end{remark}
+        
+        The poset $\Gamma(G)$ has the maximal element $G$ and the minimal element $\curly \id$. The poset $\Sigma(L/K)$ has the maximal Element $L$ and minimal element $K$. From the first part of the theorem, we obtain $\Fix(G)=L^G=K$. This special case has used the full power of the Galois condition. For example, for $L=\Q\round{\sqrt[3]2}$ and $K=\Q$, we have seen in \ref{exa:1.4} that $\Gal{L/K}=\curly \id$, hence $L^G=L$.
+
+\separline{Week 2}
+
+        \begin{proposition}{}{1.16}
+            Let $L/K$ be a finite extension with $G:=\Gal{L/K}$. The following statements are equivalent:
+            \begin{enumerate}
+                \item $L/K$ is Galois
+                \item $L^G=K$
+            \end{enumerate}
+        \end{proposition}
+
+        This proposition will serve as motivation for Artins Lemma, that greatly simplifies many proofs in Galois-theory. 
+        
+        We introduce the following notation: For $\sigma \in \Aut(L)$ we extend $\sigma$ in the following way to $L[x]$: for $f(x)=\sum_{i=0}^ma_ix^i$, we set $\sigma(f(x)):=\sum_{i=0}^m\sigma(a_i)x^i$.
+
+        \begin{lemma}{Artin}{artin}
+            Let L be a field and $H\subseteq\Aut(L)$ be a finite subgroup. Then $L/L^H$ is Galois with $$\Gal{L/L^H} = H$$
+        \end{lemma}
+        \begin{proof}
+            With the notation above, a polynomial $p\in L[x]$ is contained in $L^H[x]$ if and only if $\sigma(p(x))=p(x)\ \forall\sigma\in H$. We prove the lemma in steps:
+            \begin{enumerate}
+                \item We show that $L/L^H$ is separable. Take $\alpha\in L$, we show that $\alpha$ is algebraic over $L^H$ and the minimal polynomial $p_\alpha \in L^H[x]$ is separable.
+                \begin{itemize}
+                    \item $\alpha$ is algebraic over $L^H$: For this we consider the orbit $H.\alpha = \curly{\sigma(\alpha)|\sigma\in H}$ and let $\beta_1,\dots,\beta_r$ be the distinct elements in $H.\sigma$. We consider the polynomial $q_\alpha(x)=\prod_{i=1}^r(x-\beta_i)\in L^H[x]$.
+
+                    Since $\id\in H$, $\alpha$ is a root of $q_\alpha$. To show that $q_\alpha\in K[x]$ notice, that $\sigma\in H$ implies $\sigma H=H$, hence $\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}=\curly{\beta_1,\dots,\beta_r}$ and thus
+                    $q_\alpha(x)=\prod_{i=1}^r(x-\beta_i)=\prod_{i=1}^r(x-\sigma(\beta_i))=\sigma(q_\alpha)$ holds for all $\sigma\in H$. So because of the remark at the beginning of the proof, $q_\alpha\in L^H$ and $\alpha$ is algebraic.
+                    \item $p_\alpha$ is separable: We will show that in fact $p_\alpha=q_\alpha$ hence $p_\alpha$ is separable (we chose the $\beta_i$ to be pairwise distinct). From $q_\alpha(\alpha)=0$ follows $p_\alpha|q_\alpha$. Now in $L[x]$ we have  $x-\alpha|p_\alpha$. Applying a $\sigma\in H$, we get $$(x-\alpha)h=p_\alpha=\sigma(p_\alpha)=\sigma(x-\alpha)\sigma(h)$$
+                    where $\sigma(x-\alpha)=x-\beta_i$ for a $\beta_i\in H.\alpha$. By definition of the $\beta_i$ we get $x-\beta_i|p_\alpha\ \forall1\leq i\leq r$, therefore $q_\alpha|p_\alpha$ (and even equality, since both polynomials are monic).
+                \end{itemize}
+                \item We show that there exists $\alpha\in L$ such that $L=L^K(\alpha)$ (note that we cannot directly use the primitive element theorem since we do not know, whether $L/L^K$ is finite):
+                We pick $\alpha\in L$ to be such that $\eckig{L^H(\alpha):L^H}$ is maximal. Such an element exists since every $\alpha$ is algebraic with degree bounded by $\eckig{L^H(\alpha):L^H}=\deg(p_\alpha)=\#H.\alpha\leq\#H<\infty$.
+                
+                It suffices to show that $L\subseteq L^H(\alpha)$. For this fix an arbitrary $\beta\in L$ and consider the extension $L^H(\alpha,\beta)/L^H$. This extension is finite and separable (it is generated by separable elements). Now we can apply the primitive element theorem (Proposition 16(iii) in \cite{Cobra}), which gives $\gamma\in L$ with $K(\alpha)=K(\alpha,\beta)$. Because of the maximality property of $\alpha$, we have that $\gamma$ is already in $L^H(\alpha)$. The same must then be true for $\beta$. As a consequence, the extension $L/K$ is finite.
+                \item We complete the proof: It suffices to show that $\eckig{L:L^H}\leq\Gal{L/L^H}$. Indeed, by choosing $\alpha\in L$ like in (2), we get from (1) that
+                 $$\eckig{L^H(\alpha):K}=\#H.\alpha\leq \#H\leq \#\Gal{L/L^H}$$
+                where the last inequality follows from $H\subseteq \Gal{L/L^H}$. 
+                
+                It follows that all inequalities were in fact equalities, especially we obtain $H=\Gal{L/L^H}$.
+            \end{enumerate}
+        \end{proof}
+        \begin{proof}[Proof of \ref{prop:1.16}]
+            Note that $\Gal{L/K}$ is a finite group.
+            \begin{enumerate}
+                \item [$\Leftarrow$:] Since $K\subseteq L^{\Gal{L/K}}=L^G$, it suffices to show that $[L:L^G]=[L:K]$. From Artins Lemma, $L/G^L$ is Galois, hence $$[L:L^G]=\#\Gal{L/L^G}=\#\Gal{L/K}=[L:K]$$
+                \item [$\Rightarrow$:] With Artins Lemma \ref{lem:artin}, $L/L^G$ is Galois, hence $L/G$ is Galois.
+            \end{enumerate}
+        \end{proof}
+        \subsection{Proof of Theorem \ref{thm:1.13}}
+        \begin{proof}[Proof of \ref{thm:1.13}]
+        \begin{enumerate}
+            \item [(1)]
+            The maps $\Fix$ and $\Gal{L/\_}$ are well defined and order reversing. We show, that they are inverse to each other.
+            \begin{itemize}
+                \item $\Fix\circ\Gal{L/\_}=\id$:
+                This means, that $L^{\Gal{L/M}}=M\ \forall M\in\Sigma(L/K)$. By \ref{cor:1.3} $L/M$ is Galois. Now we can use \ref{prop:1.16} and get the desired result.
+                \item $\Gal{L/\_}\circ\Fix=\id$: that is $\Gal{L/L^H}=H\ \forall H\in\Gamma(G)$. Since $H$ is a finite group, it follows from Artins Lemma.
+            \end{itemize}
+            We compute $[L^H:K]$ for $H\in\Gamma(G)$. For this we consider the extensions $L/L^H/K$ and have $$\eckig{L:K}=\eckig{L:L^H}\eckig{L^H:K}$$
+            Again we can use Artins Lemma and get $\eckig{L:L^H}=\#H$ and since $L/K$ is Galois $\eckig{L:K}=\#G$. Hence $\#G/\#H$.
+            
+            
+            \begin{claim*}{}
+            $N\in\Gamma(G)$ is a normal subgroup if and only if $\sigma\round{L^N}=L^N\ \forall \sigma\in N$
+            \end{claim*}
+            \begin{proof}
+                By plugging in the definitions we see, that $\sigma\round{L^N}=L^{\sigma N\sigma^{-1}}$
+                \begin{align*}
+                    \alpha\in L^{\sigma N \sigma^{-1}} &\Leftrightarrow \forall g\in N: \sigma g \sigma^{-1}(\alpha)=\alpha \\
+                    &\Leftrightarrow \forall g\in N: g\sigma^{-1}(\alpha)=\sigma^{-1}(\alpha)\\
+                    &\Leftrightarrow \sigma^{-1}(\alpha)\in L^N \Leftrightarrow \alpha\in \sigma\round{L^N}
+                \end{align*}
+                Now, if $N$ is normal, then $\forall \sigma\in G: L^{\sigma N \sigma^{-1}}=L^N$. Artins Lemma then gives us $$\sigma N\sigma^{-1} = \Gal{L/L^{\sigma N \sigma\inv}} = \Gal{L/L^N} = N $$
+                The other direction is clear.
+            \end{proof}
+            \item[(3)]    
+            We are now ready for $(3)$: Let $N\trianglelefteq G$ be normal. We consider the restriction map
+            $$\pi: \Gal{L/K} \to \Gal{L^N/K}: \sigma \mapsto \sigma_{|L^N}$$
+            Since $N$ is normal, $\sigma(L^N)=L^N$, hence $\pi$ is well defined. Per construction $N\subseteq \Ker\pi$. Now take $\sigma\in \ker\pi$, then $\sigma\in\Gal{L/L^N}$. By Artins Lemma $\sigma\in N$, therefore $N\supseteq \ker\pi$.
+            
+            All in all, we have a group isomorphism $\overline\pi:G/N\to \Gal{L^N/K}$, which was to show for (3).
+            
+            \item[(2)]
+            Let $N\trianglelefteq G$ be a normal subgroup. to see that $L^N/K$ is Galois, consider
+            $$\#(G/N)= \frac{\#G}{\#H}\overset{(1)}=\eckig{L^N:K}\geq\#\Gal{L^N/K}\overset{(3)} = \#(G/N)$$
+            
+            Now let $M\in\Sigma\round{L^N/K}$ be a Galois intermediate field. From \ref{prop:1.7} $(1)\Rightarrow(3)$, there exists a separable polynomial $p\in K[x]$ such that $M$ is a splitting field of $p$. We write $p=\prod_{i=1}^r(x-\beta_i)$ (with the $\beta_i$ being pairwise distinct). We show that $\forall\sigma \in\Gal{L/K}: \sigma(M)=M$. Since $L^{\Gal{L/M}}=M$ (with (1)) this will prove that $M\trianglelefteq G$ (with the claim above).
+            
+            To show $\sigma(M)=M$, notice that $\sigma$ fixes every element in $K$, hence $\sigma(p)=p$, i.e. $\curly{\beta_1,\dots,\beta_r}=\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}$
+            Then $\sigma(M)=K(\sigma(\beta_1),\dots,\sigma(\beta_r))=K(\beta_1,\dots,\beta_r)=M$
+        \end{enumerate}
+        \end{proof}
+        
+        
+    \separline{Week $3$}
+    \subsection{Inverse Galois problem}
+        The inverse Galois problem is the following:
+        
+        Given a finite group $G$, does there exist a Galois extension $L/\Q$ such that $\Gal{L/\Q} \cong G$?
+        
+        In general this question is very hard and widely open. Starting from the work of Galois, Hilbert, Shafarevich etc. it is known that symmetric, alternating, abelian, more general solvable groups and certain finite simple groups can be realised as Galois groups $\Gal{L/\Q}$ for a certain field $L$.
+        
+        When the base field is not necessarily $\Q$ we can prove that:
+        
+        \begin{corollary}{}{1.18}
+            Given a finite group $G$ there exists a Galois extension with Galois group $G$.
+        \end{corollary}
+        
+        \begin{proof}
+            First, any finite group $G$ is a subgroup of a certain symmetric group $S_n$. The proof is similar to \ref{cor:1.9}. Take $h \in G$ and write $G = \{g_1, \dots, g_n\}$. then multiplication by $h$ gives $h.g_i = g_{\sigma_h(i)}$ for a unique $\sigma_h(i) \in [n]$.
+            
+            The map $\sigma_h: [n] \rightarrow [n]$ is a bijection with inverse $\sigma_{h^{-1}}$. Then the map $G \hookrightarrow S_n, \, h \mapsto \sigma_h$ gives the desired group embedding.
+            
+            Now we choose a field extension $L/K$ with Galois group $S_n$. Then by Galois correspondence \ref{thm:1.13}, $G \in \Gamma(S_n)$ implies that $L/L^G$ is Galois with Galois group $G$. 
+        \end{proof}
+
+\section{Examples}
+    In this section we discuss certain examples
+    \subsection{An easy example and Frobenius}
+    
+        \begin{example}{}{1.19}
+            We consider the Galois group of the polynomial $x^3-2$. Let $L = \Q(\sqrt[3]{2},\zeta)$, where $\zeta = \exp{\frac{2 \pi i}{3}}$ be a splitting field of $x^3 - 2$ over $\Q$.
+            
+            We first compute $L:\Q$. For this we consider the intermediate field $\Q(\zeta)$ and $\Q(\sqrt[3]{2})$. The minimal polynomial of $\zeta$ over $\Q$ is $x^2 + x + 1 \in \Q[x]$ and the minimal polynomial of $\sqrt[3]{2}$ over $\Q$ is $x^3 - 2 \in \Q[x]$. We set $a:= [L:\Q(\zeta)]$ and $b:=[L:\Q(\sqrt[3]{2})]$. Then by the degree formula $2a = 3b$ and hence $2 | b$. But $\zeta \not \in \Q(\sqrt[3]{2}) \subseteq \R$ so $[L:\Q(\sqrt[3]{2})] \geq 2$ hence $b = 2$, which means $[L:\Q] = 6$.
+            
+            \begin{equation*}
+                \xymatrix@W=15pt
+                {
+                & L\ar@{-}_{a}[dl]\ar@{-}^{b}[dr] & \\
+                \Q(\zeta)\ar@{-}_{2}[dr] & & \Q(\sqrt[3]{2})\ar@{-}^{3}[dl] \\
+                & \Q &
+                }
+            \end{equation*}
+        
+            Since $L/\Q$ is Galois it follows from \ref{cor:1.9} that the group homomorphism $\varphi: \Gal{L/\Q} \rightarrow S_3$ is an isomorphism.
+            
+            To have a geometric intuition, we draw the three roots of $x^3 - 2$ on the plane: $r_1 = \sqrt[3]{2}, r_2 = r_1 \zeta, r_3 = r_1 \zeta^2$ and connect them to get an equilateral triangle.
+            
+            \begin{center}
+            \begin{tikzpicture}[x=3cm,y=3cm]
+                \draw[->] (-1.3,0)--(1.3,0);
+                \draw[->] (0,-1.3)--(0,1.3);
+            
+                \draw (0,0) circle (1);
+                \draw (0:3.3cm) node[below] {$\sqrt[3]{2}$};
+                \draw (0:3.3cm) node[above] {$r_1$};
+                \draw (120:3.1cm) node[above] {$r_2$};
+                \draw (240:3.1cm) node[below] {$r_3$};
+                \filldraw[black] (0:3cm) circle(1.337pt);
+                \filldraw[black] (120:3cm) circle(1.337pt);
+                \filldraw[black] (240:3cm) circle(1.337pt);
+                \draw[gray] (3cm,0cm) -- (120:3cm);
+                \draw[gray] (120:3cm) -- (240:3cm);
+                \draw[gray] (3cm,0cm) -- (240:3cm);
+    
+            \end{tikzpicture}
+            \end{center}
+            
+            The symmetric group elements $(12),(13),(23)$ correspond to permutations $r_1,r_2; \, r_1,r_3; \, r_2,r_3$ of the roots. They can be seen as symmetries of the triangle with respect to the lines orthogonal to the edges, i.e. the reflections.
+            
+            \begin{center}
+            \begin{tikzpicture}[x=3cm,y=3cm]
+        
+                \draw (0:3.3cm) node[above] {$r_1$};
+                \draw (120:3.1cm) node[above] {$r_2$};
+                \draw (240:3.1cm) node[below] {$r_3$};
+                \filldraw[black] (0:3cm) circle(1.337pt);
+                \filldraw[black] (120:3cm) circle(1.337pt);
+                \filldraw[black] (240:3cm) circle(1.337pt);
+                \draw[gray] (3cm,0cm) -- (120:3cm);
+                \draw[gray] (120:3cm) -- (240:3cm);
+                \draw[gray] (3cm,0cm) -- (240:3cm);
+                \draw[black,dotted] (240:4.5cm) -- (60:4cm);
+                \path[<->,very thick,blue] (3cm,0cm) edge[bend right] node [left] {} (120:3cm);
+                \draw[blue] (60:2.8cm) node[fill=Example_color!30] {$(12)$};
+            
+            \end{tikzpicture}
+            \end{center}
+            
+            The elements $(123)$ and $(132)$ correspond to rotations with angles $\frac{2 \pi }{3}$ and $\frac{4 \pi}{3}$.
+            
+            \begin{center}
+            \begin{tikzpicture}[x=3cm,y=3cm]
+    
+                \draw (0:3.3cm) node[above] {$r_1$};
+                \draw (120:3.1cm) node[above] {$r_2$};
+                \draw (240:3.1cm) node[below] {$r_3$};
+                \filldraw[black] (0:3cm) circle(1.337pt);
+                \filldraw[black] (120:3cm) circle(1.337pt);
+                \filldraw[black] (240:3cm) circle(1.337pt);
+                \draw[gray] (3cm,0cm) -- (120:3cm);
+                \draw[gray] (120:3cm) -- (240:3cm);
+                \draw[gray] (3cm,0cm) -- (240:3cm);
+                \path[->,very thick,blue] (3cm,0cm) edge[bend right] node [left] {} (120:3cm);
+                \path[->,very thick,blue] (120:3cm) edge[bend right] (240:3cm);
+                \draw[blue] (60:2.9cm) node[fill=Example_color!30] {$(123)$};
+                \path[<-,very thick, blue] (0:3cm) edge[bend left] (240:3cm);
+            \end{tikzpicture}
+            \end{center}
+        
+            The Galois group $\Gal{L/K}$ is the symmetric group of the triangle, also known as $D_3$.
+            
+        \end{example}
+        
+        But if we look at the splitting field of $x^3 - 1$ over $\Q$, which is $\Q(\zeta)$. Then the three roots of $x^3 - 1$ are $\zeta,\zeta^2$. Note that $1 \in \Q$, so every element in $\Gal{\Q(\zeta)/\Q}$ will fix $1$ and the group is isomorphic to $S_2$. The only non trivial element will swap $\zeta$ and $\zeta^2$. Note that the restriction of the complex conjugation map $\sigma:z \mapsto \overline{z}$ to $\Q(\zeta)$ is well defined and it gives the above non trivial element in $\Gal{\Q(\zeta)/\Q}$
+        
+        
+        \begin{center}
+        \begin{tikzpicture}[x=3cm,y=3cm]
+            \draw[->] (-1.3,0)--(1.3,0);
+            \draw[->] (0,-1.3)--(0,1.3);
+        
+            \draw (0,0) circle (1);
+            \draw (0:3.3cm) node[above] {$1$};
+            \draw (120:3.1cm) node[above] {$\zeta$};
+            \draw (240:3.1cm) node[below] {$\zeta^2$};
+            \filldraw[black] (0:3cm) circle(1.337pt);
+            \filldraw[black] (120:3cm) circle(1.337pt);
+            \filldraw[black] (240:3cm) circle(1.337pt);
+            \draw[gray] (3cm,0cm) -- (120:3cm);
+            \draw[gray] (120:3cm) -- (240:3cm);
+            \draw[gray] (3cm,0cm) -- (240:3cm);
+            \path[<->,very thick,blue] (120:3cm) edge[bend right] node [left] {} (240:3cm);
+            \draw[blue] (180:2.6cm) node[fill=white] {$\sigma$};
+        \end{tikzpicture}
+        \end{center}
+        Next we study the Galois correspondence for $L/\Q$. We have $L = \Q(\sqrt[3]{2},\zeta)$ from \ref{exa:1.19}. The non trivial subgroups of $S_3$ are of order $2$ or $3$. There are four of them, namely:
+        \begin{equation*}
+            H_1 = \spitz{(123)}, \quad H_2 = \spitz{(12)}, \quad H_3 = \spitz{(23)}, \quad H_4 = \spitz{(13)}
+        \end{equation*}
+        
+        The fixed fields are:
+        \begin{equation*}
+            L^{H_1} = \Q(\zeta), \quad L^{H_2} = \Q\round{\sqrt[3]{2} \zeta^2}, \quad L^{H_3} = \Q\round{\sqrt[3]{2}}, \quad L^{H_4} = \Q\round{\sqrt[3]{2}\zeta}
+        \end{equation*}
+        
+        We write out the first one and leave the rest as exercises. Since $\zeta = \frac{r_2}{r_1}$, we have:
+	    \begin{equation*}
+			(123): \sqrt[3]{2} \mapsto \sqrt[3]{2}\zeta, \, \zeta \mapsto \zeta \qquad (132): \sqrt[3]{2} \mapsto \sqrt[3]{2} \zeta^2, \, \zeta \mapsto \zeta
+    	\end{equation*}
+    	
+    	Hence $\Q(\zeta) \subseteq L^{H_1}$. Moreover $[L^{H_1}:\Q] = \#S_3/\#H_1 = 2$ implies that $\Q(\zeta) = L^{H_1}$.
+    	We summarize the Galois correspondence in the following diagrams, called lattices:
+	
+    	\begin{equation*}
+    	    \begin{split}
+        	    \xymatrix@R=0.5cm @C=0.5cm
+        	    {
+        	            & S_3\ar@{-}[dl] \ar@{-}[dd] \ar@{-}[ddr] \ar@{-}[ddrr] & \\
+        	        H_1\ar@{-}[ddr] &     & \\
+        	            & H_2\ar@{-}[d] & H_3\ar@{-}[dl] & H_4\ar@{-}[dll] \\
+        	            & \{e\}
+        	    } \qquad  \qquad
+        	    \xymatrix@R=0.5cm @C=0.5cm
+        	    {
+        	            & \Q \ar@{-}[dl] \ar@{-}[dd] \ar@{-}[ddr] \ar@{-}[ddrr] & \\
+        	        \Q(\zeta)\ar@{-}[ddr] &     & \\
+        	            & \Q\round{\sqrt[3]{2}\zeta^2}\ar@{-}[d] & \Q\round{\sqrt[3]{2}}\ar@{-}[dl] & \Q\round{\sqrt[3]{2}\zeta}\ar@{-}[dll] \\
+        	            & \Q\round{\sqrt[3]{2},\zeta}
+        	    }	   
+    	    \end{split}
+    	\end{equation*}
+	
+    	\begin{example}{}{1.20}
+    		Let $K= \F_p$ with a prime number $p$ and $L$ an extension of $K$ with $[L:K] = n$. We have seen in Example \ref{exa:1.11} that $L/K$ is Galois.
+    		We show that $\Gal{L/K} \cong (\Z/n\Z.+)$ as groups.
+    		Recall that $L$ is a splitting field of the polynomial $x^{p^n}-x \in \F_p[x]$. We define a map $\mathrm{Fr}: L \rightarrow L, \alpha \mapsto \alpha^p$. It follows from $\Fr^n = \id$ that $\Fr$ is a field automorphism. Since for any $\alpha \in \F_p, \alpha^p = \alpha$ by Fermats little theorem, $\Fr \in \Gal{L/K}$.
+    		
+    		We denote by $H:= \spitz{\Fr}$ the subgroup of $\Gal{L/K}$ generated by $\Fr$.
+    		
+    		We define a map:
+    		\begin{equation*}
+    			\begin{split}
+    				\varphi: \Z &\rightarrow \Gal{L/K} \\
+    						1 & \mapsto \Fr
+    			\end{split}
+    		\end{equation*}
+    	which is a grouphomomorphism. If we can show that $H = \Gal{L/K}$, then it follows from $[L:K] = n$ that $\ker \varphi = n\Z$, for some $n \in \N$ and hence $\varphi$ would be surjective. This would mean that $\varphi$ induces an isomorphism of groups:
+    	
+    	\begin{equation*}
+    		\overline{\varphi}: \Z/n\Z \xrightarrow{\cong} \Gal{L/K}, \, \overline{k} \mapsto \Fr^k
+    	\end{equation*}
+    	
+    	To show: $H = \Gal{L/K}$. According to the Galois correspondence, it suffices to show that $L^H = \F_p$. For this we show that $\#L^H \leq \# \F_p$. Indeed, take $\alpha \in L^H$, then $\Fr(\alpha) = a$ implies that $\alpha^p = \alpha$ and $\alpha$ is a root of the polynomial $x^p - x \in \F_p[x]$. But this polynomial has at most $p$ roots, hence $\# L^H \leq p$.
+    	
+    	In general, if $K$ is a finite field with $\cha K = p > 0$ and $L/K$ is a finite extension with $[L:K] = m$ and $[K:\F_p] = n$. Then from Example \ref{exa:1.11}, the extension $K/\F_p$ is Galois. Applying Corollary \ref{cor:1.14} gives: %dieser Satz ergab in den Notizen keinen Sinn. Muss ich nochmal nachschauen. $\Gal{L/K}$ is the kernel of
+    	
+    	\begin{equation*}
+    	    \xymatrix@R=0.4cm @C=0.4cm
+    	    {
+    	        \Gal{L/\F_p}\ar[r]\ar@/_2pc/[ddd]_{\cong} & \Gal{K/\F_p}\ar@/^2pc/[ddd]^{\cong} \\
+    			\Fr\ar@{|->}[r] \ar@{|->}[d] & \Fr|_K\ar@{|->}[d] \\
+    			\overline{1}\ar@{|->}[r] & \overline{1} \\
+    			\Z/mn\Z\ar[r] & \Z/n\Z
+    	    }
+    	\end{equation*}
+    	The induced map is given by
+    	\begin{equation*}
+    	    \begin{split}
+    	        \Z/mn\Z &\rightarrow \Z/n\Z \\
+    	       \overline{k} &\mapsto \overline{k}
+    	    \end{split}
+    	\end{equation*}
+    	Hence $\spitz{\Fr^n} = \Gal{L/K} \cong \Z/m\Z$.
+    	\end{example}
+    	
+    	\begin{definition}{}{1.21}
+    		A Galois extension $L/K$ is called
+    		\begin{enumerate}
+    			\item \textbf{cyclic} if $\Gal{L/K}$ is a cyclic group
+    			\item \textbf{abelian} if $\Gal{L/K}$ is an abelian group
+    		\end{enumerate}
+    	\end{definition}
+    
+    	According to Example \ref{exa:1.20}, finite extensions of a finite field are cyclic and abelian.
+        
+    \subsection{Cyclotomic extensions}
+        We study the Galois group of the polynomial $x^n-1 \in \Q[x]$. First we describe a splitting field. For this we need the notion of a primitive root of unity.
+        
+        The complex roots of $x^n -1 $ are $\exp{\frac{2 k \pi i}{n}}$ for $k \in \{0,1,\dots,n-1\}$. These roots of unity, form a group together multiplication of complex numbers $(\mu_n,\cdot)$. It is straightforward to see that:
+        \begin{equation*}
+            \begin{split}
+                (\mu_n,\cdot) &\rightarrow (\Z/n\Z) \\
+                    \exp{\frac{2 k \pi i}{n}} &\mapsto \overline{k}
+            \end{split}
+        \end{equation*}
+        is an isomorphism of groups. Note that $\Z/n\Z$ is a ring so on $\Z/n\Z$ there is a multiplication $\overline{k} \cdot \overline{l}:= \overline{kl}$.
+        
+        \begin{definition}{}{1.22}
+            An n-th root of unity is called \textbf{primitive}, if its image in $\Z/n\Z$ has a multiplicative inverse.
+        \end{definition}
+        Clearly $\exp{\frac{2 \pi k i}{n}}$ is a primitive root of unity if amd only if $\gcd(k,n) = 1$.
+        
+        \textbf{Examples:}
+        \begin{enumerate}
+            \item In $\Z/6\Z$ the multiplicative invertible elements are $\overline{1}$ and $\overline{5}$, hence the primitive $6$-th roots of unity are $\exp{\frac{2 \pi i}{6}}$ and $\exp{\frac{10 \pi i}{6}}$.
+            \item In general there are $\varphi(n)$ many primitive $n$-th roots of unity.
+        \end{enumerate}
+        
+        The following definition was not written in the notes (hence no number), but we include it for the sake of completeness.
+        
+        \begin{definition*}{}{}
+            Let $\zeta_n \in \C$ be a primitive $n$-th root of unity, then the $n$-th cyclotomic extension is $\Q(\zeta_n)$.
+        \end{definition*}
+        
+        \begin{exercise}{}{6}
+            \begin{enumerate}
+                \item Show that the following statements are equivalent for $\zeta \in \mu_n$:
+                \begin{enumerate}
+                    \item $\zeta$ is a primitive $n$-th root of unity.
+                    \item The group $\mu_n$ is generated by $\zeta$
+                    \item $\zeta$ has order $n$.
+                \end{enumerate}
+                \item Deduce that, for a primitive $n$-th root of unity $\zeta_n$ the field $\Q(\zeta_n)$ is a splitting field of $x^n - 1$ over $\Q$, therefore $\Q(\zeta_n)/\Q$ is Galois.
+            \end{enumerate}
+        \end{exercise}
+        
+        \begin{proof}
+            
+            \textit{Ad (1):}
+            For $a) \Rightarrow b)$ let $\zeta$ be a primitive $n$-th root of unity. Then $\zeta^i \neq \zeta^j$ for all $0 \leq i < j \leq n-1$, since otherwise $\zeta^{j - i} = 1$, which is a contradiction, since $0 < j - i < n$ and $\zeta$ was said to be primitive. This means the subgroup of $\mu_n$ generated by $\zeta$ has order $n$. But so does $\mu_n$, thus $\mu_n = \spitz{\zeta}$.
+            
+            For $b) \Rightarrow c)$ notice that the order of $\zeta$ is equal to $\#\spitz{\zeta}$, which is $n$.
+            
+            The implication $c) \Rightarrow a)$ follows directly from the definition of the order of $\zeta$ (the smallest number of self-compositions for it to be the identity).
+            
+            \textit{Ad (2):}
+            The roots of $x^n - 1$ are precisely $\mu_n$. Since $\zeta_n$ is primitive, by \textit{1 b)}, we have $\mu_n = \spitz{\zeta}$ which means $\Q(\mu_n) = \Q(\zeta_n)$, which is a splitting field of $x^n - 1$, thus normal. Since $\Q$ is perfect, the algebraic extension $\Q(\zeta_n)/\Q$ is also separable thus Galois.
+            
+        \end{proof}
+        
+        We let $U_n$ denote the subset of multiplicative invertible elements in $\Z/n\Z$. So $\# U_n = \varphi(n)$. $U_n$ is a group with multiplication and is of order $\varphi(n)$.
+        
+        \begin{proposition}{}{1.23}
+            Let $\zeta_n$ be a primitive $n$-root of unity. There exists an isomorphism of groups
+            \begin{equation*}
+                \Gal{\Q(\zeta_n)/\Q} \cong U_n
+            \end{equation*}
+        \end{proposition}
+        
+        Before going to the proof, we study the minimal polynomial of $\zeta_n$. We recall the $n$-th cyclotomic polynomial:
+        
+        \begin{equation*}
+            \Phi_n(x) := \prod_{ \begin{array}{c}
+                 \zeta \text{ primitive }  \\
+                 n \text{-th root of unity} 
+            \end{array}
+            } (x-\zeta) 
+        \end{equation*}
+        
+        We have seen in \cite{Cobra} that $\Phi_n \in \Z[x]$ is a monic polynomial of degree $\varphi(n)$.
+        
+        \begin{lemma}{}{1.24}
+            The minimal polynomial of $\zeta_n$ is $\Phi_n(x)$.
+        \end{lemma}
+        
+        \begin{proof}
+            We denote $p(x)$ as the minimal polynomial of $\zeta_n$ over $\Q$. Since $\zeta_n$ is a root of $x^n - 1$, there exists $q(x) \in \Q[x]$ such that $x^n - 1 = p(x)q(x)$. By Gauss Lemma, both $p(x)$ and $q(x)$ are in $\Z[x]$. We show that all primitive $n$-th root of unity are roots of $p(x)$. Since $p(x)$ is monic, we have $p(x) = \Phi_n(x)$.
+            
+            \underline{claim:}
+                For any prime number $p$ and any primitive $n$-th root of unity $\zeta$, if $p(\zeta) = 0$ then $p\left(\zeta^p\right) = 0$.
+                
+            
+            Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From \ref{exc:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
+            
+            \begin{proof}[Proof of claim]
+                For this we consider the canonical map
+                \begin{equation*}
+                    \begin{split}
+                    \Z[x] &\rightarrow \F_p[x] \\        f(x) = \sum_{k=0}^{m} a_k x^k  &\mapsto \sum_{k=0}^m \overline{a_k}x^k =: \overline{f}(x)
+                    \end{split} 
+                \end{equation*}
+                it is a ring homomorphism. We consider the image of $x^n - 1 = p(x)q(x)$ under this map, which is:
+                \begin{equation*}
+                    x^n - \overline{1} = \overline{p(x)} \cdot \overline{q(x)}
+                \end{equation*}
+                The polynomial $x^n - \overline{1} \in \F_p[x]$ is separable. Since $\zeta$ is a root of $\overline{p}(x), \overline{q}(\zeta) \neq 0$.
+                In $\F_p[x]$ we have the identity: $(\alpha(x) + \beta(x))^p = \alpha(x)^p + \beta(x)^p$ since the non-trivial binomial numbers vanish and for any $\gamma \in \F_p, \gamma^p = \gamma$.
+                
+                Now we consider $\overline{q}(\zeta)^p: 0 \neq \overline{q}(\zeta)^p = \overline{q}(\zeta^p)$. This implies that $q(x) \in \Z[x], q(\zeta^p) \neq 0$. Since $\zeta^p$ is a root of $x^n - 1$, it has to be a root of $p(x)$.
+            \end{proof}
+        \end{proof}
+        
+        Now we can prove Proposition \ref{prop:1.23}
+        
+        \begin{proof}
+            Proposition \ref{prop:1.23}
+            
+            From Exercise \ref{exc:6}, $\mu_n = \{1,\zeta_n,\dots,\zeta_n^{n-1}\}$. We take $\sigma \in \Gal{\Q(\zeta_n)/\Q}$. Such a $\Q$-automorphism of $\Q(\zeta_n)$ is uniquely determined by the image of $\zeta_n$. Since $\sigma$ is an automorphism, it preserves the order of $\zeta_n$. From Exercise \ref{exc:6}, $\sigma(\zeta_n)$ must be a primitive $n$-th root of unity. Then $\sigma(\zeta_n) = \zeta_n^r$ for some $r \in \N$ such that $\overline{r} \in U_n$. We define a map:
+            \begin{equation*}
+                \begin{split}
+                    \Gal{\Q(\zeta_n)/\Q} &\rightarrow U_n \\
+                    \sigma &\mapsto \overline{r}
+                \end{split}
+            \end{equation*}
+            Such a map is an injective group homomorphism. From Lemma \ref{lem:1.24}:
+            
+            \begin{equation*}
+                \#\Gal{\Q(\zeta_n)/\Q} = [\Q(\zeta_n) : \Q] = \deg \Phi_n(x) = \varphi(n)
+            \end{equation*}
+            Since $\#U_n = \varphi(n)$, the above map is an isomorphism of groups.
+        \end{proof}
+        \begin{exercise}{Kummer-Extension}{7}
+            Let $K$ be a field with $\cha K = 0$ and $n\geq 2$. Assume $K$ contains a primitive $n$-th root of unity. Let $a\in K\setminus\curly{0}, p=x^n-a\in K[x]$ and $K_p$ be a splitting field of $p$ over $K$. Show that $\Gal{L/K}$ is isomorphic to a subgroup of $\Z/n\Z$. Show that $\Gal{L/K}\cong \Z/n\Z$ if and only if $p$ is irreducible in $K[x]$.
+        \end{exercise}
+
+        \begin{proof}
+            
+        \end{proof}
+    
+\section{Solvable by radicals}
+    \subsection{Radical extensions}
+        The question we plan to answer is: Given a polynomial $f\in\Q[x]$ whether one can express all roots of $f$ by applying only $+,-,\cdot,\div$ and $\sqrt[k]\cdot$ to elements in $\Q$?
+        
+        When $f=x^2+px+q$ we have roots $\frac{-p\pm\sqrt{p^2-4q}}2$ and $f$ can be solved by radicals. In general, there might be roots of the form $$\sqrt[r]{a+\sqrt[s]{b+\sqrt[t]{c}}}$$
+        for $a,b,c\in\Q, r,s,t\in\Z_{\geq 2}$.
+        
+        So our first task is to translate the notion "can be solved by radicals" to the language of fields and their extensions.
+        \begin{definition}{radical extensions}{1.25}
+            \begin{enumerate}
+                \item A field extension $L/K$ is called \textbf{simple radical} if $L=K(\alpha)$ where there exists an integer $n\geq 0$ and $a\in K$ such that $\alpha^n=a$. We also denote such an extension by $K(\sqrt[n]a)$ for short (note that $\sqrt[n]a$ is not a single fixed element in our field, we differ here from the definition in Analysis).
+                \item A field extension $L/K$ is called radical, if there exists a chain of field extensions $$K=K_1\subseteq K_2\subseteq\dots\subseteq K_{r+1}= L$$
+                such that each extension $K_{i+1}/K_i$ is simple radical.
+            \end{enumerate}
+        \end{definition}
+        We expand this definition: Since $K_{i+1}/K$ is simple radical, we can find $u_i\in K_{i+1}$ and $n_i\in\N$ such that $K_{i+1}=K_i(u_i)$ and $u_i^{n_i}\in K_i$. Therefore the extension $L/K$ is radical if and only if there exists $u_1,\dots,u_r\in L$, $n_1,\dots,n_r\in \N$ such that $L=K(u_1,\dots,u_r)$ and $u_i^{n_i}\in K(u_1,\dots,u_{i-1})$.
+        
+        \textbf{Examples}:
+        \begin{enumerate}
+            \item $\Q \left( \sqrt[3]2, \sqrt[5]{7+\sqrt[3]{4}} \right)/\Q$ is radical
+            \item any quadratic extension $L/K$ is radical, if $\cha(K) \neq 2$
+        \end{enumerate}
+    \subsection{Galois solvability theorem}
+        With the help of radical extensions, we can give a rigorous definition of the notion "solvable by radicals". From now on, we will assume $\cha(K)=0$.
+        \begin{definition}{solvable by radicals}{1.26}
+            A polynomial $f\in K[x]$ is called \textbf{solvable by radicals} over $K$, if there exists a radical extension $L/K$ such that a splitting field $K_f$ of $f$ over $K$ is contained in $L$.
+            
+            Since $K$ is of characteristic 0, $K_f/K$ is a Galois extension. We denote $\Gal{f}:=\Gal{K_f/K}$ and call it the Galois group of $f\in K[x]$.
+        \end{definition}
+        We expand this definition. The roots of $f$ are contained in $K_f$. If $K_f$ is contained in  a radical extension $L=K(u_1,\dots,u_r)$ as above, then all roots of $f$ can be expressed in polynomials in $u_1,\dots,u_r$, which are iterated radicals of elements over $K$. Hence this definition coincides with our intuition of "is solvable by radicals".
+        
+        Before stating the main theorem, we quickly recall the notion of solvable groups in Cobra.
+        
+        \begin{definition}{solvable group}{1.27}
+            A finite group $G$ is called solvable. if there exists a series of subgroups
+            $$\curly e = G_n\subseteq G_{n-1}\subseteq \dots \subseteq G_2\subseteq G_1= G$$
+            such that \begin{itemize}
+                \item $G_{i+1}$ is a normal subgroup in $G_i$
+                \item the quotient $G_i/G_{i+1}$ is a cyclic group.
+            \end{itemize}
+        \end{definition}
+        \begin{remark}{}{1.27}
+            In Cobra, the last condition reads: "$G_i/G_{i+1}$ is an abelian group. Since $G$ is finite, $G_i/G_{i+1}$ is a finite abelian group. Using the smith normal form from LAII, we get
+            $$G\cong \Z/n_i\Z \times \dots \times \Z/n_r\Z$$ with $n_1,\dots, n_r\in\N$ satisfying $n_1|\dots|n_r$ which means that the above series can be refined with cyclic subquotients. Details are left as an exercise.
+        \end{remark}
+        \begin{exercise}{Equivalence of the notions of solvability}{8}
+            \begin{enumerate}
+                \item Prove that for finite groups, the above definition of a solvable group and the one in Cobra are equivalent
+                \item Show that any subgroup/quotient of a cyclic group is cyclic.
+                \item Show that any subgroup/quotient of a solvable group is solvable.
+                \item Let $N\subseteq G$ be a normal subgroup. Show that $G$ is solvable if and only if $N$ and $N/G$ are solvable.
+            \end{enumerate}
+        \end{exercise}
+
+        \begin{proof}
+            
+        \end{proof}
+        
+        The goal of this section is to prove the following:
+        \begin{theorem}{Galois}{1.29}
+            Let $f\in K[x]$. The following statements are equivalent:
+            \begin{enumerate}
+                \item The polynomial $f$ is solvable by radicals over $K$.
+                \item The Galois group $\Gal{f}$ is solvable.
+            \end{enumerate}
+        \end{theorem}
+        As a direct consequence we obtain:
+        \begin{corollary}{}{1.30}
+            If there exists $n\geq 5$ such that $\Gal{f}\cong S_n$ then the polynomial $f$ is not solvable by radicals over $K$.
+        \end{corollary}
+        \begin{proof}
+        From Cobra, the symmetric group $S_n$ is solvable if and only if $n<5$. It suffices to apply theorem \ref{thm:1.29}.
+        \end{proof}
+        it is natural to ask: Does there exist a polynomial $f\in K[x]$ with $\Gal{f}\cong S_5$?
+        \begin{proposition}{}{1.31}
+            Let $K=\Q$ and $f=x^5-6x^2+3\in\Q[x]$. Then $\Gal f \cong S_5$
+        \end{proposition}
+        \begin{proof}
+            The polynomial $f$ has the following properties:
+            \begin{enumerate}
+                \item $f$ is irreducible by applying Eisenstein for $p=3$
+                \item $f$ has three distinct real roots and two complex roots which are conjugate to each other.
+            \end{enumerate}
+            One can show this using a bit of Analysis 1: note that $f(0)>0, f(1)<0, \lim\limits_{n\to\infty}f(n)=\infty$ and $\lim\limits_{n\to-\infty}f(n) = -\infty$.
+            by the intermediate value theorem, we know that there exist at least 3 distinct real root.
+            We can get by analytical means (such as a study of the extrema of the function) that these are in fact the only real roots. Since $f\in\Q[x]$ is invariant under complex conjugation, the complex roots have to be conjugate.
+            
+            We denote the complex roots by $r_1, r_2$ and the three real roots by $r_3, r_4, r_5$. Using \ref{cor:1.9} we look at $\Gal f$ as a subgroup of $S_5$ permuting the indices of the roots. The restriction of the complex conjugation to $K_f$ is well defined and is the element in $\Gal f$ corresponding to $(12)\in S_5$.
+            
+            Since $f$ is irreducible over $\Q$, the minimal polynomial of $r_1$ is $f$, hence $\eckig{\Q(r_1):\Q}=5$, which implies $5| \eckig{K_f:\Q} = \#\Gal f$. By the Cauchy Theorem (Cobra, Korollar 1.5.22) there exists an element of order 5 in $\Gal f$. Since 5 is prime, such an element corresponds to a 5-cycle in $S_5$, say $\sigma=(1,k_2,k_3,k_4,k_5)$. if $j_l=2$, then $\sigma^l=(1,2,i_1,1_2,i_3)\in\Gal f$. If we reorder the real roots $r_3, r_4, r_5$, we can assume that $(12345)\in\Gal f$.
+            
+            \begin{claim*}{}
+                Let $H\subseteq S_5$ be a subgroup containing $(12)$ and $(12345)$. Then $H=S_5$.
+            \end{claim*}
+            \begin{proof}
+                From Cobra we know that $S_5$ is generated by the transcription $(i,j)$ with $1\leq i < j \leq 5$.
+                
+                We set $s_i=(i,i+1)$ for $1\leq i \leq 4$, then $s_i=s_i^{-1}$. and repeating it gives:
+                $$(i,j)=s_i\dots s_{j-2}s_{j-1}s_{j-2}\dots s_i$$
+                we have shown that $S_5$ is generated by $s_1,s_2,s_3,s_4$. Let $\sigma=(12345)$. Then $s_i=\sigma s_{i-1} \sigma \ \forall 1<i<5$. This shows, that the $S_5$ is generated by $s_1,\sigma$, this proves the claim.
+            \end{proof}
+            And this completes the proof of the proposition.
+        \end{proof}
+        The proof generalises to prime numbers:
+        \begin{exercise}{}{9}
+            \begin{enumerate}
+                \item Let $f\in \Q[x]$ be an irreducible polynomial of degree $p$ (for a prime $p$). Assume that $f$ has excactly two complex roots, show that $\Gal f\cong S_5$.
+                \item (Harder) Let $p$ be an odd prime, $n_1<\dots<n_{p-2}$ are even numbers and $m$ even with $2m>\sum_{i=1}^{p-2}n_i^2$. Show that: for $f=(x^2+m)(x-n_1)\dots(x-n_{p-2}-2) \in \Q[x], \Gal f\cong S_p$.
+            \end{enumerate}
+        \end{exercise}
+        
+        \begin{proof}
+            
+        \end{proof}
+    
+    \separline{Week $4$}
+    
+\section{Proof of Galois' theorem}
+    \subsection*{Proof of $(1) \Rightarrow (2)$}
+    The idea for this direction is to use Galois correspondence. From the assumption there exists a radical extension $L/K$ such that $L_f \subseteq L$.
+    
+    To use Galois correspondence we need a Galois extension. The first problem is: a radical extension is not necessarily Galois.
+    
+    Since we work with the characteristic zero assumption, separable is not a problem. To get a Galois extension we take the smallest normal extension of $K$ containing $L$. We briefly recall the construction. As before we write $L = K(u_1,\dots,u_r)$ as in the definition. Let $p_1(x) \dots p_r(x)$. A splitting field of $p(x)$ over $K$ will do the job.
+    
+    We let $N$ denote this splitting field. Then $N/K$ is a Galois extension containing $L$ as an intermediate field.
+    
+    The next question is: Is $N/K$ still a radical extension?
+    
+    \begin{lemma}{}{1.32}
+        With the above notation $N/K$ is a radical Galois extension.
+    \end{lemma}
+    
+    \begin{proof}
+        It suffices to show that $N/K$ is radical. We keep notations in the above discussion. We set $m_i:=\deg\left(p_i(x)\right)$ and let $u_{i,1} := u_i, u_{i,2},\dots, u_{i,m_i}$ be the roots of $p_i(x)$.
+        
+        We know from assumption that $K(u_{1,1})/K$ is radical. So assume that $u_{1,1}^{n_1} \in K$ for some $n_1 \in \N$.
+        
+        \begin{claim*}{}{}
+            $K(u_{1,1} ,u_{1,2})/K(u_{1,1})$ is simple radical.
+        \end{claim*}
+        \begin{proof}
+            First, since $u_{1,1}$ and $u_{1,2}$ have the same minimal polynomial, there exists a $K$-isomorphism $K(u_{1,1}) \overset{\cong}{\rightarrow} K(u_{1,2})$. By post-composing $K(u_{1,2}) \hookrightarrow N$ we obtain a diagram:
+            
+            \begin{equation*}
+                \xymatrix{
+                    N \ar@{.>}[r]^{\sigma} & N \\
+                    K(u_{1,1})\ar@{^{(}->}^{j}[u] \ar^{\cong}[r]\ar | {i}[ur] & K(u_{1,2})\ar@{^{(}->}[u]
+                }
+            \end{equation*}
+            
+            From Proposition \textit{1.3.32} in \cite{Cobra}, there exists $\sigma: N \rightarrow N$ such that $\sigma$ is a field automorphism satisfying $\sigma j = i$. Therefore $\sigma \in \Gal{N/K}$ exists satisfying $\sigma(u_{1,1}) = u_{1,2}$.
+            
+            Now $u_{1,2}^{n_1} = \sigma(u_{1,1})^{n_1} = \sigma(u_{1,1}^{n_1}) \in K$, therefore $K(u_{1,1},u_{1,2})/K(u_{1,1})$ is simple radical.
+        \end{proof}
+        In general, we add to $K$ step by step the roots $u_{1,1},u_{1,2},\dots,u_{1,m_1},u_{2,1},\dots,u_{2,m_2}, \dots, u_{r,1}, \dots, u_{r,m_r}$. The argument in the above claim shows that at each step either we get the same field or we get a simple radical extension. This shows that $N/K$ is radical
+    \end{proof}
+    
+    Now we can prove $(1) \Rightarrow (2)$. We recall the notation
+    \begin{equation*}
+        K = K_1 \subseteq K_2 \subseteq \dots \subseteq K_{r+1} = L
+    \end{equation*}
+    such that $K_f \subseteq L$, $K_{i+1} = K_i(u_i)$ with $u_i^{n_i} \in K_i$. According to the Lemma, we assume that $L/K$ is Galois.
+    
+    Although $L/K$ is Galois, each step $K_{i+1}/K_i$ is not necessarily Galois. But this time it is not hard to repair it since we can fix it by adjoining roots of unity:
+    Let $\ell = n_1 \dots n_r$ and $\zeta$ be a primitive $\ell$-th root of unity. Note that if we set $a_i := u_i^{n_i} \in K_i$, then $K_{i+1}(\zeta) = K_i(u_i,\zeta)$ is a splitting field of the equation $x^{n_i} - a_i \in K_i(\zeta)[x]$ (any $n_i$-th root of unity is a power of $\zeta$) so it is Galois.
+    According to Exercise \textit{7}. $\Gal{K_{i+1}(\zeta)/K_i(\zeta)}$ is a cyclic group.
+    
+    Now we consider another chain of field extensions
+    
+    \begin{equation*}
+        \xymatrix{
+            K'_0 := K \subseteq K_1(\zeta) \subseteq K_2(\zeta) \subseteq \dots \subseteq K_{r+1}(\zeta) = L(\zeta)
+        }
+    \end{equation*}
+    
+    and set $K'_i:= K_i(\zeta)$. By our construction $L$ is a splitting field of $p(x)$ over $K$, hence $L(\zeta)$ is a splitting field of $p(x)(x^\ell - 1)$ over $K$. Hence $K_{r+1}'/K_0'$ is Galois.
+    
+    \begin{claim*}{}{}
+        The group $\Gal{L(\zeta)/K}$ is solvable.
+    \end{claim*}
+    
+    Assume now that the claim is proven. We consider the extensions $L(\zeta)/K_f /K$: they are all Galois, so by Corollary \ref{cor:1.14} we have an isomorphism of groups
+    
+    \begin{equation*}
+        \faktor{\Gal{L(\zeta)/K}}{\Gal{L(\zeta)/K_f}} \cong \Gal{K_f / K}
+    \end{equation*}
+    
+    Hence $\Gal{K_f/K}$ is a quotient of the solvable group $\Gal{L(\zeta)/K}$. By Exercise \ref{exc:8} it is solvable.
+    
+    \begin{proof} [proof of Claim]:
+        We apply $\Gal{L(\zeta)/\_}$ to the above sequence and get:
+        $\{\id\} = \Gal{L(\zeta)/K'_{r+1}} \subseteq \Gal{L(\zeta)/K'_r} \subseteq \dots \subseteq \Gal{L(\zeta)/K'_0}$.
+        
+        We have normal subgroups $\Gal{L(\zeta)/K'_{i+1}} \trianglelefteq \Gal{L(\zeta)/K'_i}$.
+        
+        According to Galois correspondence, applied to $L(\zeta)/K'_{i+1}/K'_i$, this property follows from the fact that $K'_{i+1}/K'_i$ is Galois.
+        
+        The subquotients $\Gal{L(\zeta)/K'_i}/\Gal{L(\zeta)/K'_{i+1}}$ are cyclic.
+        
+        Applying Corollary \ref{cor:1.14} again this group is isomorphic to $\Gal{K'_{i+1}/K'_i}$, which is cyclic.
+        
+    \end{proof}
+    
+    The proof of the direction $(1) \Rightarrow (2)$ is then complete.
+    
+    \subsection*{Proof of $(2)\Rightarrow (1)$} 
+    Assume that $\Gal{f}$ is solvable, we construct a radical extension $L/K$ with $K_f \subseteq L$.
+    
+    The key point of this construction is given a cyclic group $\Z/m\Z$, how to construct a radical extension?
+    
+    \begin{lemma}{}{1.33}
+        Let $K$ be a field of characteristic $0$ containing a primitive $m$-th root of unity $\zeta$. If $L/K$ is Galois with $\Gal{L/K} \cong \Z/m\Z$, then $L/K$ is a simple radical extension.
+    \end{lemma}
+    
+    \begin{proof}
+        There are some inaccuracies in the proof. For a more detailed proof see "Non-vanishing of resolvent" in Moodle.
+        The point is to find a generator. First since $L/K$ is finite and separable, from the primitive element theorem, we can assume that $L = K(\alpha)$ for some $\alpha \in L$.
+        
+        The crucial construction is the following Lagrange resolvent: For $\sigma \in \Gal{L/K}$ a generator:
+        \begin{equation*}
+            \ell := \alpha + \zeta \sigma(\alpha) + \zeta^2 \sigma^2(\alpha) + \dots + \zeta^{m-1}\sigma^{m-1}(\alpha)
+        \end{equation*}
+        From $\zeta \in K$ it follows $\sigma(\ell) = \zeta^{-1} \ell$ and $\sigma^k(\ell) = \zeta^{-k} \ell$. Now we consider the intermediate field $L/K(\ell)/K$ and look at $\Gal{L/K(\ell)}$ as a subgroup of $\Gal{L/K}$.
+        
+        Notice that $\sigma,\sigma^2,\dots,\sigma^{m-1}$ do not fix $\ell$, hence they are not in $\Gal{L/K(\ell)}$. It follows from $\Gal{L/K} \cong \Z/m\Z$ that $\Gal{L/K(\ell)}$ is the trivial group and hence $L = K(\ell)$ (Galois correspondence).
+        
+        It remains to show that $\ell^m \in K$. Notice that for any $1 \leq k \leq m-1$, $\sigma^k(\ell^m) = \ell^m$. Therefore again by Galois correspondence, $\ell^m \in L^{\Gal{L/K}} = K$.
+    \end{proof}
+    
+    
+    We will see later how the Lagrange resolvent helps to find solution to cubic equations by radicals.
+    
+    
+    We go back to the proof of $(2) \Rightarrow (1)$.
+    
+    \begin{proof}
+    
+    Assume that $\Gal{K_f/K}$ is solvable. Like in the part $(1) \Rightarrow (2)$ we set $r:=[K_f:K]$ and $\zeta$ to be a primitive $r$-th root unity. Then consider the extension $K_f(\zeta)/K(\zeta)$ which is also Galois. By restricting $\sigma \in \Gal{K_f(\zeta)(K(\zeta)}$ to $K_f$, since $\sigma$ fixes $\zeta$, we realised $\Gal{K_f(\zeta)/K(\zeta)}$ as a subgroup of $\Gal{K_f/K}$. As a consequence of Exercise \ref{exc:8} $\Gal{K_f(\alpha)/K(\alpha)}$ is solvable.
+    
+    We choose a composition series of it with cyclic subquotients:
+    \begin{equation*}
+        \Gal{K_f(\zeta)/K(\zeta)} = G_2 \supseteq G_3 \supseteq \dots \supseteq G_{r+1} = \{\id\}
+    \end{equation*}
+    Applying the Galois correspondence gives us fixed fields
+    \begin{equation*}
+        K(\zeta) = K_2 \subseteq K_3 \subseteq \dots \subseteq K_{r+1} = K_f(\zeta)
+    \end{equation*}
+    where $K_i = K_f(\zeta)^{G_i}$.
+    
+    We set $K_1 = K$. It remains to show that $K = K_1 \subseteq K_2 \subseteq \dots \subseteq K_{r+1} = K_f(\zeta)$ is a chain of simple radical extensions.
+    
+    The extension $K_2 / K_1$ is cyclotomic hence is simple radical. We look at $K_{i+1}/K_i$ for $i \geq 2$.
+    Since the primitive $r$-th root of unity $\zeta$ is in $K_i$ for $i \geq 2$, we want to apply the above Lemma.
+    The last thing to show for this is that $K_{i+1}/K_i$ is Galois with cyclic Galois group.
+    
+    For this we apply Galois correspondence to $K_f(\zeta)/K_{i+1}/K_i$. 
+    Since $\Gal{K_f(\zeta)/K_{i+1}} = G_{i+1}$ is a normal subgroup in $\Gal{K_f(\zeta)/K_i}$ the extension $K_{i+1}/K_i$ is Galois with Galois group $G_i/G_{i+1}$, which is cyclic by assumption.
+    The proof of the Galois theorem is then complete.    
+    \end{proof}
+    
+    \subsection*{Quadratic and cubic equations}
+        \subsubsection{(1) Quadratic equations} 
+            Let $f(x) = x^2 + ax + b \in \Q[x]$. Without loss of generality we assume that it has two distinct roots $x_1$ and $x_2$. Then $x_1 + x_2 = -a$ and $x_1x_2 = b$. We let $\zeta$ be a primitive $2$nd root of unity $(\zeta = -1)$ and define the Lagrange resolvent
+            \begin{equation*}
+                \ell := x_1 + \zeta x_2
+            \end{equation*}
+            Since $x_2 = -a - x_1 \implies \Q(x_1,x_2) = \Q(x_1)$. The Galois group $\Gal{f} \cong S_2 = \{\id, (12)=: \tau \}$ where $\tau$ permutes the two roots. Under the action of $\tau$, $\tau(\ell) = \zeta x_1 + x_2 = \zeta \ell$.
+            
+            Now notice that $u:= \ell^2$ is fixed by $\Gal{f}$ so $u \in \Q$. Then we have
+            \begin{equation*}
+                \left\{ \begin{array}{c}
+                    x_1 + \zeta x_2 = l = \sqrt{u}  \\
+                    x_1 + x_2 = -a
+                \end{array}\right.
+            \end{equation*}
+            
+            Solving it gives: $x_1 = \frac{a + \sqrt{u}}{\zeta - 1}, \quad x_2 = \frac{a +\zeta \sqrt{u}}{\zeta - 1}$.
+            
+            Replacing $\zeta$ by $-1$ and noticing
+            \begin{equation*}
+                u = \ell^2 = (x_1 + \zeta x_2)^2 = x_1^2 - 2x_1 x_2 + x_2^2 = (x_1 + x_2)^2 - 4x_1x_2 = a^2 -4b
+            \end{equation*}
+            
+            We obtain:
+            \begin{equation*}
+                x_1 = -\frac{1}{2}\left(a + \sqrt{a^2 - 4b}\right), \quad x_2 = -\frac{1}{2}\left(a - \sqrt{a^2-4b}\right)
+            \end{equation*}
+        
+            Which is the $pq$-formula.
+            
+            This method works for cubic equations aswell:
+        
+        \subsubsection{(2) cubic equations}
+            Let $f=x^3+ax^2+bx+c \in\Q[x]$. We will work with the assumption that $\Gal f\cong S_3$ since almost all cubic equations fulfil this assumption. The other cases are easier. As always we identify the two groups where we let $S_3$ operate on the roots via permutation.
+            
+            From this assumption, $f$ has three roots $x_1,x_2,x_3$. again we have 
+            \begin{align*}
+                &x^3+ax^2+bx+c=(x-x_1)(x-x_2)(x-x_3)\\
+                &\begin{cases}
+                    x_1+x_2+x_3 &=-a\\
+                    x_1x_2+x_1x_3+x_2x_3 &=b\\
+                    x_1x_2x_3 &=-c
+                \end{cases}
+            \end{align*}
+            Let $\zeta = e^{\frac{2\pi i}3}$ be a primitive 3rd root of unity. We consider the Lagrange resolvent
+            $$l:=x_1+\zeta x_2+ \zeta^2 x_3 \qquad (\sigma = (123) \in A_3)$$
+            (Note that a composition series of $S_3$ is $S_3\supset A_3 \supset \curly{e}$ where $S_3/A_3 \cong \Z/2\Z$ and $A_3\cong \Z/3\Z$. Here we study the intermediate extension $\Q(\zeta,x_1)/\Q(\zeta,x_1)^{A_3}$ with galois group isomorphic to $\Z/2\Z$).
+            
+            We name the elements of $S_3$:
+            \begin{align*}
+                \tau_1=\id,& \tau_2=(132), &&\tau_3=(123), &&&\tau_4=(23), &&&&\tau_5=(12), &&&&&\tau_6=(13)
+            \end{align*}
+            Applying them to $\ell$ gives 
+            \begin{align*}
+                &\tau_1(\ell)=\ell, &&\tau_2(\ell)=\zeta\ell, &&&\tau_3(\ell)=\zeta^2\ell\\
+                &\tau_4(\ell)=\omega, &&\tau_5(\ell)=\zeta\omega, &&&\tau_6(\ell)=\zeta^2\omega
+            \end{align*}
+            where $\omega=x_1+\zeta^2x_2+\zeta x_3$. Now notice that both $u_1:=\ell^3$ and $u_2:=\omega^3$ are fixed by $A_3$-permutations.Hence they are in the fixed field $\Q(x_1,x_2,x_3)^{A_3}$, which is of degree 2 over $\Q$. Therefore they have to satisfy a degree 2 equation:
+            $$y^2+py+q=0 \qquad \text{ with } p=-(u_1+u_2),\quad q=u_1u_2$$
+            After some computation one finds
+            $$p=2a^2-9ab+27c, \quad q=(a^2-3b)^3$$
+            Applying the result abtained for quadratic equations, we can solve $u_1$ and $u_2$ as functions in $a,b$ and $c$.
+            
+            Now we have obtained three linear equations
+            $$
+            \begin{cases}
+            x_1+\zeta x_2+\zeta^2x_3=\ell=\sqrt[3]{u_1}\\
+            x_1+\zeta^2x_2+\zeta x_3=w=\omega=\sqrt[3]{u_2}\\
+            x_1+x_2+x_3=-a
+            \end{cases}
+            $$
+            Solving them gives 
+            $$
+            \begin{cases}
+            x_1=\frac13\round{-a+\sqrt[3]{u_1}+\sqrt[3]{u_2}}\\
+            x_2=\frac13\round{-a+\zeta^2\sqrt[3]{u_1}+\zeta\sqrt[3]{u_2}}\\
+            x_3=\frac13\round{-a+\zeta\sqrt[3]{u_1}+\zeta^2\sqrt[3]{u_2}}
+            \end{cases}
+            $$
+            \begin{remark}{}{1.34}
+                If you notice the change of variable $z:=x-\frac a3$ we get $f(x)=z^3+\alpha z+\beta$ with $\alpha,\beta \in\Q$. IOn this case the formulae for $p$ and $q$ above are easier to compute: $p'=27\beta, q'=-27\alpha^3$ (verify it for yourself).
+            \end{remark}
+            For a general degree 4 equation, we can use the Lagrange resolvent to reduce it to a degree 3 equation and find the solution by radicals. But Lagrange found, that the same method applied on a degree 5 equation will only give us an equation of higher degree. This made Lagrange conjecture that a general solution might not exist and served as an inspiration for the work of Galois.
+            
+            
+\chapter{Linear representations of finite groups}
+    We are going to use \cite{Serre.20} and \cite{FultonHarris.1991} as references. You can find the PDFs on Moodle.
+    
+    In this chapter we study linear representations of finite groups. The algebraic side of representations theory studies representations of:
+    
+    \begin{enumerate}
+        \item[a)] finite groups, a*) compact and algebraic groups
+        \item[b)] Lie algebras and their quantization
+        \item[c)] Finite dimensional algebras
+        \item[d)] ad hoc examples
+    \end{enumerate}
+    
+    The specific methods used in the study of representations of these algebraic structures may be quite different (algebraic, geometric, combinatorial). But the connection between these different branches of representation theory are a big aspect in modern representation theory.
+    
+    In this lecture we will study the basic theory in part a) and c). Next semester in the Lecture "Lie algebra" we will learn part b).
+    
+    The idea of representation theory is linearization. We use vector spaces as films to take a picture of the group (let the group hit the film an we examine the \underline{trace}). If we take enough pictures of the group we can recover the group to some extent (in fact we can recover the entire group which is called Tannakian construction, this is an advanced topic).
+    
+    We briefly recall tensor products of vector spaces. Details can be found in the lecture notes of Lineare Algebra II \cite{LA} (which you can also find on the moodle page).
+    
+    \setcounter{section}{-1}
+    
+\section{Revision: tensor products}
+    
+    Let $K$ be a field and $V,W$ be two $K$-vector spaces. We denote their Cartesian product as $V \times W$. The tensor product $V \tens W$ is defined as the $K$-vector space $K(V \times W)/R$, where $K(V \times W)$ is the $K$-vector space with basis $V \times W$ and
+    \begin{equation*}
+        \begin{split}
+            R = \spitz{ \left. \begin{array}{c}
+                (v_1+v_2,w_1) - (v_1,w_1) - (v_2,w_1), \\ (v_1,w_1 + w_2) - (v_1,w_1) - (v_1,w_2),  \\
+                (\lambda v_1, \mu w_1) - \lambda \mu (v_1,w_1) 
+            \end{array}  \ \right| \ v_1,v_2 \in V, \ w_1,w_2 \in W \text{ and } \lambda,\mu \in K }_K        
+        \end{split}
+    \end{equation*}
+    
+    There is a canonical map
+    \begin{equation*}
+    \begin{split}
+        \alpha: V \times W &\to V \tens W \\ (v,w) &\mapsto [(v,w)]        
+    \end{split}
+    \end{equation*}
+    We will denote $v \tens w := [(v,w)]$.
+    
+    \begin{proposition}{Universal property of the tensor product}{2.1}
+        Let $T$ be a $K$-vector space and $f: V \times W \to T$ be a bilinear map. Then there exists a unique $K$-linear map $\overline{f}: V\times W \to T$ such that $\tilde{f} \circ \alpha = f$. This can be described via the following diagram
+        \begin{equation*}
+            \xymatrix@R=14pt {
+                V \times W \ar[dr]_{\alpha} \ar[rr]^(.55){\forall f} & & T \\
+                & V \tens W\ar@{.>}[ur]_{\exists! \bar{f}} \ar@{}[u]|(.55){\circlearrowleft}}
+        \end{equation*}
+    \end{proposition}
+    The idea behind this universal property is: bilinear maps are less familiar to us than the linear maps. By looking at tensor products, we can transform bilinear maps to linear maps. For linear maps we have the big machinery from Linear Algebra to deal with them. We can also summarize the above universal property in the following isomorphism of $K$-vector spaces
+    \begin{equation*}
+        \begin{split}
+            \Bil(V,W;T) &\overset{\cong}{\to} \Hom_K(V \tens W, T) \\
+            f &\mapsto \bar{f}            
+        \end{split}
+      \end{equation*}
+    
+    \begin{remark*}{}
+        The universal property defines the tensor product up to isomorphism, see \cite{LA}.
+    \end{remark*}
+    
+    To define a linear map $V \tens W \to T$, it suffices to define it on the elementary tensors $v \tens w$ for $v \in V,w \in W$.
+    
+    Now we assume that both $V$ and $W$ are finite dimensional. Let $(v_1,\dots,v_m)$ be a basis for $V$ and $(w_1,\dots,w_n)$ be a basis for $W$. We have seen in LA II \cite{LA} that $\round{(v_i \tens w_j) \ | \ 1 \leq i \leq m, 1 \leq j \leq n}$ is a basis of $V \tens W$. Therefore $\dim(V \tens W) = \dim(V) \cdot \dim(W)$.
+    
+    What will be of use for us in the subsequent chapters is the fact that the Hom-space can be written as a tensor product of vector spaces.
+    
+    \begin{proposition}{}{2.2}
+        Let $V,W$ be two finite-dimensional $K$-vector spaces. Then
+        \begin{equation*}
+        \begin{split}
+            \varphi: W \tens V^* &\to \Hom_K(V,W) \\
+            w \tens f &\mapsto (v \mapsto f(v)w )    
+        \end{split}
+        \end{equation*}
+        is an isomorphism of $K$-vector spaces.
+    \end{proposition}
+    
+    \begin{proof}
+        We construct the inverse of $\varphi$:
+        \begin{equation*}
+        \begin{split}
+            \psi: \Hom_K(V,W) &\to W \tens V^* \\
+            \alpha &\mapsto \sum_{i=1}^n \alpha(v_i) \tens v_i^*
+        \end{split}
+        \end{equation*}
+        where $(v_1,\dots,v_n)$ is a basis of $V$ and $(v_1^*,\dots,v_n^*)$ its dual basis, gives the inverse map of $\varphi$.
+        
+        First we need to check that $\psi \circ \varphi = \id_{W \tens V^*}$ on a basis of $W \tens V^*$. For this we fix a basis $(w_1,\dots,w_m)$ of $W$. This yields a basis $(w_l \tens v_j^*\ | \ 1 \leq l \leq m, \ 1 \leq j \leq n)$ of $W \tens V^*$. We have:
+        \begin{equation*}
+        \begin{split}
+            (\psi \circ \varphi)(w_l \tens v_j^*) = \sum_{i=1}^{n} \varphi(w_l \tens v_j^*)(v_i) \tens v_i^* = \sum_{i=1}^{n} v_j^*(v_i)w_l \tens v_i^* = \sum_{i=1}^n \delta_{i,j} w_l \tens v_i^* = w_l \tens v_j^*
+        \end{split}
+        \end{equation*}
+        
+        Conversely take $\alpha \in \Hom_K(V,W)$, then we again only need to check it for the $v_j$, we have:
+        \begin{equation*}
+        \begin{split}
+            (\varphi \circ \psi)(\alpha)(v_j) = \varphi\round{\sum_{i=1}^n \alpha(v_i) \tens v_i^*}(v_j) = \sum_{i=1}^n \varphi(\alpha(v_i) \tens v_i^*)(v_j) = \sum_{i=1}^n v_i^*(v_j)  \alpha(v_i) = \alpha(v_j)
+        \end{split}
+        \end{equation*}
+    \end{proof}
+    
+\section{Linear representations}
+    In the rest of this chapter we assume that $G$ is a finite group and fix $\C$.
+    
+    \subsection{Definition and examples}
+        Recall that for a vector space $V$, $\GL(V)$ is the group of invertible endomorphisms of $V$.
+        \begin{definition}{}{2.3}
+            A (linear) \textbf{representation} of $G$ (also called $G$-representation) is a pair $(V,\rho_V)$ where
+            \begin{itemize}
+                \item $V$ is a $\C$-vector space
+                \item $\rho_V: G \to \GL(V)$ is a group homomorphism
+            \end{itemize}
+            
+            The dimension of $V$ is called the \textbf{dimension} or \textbf{degree} of the representation. We let $\Rep(G)$ denote the category of all representations of $G$ and $\rep(G)$ denote the subcategory of all finite dimensional representations.
+        \end{definition}
+        
+        \begin{example}{}{2.4}
+            Let $G \circlearrowleft X$, i.e. $X$ is a $G$-set. By definition there exists a homomorphism of groups
+            \begin{equation*}
+            \begin{split}
+                \rho_X: G &\to S_X:=\Bij(X,X) \\
+                        g &\mapsto (x \mapsto g.x)
+            \end{split}
+            \end{equation*}
+            
+            We consider the vector space $\C(X)$ whose elements are $\C$-linear combinations of elements in $X$. In notation
+            \begin{equation*}
+                \C(X) = \left\{\sum_{i=1}^{k} \lambda_i x_i \ | \ \lambda_i \in \C, x_i \in X \right\}
+            \end{equation*}
+            The vector space $V:= \C(X)$ admits a $G$-rep structure via the map
+            \begin{equation*}
+            \begin{split}
+                \rho_V: G &\to \GL(V) \\
+                    g &\mapsto \left(x_i \mapsto \rho_X(g)(x_i)\right)
+            \end{split}
+            \end{equation*}
+            Since $\rho_X(g) \in S_X$ it permutes the basis elements of $V$. Hence the linear continuation of $\rho_X(g)$ is in $\GL(V)$.
+        \end{example}
+        
+        We look at some special cases:
+        
+        \underline{(1): $G = S_n, X = [n]$:}
+        
+            We identify $\C(X)$ with $\C^n$ together with a basis $e_1,\dots,e_n$. The above construction gives a representation of $S_n$:
+            \begin{equation*}
+            \begin{split}
+                \rho_{\C^n}: S_n &\to \GL_n(\C) \\
+                            \sigma &\mapsto \perm(\sigma)
+            \end{split}
+            \end{equation*}
+            
+            where $\perm(\sigma)$ is the permutation matrix of $\sigma$. Clearly $\perm(\sigma) \in \GL_n(\C)$, since $\det(\perm(\sigma)) = \sgn(\sigma)$. Furthermore $\perm(\sigma \circ \tau) = \perm(\sigma) \circ \perm(\tau)$.
+            
+        \underline{(2): $X=G$:}
+        
+            Then $G$ acts on $X$ by left multiplication. The above construction gives a representation of $G$
+            \begin{equation*}
+            \begin{split}
+                \rho^{\text{reg}} \text{ or } \rho_{\C(G)}: G &\to \GL(\C(G)) \\
+                g &\mapsto \round{\sum_{h \in G} \lambda_h h } \mapsto \round{\sum_{h \in G} \lambda_h gh }
+            \end{split}
+            \end{equation*}
+            Such a representation is called the left regular representation of $G$.
+            
+        \underline{(3): $X = \{x\}$:}
+        
+        Then $G$ acts on $X$ by $\rho_X(g)(x) = x$. The associated $G$-representation on $\C(X) \cong \C$ is:
+        \begin{equation*}
+        \begin{split}
+            \rho: G &\to \GL(\C) \overset{\cong}{\to} \C\setminus\{0\} \\
+            g &\mapsto \id_\C \mapsto 1
+        \end{split}
+        \end{equation*}
+        such a representation is called the trivial representation of $G$. It is a one-dimensional representation.
+        
+\separline{Week 5}
+
+        We discuss how to construct new representations from the old ones next.
+        
+        \begin{definition*}{Subrepresentation (a)}
+            Let $(V,\rho_V) \in \Rep(G)$. An element $(W,\rho_W)$ is called a \textbf{subrepresentation} of $G$, if $W \leq V$ (subspace) and $\rho_W(g) = \rho_V(g)|_W$ for all $g \in G$.
+        \end{definition*}
+        
+        We consider the example \ref{exa:2.4} (1) above with $G=S_n$ and $V=\C^n$. Let $W = \spitz{e_1 + \dots + e_n}$ then for any $g \in S_n$, $\rho_V(g)(e_1 + \dots + e_n) = e_1 + \dots + e_n$, hence $\rho_V(g)|_W \in \GL(W)$ and $(W,\rho_V(g)|_W)$ is a subrepresentation of $(V,\rho_V)$.
+        
+        Note that for a representation $(V,\rho_V)$, there always two subrepresentations $(\{0\},\rho_V|_{\{0\}})$ and $(V,\rho_V)$.
+        
+        
+        \begin{definition}{Irreducible representation}{2.5}
+            A representation $(V,\rho_V) \in \Rep(G)$ is called \textbf{irreducible} if $V$ has \underline{exactly} two subrepresentations.
+        \end{definition}
+        
+        \textbf{Examples}:
+        \begin{enumerate}
+            \item The trivial representation $\rho^{\text{triv}}: G \to \GL(\C), \quad \rho(g) = \id $ is irreducible
+            \item The representation in Example \ref{exa:2.4} (1) is not irreducible.
+            \item The $0$ representation $\rho_{0}: G \to \{0\}$ is \textbf{not} irreducible
+        \end{enumerate}
+    
+    \underline{Question:} Is the left regular representation of $G$ irreducible?
+    \begin{definition*}
+    {Quotient representation (b)}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$ such that $W \subseteq V$ is a subrepresentation. We define a $G$-representation structure on the vector space $V/W:$
+        \begin{equation*}
+        \begin{split}
+            \rho_{V/W}: G &\to \GL(V/W) \\
+                        \rho_{V/W}(g)(v+W) &= \rho_V(g)(v) + W \in V/W
+        \end{split}
+        \end{equation*}
+    \end{definition*}
+    
+    Fix $g \in G$ and say $v - v' \in W$. Then $\rho_V(g)(v-v') \in W$, hence $\rho_V(g)(v) \in \rho_V(g)(v') + W$.
+    
+    \begin{exercise}{}{10}
+        We consider the above representation of $S_3$ on $\C^3$ and its subrep. $W = \spitz{e_1 + e_2 + e_3}$. Show that: $\C^3/W$ is an irreducible representation of $S_3$. How about replacing $3$ by any $n \in \N$?
+    \end{exercise}
+
+    \begin{proof}
+        For $n=3$ we would need to have a $1$-dimensional subrepresentation $U/W$ that is $\rho_{V/W}(g)$-invariant. Say $U/W = \spitz{u + W}$, then $u + W = \rho_{V/W}(g)(u+W) = \rho_{V}(g)(u) + W$, hence $\rho_V(g)(u) - u \in W$ for all $g \in S_3$. If we take $u = (a,b,c)^t, g = (12)$, then:
+        \begin{equation*}
+            \rho_V(12)(u) - u = \round{\begin{array}{c}
+                 b-a  \\
+                 a-b \\
+                 c
+            \end{array}} \implies a-b = b-a = c \implies a = b \land c = 0
+        \end{equation*}
+        If we take $g = (13)$ we get $c = a$ and hence $u = (0,0,0)^t$ which yields a contradiction.
+        
+        It is actually irreducible for any $n \in \N$. We define the Hyperplane $H = \{x \in \C^n \ | \ \sum_{i=1}^n x_i = 0\}$, which is a vector space. Now we have $G$-structure on $H$ via:
+        \begin{equation*}
+        \begin{split}
+            \rho_H(g): G \to \GL(H) \\
+                        g \mapsto \rho_V(g)|_H
+        \end{split}
+        \end{equation*}
+        
+        which is well defined, since $\sum_{i=1}^n\rho_V(g)(x)_i = \sum_{i=1}^n x_{g(i)} = 0$. Now we show that $V/W \cong H$ as $G$-reps. For this we consider the map
+        \begin{equation*}
+        \begin{split}
+            \varphi: V/W &\to H \\
+                    v + W &\mapsto w \in v + W \text{ with } \sum_{i=1}^n w_i = 0
+        \end{split}
+        \end{equation*}
+        
+        This $w$ exists since for any $v$, we set $w_i = v_i - \frac{1}{n}\sum_{i=1}^n v_i$ and it is unique since if there where two such $w,w' \in v +W$, then $w-w' \in W$, hence $w = w' + \lambda (e_1 + \dots + e_n)$, but
+        \begin{equation*}
+        \begin{split}
+            0 = \sum_{i=1}^n w_i = \sum_{i=1}^n w_i' + \lambda = \lambda \cdot n \implies \lambda = 0 \implies w = w'
+        \end{split}
+        \end{equation*}
+        
+        One can easily check that there is a isomorphism of $G$-reps:
+        
+        \begin{equation*}
+        \xymatrix@C=40pt {
+            V/W \ar^{\rho_{V/W}(g)}[r] \ar[d]_{\varphi} & V/W\ar[d]^{\varphi} \\
+            H \ar[r]_{\rho_H(g)} & H\ar@{}|{\circlearrowleft}[ul]
+        }
+        \end{equation*}
+        
+        Clearly $\mathbf{1} \oplus \rho_H = \rho_V$ and since $S_n$ acts doubly transitive on $[n]$, by Exercise 3 c) of sheet 5, $(\rho_H,H)$ is irreducible and so is $(\rho_{V/W},V/W)$.
+    \end{proof}
+     
+    \begin{definition*}
+    {Direct sum (c)}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$. The \textbf{direct sum} of vector spaces $V \oplus W$ is a $G$-rep. via
+        \begin{equation*}
+        \begin{split}
+            \rho_{V \oplus W}: G &\to \GL(V \oplus W) \\
+                            g &\mapsto \round{(v,w) \mapsto (\rho_V(g)(v),\rho_W(g)(w))}
+        \end{split}
+        \end{equation*}
+    \end{definition*}
+    This operation will be essential for decomposing representations.
+    
+    \begin{definition*}
+    {Tensor product (d)}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$. The \textbf{tensor product} $V \tens W$ is a $G$-representation via:
+        \begin{equation*}
+        \begin{split}
+            \rho_{V \tens W}: G &\to \GL(V \tens W) \\
+                    \rho_{V \tens W}(g)(v \tens w) &= \rho_V(g)(v) \tens \rho_W(g)(w)
+        \end{split}
+        \end{equation*}
+        and then use the universal property \ref{prop:2.1} to extend it to a linear map.
+    \end{definition*}
+
+    \begin{definition*}
+    {Dual representation (e)}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$. The dual space $V^*$ admits a $G$-representation structure via:
+        \begin{equation*}
+        \begin{split}
+            \rho_{V^*}: G &\to\GL(V^*) \\
+                \spitz{\rho_{V^*}(g)(f),v} &= \spitz{f,\rho_V(g^{-1})(v)}
+        \end{split}
+        \end{equation*}
+        where $\spitz{\bullet,\bullet}$ is the evaluation pairing $\Hom_\C(V,W) \times V \to W, \quad (f,v) \mapsto f(v) = \spitz{f,v}$
+    \end{definition*}
+    
+    \begin{definition*}
+    {Hom-space (f)}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$. The $\C$-vector space $\Hom_\C(V,W)$ is a $G$-representation via:
+        \begin{equation*}
+        \begin{split}
+            \spitz{\rho_{\Hom}(g)(f),v} = \rho_W(g)\round{\spitz{f,\rho_V(g^{-1})(v)}}
+        \end{split}
+        \end{equation*}
+        i.e. $\rho_\Hom(g)(f) = \rho_W(g) f \rho_V(g^{-1})$.
+    \end{definition*}
+    \begin{remark*}{}
+        Using \ref{prop:2.2} we get this as a special case from the previous two cases.
+    \end{remark*}
+    
+    Now that we defined objects, we need to look at morphisms between them.
+    
+    \begin{definition}{}{2.6}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$.
+        
+        A linear map $f: V \to W$ is called a \textbf{(homo)morphism of $G$-representations}, if $\forall g \in G$ the following diagram commutes:
+        \begin{equation*}
+        \xymatrix @R=30pt{
+            V \ar^{\rho_V(g)}[r] \ar_{f}[d] & V\ar^{f}[d] \\
+            W \ar_{\rho_W(g)}[r] & W\ar@{}|{\circlearrowleft}[ul]
+        }
+        \end{equation*}
+        We let $\Hom_G(V,W)$ denote the set of homomorphisms of $G$-representations from $V$ to $W$. It is a $\C$-vector space.
+        
+        The representations $(V,\rho_V)$ and $(W,\rho_W)$ are called \textbf{isomorphic}, if there exists an $f \in \Hom_G(V,W)$ which is an isomorphism of vector spaces.
+    \end{definition}
+    
+    \begin{exercise}{}{11}
+        Let $(V,\rho_V), (W,\rho_W) \in \Rep(G)$ and $f \in \Hom_G(V,W)$.
+        \begin{enumerate}
+            \item Verify that $\Ker(f)$ is a subrep of $V$ and $\Img(f)$ is a subrep of $W$.
+            \item Show that $f$ induces an isomorphism of $G$-reps: $\bar{f}: V/\Ker(f) \cong \Img(f)$.
+            \item Let $V,W$ be finite dimensional vector spaces.
+            
+            Show that the linear map $\varphi: W \tens V^* \to \Hom_\C(V,W)$ from Proposition \ref{prop:2.2} is an isomorphism of $G$-reps. This explains why we define the $G$-structure on $\Hom_\C(V,W)$ as in (f). It follows from (d) and (e).  
+        \end{enumerate}
+    \end{exercise}
+    \begin{proof}
+        
+    \end{proof}
+    The vector space $\Hom_G(V,W)$ of $G$-homs. is in fact an invariant space.
+    \begin{definition*}{invariant space}
+        For $V \in \Rep(G)$, we denote its \textbf{invariant space} $V^G := \{v \in V \ | \ \forall g \in G: \rho_V(g)(v) = v \}$.
+    \end{definition*}
+
+    \begin{lemma}{}{2.7}
+        Let $V,W \in \Rep(G)$. The the $\C$-vector space $\Hom_G(V,W)$ and $\Hom_\C(V,W)^G$ are equal.
+    \end{lemma}
+    \begin{proof}
+        \begin{equation*}
+        \begin{split}
+            f \in \Hom_\C(V,W)^G &\Leftrightarrow \forall g \in G: \rho_{\Hom}(g)(f) = f \\
+            &\Leftrightarrow \forall g \in G: \rho_W(g) \circ f \circ \rho_V(g^{-1}) = f \\
+            &\Leftrightarrow \forall g \in G: \rho_W(g) \circ f = f \circ \rho_V(g) \\
+            &\Leftrightarrow f \in \Hom_G(V,W)
+        \end{split}
+        \end{equation*}
+    \end{proof}
+
+    \subsection{Group algebras}
+        We can endow the vector space $\C(G)$ with an associative multiplication (extending the one of $G$ by linearity)
+        \begin{equation*}
+        \begin{split}
+            \round{\sum_{g \in G} \lambda_g g } \cdot \round{\sum_{h \in G} \mu_h h} &= \sum_{g \in G} \sum_{h \in H} \lambda_g \mu_h gh \\
+            &\overset{gh = k}{=} \sum_{g \in G} \sum_{k \in G} \lambda_g \mu_{g^{-1}k} k
+        \end{split}
+        \end{equation*}
+        The vector space $\C(G)$, becomes a $\C$-algebra with this multiplication. We call it the group algebra and denote it by $\C[G]$.
+        
+        Another point of view on the group algebra is to look at them as functions on $G$.
+
+        Let $\cF(G) = \{f:G \to \C \}$ be the set of functions on $G$ taking values in $\C$. It is straightforward to verify that $\cF(G)$ is a $\C$-vector space with a basis given by the Dirac functions $\delta_g \in \cF(G)$ where:
+        \begin{equation*}
+            \delta_g(h):=\left\{ \begin{array}{cc}
+                1, & h=g \\
+                0, & h \neq g
+            \end{array}\right.
+        \end{equation*}
+        On $\cF(G)$ we study the \textbf{convolution product}:
+        For $\varphi,\psi \in \cF(G)$ we set
+        \begin{equation*}
+        \begin{split}
+            (\varphi \star \psi)(g) = \sum_{g_1g_2 = g} \varphi(g_1)\psi(g_2) = \sum_{h \in G} \varphi(h)\psi(h^{-1}g)
+        \end{split}
+        \end{equation*}
+        Clearly $\varphi \star \psi \in \cF(G)$.
+        It is also straightforward to verify that $(\cF(G),\star)$ is an associative $\C$-Algebra of $\C$-dimension $\#G$.
+
+        \begin{proposition}{}{2.8}
+            The $\C$-linear map
+            \begin{equation*}
+            \begin{split}
+                {}^\circ : \cF(G) &\to \C[G] \\
+                \varphi &\mapsto \varphi^\circ:= \sum_{g \in G}\varphi(g)g
+            \end{split}
+            \end{equation*}
+            is an isomorphism of $\C$-algebras.
+        \end{proposition}
+        \begin{proof}
+            The map is clearly injective. Since both sides have dimension $\#G$, it suffices to show that the map is an algebra homomorphism.
+            Take $\varphi,\psi \in \cF(G)$ and $\lambda \in \C$, then
+            \begin{equation*}
+            \begin{split}
+                \round{\varphi + \lambda \psi}^\circ = \sum_{g \in G} (\varphi + \lambda \psi)(g)g = \sum_{g \in G} (\varphi(g) + \lambda \psi(g))g = \sum_{g \in G} \varphi(g)g + \lambda \sum_{g \in G} \psi(g) =\varphi^\circ + \lambda \psi^\circ
+            \end{split}
+            \end{equation*}
+            Furthermore
+            \begin{equation*}
+            \begin{split}
+                \round{\varphi \star \psi}^\circ &= \sum_{g \in G}(\varphi \star \psi)(g)g = \sum_{g \in G} \sum_{h \in G} \varphi(h) \psi(h^{-1}g)g \overset{k = h^{-1}g}{=} \sum_{k \in G} \sum_{h \in G} \varphi(h) \psi(k) hk \\
+                &= \sum_{h \in G}\sum_{k \in G} \varphi(h) \psi(k) hk = \round{\sum_{h \in G} \varphi(h)h} \cdot \round{\sum_{k \in G} \psi(k)k} = \varphi^\circ \cdot \psi^\circ 
+            \end{split}
+            \end{equation*}
+        \end{proof}
+        Although we will study the modules over an algebra in the next chapter in a detailed fashion, we give some hints on the connections between representations and modules in the following. Modules constitute a convenient way of studying representations.
+
+        Recall that for a $\C$-algebra $A$, an $A$-module $M$ is a $\C$-vector space $M$ with a $\C$-algebra homomorphism $\lambda_M: A \to \End_\C(M)$.
+        \begin{enumerate}
+            \item Let $(V,\rho_V)$ be a representation of $G$. We define a $\C[G]$-module structure
+            \begin{equation*}
+            \begin{split}
+                \tilde{\rho}_V: \C[G] &\to \End_\C(V) \\
+                                \tilde{\rho}_V\round{\sum_{g \in G} \lambda_g g}(v) = \sum_{g \in G} \lambda_g \rho_V(g)(v) \in V
+            \end{split}
+            \end{equation*}
+            \item On the other hand, if $\lambda: \C[G] \to \End_\C(V)$ we obtain a $\C[G]$-module structure on $V$. We define a representation of $G$ on $V$ by
+            \begin{equation*}
+            \begin{split}
+                \rho_V: \G &\to \GL(V) \\  
+                        \rho_V(g)(v) = \lambda(g)(v)
+            \end{split}
+            \end{equation*}
+        \end{enumerate}
+        One easily verifies that these two operations are mutually inverse. As a summary, we obtained a bijection:
+        \begin{equation*}
+            \Hom_{\mathrm{Grp}}(G,\GL(V)) \cong \Hom_{\C\mathrm{-alg}}(\C[G],\End(V))
+        \end{equation*}
+        \begin{exercise}{}{12µ}
+            Verify that under this correspondence, homomorphsims of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
+        \end{exercise}
+\separline{Week 6}
+
+\section{Character theory}
+    The first question to answer in representation theory is: Given two representations, whether they are isomorphic or not? To always construct isomorphisms between them seems to be complicated, proving that none exist even more so.
+    
+    The goal of character theory is to give a numerical criterion to determine whether two given representations are isomorphic or not.
+    
+    \subsection{Character of a representation}
+        \begin{definition}{Character}{2.9}
+            Let $V\in\rep(G)$. The \textbf{character} of $V$ is the function $\chi_V : G\to \C$ defined by:
+            \begin{equation*}
+                \chi_V(g)=\Tr(\rho_V(g))
+            \end{equation*}
+        \end{definition}
+        Note that if $V\cong W$ as $G$-representations, then $\chi_V = \chi_W$.
+        
+        We start from some properties of characters.
+        
+        \begin{lemma}{}{2.10}
+            Let $V,W\in\rep(G)$. The following hold:
+            \begin{enumerate}
+                \item For any $g,h\in G,\ \chi_V(ghg^{-1})=\chi_V(g)$, or equivalently $\chi_V(gh)=\chi_V(hg)$.
+                \item $\chi_V(e)=\dim V$
+                \item $\chi_{V\oplus W}=\chi_V+\chi_W$
+                \item $\chi_{V\otimes W} = \chi_V \cdot \chi_W$
+                \item for any $g\in G,\ \chi_V(g^{-1}) = \overline{\chi_V(g)}$
+                \item $\chi_{V^*}=\overline{\chi_V}$
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof} Take $V,W \in \rep(G)$ and by $\chi_V,\chi_W$ denote their characters.
+        
+            \begin{enumerate}
+                \item [(1)]
+                    Take $g,h \in G$, then we have
+                    \begin{align*}
+                        \chi_V\round{ghg^{-1}}&=\Tr\round{\rho_V\round{ghg^{-1}}}\\
+                        &=\Tr\round{\rho_V(g)\rho_V(h)\rho_V\round{g^{-1}}}\\
+                        &=\Tr\round{\rho_V(g)\rho_V\round{g^{-1}}\rho_V(h)}\\
+                        &= \Tr(\rho_V(h))\\
+                        &= \chi_V(h)
+                    \end{align*}
+
+                \item [(2)]
+                    We have $\rho_V(e)=\id_V$, hence $\chi_V(e) = \Tr(\rho_V(e)) = \dim V$
+                
+                \item [(3)]
+                    We fix a basis $B_V = \round{v_1,\dots, v_n}$ of $V$ and a basis $B_W = \round{w_1\dots,w_m}$ of $W$. This yields a basis of $V \oplus W$, namely $B_{V \oplus W} := B_V \times \{0\} \cup \{0\} \times B_W$. %Let $M(\rho_V(g))$ and $M(\rho_W(g))$ be the matrices of $\rho_V(g)$ and $\rho_W(g)$ with respect to these bases.
+                    From $\rho_{V\oplus W}(g)(v,w):=(\rho_V(g)(v),\rho_W(g)(w))$ it follows that with respect to this basis, the transformation matrix is of the form
+                    \begin{align*}
+                        \tensor[^{B_{V \oplus W}}]{\rho_{V\oplus W}(g)}{^{B_{V \oplus W}}} = \begin{pmatrix}
+                        \tensor[^{B_V}]{\rho_V(g)}{^{B_V}} & 0 \\
+                        0 & \tensor[^{B_W}]{\rho_W(g)}{^{B_W}}
+                        \end{pmatrix}
+                    \end{align*}
+                    and therefore
+                    \begin{equation*}
+                    \begin{split}
+                        \chi_{V\oplus W}(g) &= \Tr \round{ \tensor[ ^{B_{V \oplus W}} ] {(\rho_{V\oplus W}(g)} {^{B_{V \oplus W}}}} \\
+                        &= \Tr \round{\tensor[^{B_V}]{\rho_V(g)}{^{B_V}}} + \Tr \round{\tensor[^{B_W}]{\rho_W(g)}{^{B_W}}} \\
+                        &= \chi_V(g) + \chi_W(g)
+                    \end{split}
+                    \end{equation*}
+                \item [(4)]
+                    As above, we fix bases $\round{v_1,\dots, v_n}$ of $V$ and $\round{w_1\dots,w_m}$ of $W$. Then $B_{V \tens W} = \round{v_i\otimes w_j \ | \ i \in [n], j \in [m]}$ is a basis of $V \otimes W$. We fix the order of $B_{V\otimes W}$ as
+                    \begin{equation*}
+                        v_1\otimes w_1, \dots, v_1\otimes w_n, v_2\otimes w_1, \dots, v_n\otimes w_1, \dots, v_n\otimes w_m
+                    \end{equation*}
+                    and set $A := \tensor[^{B_V}]{\rho_V(g)}{^{B_V}} = (a_{i,j}), B: = \tensor[^{B_W}]{\rho_W(g)}{^{B_W}}$.
+                    The transformation matrix of $\rho_{V\otimes W}(g)$ under $B_{V \tens W}$ is:
+                    \begin{equation*}
+                        \tensor[^{B_{V \tens W}}]{\rho_{V \tens W}(g)}{^{B_{V \tens W}}} = \begin{pmatrix}
+                            a_{1,1}B & a_{1,2}B & \dots & a_{1,n}B \\
+                            \vdots & \vdots & & \vdots \\
+                            a_{n,1}B & a_{n,2}B & \dots & a_{n,n}B
+                        \end{pmatrix} = A \tens B
+                    \end{equation*}
+                    the Kronecker product of $A$ and $B$ (see \cite{LA} for further reference).
+                    Indeed one calculates (I think there is a mistake in the notes, I wrote my version)
+                    \begin{equation*}
+                    \begin{split}
+                        \rho_{V \tens W}(g)(v_i \tens w_j) &= \rho_V(v_i) \tens \rho_W(w_j) = \round{\sum_{k=1}^n a_{ki}v_k }\tens \round{\sum_{l=1}^m b_{lj}w_l } \\
+                        &= \sum_{k=1}^n a_{ki} \round{v_k \tens \sum_{l=1}^m b_{lj} w_l} = \sum_{k=1}^n a_{ki} \sum_{l=1}^m b_{lj} \round{v_k \tens w_l } 
+                    \end{split}
+                    \end{equation*}
+    
+                    So with the ordering we choose we get:
+                    \begin{equation*}
+                        \rho_{V \tens W}(g)(v_i \tens w_j)_{B_{V \tens W}} =
+                        \begin{pmatrix}
+                            a_{1,i} b_{1j} \\
+                            a_{1,i} b_{2j} \\
+                            \vdots \\
+                            a_{1,i} b_{mj} \\
+                            a_{2,i} b_{1,j} \\
+                            \vdots \\
+                            a_{n,i} b_{m,j}
+                        \end{pmatrix}
+                    \end{equation*}
+    
+                    Which is precisely the $j$-th row of the $i$-th Block of $A \tens B$. Therefore
+                    
+                    \begin{equation*}
+                    \begin{split}
+                        \chi_{V\otimes W}(g) &= \Tr \round{\tensor[^{B_{V \tens W}}]{\rho_{V \tens W}(g)}{^{B_{V \tens W}}}} = \Tr(A\otimes B) = \Tr(a_{11}B) + \dots + \Tr(a_{nn}B) \\
+                        &= \Tr(A)\Tr(B) = \chi_V(g) \cdot \chi_W(g) = (\chi_V \cdot \chi_W)(g)
+                    \end{split}
+                    \end{equation*}
+                \item[(5)]
+                    We first show that the eigenvalues of $\rho_V(g)$ are root of unity. Since $G$ is a finite group for any $g \in G$, there exists an $m \in \N$ such that $g^m = e$ (every element in $G$ has finite order). This implies $\rho_V(g)^m  \id_V$, hence the minimal polynomial of $\rho_V(g) \in \End(V)$ divides $t^m - 1$. It then follows that the eigenvalues of $\rho_V(g)$ are roots of $t^m - 1$ hence they are roots of unity.
+
+                    We let $\lambda_1,\dots,\lambda_m$ denote the eigenvalues of $\rho_V(g)$ (with multiplicity), then $\lambda_i^{-1} = \lambda_i$ and
+                    \begin{equation*}
+                        \overline{\chi_V(g)} = \overline{\lambda_1 + \dots + \lambda_m} = \overline{\lambda_1} + \dots + \overline{\lambda_m} = \lambda_1^{-1} + \dots + \lambda_m^{-1} = \chi_V(g^{-1})
+                    \end{equation*}
+                    Where we used that $\rho_V(g^{-1}) = \rho_V(g)^{-1}$.
+                \item[(6)]
+                    Form $(5)$ it suffices to show that for any $g\in G$, we have $\chi_{V^*}(g) = \chi_V(g^{-1})$. We choose a basis $(v_1,\dots,v_n)$ of $V$ and the corresponding dual basis $(v_1^*,\dots,v_n^*)$ of $V^*$. We can write $\rho_{V^*}(g)(v_i^*) = \sum_{j=1}^n b_{ij} v_j^*$, for some $b_{ij} \in \C$. Therefore
+                    \begin{equation*}
+                        \spitz{\rho_{V^*}(g)(v_i^*),v_j} = b_{ij}
+                    \end{equation*}
+                    According to the $G$-representation structure on $V^*$, we have
+                    \begin{equation*}
+                        \spitz{v_i^*,\rho_V(g^{-1})(v_j)} = b_{ij}
+                    \end{equation*}
+                    That is to say, $\rho_V(g^{-1})(v_j) = \sum \limits_{i=1}^n b_{ij} v_i$, hence
+                    \begin{equation*}
+                        \chi_{V^*}(g) = \Tr(\rho_{V^*}(g)) = \sum_{i=1}^n b_{ii} = \Tr(\rho_V(g^{-1})) = \chi_V(g^{-1})
+                    \end{equation*}
+            \end{enumerate}
+        \end{proof}
+        \begin{corollary}{}{2.11}
+            For $V,W \in \rep(G)$, we have $\chi_{\Hom(V,W)} = \chi_W \cdot \overline{\chi_V}$
+        \end{corollary}
+        \begin{proof}
+            By Exercise \ref{exc:11} (3), $\Hom(V,W) \cong W \tens V^*$, as $G$-reps, therefore using Lemma \ref{lem:2.10}:
+            \begin{equation*}
+                \chi_{\Hom(V,W)} = \chi_{W \tens V^*} = \chi_W \cdot \chi_{V^*} = \chi_W \cdot \overline{\chi_V}
+            \end{equation*}
+        \end{proof}
+\section{Central functions}
+    We put characters in a larger family by studying functions on $G$ satisfying the condition in Lemma \ref{lem:2.10} (1). They are the key to open the door to character theory.
+
+    \begin{definition}{central/class function}{2.12}
+        A function $f: G \to \C$ is called \textbf{central}, if it is constant on each conjugacy class of $G$, i.e. for all $g,h \in G: f(ghg^{-1}) = f(h)$ or equivalently $f(gh) = f(hg)$. We let $\CF(G)$ denote the set of central functions on $G$. It is a $\C$-vector space.
+    \end{definition}
+    In the literature, the central functions are also called class functions. We will soon explain why we use the name "central".
+
+    We let $\cC(G)$ denote the set of conjugacy classes in $G$. Then a class function $f:G \to \C$ induces a function $f: \cC(G) \to \C$.
+    
+    Before going further, we look at some examples.
+    \begin{example}{}{2.13}
+        \begin{enumerate}
+            \item
+                For $V \in \rep(G)$, $\chi_V \in \CF(G)$.
+            \item
+                Let $C \in \cC(G)$, we define
+                \begin{equation*}
+                \begin{split}
+                    \gamma_C: G &\to \C \\
+                            g &\mapsto \left\{ \begin{array}{cl}
+                                1, & \text{if } g \in C  \\
+                                0, & \text{else}
+                            \end{array} \right.
+                \end{split}
+                \end{equation*}
+                Then $\gamma_C \in \CF(G)$.
+        \end{enumerate}
+    \end{example}
+    
+    We recall the isomorphism
+    \begin{equation*}
+    \begin{split}
+        \cF(G) &\to \C[G] \\
+            f &\mapsto f^\circ = \sum_{g \in G}f(g)g
+    \end{split}
+    \end{equation*}
+    Since $\CF(G) \subseteq \cF(G)$, we can examine its image in $\C[G]$.
+    \begin{definition*}{center}
+        For a monoid $M$, we denote its center $Z(M) = \{m \in M \ | \ \forall n \in M: mn = nm\}$.
+    \end{definition*}
+    Since $\C[G]$ is a monoid with $\cdot$, $Z(\C[G]) = \{x \in \C[G] \ | \ \forall y \in \C[G]: xy = yx \}$.
+
+    \begin{corollary}{}{2.14}
+        When restricted to $\CF(G)$, the above isomorphism gives on isomorphism of $\C$-algebras
+        \begin{equation*}
+            \CF(G) \overset{\cong}{\to} Z(\C[G])
+        \end{equation*}
+    \end{corollary}
+    \begin{proof}
+        Given $\alpha \in CF(G)$, we first verify that its image lands in $Z(\C[G])$, that is to say, $\forall h \in G$:
+        \begin{equation*}
+            h \round{\sum_{g \in G} \alpha(g) g} = \round{\sum_{g \in G} \alpha(g)g}h
+        \end{equation*}
+        It suffices to show that $\sum_{g \in G} \alpha(g) h g h^{-1} = \sum_{g \in G} \alpha(g)$.
+        
+        Since $\inn_h: G \to G, g \mapsto hgh^{-1}$ is a bijection, the left hand side reads:
+        \begin{equation*}
+            \sum_{g \in G} \alpha(g) h g h^{-1} = \sum_{g \in G} \alpha(hgh^{-1}) h g h^{-1} = \sum_{k \in G} \alpha(k) k = \text{RHS}
+        \end{equation*}
+        Where RHS means right hand side, i.e. we have shown equality.
+
+        Thus we obtained a $\C$-algebra homomorphism $\CF(G) \to Z(\C[G])$ which is injective. We show that it is also surjective:
+
+        Take $x = \sum_{\lambda_g} g \in Z(\C[G])$ and $h \in G$, since $hx^h{-1} = x$ it follows that
+        \begin{equation*}
+            \sum_{g \in g} \lambda_g h g h^ {-1} = \sum_{g \in G} \lambda_g g
+        \end{equation*}
+        which implies that $\lambda_g = \lambda_{hgh^{-1}}$ by comparing coefficients in $\C[G]$. So the coefficients of $x$ are constant on each conjugacy class which means
+        \begin{equation*}
+            \lambda: G \to \C, g \mapsto \lambda_g 
+        \end{equation*}
+        is the central function with image $x$.
+    \end{proof}
+
+    Our goals are:
+    \begin{enumerate}
+        \item Study different vector space bases of $\CF(G)$.
+        \item Define a hermitian form on $\CF(G)$ to get an orthonormal basis.
+    \end{enumerate}
+
+    \begin{lemma}{}{2.15}
+        The tuple $(\gamma_C \ | \ C \in \cC(G))$ form a basis of $\CF(G)$. In particular, $\dim_\C(\CF(G)) = \# \CF(G)$.
+    \end{lemma}
+    \begin{proof}
+        \underline{Generating:}
+            Let $f \in \CF(G)$. Since $f$ is constant on each conjugacy class $C \in \cC(G)$, we let $f(C)$ denote this value. Then we can write
+            \begin{equation*}
+                f = \sum_{C \in \cC(G)} f(C) \gamma_C
+            \end{equation*}
+        \underline{Independence:}
+            Assume $\sum_{C \in \cC(G)} \lambda_C \gamma_C = 0$ for $\lambda_C \in \C$. We fix $C_0 \in \cC(G)$ and choose $g \in C_0$, then
+            \begin{equation*}
+                0 = \sum_{C \in \cC(G)} \lambda_C \gamma_C(g) = \lambda_{C_0} \gamma_{C_0}(g) = \lambda_{C_0}
+            \end{equation*}
+    \end{proof}
+    \begin{corollary}{}{2.16}
+        The $\C$-vector space $Z(\C[G])$ has a basis $\round{\sum\limits_{g \in C} g \ | \ C \in \cC(G)}$. In particular $\dim_\C(Z(\C[G])) = \# \cC(G)$.
+    \end{corollary}
+    \begin{proof}
+        Combining Corollary \ref{cor:2.14} and Lemma \ref{lem:2.15}, $\round{\gamma_C^\circ \ | \ C \in \cC(G)}$ forms a basis of $\Z(\C[G])$. It suffices to notice that $\gamma_C^\circ = \sum\limits_{g \in G} \gamma_C(g)g = \sum\limits_{g \in G} g$
+    \end{proof}
+
+    We introduce a Hermitian form on the $\C$-vector space $\CF(G)$.
+    \begin{definition}{}{2.17}
+        Let $\varphi,\psi \in \CF(G)$, we define:
+        \begin{equation*}
+            \spitz{\varphi,\psi} := \frac{1}{\#G} \sum_{g \in G} \varphi(g) \overline{\psi(g)} \in \C
+        \end{equation*}
+    \end{definition}
+    It is straightforward to verify that $\spitz{\_,\_}$ is a Hermitian form (i.e. linear on the first component and $\spitz{\varphi,\psi} = \overline{\spitz{\psi,\varphi}}$).
+    In view of Corollary \ref{cor:2.11}, we have:
+    \begin{equation*}
+        \spitz{\chi_W,\chi_V} = \frac{1}{\#G} \sum_{g \in G} \chi_{\Hom(V,W)}(g)
+    \end{equation*}
+    If we extend $\chi_{\Hom(V,W)}$ by linearity to $\C(G)$, i.e.
+    \begin{equation*}
+        \chi_{\Hom(V,W)}\round{\sum_{g \in G} \lambda_g g} = \sum_{g \in G} \lambda_g \chi_{\Hom(V,W)}(g)
+    \end{equation*}
+    Then we can rewrite the above formular as:
+    \begin{equation*}
+        \spitz{\chi_W,\chi_V} = \chi_{\Hom(V,W)} \round{\frac{1}{\#G} \sum_{g \in G}g}
+    \end{equation*}
+    this special element $\frac{1}{\#G} \sum\limits_{g \in G}g$ will be crucial in the character theory. One should keep the above formular in mind.
+    \begin{example}{2.18}
+        We compute $\spitz{\gamma_C,\gamma_{C'}}$ for $C,C' \in \cC(G)$.
+        Recall the formula
+        \begin{equation*}
+            \spitz{\gamma_C,\gamma_{C'}} = \frac{1}{\#G} \sum_{g \in G}\gamma_C \overline{\gamma_{C'}(g)}
+        \end{equation*}
+        If $C \neq C'$, then for all $g \in G$, either $\gamma_C(g) = 0$ or $\gamma_{C'}(g) = 0$ hence $\spitz{\gamma_C,\gamma_{C'}}$.
+        
+        If $C = C'$, then
+        \begin{equation*}
+            \spitz{\gamma_C,\gamma_{C'}} = \frac{1}{\#G}\sum_{g \in G} |\gamma_C(g)|^2 = \frac{1}{\#G} \sum_{g \in C} |\gamma_C(g)|^2 = \frac{\#C}{\#G}
+        \end{equation*}
+        As a summary: $\spitz{\gamma_C,\gamma_{C'}} = \frac{\#C}{\#G} \delta_{C,C'}$. Hence the basis $(\gamma_C \ | \ C \in \cC(G)) $ is orthogonal, but not orthonormal.
+    \end{example}
+
+    We introduce another basis of $\CF(G)$.
+
+    Let $\Irr(G)$ be the set of finite dimensional irreducible representations of $G$ up to isomorphism. That is to say, isomorphic representations are indetified as the same object in $\Irr(G)$.
+    \begin{theorem}{}{2.19}
+        The tuple $(\chi_V \ | \ V \in \Irr(G))$ forms an orthonormal basis of $\CF(G)$.
+    \end{theorem}
+    This is the first main result of this chapter. We delay its proof to chapter \textit{2.4}.
+
+    \begin{corollary}{}{2.20}
+        \begin{enumerate}
+            \item
+                The number of finite dimensional irreducible representations of $G$ (up to isomorphism) coincides with $\dim_\C(\CF(G)), \cC(G)$ and $\dim_\C(Z(\C[G]))$.
+            \item
+                Let $\Irr(G) = \{S_1,\dots,S_t\}$ and $V = \bigoplus_{i=1}^t S_i^{\oplus n_i}$. Then $n_i = \spitz{\chi_V,\chi_{S_i}}$.
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        We start with the proof of the Corollary \ref{cor:2.20}.
+        \begin{enumerate}
+            \item[(1)] It follows from $\round{\chi_V \ | \ V \in \Irr(G)}$ is a basis of $\CF(G)$.
+            \item[(2)] By Lemma \ref{lem:2.10} (3) and Theorem \ref{thm:2.19}
+            \begin{equation*}
+                \spitz{\chi_V,\chi_{S_i}} \overset{\ref{lem:2.10}}{=} \spitz{\sum_{j=1}^t n_j \chi_{S_j},\chi_{S_i}} = \sum_{j=1}^t n_j \spitz{\chi_{S_j},\chi_{S_i}} \overset{\ref{thm:2.19}}{=} n_i 
+            \end{equation*}
+        \end{enumerate}
+    \end{proof}
+
+\section{Projector, Maschke and Schur}
+    We have a closer look at the element $P:=\frac1{\#G}\sum_{g\in G}g$. This element is in the image of $\frac 1{\#G}\sum_{C\in\cC(G)}\gamma_C$ in $Z(\C[G])$, hence $\forall g\in G:\ gP=Pg=P$, and in particular, $P^2=P$. We call $P$ the \textbf{projector}.
+    \begin{definition}{idempotent endomorphism}{2.21}
+        An endomorphism $\phi\in\End(G)(V)$ is called \textbf{idempotent}, if $\phi^2=\phi$.
+    \end{definition}
+    Idempotents can be used to decompose representations:
+
+    \begin{lemma}{}{2.22}
+        Let $V\in \rep(G)$ and $\phi\in\Hom_G(V,V)$ be idempotent. Then $V\cong_G\Ker\phi\oplus\Img\phi$.
+    \end{lemma}
+    \begin{proof}
+        From LA
+        $$\alpha: V\to \Ker\phi\oplus\Img\phi: v\mapsto (v-\phi(v), \phi(v)$$
+        is an isomorphism in the category of vector spaces. It suffices to show that $\alpha$ is a homomorphism of $G$-representations. So for $g\in G$, we need to show that
+        $\rho_{\ker\phi\oplus\Img\phi}(g)(\alpha(v))= \alpha(\rho_V(g)(v))$. 
+        Indeed \begin{align*}
+            \alpha(\rho_V(g)(v))&=\round{\rho_V(g)(v)-\phi(\rho_V(g)(v)), \phi(\rho_V(g)(v))}\\
+            &=\round{\rho_V(g)(v)-\rho_V(g)(\phi(v)), \rho_V(g)(\phi(v))}\\
+            &=\round{\rho_v(G)(v-\phi(v)),\rho_V(g)(\phi(v))}\qquad \text{since $\ker\phi, \Img\phi$ are subrepresentations of $(V,\rho)$}\\
+            &= \rho_{\ker\phi\oplus\Img\phi}(g)(\alpha(v))
+        \end{align*}
+    \end{proof}
+
+    The projector can be used to produce an idempotent in $\Hom_G(V,V)$.
+
+    \begin{corollary}{}{2.23}
+        For $(V)\in\rep(G), \Img\tilde\rho(P)=V^G$
+        In particular, for $V,W\in\rep(G)$, 
+        $$\tilde\rho_{\Hom(V,W)}(P): \Hom(V,W)\to \Hom(V,W)$$ has an image in $\Hom_G(V,W)$.
+    \end{corollary}
+    \begin{proof}
+        \begin{enumerate}
+            \item ["$\subseteq$"] We take $v\in V$, then for any $g\in G$,
+            $$\rho_V(g)(\tilde\rho(P)(v))?\tilde\rho_V(gP)(v)=\tilde\rho_V(P)(v)$$
+            hence $\rho_V(g)\round{\tilde\rho_V(P)(v)}\in V^G$.
+        \end{enumerate}
+        The other inclusion "$\supseteq$" is clear: if $v\in V^G$, then $\tilde\rho_V(P)(v)=\sum\frac1{\#G}\sum_{g\in G}\rho_V(g)(v)=v$
+        The statement on $\Hom(V,W)$ follows from \ref{lem:2.7}.
+    \end{proof}
+
+    As an application of the projector, we can prove the following fundamental theorem in group representation theory:
+
+    \begin{theorem}{Maschke}{2.24}
+        Any finite dimensional representation of $G$ is isomorphic to a direct sum of irreducible representations.
+    \end{theorem}
+    \begin{proof}
+        We can proceed by induction on the dimension of the representation. The one-dimensional case is clear.
+
+        Let $V\in\rep(G)$. If $V$ is irreducible then we are done. If not there is a subrepresentation $W$ of $V$ of dimension $\geq 1$. $W$ is a subspace of $V$. As vector spaces we have a direct sum composition $V=W\oplus W'$. We denote $\pi:V\to W$ the canonical projection and $\iota: W\to V$ the canonical injection arising from the direct sum. Then $\phi=\iota\circ\pi$ is an idempotent in $\Hom(V,V)$. Let $\tilde P:=\tilde \rho_{\End(V)}(P):\Hom(V,V)\to \Hom_G(V,V)$ be the projection in \ref{cor:2.23}. Then $\tilde P(\phi)$ is an idempotent in $\Hom_G(V,V)$ with image $W$ ($W$ is a subrepresentation, hence $\frac1{\# G}\sum_{g\in G}\rho(g)(\phi)$ has image $W$.)\footnote{Verify that $\Img \tilde{\rho} (\phi)=W$, then for any $v\in V: \tilde\rho(\phi)^2(v)=\tilde\rho(\phi)\underbrace{\round{\tilde\rho(\phi)(v)}}_{\in W} = \tilde\rho(\phi)(v)$.}
+        \ref{lem:2.22} gives an isomorphism $V\cong \ker\tilde P(\phi)\oplus W$ as $G$-representations. Then we can proceed by induction.
+    \end{proof}
+
+    \begin{remark}{}{2.25}
+        The projector is well-defined if we replace $\C$ by any field $\K$ whose characteristic does not divide $\#G$. Hence Maschke's theorem holds over such fields.
+    \end{remark}
+
+    Another tool to prove \ref{thm:2.19} is the following lemma by Schur:
+
+    \begin{lemma}{Schur}{2.26}
+        Let $V,W\in\rep(G)$ be two irreducible representations. Then
+        $$\dim_\C\Hom_G(V,W)=\begin{cases}
+            1 & V\cong_G W\\
+            0 & \text{otherwise}
+        \end{cases}$$
+    \end{lemma}
+    \begin{proof}
+        Let $\phi:V\to W$  be a nonzero homomorphism of $G$-representations.
+        \begin{enumerate}
+            \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\phi-t\cdot\id_V\in\Hom_G(V,V)$ and hance $\ker(f\inv\circ\phi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\phi:V\to V$. Then $\ker(f\inv\circ\phi-\lambda\id_V=V$ because $V$ is irreducible. That is to say, $\phi=\lambda f$.
+            \item Assume that $V\not\cong_G W$. Then $\ker\phi$ is a subrepresentation of of $W$. since $\phi\neq 0$, $\phi$ is injective. Moreover, since $\Img\phi$ is a subrepresentation of $W$ and $\phi\neq 0$, $\phi$ is surjective. This contradicts to $V\not\cong W$, and hence such a map $\phi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
+        \end{enumerate}
+    \end{proof}
+    \begin{corollary}{}{2.27}
+        For $V\in\rep(G)$ irreducible and $z\in Z(\C[G])$, $\tilde\rho_V(z)=\Hom_G(V,V)$ equals to a scalar map $\lambda\id_V$
+    \end{corollary}
+\section{Proof of Theorem 2.19}
+    We first show that for $V,W\in\Irr(G)$ $$\spitz{\chi_W,\chi_V}=\delta{V,W}$$
+    We have seen that $$\spitz{\chi_W,\chi_V}=\chi_{\Hom(V,W)}(P)=\Tr\round{\tilde\rho_{\Hom(V;W)}(P)}$$
+
+    Note that $P$ is an idempotent and $\tilde\rho_{\Hom(V,W)}(P)$ is a projection from $\Hom(V,W)$ to $\Hom_G(V,W)$. Therefore the trace of $\tilde\rho_{\Hom(V,W)}(P)$ equals to  $\dim_\C\Hom_G(V,W)=\delta_{V,W}$ by Schur's lemma (the eigenvalues of idempotents are 0 and 1). From this orthogonality, it follows, that characters of irreducible representations are linearly independent.
+
+    It remains to show the generating property.
+
+    \begin{claim*}{}
+        If $\alpha\in\text{CF}(G)$ satisfies $\spitz{\alpha,\chi_V}=0\ \forall V\in\Irr(G)\Rightarrow \alpha=0$.
+    \end{claim*}
+    \begin{proof}
+        Let $V\in\Irr(G)$. By \ref{cor:2.14}, $\alpha\circ\in Z(\C[G])$ and by \ref{cor:2.27}, $\tilde\rho_V(\alpha)$ is a scalar $\lambda\id_V$. We determine this scalar $\lambda$.
+        \begin{align*}
+            \lambda\dim V &= \Tr(\tilde\rho_V(\alpha(\alpha\circ))= \sum_{g\in G} \alpha(g) \chi_V(g)\\
+            &\overset{\ref{lem:2.10}}= \#G\frac1{\#G}\sum_{g\in G}\alpha(g)\chi_{V^*}(g)\\
+            &=\#G\cdot\spitz{\alpha, \chi_{V^*}}=0
+        \end{align*}
+        For the last equality, we used Maschke to write $V^*$ as sum of irreducible representations. For each of their characters, the scalar product vanishes.
+
+        From this computation, $\lambda=0$. We have shown, that for any irreducible representation $V$, $\tilde\rho_V(\alpha\circ)=0$. Again Maschke tells us that for any $W\in\rep(G)$, $\tilde\rho_W(\alpha\circ)=0$.
+        % TO commplete the proof, we examine a special choice of $W$:
+    \end{proof}
+To be continued   
+\begin{comment}
+    ... to say that in the decomposition there is only one irreducible representation appearing. %\end{proof}
+\end{comment}
+
+\separline{Week 7}
+    \begin{corollary}{Second orthogonal relation}{2.29}
+        Let $\Irr(G) = \{S_1,\dots,S_t\}$ with characters $\chi_i := \chi_{S_i}$. For $g \in G$, let $C_g \in \cC(G)$ be such that $g \in C_g$, then
+        \begin{equation*}
+            \sum_{i=1}^t \chi_g(g) \overline{\chi_i(g)} = \frac{\#G}{\#C_g}
+        \end{equation*}
+        and if $h \not \in \C_g$, then
+        \begin{equation*}
+            \sum_{i=1}^t \chi_i(g) \overline{\chi_i(h)} = 0
+        \end{equation*}
+    \end{corollary}
+    \begin{proof}
+        We fix $s \in G$ and $C_s \in \cC(G)$ with $s \in C_s$. We expand $\gamma_{C_s}$ in the orthonormal basis $(\chi_1,\dots,\chi_t)$. We have $\gamma_{C_S} = \sum_{i=1}^t \lambda_i \chi_i$, where $\lambda_i = \spitz{\gamma_{C_s},\chi_i} = \frac{1}{\#G} \sum_{g \in G} \gamma_{C_s}(g) \overline{\chi_i(g)} $.
+
+        The sum is in fact over $C_s$ and $\gamma_{C_s}, \chi_i$ are central functions. Therefore $\lambda_i  = \frac{\#C_s}{\#G}\overline{\chi_i(s)}$. Hence
+        \begin{equation*}
+            \gamma_{C_s} = \sum_{i=1}^t \frac{\#C_s}{\#G} \overline{\chi_i(s)} \chi_i
+        \end{equation*}
+        If $g \in C_s$, then
+        \begin{equation*}
+            \sum_{i=1}^t \chi_i(s) \overline{\chi_i(g)} = \sum_{i=1}^t \chi_i(g) \overline{\chi_i(g)} = \frac{\#G}{\#C_s}
+        \end{equation*}
+        otherwise
+        \begin{equation*}
+            \sum_{i=1}^t \chi_i(g) \overline{\chi_i(s)} = 0
+        \end{equation*}
+    \end{proof}
+
+\section{Character tables}
+    It is usually convenient to put the values of characters into a table.
+
+    The columns of such a table are indexed by conjugacy classes and the rows are indexed $\Irr(G)$. For a conjugacy class $C$ and an irreducible representation $S$, the corresponding element in the table reads $\chi_S(C)$.
+
+    For example we compute such a table for $S_3$. There are three conjugacy classes in $S_3$:
+    \begin{equation*}
+        C_1 = \{e\}, \quad C_2 = \{(12),(13),(23)\}, \quad C_3 = \{(123),(132)\}
+    \end{equation*}
+    Then there are three elements in $\Irr(S_3)$:
+    We denote them by $S_1,S_2,S_3$, where $S_1$ is the trivial representation.
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+             & $C_1$ & $C_2$ & $C_3$  \\ \hline
+            $\rho^{\text{triv}}$ & $1$ & $1$ & $1$  \\ \hline
+            $S_2$ & $a$ & $b$ & $c$ \\ \hline 
+            $S_3$ & $d$ & $e$ & $f$ \\ \hline
+        \end{tabular}
+    \end{table}
+
+    Theorem \ref{thm:2.19} implies that the rows of the table are "weighted" orthogonal. Fox example,
+    \begin{equation*}
+        0 = \spitz{\chi_1,\chi_2} = \#C_1 \chi_1(C_1) \overline{\chi_2 (C_1)} + \#C_2 \chi_1(C_2) + \overline{\chi_2(C_2)} + \#C_3 \chi_1(C_3) + \overline{\chi_2(C_3)} = \overline{a} + 3 \overline{b} + 2 \overline{c} 
+    \end{equation*}
+    Therefore $a + 3b + 2c = 0$.
+    We choose $C_1 = \{e\}, C_2 = \{(12),(13),(23)\}$ and $C_3 = \{(123),(132)\}$
+    Corollary \ref{cor:2.29} implies that the columns of the table also have a certain orthogonality. If we look at $C_1$ and itself, the first part of Corollary \ref{cor:2.29} gives:
+    \begin{equation*}
+        1 + a^2 + d^2 = \#G = 6
+    \end{equation*}
+    We notice that $\chi_{S_i}(e) = \dim_\C(S_i) \in \N_0$ and choose a solution $a=1$, $d=2$ (the only other solution is $a=2$, $d=1$).
+    We get
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+             & $\{e\}$ & $\{(12),(23),(23)\}$ & $\{(123),(132)\}$  \\ \hline
+            $\rho^{\text{triv}}$ & $1$ & $1$ & $1$  \\ \hline
+            $S_2$ & $1$ & $b$ & $c$ \\ \hline 
+            $S_3$ & $2$ & $e$ & $f$ \\ \hline
+        \end{tabular}
+    \end{table}
+
+    
+    If we look at the first and second columns, the corollary gives:
+    \begin{equation*}
+        1 + a\overline{b} + d \overline{e} = 0 \implies 1 + b + 2e = 0
+    \end{equation*}
+    The irreducible representation $S_2$ is one-dimensional.
+    Elements in $C_i$ have order $i$. Since any $\sigma \in C_2$ satisfies $\rho_{S_2}(\sigma)^2 = \id_{S_2}$, $\rho_{S_2}(\sigma)$ has eigenvalue either $1$ or $-1$. A similar argument shows that for $\tau \in C_3$, $\rho_{S_2}(\tau)$ has eigenvalues that a third roots of unity.
+
+    For the sake of contradiction let us assume that $b = \chi_{S_2}(\sigma) = 1$, then it follows from $1 + 3b + 2c = 0$, that $c = \chi_{S_2}(\tau) = -\frac{1}{2} (1 + 3b) = -\frac{1}{2} (4) = -2$, which contradicts the fact that $c$ is a (third) root of unity. So we get $b = -1$ and $c = 1$.
+    We obtained two equations of $e$ and $f$:
+    \begin{equation*}
+        \left\{ \begin{array}{cc}
+             2 + 3e + 2f = 0  \\
+             2 - 3e + 2f = 0 
+        \end{array}\right. \implies \left\{ \begin{array}{cc}
+             e = 0  \\
+             f = -1 
+        \end{array}\right.
+    \end{equation*}
+    The complete character table of $S_3$ is then:
+    \begin{table}
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+             & $C_1$ & $C_2$ & $C_3$  \\ \hline
+            $\rho^{\text{triv}}$ & $1$ & $1$ & $1$  \\ \hline
+            $S_2$ & $1$ & $-1$ & $1$ \\ \hline 
+            $S_3$ & $2$ & $0$ & $-1$ \\ \hline
+        \end{tabular}
+    \end{table}
+
+    If you look at this character table, you only see integers and it is tempting to guess that: for any $g \in S_n, \chi_V(g) \in \Z$ for any $V \in \Irr(S_n)$.
+
+    This is in fact true, we will prove it in the next chapter when we talk about the representation theory of $S_n$.
+
+    We did not use the structure of $S_3$, but we have already computed all characters of $S_3$.
+
+    \begin{exercise}{}{13}
+        Let $V = \C^3$ be the representation of $S_3$ arising from the action of $S_3$ on $[3]$. Decompose $V^{\tens n}$ into a direct sum of irreducible representations of $S_3$. (start from computing $\chi_V$ using the definition)
+    \end{exercise}
+\section{Left regular representation}
+    We proceed to studying the left regular representation in detail with the help of character theory.
+
+    Let $\chi^{\text{reg}}$ be the 
+    
+%\nocite{*}
+
+\printbibliography
+\end{document}
+
+        
+

@@ -1,0 +1,93 @@
+%This template was written by Elias Cleusters, Paul Oberdörster and Felix Lerner. This template is constantly getting updated so if you have any suggestions please let us know (name.surname@rwth-aachen.de).
+% PREAMBLE
+% =========
+
+%Allgemein
+%\usepackage[ngerman]{babel}                %!!!! removed should be declared in the main file
+\usepackage[utf8]{inputenc}					% Input encoding
+\usepackage[T1]{fontenc}					% T1 fonts 
+%\usepackage{amsfonts}						% Mathe font
+\usepackage{newcent}						% New Century Schoolbook
+%\usepackage{fouriernc}						% Mathe font für newcent
+\usepackage{dsfont}							% Symbole für Zahlbereiche
+\usepackage{zi4}							% Font für typewriter style
+\usepackage{makeidx}                        % z.B. Für ein Glossar am Ende.
+\makeindex
+\usepackage[most]{tcolorbox}                % z.B. für Enviroments, colorboxes halt
+\usepackage{varwidth}                       %? um verschiedene Elemente besser nebeneinander alignen zu können, z.B. Bilder, diagramme etc?
+
+%biblatex                                   % Für Referenzen/ Bibliographie/ Literaturverzeichnis. Die folgenden Zeilen gehören dazu
+\usepackage[backend=biber, natbib=true, style=alphabetic, url=false, doi=true, eprint=false, giveninits=true]{biblatex}
+\usepackage{csquotes}                               %such that biblatex doesnt cry
+                                                    %\addbibresource{...} should be executed in main
+
+\usepackage{ifthen}                                 % basically Ternary Operator
+\usepackage{letltxmacro}							% Makros neu definieren mit mehr Optionen. Verstehe ich nicht, scheint aber nicht zu schaden.
+\usepackage{booktabs}								% Qualitativ hochwertige horizontale Striche
+\usepackage{wrapfig}								% Text um Abbildungen herumwrappen
+\usepackage{microtype}								% Verbesserte Zeilenumbrüche. Scheint ganz gut zu sein und das generelle Textbild zu verbessern
+\usepackage{calc}                                   % Basic arithmetic, die der Compiler auswerten kann
+\usepackage{xcolor}									%Definition von Farben
+\usepackage{graphicx}								%Einfügen von externen Grafiken
+\usepackage{tikz}									%Erstellen von Grafiken
+
+\usepackage[shortlabels]{enumitem}					%Verbesserte Aufzählungen
+\setitemize			{leftmargin=*}
+\setenumerate		{leftmargin=*}
+
+%Allgemeine Layouteinstellungen
+	
+\renewcommand{\footnoterule}{						
+	\noindent\rule{0.4\textwidth}{.4pt}
+	\vspace{0.6em}}
+\deffootnote{1em}{1em}								
+	{\thefootnotemark\hspace{0.5em}}
+	
+\usepackage{chngcntr}
+\counterwithout{footnote}{section}
+
+\usepackage{scrlayer-scrpage}
+\setkomafont{pageheadfoot}
+	{\normalfont\itshape}
+\pagestyle{scrheadings}		
+\renewcommand{\sectionmark}[1]
+	{\markboth{\thesection~#1~}{}}
+\renewcommand{\sectionmark}[1]
+	{\markright{\thesubsection\autodot~#1}}
+
+\usepackage[titles]{tocloft}	
+\renewcommand{\cftchapfont}{\normalfont\rmfamily\bfseries}            % TOC Font für Chapters
+
+\setkomafont{chapter}{\normalfont\Huge\bfseries}
+\setkomafont{section}{\normalfont\Large\bfseries}
+\setkomafont{subsection}{\normalfont\large\bfseries}
+\setkomafont{subsubsection}{\normalfont\bfseries}
+
+
+				
+\clubpenalty 					= 10000					
+\widowpenalty 				= 10000					
+\displaywidowpenalty 	= 10000					
+
+\makeatletter
+\@beginparpenalty			=	10000					
+\makeatother
+
+\definecolor{linkblue}{RGB}{0,0,0}
+\definecolor{citeblue}{RGB}{0,0,0}
+
+\usepackage[pdfstartpage= 1, pdfstartview= FitB, colorlinks= true, bookmarks=true, bookmarksopen=true, bookmarksnumbered=true, linkcolor=linkblue, citecolor=citeblue, pdfdisplaydoctitle=true]{hyperref}          %Referenzen sind hyperrefs.
+\usepackage{cleveref}                           %allowing the format of references to be determined automatically according to the type of reference
+
+% Mathematische Pakete
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+%\usepackage{stmaryrd}
+\usepackage{esint}									\usepackage{faktor}
+\usepackage{mathtools}								
+\usepackage{polynom}								
+\usepackage{cancel}									
+\usepackage[all]{xy}            %xy matrix for diagramms
+\usepackage{tensor}             %for Transformation matrices
