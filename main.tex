@@ -2088,7 +2088,7 @@
     \begin{proof}
         Let $\phi:V\to W$  be a nonzero homomorphism of $G$-representations.
         \begin{enumerate}
-            \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\phi-t\cdot\id_V\in\Hom_G(V,V)$ and hance $\ker(f\inv\circ\phi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\phi:V\to V$. Then $\ker(f\inv\circ\phi-\lambda\id_V=V$ because $V$ is irreducible. That is to say, $\phi=\lambda f$.
+            \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\phi-t\cdot\id_V\in\Hom_G(V,V)$ and hence $\ker(f\inv\circ\phi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\phi:V\to V$. Then $\ker(f\inv\circ\phi-\lambda\id_V=V$ because $V$ is irreducible. That is to say, $\phi=\lambda f$.
             \item Assume that $V\not\cong_G W$. Then $\ker\phi$ is a subrepresentation of of $W$. since $\phi\neq 0$, $\phi$ is injective. Moreover, since $\Img\phi$ is a subrepresentation of $W$ and $\phi\neq 0$, $\phi$ is surjective. This contradicts to $V\not\cong W$, and hence such a map $\phi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
         \end{enumerate}
     \end{proof}
@@ -2107,9 +2107,9 @@
         If $\alpha\in\text{CF}(G)$ satisfies $\spitz{\alpha,\chi_V}=0\ \forall V\in\Irr(G)\Rightarrow \alpha=0$.
     \end{claim*}
     \begin{proof}
-        Let $V\in\Irr(G)$. By \ref{cor:2.14}, $\alpha\circ\in Z(\C[G])$ and by \ref{cor:2.27}, $\tilde\rho_V(\alpha)$ is a scalar $\lambda\id_V$. We determine this scalar $\lambda$.
+        Let $V\in\Irr(G)$. By \ref{cor:2.14}, $\alpha^\circ\in Z(\C[G])$ and by \ref{cor:2.27}, $\tilde\rho_V(\alpha)$ is a scalar $\lambda\id_V$. We determine this scalar $\lambda$.
         \begin{align*}
-            \lambda\dim V &= \Tr(\tilde\rho_V(\alpha(\alpha\circ))= \sum_{g\in G} \alpha(g) \chi_V(g)\\
+            \lambda\dim V &= \Tr(\tilde\rho_V(\alpha(\alpha^\circ))= \sum_{g\in G} \alpha(g) \chi_V(g)\\
             &\overset{\ref{lem:2.10}}= \#G\frac1{\#G}\sum_{g\in G}\alpha(g)\chi_{V^*}(g)\\
             &=\#G\cdot\spitz{\alpha, \chi_{V^*}}=0
         \end{align*}
@@ -2236,6 +2236,9 @@ To be continued
     \begin{exercise}{}{13}
         Let $V = \C^3$ be the representation of $S_3$ arising from the action of $S_3$ on $[3]$. Decompose $V^{\tens n}$ into a direct sum of irreducible representations of $S_3$. (start from computing $\chi_V$ using the definition)
     \end{exercise}
+    \begin{proof}
+        
+    \end{proof}
 \section{Left regular representation}
     We proceed to studying the left regular representation in detail with the help of character theory.
 
