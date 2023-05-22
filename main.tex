@@ -1270,7 +1270,7 @@
             
             
 \chapter{Linear representations of finite groups}
-    We are going to use \cite{Serre.20} and \cite{FultonHarris.1991} as references. You can find the PDFs on Moodle.
+    We are going to use \cite{Serre.1977} and \cite{FultonHarris.1991} as references. You can find the PDFs on Moodle.
     
     In this chapter we study linear representations of finite groups. The algebraic side of representations theory studies representations of:
     
@@ -1977,8 +1977,8 @@
     \begin{equation*}
         \spitz{\chi_W,\chi_V} = \chi_{\Hom(V,W)} \round{\frac{1}{\#G} \sum_{g \in G}g}
     \end{equation*}
-    this special element $\frac{1}{\#G} \sum\limits_{g \in G}g$ will be crucial in the character theory. One should keep the above formular in mind.
-    \begin{example}{2.18}
+    this special element $\frac{1}{\#G} \sum\limits_{g \in G}g$ will be crucial in the character theory. One should keep the above formula in mind.
+    \begin{example}{}{2.18}
         We compute $\spitz{\gamma_C,\gamma_{C'}}$ for $C,C' \in \cC(G)$.
         Recall the formula
         \begin{equation*}
@@ -2062,7 +2062,7 @@
 
     As an application of the projector, we can prove the following fundamental theorem in group representation theory:
 
-    \begin{theorem}{Maschke}{2.24}
+    \begin{theorem}{Maschke}{maschke}
         Any finite dimensional representation of $G$ is isomorphic to a direct sum of irreducible representations.
     \end{theorem}
     \begin{proof}
@@ -2078,7 +2078,7 @@
 
     Another tool to prove \ref{thm:2.19} is the following lemma by Schur:
 
-    \begin{lemma}{Schur}{2.26}
+    \begin{lemma}{Schur}{schur}
         Let $V,W\in\rep(G)$ be two irreducible representations. Then
         $$\dim_\C\Hom_G(V,W)=\begin{cases}
             1 & V\cong_G W\\
@@ -2116,12 +2116,31 @@
         For the last equality, we used Maschke to write $V^*$ as sum of irreducible representations. For each of their characters, the scalar product vanishes.
 
         From this computation, $\lambda=0$. We have shown, that for any irreducible representation $V$, $\tilde\rho_V(\alpha\circ)=0$. Again Maschke tells us that for any $W\in\rep(G)$, $\tilde\rho_W(\alpha\circ)=0$.
-        % TO commplete the proof, we examine a special choice of $W$:
+        To complete the proof, we examine a special choice of $W$: The left regular representation. Let $W = \C(G)$. Then
+        \begin{equation*}
+            0 = \tilde{\rho}_W(\alpha^\circ)(e) = \sum_{g \in G} \alpha(g) \rho_W(g)(e) = \sum_{g \in G} \alpha(g)g
+        \end{equation*}
+        Since elements in $G$ form a basis of $\C(G)$, for any $g \in G$, we have $\alpha(g) = 0$
     \end{proof}
-To be continued   
-\begin{comment}
-    ... to say that in the decomposition there is only one irreducible representation appearing. %\end{proof}
-\end{comment}
+    We deduce several immediate consequences.
+    \begin{corollary}{}{2.28}
+        \begin{enumerate}
+            \item
+                Let $V,V' \in \rep(G)$. $V$ is isomorphic to $V'$ as a $G$-representation if and only if $\chi_V = \chi_{V'}$.
+            \item
+                Let $V \in \rep(G)$. $V$ is irreducible if and only if $\spitz{\chi_V,\chi_V} = 1$
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        Ad \textit{(1)}:
+        
+        Let $\Irr(G) = \{S_1,\dots,S_t\}$. We use Maschke's theorem \ref{thm:maschke} to write $V \cong S_1^{\oplus n_1} \oplus \dots \oplus S_t^{\oplus n_t}$ and $V' \cong S_1^{\oplus m_1} \oplus \dots \oplus S_t^{\oplus m_t}$. From Corollary \ref{cor:2.20} (2), $n_i = \spitz{\chi_V,\chi_{S_i}} = \spitz{\chi_{V'},\chi_{S_i}} = m_i$ and hence $V \cong V'$. The other direction is clear.
+
+        Ad \textit{(2)}:
+        
+        With the above notation and Corollary \ref{cor:2.20} (2), $\spitz{\chi_V,\chi_V }= \sum_{i=1}^t n_i^2 = 1$, which is equivalent to say that in the decomposition there is only one irreducible representation appearing.
+    \end{proof}
+
 
 \separline{Week 7}
     \begin{corollary}{Second orthogonal relation}{2.29}
@@ -2162,7 +2181,7 @@ To be continued
     \end{equation*}
     Then there are three elements in $\Irr(S_3)$:
     We denote them by $S_1,S_2,S_3$, where $S_1$ is the trivial representation.
-    \begin{table}[h]
+    \begin{table}[ht]
         \centering
         \begin{tabular}{|c|c|c|c|}
         \hline
@@ -2185,7 +2204,7 @@ To be continued
     \end{equation*}
     We notice that $\chi_{S_i}(e) = \dim_\C(S_i) \in \N_0$ and choose a solution $a=1$, $d=2$ (the only other solution is $a=2$, $d=1$).
     We get
-    \begin{table}[h!]
+    \begin{table}[ht]
         \centering
         \begin{tabular}{|c|c|c|c|}
         \hline
@@ -2216,7 +2235,7 @@ To be continued
         \end{array}\right.
     \end{equation*}
     The complete character table of $S_3$ is then:
-    \begin{table}
+    \begin{table}[ht]
         \centering
         \begin{tabular}{|c|c|c|c|}
         \hline
@@ -2287,7 +2306,7 @@ To be continued
     \begin{proof}
         Since each $\tilde \rho_{S_i}$ is a $\C$-algebra homomorphism it follows that $\tilde{\rho}$ is a $\C$-algebra homomorphism. From Corollary \ref{cor:2.31}, $\tilde{\rho}$ is injective. Since $\dim \C[G] = \# G$, the bijectivity follows from $\#G = \round{\dim S_1}^2 + \dots + \round{\dim S_t}^2$.
     \end{proof}
-    The inverse map is called the Fourier inversion formula (see for example Proposition \textit{11} in the book of Serre \cite{Serre.20}).
+    The inverse map is called the Fourier inversion formula (see for example Proposition \textit{11} in the book of Serre \cite{Serre.1977}).
 
     Under this isomorphism $Z(\C[G])$ is sent to $\prod\limits_{i=1}^t \C \id_{S_i}$ (the center of $\End(S_i)$ is $\C \id_{S_i}$):
 
