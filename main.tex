@@ -1712,7 +1712,7 @@
         \begin{equation*}
             \Hom_{\mathrm{Grp}}(G,\GL(V)) \cong \Hom_{\C\mathrm{-alg}}(\C[G],\End(V))
         \end{equation*}
-        \begin{exercise}{}{12µ}
+        \begin{exercise}{}{12}
             Verify that under this correspondence, homomorphsims of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
         \end{exercise}
 \separline{Week 6}
@@ -2321,6 +2321,123 @@
     where $\chi_{S_i}(z)$ is the extension of $\chi_{S_i}$ is the extension to $\C[G]$ by linearity.
     (i.e. $z$ acts on $S_i$ as this scalar). Then $(\omega_{S_1},\dots ,\omega_{S_t}): Z(\C[G]) \overset{\cong}{\to} \C \id_{S_1} \times\dots \times \C \id_{S_t}$ is the $\C$-algebra isomorphism above.
     \separline{Week 8}
+    \separline{VL 12}
+    \separline{VL 13}
+    ...
+\chapter{Semi-simple algebras}
+    In the last chapter we have seen that studying the representation theory of groups is equivalent to the study of modules over the group algebra $\C[G]$, see Exercise \ref{exc:12}.
+
+    From this chapter on we will study the representation theory of finite dimensional algebras. In this chapter we study the simplest such algebras from a representation-theoretical point of view, they are essentially matrices.
+\section{Modules over algebras}
+    \subsection{Modules}
+        In Computeralgebra \cite{Cobra} we have already studied modules over (commutative) rings. In the following we particularly study the non-commutative setting.
+
+        Let $K$ be a field. In this lecture all algebras and rings are associative and unital. Unital means, there is a multiplicative identity.
+
+        \begin{definition}{}{3.1}
+            \begin{enumerate}
+                \item
+                    A $\mathbf{K}$\textbf{-algebra} $(A,+,\cdot)$ is a ring and a $K$-vector space satisfying:
+                    \begin{equation*}
+                        \forall a,b \in A, \lambda \in K: \lambda(ab) = (\lambda a)b = a (\lambda b)
+                    \end{equation*}
+                \item
+                    The \textbf{dimension} of $A$ is its dimension as $K$-vector space.
+                \item 
+                    A \textbf{subalgebra} of $A$ is a $K$-vector subspace and a subring (not an ideal!) of $A$
+                \item
+                    Let $A,B$ be two $K$-algebras. A $\mathbf{K}$\textbf{-algebra homomorphism} between $A$ and $B$ is a $K$-linear map and a ring homomorphism. Similarly we can define iso-, endo-, automorphisms and so on.
+            \end{enumerate}
+        \end{definition}
+        
+        \textbf{Examples:}
+            \begin{enumerate}
+                \item
+                    Let $K$ be a field, then $K$ is a $K$-algebra.
+                \item
+                    Let $G$ be a group, then $\C[G]$ is a $\C$-algebra.
+                \item
+                    Let $V$ be a $K$-vector space, then $\End_K(V)$ is a $K$-algebra.
+            \end{enumerate}
+
+        Here is a small intermezzo, which may or may not be of interest to you:
+        
+        \begin{remark*}{abstract nonsense - F}
+            One can formulate the above relations by means of a commutative diagram. For example, let $\mu: A \times A \to A, (a,b) \mapsto a \cdot b$ be the multiplication of $A$, then we can formulate associativity of $A$ via
+            \begin{equation*}
+                \xymatrix {
+                & A \times A \times A \ar[dl]_{(\mu,1)} \ar[dr]^{(1,\mu)}& \\
+                A \times A \ar[dr]_{\mu} & \circlearrowleft & A \times A\ar[dl]^{\mu} \\
+                & A & 
+                }
+            \end{equation*}
+            \textbf{Why should we care?}
+            
+            The above diagram describes associativity not only for algebras, but for groups, monoids, rings and so on. Similarly we can realize all the other requirements for a group say.
+            
+            Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\Set$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group}.
+            
+            In contrast - if we were to just write out the definition of a topological group the "choice" of definition would be way less natural.
+
+            To summarize: Mathematics likes to reward generalization, and we like rewards, so we should strive for abstraction. In this case we got rewarded with a deeper understanding of the definition of a (topological)group and structure in general.
+        \end{remark*}
+
+        Returning to the lecture notes, we define modules over $K$-algebras just as in the commutative case, we just have to make a difference between left and right modules.
+
+        \begin{definition}{}{3.2}
+            Let $A$ be a $K$-algebra. A left $A$-module $M$ is a $K$-vector space $M$ together with a $K$-algebra homomorphism $\lambda_M: A \to \End_K(M)$.
+
+            For $a \in A, m \in M$ we will usually denote $a \cdot m := \lambda_M(a)(m)$.
+
+            Let $A^{\op}$ be the $K$-algebra whose $K$-vector space structure is the same as $A$, and the multiplication is defined by $a \cdot_{\op} b:= b \cdot a$ for all $a,b \in A^{\op}$
+        \end{definition}
+
+        We call $K$-vector space $M$ a right $A$-module, if there exists a $K$-algebra homomorphism $\rho_M: A^\op \to \End_K(M)$.
+
+        \begin{remark}{}{3.3}
+            In general $A$ is not isomorphic to $A^\op$ as a non-commutative ring could be quite different (for example, one can be noetherian but the other not). For an example of such an algebra see Section 2.8 in \cite{Jacobson.2009}.
+        \end{remark}
+        Sometime we will simply write $\tensor[_A]{M}{}$ or $M_A$ to emphasize that it is a left or right $A$-module. When we just say $A$-module we mean left module by default.
+
+        \begin{example}{}{3.4}
+            \begin{enumerate}
+                \item
+                    Let $\tensor[_A]{M}{}, \tensor[_A]{N}{}$ be two $A$-modules. Their direct sum $M \oplus N$ is the left $A$-module defined by $M \oplus N$ as a vector space and the action
+                    \begin{equation*}
+                        a\cdot(m,n):=(a \cdot m, a \cdot n)
+                    \end{equation*}
+                    for all $a \in A, m \in M, n\in N$.
+                \item
+                    Let $\tensor[_A]{M}{}$ be an $A$-module. The dual vector space $M^*$ is a right $A$-module with the following multiplication:
+                    \begin{equation*}
+                        \spitz{f\cdot a, m} = \spitz{f,a \cdot m}
+                    \end{equation*}
+                    for all $f \in M^*, m \in M$ and $a \in A$.
+                \item
+                    $A$ is both a left and right $A$-module:
+                    \begin{equation*}
+                    \begin{split}
+                        A &\to \End_K(A) \\
+                        a &\mapsto (b \mapsto ab) \\
+                        A^\op &\to \End_K(A) \\
+                            a &\mapsto (b \mapsto ba)
+                    \end{split}
+                    \end{equation*}
+            \end{enumerate}
+        \end{example}
+        But one should keep in mind that there is no \underline{natural} $A$-module structure on the tensor product of two $A$-modules. The group algebra (and the universal enveloping algebra you will see in the Liealgebren lecture) are very special because it admits a bialgebra structure.
+
+        \begin{definition}{}{3.5}
+            \begin{enumerate}
+                \item
+                    Let $\tensor[_A]{M}{}$ be an $A$-module. A $K$-vector subspace $N$ of $M$ is called an $\mathbf{A}$\textbf{-submodule} if for all $a \in A$ and $n \in N: \lambda_M(a)(n) \in N$.
+                \item
+                    Submodules of the left/right $A$-module $A$ are called \textbf{left/right ideals} of $A$.
+                \item
+                    A subspace $I \subseteq A$ is called an ideal (or a two-sided ideal), if it is both a left and a right ideal in $A$.
+            \end{enumerate}
+        \end{definition}
+        
 %\nocite{*}
 
 \printbibliography
