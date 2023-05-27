@@ -87,9 +87,9 @@
         
         To summarize: For $\varphi \neq 0$, $\varphi(K)$ is a subfield of $L$ and $L/\varphi(K)$ is a field extension.
         
-        Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space form the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover $L$ is also a $K$-algebra.
+        Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
         
-        Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-homomorphisms. Similarly we have the notion of $K$-isomorphisms.
+        Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-homomorphisms. Similarly, we have the notion of $K$-isomorphisms.
         
         \begin{exercise}{}{1}
                 Let $L_1/K, \, L_2/K$ be two field extensions of $K$. Show that:
@@ -117,17 +117,17 @@
             \mathrm{ev}_\alpha: K[x] &\rightarrow L \\
                                 f(x) &\mapsto f(\alpha)
         \end{align*}
-        The map $\mathrm{ev}_\alpha$ is a ring homomorphism. By the isomorphism theorem we get:
+        The map $\mathrm{ev}_\alpha$ is a ring homomorphism. By the isomorphism theorem, we get:
         \begin{equation*}
             \faktor{K[x]}{\Ker(\ev_\alpha)} \cong \Img(\ev_\alpha)
         \end{equation*}
-        The kernel $\ker(\ev_\alpha)$ is a $K-$ideal in $K[x]$, which is a PID (prinicpal ideal domain), hence either there exists a monic polynomial $p_\alpha(x) \in K[x]$ (monic means $\LK(p_\alpha(x))=1$) of positive degree such that $\Ker(\ev_\alpha) = (p_\alpha(x))$ or $\ker(\ev_\alpha) = \{0\}$.
+        The kernel $\ker(\ev_\alpha)$ is a $K-$ideal in $K[x]$, which is a PID (principal ideal domain), hence either there exists a monic polynomial $p_\alpha(x) \in K[x]$ (monic means $\LK(p_\alpha(x))=1$) of positive degree such that $\Ker(\ev_\alpha) = (p_\alpha(x))$ or $\ker(\ev_\alpha) = \{0\}$.
         
-        In the second case $\alpha$ is not a root of any polynomial in $K[x]$, hence the set $\{1,\alpha,\alpha^2,\dots\}$ is linearly independent over $K$ and thus the $K$-vector space $L$ is of infinite dimension. In this case we say $\alpha$ is \textbf{transcendental} over $K$.
+        In the second case $\alpha$ is not a root of any polynomial in $K[x]$, hence the set $\{1,\alpha,\alpha^2,\dots\}$ is linearly independent over $K$ and thus the $K$-vector space $L$ is of infinite dimension. In this case, we say $\alpha$ is \textbf{transcendental} over $K$.
         
-        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
+        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is an integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
         
-        Moreover, in a principal ideal ring prime ideals are maximal. so $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
+        Moreover, in a principal ideal ring prime ideals are maximal. so $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case, $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
         
         Generalising this notation: for a subset $S \subseteq L$ we will denote $K(S)$ as the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $S$. If $S$ is a finite set we call $K(S)$ finitely generated.
         
@@ -142,16 +142,16 @@
         \end{exercise}
         
         \begin{proof}
-            Let $p_1,\dots,p_n$ be distinct prime numbers. We show that $[\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q] = 2^s$. For this we proceed with induction on $s$.
+            Let $p_1,\dots,p_n$ be distinct prime numbers. We show that $[\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q] = 2^s$. For this, we proceed with induction on $s$.
             
-            If $s=1$, then $\sqrt{p_1}$ has minimal polynomial $x^2-p_1$, which is irreducible by the Eisenstein-criterion. Thus $[\Q(\sqrt{p_1}):\Q] = 2$.
+            If $s=1$, then $\sqrt{p_1}$ has minimal polynomial $x^2-p_1$, which is irreducible by the Eisenstein criterion. Thus $[\Q(\sqrt{p_1}):\Q] = 2$.
             
-            Lets assume we proved the assertion for $s-1 \in \N$. We have:
+            Let us assume we proved the assertion for $s-1 \in \N$. We have:
             \begin{align*}
                 [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q] &= [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] \cdot [\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}}):\Q] \\
                 &\overset{\text{IH}}{=} [\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] \cdot 2^{s-1}
             \end{align*}
-            By induction we get for all $1<i<s$:
+            By induction, we get for all $1<i<s$:
             \begin{equation}\tag{$\star$}\label{*}
                 [\Q(\sqrt{p_1},\dots,\sqrt{p_i}):\Q(\sqrt{p_1},\dots,\sqrt{p_{i-1}})] = 2
             \end{equation}
@@ -249,18 +249,18 @@
             }
         \end{equation*}
         
-        For better understanding of the definition we try to figure out what obstructs an extension from being Galois?
+        For a better understanding of the definition, we try to figure out what obstructs an extension from being Galois?
         \begin{example}{}{1.4}
             We consider the extension $\Q\left(\sqrt[3]{2}\right)/\Q$. We have $p_{\sqrt[3]{2}}(x) = x^3-2$. Let $\sigma \in \Gal{\Q\left(\sqrt[3]{2}\right)/\Q }$. By Exercise \ref{exc:3}, $\sigma$ must send $\sqrt[3]{2}$ to an element in $\Q(\sqrt[3]{2})$ with minimal polynomial $x^3-2$. The only root of $x^3-2$ in $\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$ (the others are complex). Hence $\sigma$ must be the identity map. In this case $\Gal{ \Q(\sqrt[3]{2})/\Q} = \{\id\}$ and the extension is not Galois since $\left[\Q\left(\sqrt[3]{2}\right):\Q\right]=3$.
         \end{example}
         
         What goes wrong in this example? The point is that $\Q\left( \sqrt[3]{2}\right)$ does not contain all roots of $x^3-2$.
         
-        So to get a Galois extension, we need that the minimal polynomial splits into linear factors.
+        So to get a Galois extension, we need that the minimal polynomial split into linear factors.
         
         Even if we assume that $L$ is a splitting field of $K$ the equality $\#\Gal{L/K} = [L:K]$ may still fail. We consider $K = \F_p(t)$ and $L= \F_p\left( \sqrt[p]{t}\right)$, where $\alpha:=\sqrt[p]{t}$ has minimal polynomial $p_\alpha = x^p - t \in K[x]$. This polynomial is irreducible but since $\F_p$ has characteristic $p$ we get $x^p-t = (x-\alpha)^p$. Let $\sigma \in \Gal {L/K}$ then $\sigma$ sends $\alpha$ to a root of $p_\alpha$ in $L$ which can only be $\alpha$. Therefore again $\#\Gal {L/K} = 1$.
         
-        What goes wrong here is that the minimal polynomial has multiple, non distinct roots, i.e. the extension is not separable.
+        What goes wrong here is that the minimal polynomial has multiple, non-distinct roots, i.e. the extension is not separable.
         
         Luckily these are all the obstructions. Before starting this investigation we briefly recall normal and separable extensions.
         
@@ -330,7 +330,7 @@
             Assume that $\cha K = 0$ and $f(x) \in K[x]$. Let $K_f$ be the splitting field of $f(x)$ over $K$. Then the extension $K_f/K$ is Galois.
         \end{corollary}
         \begin{proof}
-            Clearly the extension is normal. Since $K$ is perfect the extension is also separable (because it is finite). Using \ref{prop:1.7} yields that $K_f/K$ is Galois.
+            Clearly, the extension is normal. Since $K$ is perfect the extension is also separable (because it is finite). Using \ref{prop:1.7} yields that $K_f/K$ is Galois.
         \end{proof}
         
         According to this corollary, if we want to study the symmetries of roots of a polynomial $f(x) \in K[x]$. $K \in \{\Q,\R\}$, we can always work inside $K_f$, where we have the Galois property.
@@ -360,9 +360,9 @@
             It remains to show that $\varphi$ is injective. Indeed if $\varphi(g) =\id$, the for any $1 \leq k \leq n$: $g(r_k) = r_k$. Since $L = K(r_1, \dots, r_n)$, we have $g = \id$.
         \end{proof}
         
-        The idea in this Corollary is helpful in the computation of Galois groups, since it realises and abstract group of automorphisms as permutations of roots. This is the fundamental idea of representation theory, which we will discuss in the next Chapter.
+        The idea in this Corollary is helpful in the computation of Galois groups since it realises an abstract group of automorphisms as permutations of roots. This is the fundamental idea of representation theory, which we will discuss in the next Chapter.
         
-        Usually $\varphi$ is not an isomorphism. But when $K = \Q$  we have the following theorem:
+        Usually, $\varphi$ is not an isomorphism. But when $K = \Q$  we have the following theorem:
         
         \begin{theorem}{}{1.10}
         \begin{enumerate}
@@ -383,7 +383,7 @@
         \end{example}
         
 \section{Galois correspondence}
-        In this section we will state and prove the fundamental theorem of Galois theory. Roughly speaking it gives a correspondence (called Galois correspondence) between intermediate field in a Galois extension and the subgroups of the Galois group. This correspondence translates problems in field theory to group theory, which is the key idea of Galois.
+        In this section, we will state and prove the fundamental theorem of Galois theory. Roughly speaking it gives a correspondence (called Galois correspondence) between an intermediate field in a Galois extension and the subgroups of the Galois group. This correspondence translates problems in field theory to group theory, which is the key idea of Galois.
     
     \subsection{Fundamental theorem}
         We need to introduce certain notations to state the main result.
@@ -428,7 +428,7 @@
             M_1,M_2 \in \Sigma(L/K), \quad M_1 \succ M_2 :\Leftrightarrow M_1 \supseteq M_2
         \end{align*}
         
-        If we consider a finite extension $L/K$ then the Galois group is finite (it is bounded by $[L:K]$). For a finite group there exist only finitely many subgroups (i.e. $\Gamma(\Gal{L/K})$) is a finite set). If there were a correspondence between $\Gamma(\Gal{L/K})$ and $\Sigma(\Gal{L/K})$, then there should only be finitely many intermediate fields. According to Korollar 1.3.51 of Cobra \cite{Cobra}, the extensions $L/K$ has to be primitive or we should at least assume that $L/K$ is separable.
+        If we consider a finite extension $L/K$ then the Galois group is finite (it is bounded by $[L:K]$). For a finite group, there exist only finitely many subgroups (i.e. $\Gamma(\Gal{L/K})$) is a finite set). If there were a correspondence between $\Gamma(\Gal{L/K})$ and $\Sigma(\Gal{L/K})$, then there should only be finitely many intermediate fields. According to Korollar 1.3.51 of Cobra \cite{Cobra}, the extension $L/K$ has to be primitive or we should at least assume that $L/K$ is separable.
         
         \begin{theorem}{Galois correspondence}{1.13}
             Let $L/K$ be a Galois extension and $G:= \Gal{L/K}$ be its Galois group.
@@ -455,7 +455,7 @@
             }
         \end{equation*}
         
-        Before we proof this theorem we first look at a few consequences of it.
+        Before we prove this theorem we first look at a few consequences of it.
         
         \begin{corollary}{}{1.14}
             Let $L/K$ be a Galois extension and $M$ be an intermediate field such that $M/K$ is Galois. Then:
@@ -573,7 +573,7 @@
         
         Given a finite group $G$, does there exist a Galois extension $L/\Q$ such that $\Gal{L/\Q} \cong G$?
         
-        In general this question is very hard and widely open. Starting from the work of Galois, Hilbert, Shafarevich etc. it is known that symmetric, alternating, abelian, more general solvable groups and certain finite simple groups can be realised as Galois groups $\Gal{L/\Q}$ for a certain field $L$.
+        In general, this question is very hard and widely open. Starting from the work of Galois, Hilbert, Shafarevich etc. it is known that symmetric, alternating, abelian, more general solvable groups and certain finite simple groups can be realised as Galois groups $\Gal{L/\Q}$ for a certain field $L$.
         
         When the base field is not necessarily $\Q$ we can prove that:
         
@@ -590,7 +590,7 @@
         \end{proof}
 
 \section{Examples}
-    In this section we discuss certain examples
+    In this section, we discuss certain examples
     \subsection{An easy example and Frobenius}
     
         \begin{example}{}{1.19}
@@ -750,13 +750,13 @@
     						1 & \mapsto \Fr
     			\end{split}
     		\end{equation*}
-    	which is a grouphomomorphism. If we can show that $H = \Gal{L/K}$, then it follows from $[L:K] = n$ that $\ker \varphi = n\Z$, for some $n \in \N$ and hence $\varphi$ would be surjective. This would mean that $\varphi$ induces an isomorphism of groups:
+    	which is a group homomorphism. If we can show that $H = \Gal{L/K}$, then it follows from $[L:K] = n$ that $\ker \varphi = n\Z$, for some $n \in \N$ and hence $\varphi$ would be surjective. This would mean that $\varphi$ induces an isomorphism of groups:
     	
     	\begin{equation*}
     		\overline{\varphi}: \Z/n\Z \xrightarrow{\cong} \Gal{L/K}, \, \overline{k} \mapsto \Fr^k
     	\end{equation*}
     	
-    	To show: $H = \Gal{L/K}$. According to the Galois correspondence, it suffices to show that $L^H = \F_p$. For this we show that $\#L^H \leq \# \F_p$. Indeed, take $\alpha \in L^H$, then $\Fr(\alpha) = a$ implies that $\alpha^p = \alpha$ and $\alpha$ is a root of the polynomial $x^p - x \in \F_p[x]$. But this polynomial has at most $p$ roots, hence $\# L^H \leq p$.
+    	To show: $H = \Gal{L/K}$. According to the Galois correspondence, it suffices to show that $L^H = \F_p$. For this, we show that $\#L^H \leq \# \F_p$. Indeed, take $\alpha \in L^H$, then $\Fr(\alpha) = a$ implies that $\alpha^p = \alpha$ and $\alpha$ is a root of the polynomial $x^p - x \in \F_p[x]$. But this polynomial has at most $p$ roots, hence $\# L^H \leq p$.
     	
     	In general, if $K$ is a finite field with $\cha K = p > 0$ and $L/K$ is a finite extension with $[L:K] = m$ and $[K:\F_p] = n$. Then from Example \ref{exa:1.11}, the extension $K/\F_p$ is Galois. Applying Corollary \ref{cor:1.14} gives: %dieser Satz ergab in den Notizen keinen Sinn. Muss ich nochmal nachschauen. $\Gal{L/K}$ is the kernel of
     	
@@ -790,7 +790,7 @@
     	According to Example \ref{exa:1.20}, finite extensions of a finite field are cyclic and abelian.
         
     \subsection{Cyclotomic extensions}
-        We study the Galois group of the polynomial $x^n-1 \in \Q[x]$. First we describe a splitting field. For this we need the notion of a primitive root of unity.
+        We study the Galois group of the polynomial $x^n-1 \in \Q[x]$. First, we describe a splitting field. For this, we need the notion of a primitive root of unity.
         
         The complex roots of $x^n -1 $ are $\exp{\frac{2 k \pi i}{n}}$ for $k \in \{0,1,\dots,n-1\}$. These roots of unity, form a group together multiplication of complex numbers $(\mu_n,\cdot)$. It is straightforward to see that:
         \begin{equation*}
@@ -804,7 +804,7 @@
         \begin{definition}{}{1.22}
             An n-th root of unity is called \textbf{primitive}, if its image in $\Z/n\Z$ has a multiplicative inverse.
         \end{definition}
-        Clearly $\exp{\frac{2 \pi k i}{n}}$ is a primitive root of unity if amd only if $\gcd(k,n) = 1$.
+        Clearly $\exp{\frac{2 \pi k i}{n}}$ is a primitive root of unity if and only if $\gcd(k,n) = 1$.
         
         \textbf{Examples:}
         \begin{enumerate}
@@ -879,7 +879,7 @@
             Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From \ref{exc:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
             
             \begin{proof}[Proof of claim]
-                For this we consider the canonical map
+                For this, we consider the canonical map
                 \begin{equation*}
                     \begin{split}
                     \Z[x] &\rightarrow \F_p[x] \\        f(x) = \sum_{k=0}^{m} a_k x^k  &\mapsto \sum_{k=0}^m \overline{a_k}x^k =: \overline{f}(x)
@@ -934,7 +934,7 @@
         \begin{definition}{radical extensions}{1.25}
             \begin{enumerate}
                 \item A field extension $L/K$ is called \textbf{simple radical} if $L=K(\alpha)$ where there exists an integer $n\geq 0$ and $a\in K$ such that $\alpha^n=a$. We also denote such an extension by $K(\sqrt[n]a)$ for short (note that $\sqrt[n]a$ is not a single fixed element in our field, we differ here from the definition in Analysis).
-                \item A field extension $L/K$ is called radical, if there exists a chain of field extensions $$K=K_1\subseteq K_2\subseteq\dots\subseteq K_{r+1}= L$$
+                \item A field extension $L/K$ is called radical if there exists a chain of field extensions $$K=K_1\subseteq K_2\subseteq\dots\subseteq K_{r+1}= L$$
                 such that each extension $K_{i+1}/K_i$ is simple radical.
             \end{enumerate}
         \end{definition}
@@ -965,7 +965,7 @@
             \end{itemize}
         \end{definition}
         \begin{remark}{}{1.27}
-            In Cobra, the last condition reads: "$G_i/G_{i+1}$ is an abelian group. Since $G$ is finite, $G_i/G_{i+1}$ is a finite abelian group. Using the smith normal form from LAII, we get
+            In Cobra, the last condition reads: "$G_i/G_{i+1}$ is an abelian group. Since $G$ is finite, $G_i/G_{i+1}$ is a finite abelian group. Using the Smith normal form from LAII, we get
             $$G\cong \Z/n_i\Z \times \dots \times \Z/n_r\Z$$ with $n_1,\dots, n_r\in\N$ satisfying $n_1|\dots|n_r$ which means that the above series can be refined with cyclic subquotients. Details are left as an exercise.
         \end{remark}
         \begin{exercise}{Equivalence of the notions of solvability}{8}
@@ -989,7 +989,7 @@
                 \item The Galois group $\Gal{f}$ is solvable.
             \end{enumerate}
         \end{theorem}
-        As a direct consequence we obtain:
+        As a direct consequence, we obtain:
         \begin{corollary}{}{1.30}
             If there exists $n\geq 5$ such that $\Gal{f}\cong S_n$ then the polynomial $f$ is not solvable by radicals over $K$.
         \end{corollary}
@@ -1007,7 +1007,7 @@
                 \item $f$ has three distinct real roots and two complex roots which are conjugate to each other.
             \end{enumerate}
             One can show this using a bit of Analysis 1: note that $f(0)>0, f(1)<0, \lim\limits_{n\to\infty}f(n)=\infty$ and $\lim\limits_{n\to-\infty}f(n) = -\infty$.
-            by the intermediate value theorem, we know that there exist at least 3 distinct real root.
+            by the intermediate value theorem, we know that there exist at least 3 distinct real roots.
             We can get by analytical means (such as a study of the extrema of the function) that these are in fact the only real roots. Since $f\in\Q[x]$ is invariant under complex conjugation, the complex roots have to be conjugate.
             
             We denote the complex roots by $r_1, r_2$ and the three real roots by $r_3, r_4, r_5$. Using \ref{cor:1.9} we look at $\Gal f$ as a subgroup of $S_5$ permuting the indices of the roots. The restriction of the complex conjugation to $K_f$ is well defined and is the element in $\Gal f$ corresponding to $(12)\in S_5$.
@@ -1042,7 +1042,7 @@
     
 \section{Proof of Galois' theorem}
     \subsection*{Proof of $(1) \Rightarrow (2)$}
-    The idea for this direction is to use Galois correspondence. From the assumption there exists a radical extension $L/K$ such that $L_f \subseteq L$.
+    The idea for this direction is to use Galois correspondence. From the assumption, there exists a radical extension $L/K$ such that $L_f \subseteq L$.
     
     To use Galois correspondence we need a Galois extension. The first problem is: a radical extension is not necessarily Galois.
     
@@ -1059,7 +1059,7 @@
     \begin{proof}
         It suffices to show that $N/K$ is radical. We keep notations in the above discussion. We set $m_i:=\deg\left(p_i(x)\right)$ and let $u_{i,1} := u_i, u_{i,2},\dots, u_{i,m_i}$ be the roots of $p_i(x)$.
         
-        We know from assumption that $K(u_{1,1})/K$ is radical. So assume that $u_{1,1}^{n_1} \in K$ for some $n_1 \in \N$.
+        We know from the assumption that $K(u_{1,1})/K$ is radical. So assume that $u_{1,1}^{n_1} \in K$ for some $n_1 \in \N$.
         
         \begin{claim*}{}{}
             $K(u_{1,1} ,u_{1,2})/K(u_{1,1})$ is simple radical.
@@ -1140,7 +1140,7 @@
     
     \begin{proof}
         There are some inaccuracies in the proof. For a more detailed proof see "Non-vanishing of resolvent" in Moodle.
-        The point is to find a generator. First since $L/K$ is finite and separable, from the primitive element theorem, we can assume that $L = K(\alpha)$ for some $\alpha \in L$.
+        The point is to find a generator. First, since $L/K$ is finite and separable, from the primitive element theorem, we can assume that $L = K(\alpha)$ for some $\alpha \in L$.
         
         The crucial construction is the following Lagrange resolvent: For $\sigma \in \Gal{L/K}$ a generator:
         \begin{equation*}
@@ -1154,7 +1154,7 @@
     \end{proof}
     
     
-    We will see later how the Lagrange resolvent helps to find solution to cubic equations by radicals.
+    We will see later how the Lagrange resolvent helps to find a solution to cubic equations by radicals.
     
     
     We go back to the proof of $(2) \Rightarrow (1)$.
@@ -1175,7 +1175,7 @@
     
     We set $K_1 = K$. It remains to show that $K = K_1 \subseteq K_2 \subseteq \dots \subseteq K_{r+1} = K_f(\zeta)$ is a chain of simple radical extensions.
     
-    The extension $K_2 / K_1$ is cyclotomic hence is simple radical. We look at $K_{i+1}/K_i$ for $i \geq 2$.
+    The extension $K_2 / K_1$ is cyclotomic and hence is simple radical. We look at $K_{i+1}/K_i$ for $i \geq 2$.
     Since the primitive $r$-th root of unity $\zeta$ is in $K_i$ for $i \geq 2$, we want to apply the above Lemma.
     The last thing to show for this is that $K_{i+1}/K_i$ is Galois with cyclic Galois group.
     
@@ -1186,7 +1186,7 @@
     
     \subsection*{Quadratic and cubic equations}
         \subsubsection{(1) Quadratic equations} 
-            Let $f(x) = x^2 + ax + b \in \Q[x]$. Without loss of generality we assume that it has two distinct roots $x_1$ and $x_2$. Then $x_1 + x_2 = -a$ and $x_1x_2 = b$. We let $\zeta$ be a primitive $2$nd root of unity $(\zeta = -1)$ and define the Lagrange resolvent
+            Let $f(x) = x^2 + ax + b \in \Q[x]$. Without loss of generality, we assume that it has two distinct roots $x_1$ and $x_2$. Then $x_1 + x_2 = -a$ and $x_1x_2 = b$. We let $\zeta$ be a primitive $2$nd root of unity $(\zeta = -1)$ and define the Lagrange resolvent
             \begin{equation*}
                 \ell := x_1 + \zeta x_2
             \end{equation*}
@@ -1713,7 +1713,7 @@
             \Hom_{\mathrm{Grp}}(G,\GL(V)) \cong \Hom_{\C\mathrm{-alg}}(\C[G],\End(V))
         \end{equation*}
         \begin{exercise}{}{12}
-            Verify that under this correspondence, homomorphsims of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
+            Verify that under this correspondence, homomorphisms of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
         \end{exercise}
 \separline{Week 6}
 
@@ -1731,7 +1731,7 @@
         \end{definition}
         Note that if $V\cong W$ as $G$-representations, then $\chi_V = \chi_W$.
         
-        We start from some properties of characters.
+        We start with some properties of characters.
         
         \begin{lemma}{}{2.10}
             Let $V,W\in\rep(G)$. The following hold:
@@ -1800,7 +1800,7 @@
                     \end{split}
                     \end{equation*}
     
-                    So with the ordering we choose we get:
+                    So with the ordering we choose, we get:
                     \begin{equation*}
                         \rho_{V \tens W}(g)(v_i \tens w_j)_{B_{V \tens W}} =
                         \begin{pmatrix}
@@ -1914,7 +1914,7 @@
         \begin{equation*}
             \sum_{g \in G} \alpha(g) h g h^{-1} = \sum_{g \in G} \alpha(hgh^{-1}) h g h^{-1} = \sum_{k \in G} \alpha(k) k = \text{RHS}
         \end{equation*}
-        Where RHS means right hand side, i.e. we have shown equality.
+        Where RHS means right-hand side, i.e. we have shown equality.
 
         Thus we obtained a $\C$-algebra homomorphism $\CF(G) \to Z(\C[G])$ which is injective. We show that it is also surjective:
 
@@ -1973,7 +1973,7 @@
     \begin{equation*}
         \chi_{\Hom(V,W)}\round{\sum_{g \in G} \lambda_g g} = \sum_{g \in G} \lambda_g \chi_{\Hom(V,W)}(g)
     \end{equation*}
-    Then we can rewrite the above formular as:
+    Then we can rewrite the above formula as:
     \begin{equation*}
         \spitz{\chi_W,\chi_V} = \chi_{\Hom(V,W)} \round{\frac{1}{\#G} \sum_{g \in G}g}
     \end{equation*}
@@ -1995,7 +1995,7 @@
 
     We introduce another basis of $\CF(G)$.
 
-    Let $\Irr(G)$ be the set of finite dimensional irreducible representations of $G$ up to isomorphism. That is to say, isomorphic representations are indetified as the same object in $\Irr(G)$.
+    Let $\Irr(G)$ be the set of finite dimensional irreducible representations of $G$ up to isomorphism. That is to say, isomorphic representations are identified as the same object in $\Irr(G)$.
     \begin{theorem}{}{2.19}
         The tuple $(\chi_V \ | \ V \in \Irr(G))$ forms an orthonormal basis of $\CF(G)$.
     \end{theorem}
@@ -2063,12 +2063,12 @@
     As an application of the projector, we can prove the following fundamental theorem in group representation theory:
 
     \begin{theorem}{Maschke}{maschke}
-        Any finite dimensional representation of $G$ is isomorphic to a direct sum of irreducible representations.
+        Any finite-dimensional representation of $G$ is isomorphic to a direct sum of irreducible representations.
     \end{theorem}
     \begin{proof}
         We can proceed by induction on the dimension of the representation. The one-dimensional case is clear.
 
-        Let $V\in\rep(G)$. If $V$ is irreducible then we are done. If not there is a subrepresentation $W$ of $V$ of dimension $\geq 1$. $W$ is a subspace of $V$. As vector spaces we have a direct sum composition $V=W\oplus W'$. We denote $\pi:V\to W$ the canonical projection and $\iota: W\to V$ the canonical injection arising from the direct sum. Then $\phi=\iota\circ\pi$ is an idempotent in $\Hom(V,V)$. Let $\tilde P:=\tilde \rho_{\End(V)}(P):\Hom(V,V)\to \Hom_G(V,V)$ be the projection in \ref{cor:2.23}. Then $\tilde P(\phi)$ is an idempotent in $\Hom_G(V,V)$ with image $W$ ($W$ is a subrepresentation, hence $\frac1{\# G}\sum_{g\in G}\rho(g)(\phi)$ has image $W$.)\footnote{Verify that $\Img \tilde{\rho} (\phi)=W$, then for any $v\in V: \tilde\rho(\phi)^2(v)=\tilde\rho(\phi)\underbrace{\round{\tilde\rho(\phi)(v)}}_{\in W} = \tilde\rho(\phi)(v)$.}
+        Let $V\in\rep(G)$. If $V$ is irreducible then we are done. If not there is a subrepresentation $W$ of $V$ of dimension $\geq 1$. $W$ is a subspace of $V$. As vector spaces, we have a direct sum composition $V=W\oplus W'$. We denote $\pi:V\to W$ the canonical projection and $\iota: W\to V$ the canonical injection arising from the direct sum. Then $\phi=\iota\circ\pi$ is an idempotent in $\Hom(V,V)$. Let $\tilde P:=\tilde \rho_{\End(V)}(P):\Hom(V,V)\to \Hom_G(V,V)$ be the projection in \ref{cor:2.23}. Then $\tilde P(\phi)$ is an idempotent in $\Hom_G(V,V)$ with image $W$ ($W$ is a subrepresentation, hence $\frac1{\# G}\sum_{g\in G}\rho(g)(\phi)$ has image $W$.)\footnote{Verify that $\Img \tilde{\rho} (\phi)=W$, then for any $v\in V: \tilde\rho(\phi)^2(v)=\tilde\rho(\phi)\underbrace{\round{\tilde\rho(\phi)(v)}}_{\in W} = \tilde\rho(\phi)(v)$.}
         \ref{lem:2.22} gives an isomorphism $V\cong \ker\tilde P(\phi)\oplus W$ as $G$-representations. Then we can proceed by induction.
     \end{proof}
 
@@ -2113,7 +2113,7 @@
             &\overset{\ref{lem:2.10}}= \#G\frac1{\#G}\sum_{g\in G}\alpha(g)\chi_{V^*}(g)\\
             &=\#G\cdot\spitz{\alpha, \chi_{V^*}}=0
         \end{align*}
-        For the last equality, we used Maschke to write $V^*$ as sum of irreducible representations. For each of their characters, the scalar product vanishes.
+        For the last equality, we used Maschke to write $V^*$ as the sum of irreducible representations. For each of their characters, the scalar product vanishes.
 
         From this computation, $\lambda=0$. We have shown, that for any irreducible representation $V$, $\tilde\rho_V(\alpha\circ)=0$. Again Maschke tells us that for any $W\in\rep(G)$, $\tilde\rho_W(\alpha\circ)=0$.
         To complete the proof, we examine a special choice of $W$: The left regular representation. Let $W = \C(G)$. Then
@@ -2175,7 +2175,7 @@
 
     The columns of such a table are indexed by conjugacy classes and the rows are indexed $\Irr(G)$. For a conjugacy class $C$ and an irreducible representation $S$, the corresponding element in the table reads $\chi_S(C)$.
 
-    For example we compute such a table for $S_3$. There are three conjugacy classes in $S_3$:
+    For example, we compute such a table for $S_3$. There are three conjugacy classes in $S_3$:
     \begin{equation*}
         C_1 = \{e\}, \quad C_2 = \{(12),(13),(23)\}, \quad C_3 = \{(123),(132)\}
     \end{equation*}
@@ -2192,7 +2192,7 @@
         \end{tabular}
     \end{table}
 
-    Theorem \ref{thm:2.19} implies that the rows of the table are "weighted" orthogonal. Fox example,
+    Theorem \ref{thm:2.19} implies that the rows of the table are "weighted" orthogonal. For example,
     \begin{equation*}
         0 = \spitz{\chi_1,\chi_2} = \#C_1 \chi_1(C_1) \overline{\chi_2 (C_1)} + \#C_2 \chi_1(C_2) + \overline{\chi_2(C_2)} + \#C_3 \chi_1(C_3) + \overline{\chi_2(C_3)} = \overline{a} + 3 \overline{b} + 2 \overline{c} 
     \end{equation*}
@@ -2221,7 +2221,7 @@
         1 + a\overline{b} + d \overline{e} = 0 \implies 1 + b + 2e = 0
     \end{equation*}
     The irreducible representation $S_2$ is one-dimensional.
-    Elements in $C_i$ have order $i$. Since any $\sigma \in C_2$ satisfies $\rho_{S_2}(\sigma)^2 = \id_{S_2}$, $\rho_{S_2}(\sigma)$ has eigenvalue either $1$ or $-1$. A similar argument shows that for $\tau \in C_3$, $\rho_{S_2}(\tau)$ has eigenvalues that a third roots of unity.
+    Elements in $C_i$ have order $i$. Since any $\sigma \in C_2$ satisfies $\rho_{S_2}(\sigma)^2 = \id_{S_2}$, $\rho_{S_2}(\sigma)$ has eigenvalue either $1$ or $-1$. A similar argument shows that for $\tau \in C_3$, $\rho_{S_2}(\tau)$ has third roots of unity as eigenvalues.
 
     For the sake of contradiction let us assume that $b = \chi_{S_2}(\sigma) = 1$, then it follows from $1 + 3b + 2c = 0$, that $c = \chi_{S_2}(\tau) = -\frac{1}{2} (1 + 3b) = -\frac{1}{2} (4) = -2$, which contradicts the fact that $c$ is a (third) root of unity. So we get $b = -1$ and $c = 1$.
     We obtained two equations of $e$ and $f$:
@@ -2259,7 +2259,7 @@
         
     \end{proof}
 \section{Left regular representation}
-    We proceed to studying the left regular representation in detail with the help of character theory.
+    We proceed to study the left regular representation in detail with the help of character theory.
 
     Let $\chi^{\text{reg}}$ be the character of the left regular representation $\rho^{\text{reg}}$. If we denote $G = \{g_1,\dots,g_n\}$, then for $g_k \neq e$ we have $g_k g_l \neq g_l$ for any $1 \leq l \leq n$, this shows
     \begin{equation*}
@@ -2286,7 +2286,7 @@
     \begin{proof}
         Since $\C(G) \cong S_1 ^{\oplus d_1} \oplus \dots \oplus S_t^{d_t}$ with $d_i > 0$, then it follows from $\tilde{\rho}_{S_i}(x) = 0$ for all $1 \leq i \leq t$ that $\tilde \rho_{\C(G)}(x) = 0$. But $x = \tilde{\rho}_{\C(G)}(x)(e) = 0$
     \end{proof}
-    (same trick used in the proof of theorem \ref{thm:2.19} in the claim)
+    (the same trick used in the proof of theorem \ref{thm:2.19} in the claim)
     Let $A,B$ be two $\C$-algebras. The product $A \times B$ is the $\C$-algebra defined by:
     \begin{itemize}
         \item as $\C$-vector space it is $A \oplus B$ (as vector space)
@@ -2330,9 +2330,9 @@
     From this chapter on we will study the representation theory of finite dimensional algebras. In this chapter we study the simplest such algebras from a representation-theoretical point of view, they are essentially matrices.
 \section{Modules over algebras}
     \subsection{Modules}
-        In Computeralgebra \cite{Cobra} we have already studied modules over (commutative) rings. In the following we particularly study the non-commutative setting.
+        In Computeralgebra \cite{Cobra} we have already studied modules over (commutative) rings. In the following, we particularly study the non-commutative setting.
 
-        Let $K$ be a field. In this lecture all algebras and rings are associative and unital. Unital means, there is a multiplicative identity.
+        Let $K$ be a field. In this lecture, all algebras and rings are associative and unital. Unital means, there is a multiplicative identity.
 
         \begin{definition}{}{3.1}
             \begin{enumerate}
@@ -2346,7 +2346,7 @@
                 \item 
                     A \textbf{subalgebra} of $A$ is a $K$-vector subspace and a subring (not an ideal!) of $A$
                 \item
-                    Let $A,B$ be two $K$-algebras. A $\mathbf{K}$\textbf{-algebra homomorphism} between $A$ and $B$ is a $K$-linear map and a ring homomorphism. Similarly we can define iso-, endo-, automorphisms and so on.
+                    Let $A,B$ be two $K$-algebras. A $\mathbf{K}$\textbf{-algebra homomorphism} between $A$ and $B$ is a $K$-linear map and a ring homomorphism. Similarly, we can define iso-, endo-, automorphisms and so on.
             \end{enumerate}
         \end{definition}
         
@@ -2373,13 +2373,13 @@
             \end{equation*}
             \textbf{Why should we care?}
             
-            The above diagram describes associativity not only for algebras, but for groups, monoids, rings and so on. Similarly we can realize all the other requirements for a group say.
+            The above diagram describes associativity not only for algebras but for groups, monoids, rings and so on. Similarly, we can realize all the other requirements for a group say.
             
             Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\Set$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group}.
             
             In contrast - if we were to just write out the definition of a topological group the "choice" of definition would be way less natural.
 
-            To summarize: Mathematics likes to reward generalization, and we like rewards, so we should strive for abstraction. In this case we got rewarded with a deeper understanding of the definition of a (topological)group and structure in general.
+            To summarize: Mathematics likes to reward generalization, and we like rewards, so we should strive for abstraction. In this case, we got rewarded with a deeper understanding of the definition of a (topological)group and structure in general.
         \end{remark*}
 
         Returning to the lecture notes, we define modules over $K$-algebras just as in the commutative case, we just have to make a difference between left and right modules.
@@ -2395,9 +2395,9 @@
         We call $K$-vector space $M$ a right $A$-module, if there exists a $K$-algebra homomorphism $\rho_M: A^\op \to \End_K(M)$.
 
         \begin{remark}{}{3.3}
-            In general $A$ is not isomorphic to $A^\op$ as a non-commutative ring could be quite different (for example, one can be noetherian but the other not). For an example of such an algebra see Section 2.8 in \cite{Jacobson.2009}.
+            In general, $A$ is not isomorphic to $A^\op$ as a non-commutative ring could be quite different (for example, one can be noetherian but the other not). For an example of such an algebra see Section 2.8 in \cite{Jacobson.2009}.
         \end{remark}
-        Sometime we will simply write $\tensor[_A]{M}{}$ or $M_A$ to emphasize that it is a left or right $A$-module. When we just say $A$-module we mean left module by default.
+        Sometimes we will simply write $\tensor[_A]{M}{}$ or $M_A$ to emphasize that it is a left or right $A$-module. When we just say $A$-module we mean left module by default.
 
         \begin{example}{}{3.4}
             \begin{enumerate}
@@ -2434,7 +2434,7 @@
                 \item
                     Submodules of the left/right $A$-module $A$ are called \textbf{left/right ideals} of $A$.
                 \item
-                    A subspace $I \subseteq A$ is called an ideal (or a two-sided ideal), if it is both a left and a right ideal in $A$.
+                    A subspace $I \subseteq A$ is called an ideal (or a two-sided ideal) if it is both a left and a right ideal in $A$.
             \end{enumerate}
         \end{definition}
         
