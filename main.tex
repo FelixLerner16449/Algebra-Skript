@@ -80,7 +80,7 @@
     \subsection{Fields and extensions}
         We briefly recall what we have done in the Cobra lecture \cite{Cobra} last semester.
         
-        In Algebra people study algebraic structures (like groups, rings, fields, vector spaces) and the maps between them preserving these structures (grouphom., ringhom, etc.). For fields such maps are field extensions.
+        In Algebra people study algebraic structures (like groups, rings, fields, vector spaces) and the maps between them preserving these structures (grouphom., ringhom, etc.). For fields, such maps are field extensions.
         
         A \textbf{field} $K$ is a commutative ring with exactly two ideals ($\{0\}$ and $K$).
         Given two fields $K$ and $L$, a \textbf{field homomorphism} between them is a ring homomorphism $\varphi: K \rightarrow L$. The kernel of such a field homomorphism is a ($K$-)ideal in the ring $K$, hence either $\ker(\varphi) = \{0\}$ or $\ker(\varphi) = K$. That is to say, either $\varphi$ is the zero map, or $\varphi$ is injective.
@@ -205,7 +205,7 @@
         \end{proof}
             
     \subsection{Galois extensions}
-        Our goal of this chapter is to study the solvability of algebraic equation of radicals, hence we will concentrate on the finite extensions.
+        Our goal of this chapter is to study the solvability of algebraic equations of radicals, hence we will concentrate on the finite extensions.
         
         We have seen the following Lemma in Cobra \cite{Cobra} (Satz 1.3.33 with $M=L$ and its proof).
         \begin{lemma}{}{1.1}
@@ -216,7 +216,7 @@
             \end{enumerate}
         \end{lemma}
         \begin{proof}
-            We sketch the proof of (2) since it does not follow from the statement of \textit{Satz 1.3.33} but its proof. From that proof we have the estimation for the extension $L/N/K$:
+            We sketch the proof of (2) since it does not follow from the statement of \textit{Satz 1.3.33} but its proof. From that proof, we have the estimation for the extension $L/N/K$:
             \begin{align*}
                 \#\Hom_K(L,L) &\leq \#\Hom_N(L,L) \cdot \# \Hom_K(N,L) \\
                 &\leq [L:N] \cdot [N:K] = [L:K]
@@ -1029,7 +1029,7 @@
         The proof generalises to prime numbers:
         \begin{exercise}{}{9}
             \begin{enumerate}
-                \item Let $f\in \Q[x]$ be an irreducible polynomial of degree $p$ (for a prime $p$). Assume that $f$ has excactly two complex roots, show that $\Gal f\cong S_5$.
+                \item Let $f\in \Q[x]$ be an irreducible polynomial of degree $p$ (for a prime $p$). Assume that $f$ has exactly two complex roots, show that $\Gal f\cong S_5$.
                 \item (Harder) Let $p$ be an odd prime, $n_1<\dots<n_{p-2}$ are even numbers and $m$ even with $2m>\sum_{i=1}^{p-2}n_i^2$. Show that: for $f=(x^2+m)(x-n_1)\dots(x-n_{p-2}-2) \in \Q[x], \Gal f\cong S_p$.
             \end{enumerate}
         \end{exercise}
@@ -1193,7 +1193,7 @@
     
     Let $L^\times:=L\setminus\{0\}$ be the multiplicative group of the field $L$. A \emph{character} of $G$ (with value in $L^\times$) is a group homomorphism $\chi:G\to L^\times$. We denote $\mathrm{Ch}(G,L^\times)$ the set of such characters. Note that these characters are different to those we will see in group representation theory.
     
-    \begin{lemma}{Dedekind}
+    \begin{lemma}{Dedekind}{1.34}
         Different characters of $G$ are linearly independent over $L$.
     \end{lemma}
 
@@ -1319,7 +1319,7 @@
             x_3=\frac13\round{-a+\zeta\sqrt[3]{u_1}+\zeta^2\sqrt[3]{u_2}}
             \end{cases}
             $$
-            \begin{remark}{}{1.34}
+            \begin{remark}{}{1.36}
                 If you notice the change of variable $z:=x-\frac a3$ we get $f(x)=z^3+\alpha z+\beta$ with $\alpha,\beta \in\Q$. IOn this case the formulae for $p$ and $q$ above are easier to compute: $p'=27\beta, q'=-27\alpha^3$ (verify it for yourself).
             \end{remark}
             For a general degree 4 equation, we can use the Lagrange resolvent to reduce it to a degree 3 equation and find the solution by radicals. But Lagrange found, that the same method applied on a degree 5 equation will only give us an equation of higher degree. This made Lagrange conjecture that a general solution might not exist and served as an inspiration for the work of Galois.
@@ -1445,7 +1445,7 @@
         \end{definition}
         
         \begin{example}{}{2.4}
-            Let $G \circlearrowleft X$, i.e. $X$ is a $G$-set. By definition there exists a homomorphism of groups
+            Let $G \circlearrowleft X$, i.e. $X$ is a $G$-set. By definition, there exists a homomorphism of groups
             \begin{equation*}
             \begin{split}
                 \rho_X: G &\to S_X:=\Bij(X,X) \\
@@ -1564,7 +1564,7 @@
         \end{split}
         \end{equation*}
         
-        which is well defined, since $\sum_{i=1}^n\rho_V(g)(x)_i = \sum_{i=1}^n x_{g(i)} = 0$. Now we show that $V/W \cong H$ as $G$-reps. For this we consider the map
+        which is well defined, since $\sum_{i=1}^n\rho_V(g)(x)_i = \sum_{i=1}^n x_{g(i)} = 0$. Now we show that $V/W \cong H$ as $G$-reps. For this, we consider the map
         \begin{equation*}
         \begin{split}
             \varphi: V/W &\to H \\
@@ -1579,7 +1579,7 @@
         \end{split}
         \end{equation*}
         
-        One can easily check that there is a isomorphism of $G$-reps:
+        One can easily check that there is an isomorphism of $G$-reps:
         
         \begin{equation*}
         \xymatrix@C=40pt {
@@ -1700,7 +1700,7 @@
         \end{equation*}
         The vector space $\C(G)$, becomes a $\C$-algebra with this multiplication. We call it the group algebra and denote it by $\C[G]$.
         
-        Another point of view on the group algebra is to look at them as functions on $G$.
+        Another point of view on the group algebra is to look at the elements as functions on $G$.
 
         Let $\cF(G) = \{f:G \to \C \}$ be the set of functions on $G$ taking values in $\C$. It is straightforward to verify that $\cF(G)$ is a $\C$-vector space with a basis given by the Dirac functions $\delta_g \in \cF(G)$ where:
         \begin{equation*}
@@ -1882,7 +1882,7 @@
                     \end{split}
                     \end{equation*}
                 \item[(5)]
-                    We first show that the eigenvalues of $\rho_V(g)$ are root of unity. Since $G$ is a finite group for any $g \in G$, there exists an $m \in \N$ such that $g^m = e$ (every element in $G$ has finite order). This implies $\rho_V(g)^m  \id_V$, hence the minimal polynomial of $\rho_V(g) \in \End(V)$ divides $t^m - 1$. It then follows that the eigenvalues of $\rho_V(g)$ are roots of $t^m - 1$ hence they are roots of unity.
+                    We first show that the eigenvalues of $\rho_V(g)$ are roots of unity. Since $G$ is a finite group for any $g \in G$, there exists an $m \in \N$ such that $g^m = e$ (every element in $G$ has finite order). This implies $\rho_V(g)^m  \id_V$, hence the minimal polynomial of $\rho_V(g) \in \End(V)$ divides $t^m - 1$. It then follows that the eigenvalues of $\rho_V(g)$ are roots of $t^m - 1$ hence they are roots of unity.
 
                     We let $\lambda_1,\dots,\lambda_m$ denote the eigenvalues of $\rho_V(g)$ (with multiplicity), then $\lambda_i^{-1} = \lambda_i$ and
                     \begin{equation*}
@@ -1914,7 +1914,7 @@
             \end{equation*}
         \end{proof}
 \subsection{Central functions}
-    We put characters in a larger family by studying functions on $G$ satisfying the condition in Lemma \ref{lem:2.10} (1). They are the key to open the door to character theory.
+    We put characters in a larger family by studying functions on $G$ satisfying the condition in Lemma \ref{lem:2.10} (1). They are the key to opening the door to character theory.
 
     \begin{definition}{central/class function}{2.12}
         A function $f: G \to \C$ is called \textbf{central}, if it is constant on each conjugacy class of $G$, i.e. for all $g,h \in G: f(ghg^{-1}) = f(h)$ or equivalently $f(gh) = f(hg)$. We let $\CF(G)$ denote the set of central functions on $G$. It is a $\C$-vector space.
@@ -2132,7 +2132,7 @@
     \begin{proof}
         We can proceed by induction on the dimension of the representation. The one-dimensional case is clear.
 
-        Let $V\in\rep(G)$. If $V$ is irreducible then we are done. If not there is a subrepresentation $W$ of $V$ of dimension $\geq 1$. $W$ is a subspace of $V$. As vector spaces, we have a direct sum composition $V=W\oplus W'$. We denote $\pi:V\to W$ the canonical projection and $\iota: W\to V$ the canonical injection arising from the direct sum. Then $\varphi=\iota\circ\pi$ is an idempotent in $\Hom(V,V)$. Let $\tilde P:=\tilde \rho_{\End(V)}(P):\Hom(V,V)\to \Hom_G(V,V)$ be the projection in \ref{cor:2.23}. Then $\tilde P(\varphi)$ is an idempotent in $\Hom_G(V,V)$ with image $W$ ($W$ is a subrepresentation, hence $\frac1{\# G}\sum_{g\in G}\rho(g)(\varphi)$ has image $W$.)\footnote{Verify that $\Img \tilde{\rho} (\varphi)=W$, then for any $v\in V: \tilde\rho(\varphi)^2(v)=\tilde\rho(\varphi)\underbrace{\round{\tilde\rho(\varphi)(v)}}_{\in W} = \tilde\rho(\varphi)(v)$.}
+        Let $V\in\rep(G)$. If $V$ is irreducible then we are done. If not there is a subrepresentation $W$ of $V$ of dimension $\geq 1$. $W$ is a subspace of $V$. As vector spaces, we have a direct sum composition $V=W\oplus W'$. We denote with $\pi: V \to W$ the canonical projection and $\iota: W\to V$ the canonical injection arising from the direct sum. Then $\varphi=\iota\circ\pi$ is an idempotent in $\Hom(V,V)$. Let $\tilde P:=\tilde \rho_{\End(V)}(P):\Hom(V,V)\to \Hom_G(V,V)$ be the projection in \ref{cor:2.23}. Then $\tilde P(\varphi)$ is an idempotent in $\Hom_G(V,V)$ with image $W$ ($W$ is a subrepresentation, hence $\frac1{\# G}\sum_{g\in G}\rho(g)(\varphi)$ has image $W$.)\footnote{Verify that $\Img \tilde{\rho} (\varphi)=W$, then for any $v\in V: \tilde\rho(\varphi)^2(v)=\tilde\rho(\varphi)\underbrace{\round{\tilde\rho(\varphi)(v)}}_{\in W} = \tilde\rho(\varphi)(v)$.}
         \ref{lem:2.22} gives an isomorphism $V\cong \ker\tilde P(\varphi)\oplus W$ as $G$-representations. Then we can proceed by induction.
     \end{proof}
 
@@ -2143,14 +2143,14 @@
     Another tool to prove \ref{thm:2.19} is the following lemma by Schur:
 
     \begin{lemma}{Schur}{schur}
-        Let $V,W\in\rep(G)$ be two irreducible representations. Then
+        Let $V,W \in \rep(G)$ be two irreducible representations. Then
         $$\dim_\C\Hom_G(V,W)=\begin{cases}
             1 & V\cong_G W\\
             0 & \text{otherwise}
         \end{cases}$$
     \end{lemma}
     \begin{proof}
-        Let $\varphi:V\to W$  be a nonzero homomorphism of $G$-representations.
+        Let $\varphi: V \to W$  be a nonzero homomorphism of $G$-representations.
         \begin{enumerate}
             \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\varphi-t\cdot\id_V\in\Hom_G(V,V)$ and hence $\ker(f\inv\circ\varphi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\varphi:V\to V$. Then $\ker(f\inv\circ\varphi-\lambda\id_V=V$ because $V$ is irreducible. That is to say, $\varphi=\lambda f$.
             \item Assume that $V\not\cong_G W$. Then $\ker\varphi$ is a subrepresentation of of $W$. since $\varphi\neq 0$, $\varphi$ is injective. Moreover, since $\Img\varphi$ is a subrepresentation of $W$ and $\varphi\neq 0$, $\varphi$ is surjective. This contradicts $V\not\cong W$, and hence such a map $\varphi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
@@ -2244,7 +2244,7 @@
         C_1 = \{e\}, \quad C_2 = \{(12),(13),(23)\}, \quad C_3 = \{(123),(132)\}
     \end{equation*}
     Then there are three elements in $\Irr(S_3)$:
-    We denote them by $S_1,S_2,S_3$, where $S_1$ is the trivial representation.
+    We denote them by $S_1, S_2, S_3$, where $S_1$ is the trivial representation.
     \begin{table}[ht]
         \centering
         \begin{tabular}{|c|c|c|c|}
@@ -2427,17 +2427,57 @@
             We consider the submodule $M_k$ of $\Z[r]$ generated by $1,r,\dots r^{k-1}$. Since $\Z[r]$ is finitely generated, there exists $m$ such that $\Z[r]=M_{m-1}$, which means that we can write $r^m$ as a $\Z$-linear combination of $1,r,\dots,r^{m-1}$. Then $r$ is integral over $\Z$.
         \end{enumerate}
     \end{proof}
+
+    Here some stuff is missing @Elias...
+
+    I just write out all the environments so the numbering remains correct.
+
+    
     \begin{corollary}{}{2.36}
         
     \end{corollary}
-    ... known in 1970's.
+    
+    \begin{corollary}{}{2.37}
+        
+    \end{corollary}
+
+    \begin{lemma}{}{2.38}
+        
+    \end{lemma}
+
+\section{Applications}
+    \subsection{Normal subgroups}
+
+    \begin{proposition}{}{2.39}
+        
+    \end{proposition}
+
+    \begin{lemma}{}{2.40}
+        
+    \end{lemma}
+
+    \begin{corollary}{}{2.41}
+        
+    \end{corollary}
+    
+    \subsection{Center}
+
+    \begin{corollary}{}{2.42}
+        
+    \end{corollary}
+
+    \begin{proposition}{}{2.43}
+        
+    \end{proposition}
+\section{Bursides' theorem}
+    As an application of character theory, we prove Burnsides' theorem. The following proof is mostly due to Burnside. A proof without representation theory is only known since the 1970s.
 
     \separline{VL 13}
     \begin{theorem}{Burnside 1904}{2.44}
         Let $p,q$ be two prime numbers and $a,b \in \N$. Any group of order $p^a \cdot q^b$ is solvable.
     \end{theorem}
 
-    To prove the theorem, we need two preliminary resulsts.
+    To prove the theorem, we need two preliminary results.
 
     \begin{lemma}{}{2.45}
         Let $\e_1,\dots,\e_n$ be roots of unity. If $\frac{1}{m}\round{\e_1 + \dots + \e_m }$ is an algebraic integer,
@@ -2482,7 +2522,7 @@
         \end{equation*}
         but the left-hand side is in $\overline{\Z} \cap \Q = \Z$, but so must be the right-hand side, which is a contradiction.
 
-        Therefore $p^t$ and $\chi_j(e)$ are coprime. Bèzout tells us that there exist $a,b \in \Z$:
+        Therefore $p^t$ and $\chi_j(e)$ are coprime. Bézout tells us that there exist $a,b \in \Z$:
         \begin{equation*}
             a p^t + b \chi_j(e) = 1
         \end{equation*}
@@ -2521,7 +2561,7 @@
         If $G$ is a non-trivial normal subgroup $N$, then both $N$ and $G/N$ have an order of form $p^c q^d$. The induction hypothesis implies that both of them are solvable.
         By Exercise~\ref{exc:8}(4), $G$ is solvable.
 
-        Now we can assume that $G$ is simple of order $p^a\cdot q^b$. Without loss of generality, we assume that $a,b \neq 0$ (otherwise $G$ is not simple a $p$-group or a $q$-group).
+        Now we can assume that $G$ is simple of order $p^a\cdot q^b$. Without loss of generality, we assume that $a,b \neq 0$ (otherwise $G$ is not simple, a $p$-group or a $q$-group).
         Let $P$ be a $p$-Sylow subgroup of $G$. Then the center of $P$ is non-trivial ($P$ is a $p$-group) and we choose $g \in Z(P) \setminus\{e\}$.
 
         Let $C_G(g) = \{h \in G \ | \ hg = gh\}$ be the \textbf{centralizer} of $g$. Since $g \in Z(P)$, $P \subseteq C_G(g)$.
