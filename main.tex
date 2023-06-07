@@ -232,7 +232,7 @@
         \begin{definition}{Galois extension}{1.2}
             A finite field extension $L/K$ is called \textbf{Galois} if $\#\Gal{L/K} = [L:K]$.
         \end{definition}
-        We can rephrase the Lemma above as:
+        We can rephrase part of the Lemma above as:
         
         \begin{corollary}{}{1.3}
             Let $L/K$ be a Galois extension and $N$ be an intermediate field. Then $L/N$ is Galois.
@@ -919,9 +919,9 @@
             Let $K$ be a field with $\cha K = 0$ and $n\geq 2$. Assume $K$ contains a primitive $n$-th root of unity. Let $a\in K\setminus\curly{0}, p=x^n-a\in K[x]$ and $K_p$ be a splitting field of $p$ over $K$. Show that $\Gal{L/K}$ is isomorphic to a subgroup of $\Z/n\Z$. Show that $\Gal{L/K}\cong \Z/n\Z$ if and only if $p$ is irreducible in $K[x]$.
         \end{exercise}
 
-        \begin{proof}
-            
-        \end{proof}
+%         \begin{proof}
+%             
+%         \end{proof}
     
 \section{Solvable by radicals}
     \subsection{Radical extensions}
@@ -977,9 +977,9 @@
             \end{enumerate}
         \end{exercise}
 
-        \begin{proof}
-            
-        \end{proof}
+%         \begin{proof}
+%             
+%         \end{proof}
         
         The goal of this section is to prove the following:
         \begin{theorem}{Galois}{1.29}
@@ -1034,9 +1034,9 @@
             \end{enumerate}
         \end{exercise}
         
-        \begin{proof}
-            
-        \end{proof}
+%         \begin{proof}
+%             
+%         \end{proof}
     
     \separline{Week $4$}
     
@@ -1046,7 +1046,7 @@
     
     To use Galois correspondence we need a Galois extension. The first problem is: a radical extension is not necessarily Galois.
     
-    Since we work with the characteristic zero assumption, separable is not a problem. To get a Galois extension we take the smallest normal extension of $K$ containing $L$. We briefly recall the construction. As before we write $L = K(u_1,\dots,u_r)$ as in the definition. Let $p_1(x) \dots p_r(x)$. A splitting field of $p(x)$ over $K$ will do the job.
+    Since we work with the characteristic zero assumption, separable is not a problem. To get a Galois extension we take the smallest normal extension of $K$ containing $L$. We briefly recall the construction. As before we write $L = K(u_1,\dots,u_r)$ as in the definition. Let $p_1(x) \dots p_r(x)$ be the respective minimal polynomials of the $u_i$ over $K(u_1,\dots, u_{i-1})$. A splitting field of $p(x)$ over $K$ will do the job.
     
     We let $N$ denote this splitting field. Then $N/K$ is a Galois extension containing $L$ as an intermediate field.
     
@@ -1095,7 +1095,7 @@
     
     \begin{equation*}
         \xymatrix{
-            K'_0 := K \subseteq K_1(\zeta) \subseteq K_2(\zeta) \subseteq \dots \subseteq K_{r+1}(\zeta) = L(\zeta)
+            K_0 := K \subseteq K_1(\zeta) \subseteq K_2(\zeta) \subseteq \dots \subseteq K_{r+1}(\zeta) = L(\zeta)
         }
     \end{equation*}
     
@@ -1294,14 +1294,14 @@
             \end{tabular}
             \end{center}
             %\begin{align*}
-             %   &\tau_1(\ell)=\ell, &&\tau_2(\ell)=\zeta\ell, &&&\tau_3(\ell)=\zeta^2\ell\\
-             %   &\tau_4(\ell)=\omega, &&\tau_5(\ell)=\zeta\omega, &&&\tau_6(\ell)=\zeta^2\omega
+            %    &\tau_1(\ell)=\ell, &&\tau_2(\ell)=\zeta\ell, &&&\tau_3(\ell)=\zeta^2\ell\\
+            %    &\tau_4(\ell)=\omega, &&\tau_5(\ell)=\zeta\omega, &&&\tau_6(\ell)=\zeta^2\omega
             %\end{align*}
             where $\omega=x_1+\zeta^2x_2+\zeta x_3$. Now notice that both $u_1:=\ell^3$ and $u_2:=\omega^3$ are fixed by $A_3$-permutations.Hence they are in the fixed field $\Q(x_1,x_2,x_3)^{A_3}$, which is of degree 2 over $\Q$. Therefore they have to satisfy a degree 2 equation:
             $$y^2+py+q=0 \qquad \text{ with } p=-(u_1+u_2),\quad q=u_1u_2$$
             After some computation one finds
             $$p=2a^2-9ab+27c, \quad q=(a^2-3b)^3$$
-            Applying the result abtained for quadratic equations, we can solve $u_1$ and $u_2$ as functions in $a,b$ and $c$.
+            Applying the result obtained for quadratic equations, we can solve $u_1$ and $u_2$ as functions in $a,b$ and $c$.
             
             Now we have obtained three linear equations
             $$
@@ -1322,13 +1322,13 @@
             \begin{remark}{}{1.36}
                 If you notice the change of variable $z:=x-\frac a3$ we get $f(x)=z^3+\alpha z+\beta$ with $\alpha,\beta \in\Q$. IOn this case the formulae for $p$ and $q$ above are easier to compute: $p'=27\beta, q'=-27\alpha^3$ (verify it for yourself).
             \end{remark}
-            For a general degree 4 equation, we can use the Lagrange resolvent to reduce it to a degree 3 equation and find the solution by radicals. But Lagrange found, that the same method applied on a degree 5 equation will only give us an equation of higher degree. This made Lagrange conjecture that a general solution might not exist and served as an inspiration for the work of Galois.
+            For a general degree 4 equation, we can use the Lagrange resolvent to reduce it to a degree 3 equation and find the solution by radicals. But Lagrange found that the same method applied to a degree 5 equation will only give us an equation of a higher degree. This made Lagrange conjecture that a general solution might not exist and served as an inspiration for the work of Galois.
             
             
 \chapter{Linear representations of finite groups}
     We are going to use \cite{Serre.1977} and \cite{FultonHarris.1991} as references. You can find the PDFs on Moodle.
     
-    In this chapter we study linear representations of finite groups. The algebraic side of representations theory studies representations of:
+    In this chapter, we study linear representations of finite groups. The algebraic side of representations theory studies representations of:
     
     \begin{enumerate}
         \item[a)] finite groups, a*) compact and algebraic groups
@@ -1337,19 +1337,19 @@
         \item[d)] ad hoc examples
     \end{enumerate}
     
-    The specific methods used in the study of representations of these algebraic structures may be quite different (algebraic, geometric, combinatorial). But the connection between these different branches of representation theory are a big aspect in modern representation theory.
+    The specific methods used in the study of representations of these algebraic structures may be quite different (algebraic, geometric, combinatorial). But the connection between these different branches of representation theory is a big aspect of modern representation theory.
     
-    In this lecture we will study the basic theory in part a) and c). Next semester in the Lecture "Lie algebra" we will learn part b).
+    In this lecture we will study the basic theory in parts a) and c). Next semester in the Lecture "Lie algebra" we will learn part b).
     
-    The idea of representation theory is linearization. We use vector spaces as films to take a picture of the group (let the group hit the film an we examine the \underline{trace}). If we take enough pictures of the group we can recover the group to some extent (in fact we can recover the entire group which is called Tannakian construction, this is an advanced topic).
+    The idea of representation theory is linearization. We use vector spaces as films to take a picture of the group (let the group hit the film and examine the \underline{trace}). If we take enough pictures of the group we can recover the group to some extent (in fact we can recover the entire group which is called Tannakian construction, this is an advanced topic).
     
-    We briefly recall tensor products of vector spaces. Details can be found in the lecture notes of Lineare Algebra II \cite{LA} (which you can also find on the moodle page).
+    We briefly recall tensor products of vector spaces. Details can be found in the lecture notes of Lineare Algebra II \cite{LA} (which you can also find on the Moodle page).
     
     \setcounter{section}{-1}
     
 \section{Revision: tensor products}
     
-    Let $K$ be a field and $V,W$ be two $K$-vector spaces. We denote their Cartesian product as $V \times W$. The tensor product $V \tens W$ is defined as the $K$-vector space $K(V \times W)/R$, where $K(V \times W)$ is the $K$-vector space with basis $V \times W$ and
+    Let $K$ be a field and $V, W$ be two $K$-vector spaces. We denote their Cartesian product as $V \times W$. The tensor product $V \tens W$ is defined as the $K$-vector space $K(V \times W)/R$, where $K(V \times W)$ is the $K$-vector space with basis $V \times W$ and
     \begin{equation*}
         \begin{split}
             R = \spitz{ \left. \begin{array}{c}
@@ -1375,7 +1375,7 @@
                 & V \tens W\ar@{.>}[ur]_{\exists! \bar{f}} \ar@{}[u]|(.55){\circlearrowleft}}
         \end{equation*}
     \end{proposition}
-    The idea behind this universal property is: bilinear maps are less familiar to us than the linear maps. By looking at tensor products, we can transform bilinear maps to linear maps. For linear maps we have the big machinery from Linear Algebra to deal with them. We can also summarize the above universal property in the following isomorphism of $K$-vector spaces
+    The idea behind this universal property is: bilinear maps are less familiar to us than linear maps. By looking at tensor products, we can transform bilinear maps into linear maps. For linear maps, we have the big machinery from Linear Algebra to deal with them. We can also summarize the above universal property in the following isomorphism of $K$-vector spaces
     \begin{equation*}
         \begin{split}
             \Bil(V,W;T) &\overset{\cong}{\to} \Hom_K(V \tens W, T) \\
@@ -1389,12 +1389,12 @@
     
     To define a linear map $V \tens W \to T$, it suffices to define it on the elementary tensors $v \tens w$ for $v \in V,w \in W$.
     
-    Now we assume that both $V$ and $W$ are finite dimensional. Let $(v_1,\dots,v_m)$ be a basis for $V$ and $(w_1,\dots,w_n)$ be a basis for $W$. We have seen in LA II \cite{LA} that $\round{(v_i \tens w_j) \ | \ 1 \leq i \leq m, 1 \leq j \leq n}$ is a basis of $V \tens W$. Therefore $\dim(V \tens W) = \dim(V) \cdot \dim(W)$.
+    Now we assume that both $V$ and $W$ are finite-dimensional. Let $(v_1,\dots,v_m)$ be a basis for $V$ and $(w_1,\dots,w_n)$ be a basis for $W$. We have seen in LA II \cite{LA} that $\round{(v_i \tens w_j) \ | \ 1 \leq i \leq m, 1 \leq j \leq n}$ is a basis of $V \tens W$. Therefore $\dim(V \tens W) = \dim(V) \cdot \dim(W)$.
     
-    What will be of use for us in the subsequent chapters is the fact that the Hom-space can be written as a tensor product of vector spaces.
+    What will be of use to us in the subsequent chapters is the fact that the Hom-space can be written as a tensor product of vector spaces.
     
     \begin{proposition}{}{2.2}
-        Let $V,W$ be two finite-dimensional $K$-vector spaces. Then
+        Let $V, W$ be two finite-dimensional $K$-vector spaces. Then
         \begin{equation*}
         \begin{split}
             \varphi: W \tens V^* &\to \Hom_K(V,W) \\
@@ -1414,7 +1414,7 @@
         \end{equation*}
         where $(v_1,\dots,v_n)$ is a basis of $V$ and $(v_1^*,\dots,v_n^*)$ its dual basis, gives the inverse map of $\varphi$.
         
-        First we need to check that $\psi \circ \varphi = \id_{W \tens V^*}$ on a basis of $W \tens V^*$. For this we fix a basis $(w_1,\dots,w_m)$ of $W$. This yields a basis $(w_l \tens v_j^*\ | \ 1 \leq l \leq m, \ 1 \leq j \leq n)$ of $W \tens V^*$. We have:
+        First, we need to check that $\psi \circ \varphi = \id_{W \tens V^*}$ on a basis of $W \tens V^*$. For this we fix a basis $(w_1,\dots,w_m)$ of $W$. This yields a basis $(w_l \tens v_j^*\ | \ 1 \leq l \leq m, \ 1 \leq j \leq n)$ of $W \tens V^*$. We have:
         \begin{equation*}
         \begin{split}
             (\psi \circ \varphi)(w_l \tens v_j^*) = \sum_{i=1}^{n} \varphi(w_l \tens v_j^*)(v_i) \tens v_i^* = \sum_{i=1}^{n} v_j^*(v_i)w_l \tens v_i^* = \sum_{i=1}^n \delta_{i,j} w_l \tens v_i^* = w_l \tens v_j^*
@@ -1430,7 +1430,7 @@
     \end{proof}
     
 \section{Linear representations}
-    In the rest of this chapter we assume that $G$ is a finite group and fix $\C$.
+    In the rest of this chapter, we assume that $G$ is a finite group and fix $\C$.
     
     \subsection{Definition and examples}
         Recall that for a vector space $V$, $\GL(V)$ is the group of invertible endomorphisms of $V$.
@@ -1668,9 +1668,9 @@
             Show that the linear map $\varphi: W \tens V^* \to \Hom_\C(V,W)$ from Proposition \ref{prop:2.2} is an isomorphism of $G$-reps. This explains why we define the $G$-structure on $\Hom_\C(V,W)$ as in (f). It follows from (d) and (e).  
         \end{enumerate}
     \end{exercise}
-    \begin{proof}
-        
-    \end{proof}
+%    \begin{proof}
+%        
+%    \end{proof}
     The vector space $\Hom_G(V,W)$ of $G$-homs. is in fact an invariant space.
     \begin{definition*}{invariant space}
         For $V \in \Rep(G)$, we denote its \textbf{invariant space} $V^G := \{v \in V \ | \ \forall g \in G: \rho_V(g)(v) = v \}$.
@@ -1771,9 +1771,9 @@
         \begin{exercise}{}{12}
             Verify that under this correspondence, homomorphisms of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
         \end{exercise}
-        \begin{proof}
-            
-        \end{proof}
+%        \begin{proof}
+%            
+%        \end{proof}
 \separline{Week 6}
 
 \section{Character theory}
@@ -2210,9 +2210,9 @@
     \begin{corollary}{Second orthogonal relation}{2.29}
         Let $\Irr(G) = \{S_1,\dots,S_t\}$ with characters $\chi_i := \chi_{S_i}$. For $g \in G$, let $C_g \in \cC(G)$ be such that $g \in C_g$, then
         \begin{equation*}
-            \sum_{i=1}^t \chi_g(g) \overline{\chi_i(g)} = \frac{\#G}{\#C_g}
+            \sum_{i=1}^t \chi_i(g) \overline{\chi_i(g)} = \frac{\#G}{\#C_g}
         \end{equation*}
-        and if $h \not \in \C_g$, then
+        and if $h \not \in C_g$, then
         \begin{equation*}
             \sum_{i=1}^t \chi_i(g) \overline{\chi_i(h)} = 0
         \end{equation*}
@@ -2319,9 +2319,9 @@
     \begin{exercise}{}{13}
         Let $V = \C^3$ be the representation of $S_3$ arising from the action of $S_3$ on $[3]$. Decompose $V^{\tens n}$ into a direct sum of irreducible representations of $S_3$. (start from computing $\chi_V$ using the definition)
     \end{exercise}
-    \begin{proof}
-        
-    \end{proof}
+%    \begin{proof}
+%        
+%    \end{proof}
 \section{Left regular representation}
     We proceed to study the left regular representation in detail with the help of character theory.
 
@@ -2408,7 +2408,7 @@
         \begin{equation*}
             0 = \frac{a^n}{b^n} + \alpha_{n-1} \frac{a^{n-1}}{b^{n-1}}\dots + \alpha_0 \implies -a^n = \alpha_{n-1} a^{n-1}b + \dots + \alpha_0 b^n = b(\alpha_{n-1} a^{n-1} + \dots + \alpha_0 b^{n-1})
         \end{equation*}
-        But this means $b | a^n$. But since $\gcd(a,b) = 1$, this is only possible if $b = 1$ (note that we choose $b \in \N$), hence $x \in \Z$.
+        But this means $b | a^n$. But since $\gcd(a,b) = 1$, this is only possible if $b = 1$ (note that we chose $b \in \N$), hence $x \in \Z$.
     \end{proof}
     \begin{lemma}{}{2.35}
         The following statements on $r\in R$ are equivalent:
@@ -2421,30 +2421,57 @@
     \begin{proof} We prove the statement using ring closure:
         \begin{enumerate}
             \item [$(1)\Rightarrow (2)$] We assume that $r$ is a root of $x^m+a_{m-1}x^{m-1}+\dots+a_1x+a_0$ where $a_0,\dots,a_{m-1}\in\Z$. Then $\Z[r]$ is a $\Z$-module generated by $1,r,\dots,r^{m-1}$
-            \item[$(2)\Rightarrow (3)$]
+            \item[$(2)\Rightarrow (3)$] Take $M=\Z[r]$.
             \item[$(3)\Rightarrow (1)$] Since $\Z$ is Noetherian, submodules of a finitely generated module are finitely generated.
             Therefore $\Z[r]$ is finitely generated.
             We consider the submodule $M_k$ of $\Z[r]$ generated by $1,r,\dots r^{k-1}$. Since $\Z[r]$ is finitely generated, there exists $m$ such that $\Z[r]=M_{m-1}$, which means that we can write $r^m$ as a $\Z$-linear combination of $1,r,\dots,r^{m-1}$. Then $r$ is integral over $\Z$.
         \end{enumerate}
     \end{proof}
-
-    Here some stuff is missing @Elias...
-
-    I just write out all the environments so the numbering remains correct.
-
     
     \begin{corollary}{}{2.36}
-        
+        \begin{enumerate}
+            \item $\bar\Z$ is a ring
+            \item For any $V\in\rep(G), \chi_V:Gto\C$ has image in $\bar\Z$
+        \end{enumerate}
     \end{corollary}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item It suffices to show: for $\alpha,\beta\in\bar\Z$, $\alpha+\beta, \alpha\beta$ are in $\bar\Z$. Assume that $\Z[\beta]$ is generated by $1,\alpha,\dots,\alpha^m$ and $\Z[\alpha]$ is generated by $1,\beta,\dots,\beta^n$. Then $\Z[\alpha,\beta]$ is contained in the $\Z$-module $M$ generated by $\curly{\alpha^i\beta^j|0\leq i\leq m, 0\leq j\leq n}$. Applying \ref{lem:2.35} $(3)\Rightarrow (1)$ to $\Z[\alpha+\beta], \Z[\alpha\beta]\subseteq\Z[\alpha,\beta]\subseteq M$ prooves what we needed to show.
+            \item For $g\in G,\ \chi_V(g)$ is a sum of roots of unity, which are algebraic integers, hence by (1), $\chi_V$ has an image in $\bar\Z$.
+        \end{enumerate}
+    \end{proof}
     
     \begin{corollary}{}{2.37}
-        
+        For any $C\in\cC(G)$, the element $\gamma_C^o\in Z(\C[G])$ is integral over $\Z$.
     \end{corollary}
 
+    \begin{proof}
+        Let $\cC(G)=\curly{C_1,\dots,C_N}$. we consider the $\Z$-submodule $R:=\Z\gamma_{C_1}^o\oplus\dots\oplus\Z\gamma_{C_l}^o\subseteq Z(\C[G])$. From the multiplication formula $\gamma_{C_i}^o\cdot\gamma_{C_j}^o=\sum_{k=1}^lm_{ij}^k\gamma^o_{c_k}$ where $M_{ij}^k:=\#\curly{(g,h)\in C_i\times C_j| gh\in \C_k}$ (verify it!).
+
+        It follows that $R$ is a finitely generated $\Z$-submodule of $Z(\C[g])$ which contains $\Z[\gamma_{C_i}^o]$ for any $i\in [l]$.
+    \end{proof}
+    
     \begin{lemma}{}{2.38}
+        Let $V\in\Irr(G)$ and $C\in\cC(G)$. For any $g\in C$, 
+        $$\frac{\chi_V(g)\cdot\#C}{\dim V}=\frac{\chi_V(g)\cdot\#C}{\chi_V(e)}\in\bar\Z$$
         
     \end{lemma}
+    
+    \begin{proof}
+        Since $V$ is irreducible and $\gamma_C^o\in Z(\C[G])$, it follows from Schurs lemma (\ref{cor:2.27} to be precise) that $\tilde\rho_V(\gamma^o_C)=\sum_{h\in C}\rho_V(h)$ \textit{is} a scalar $\lambda\cdot \id_V$ for $\lambda\in\C$. To determine $\lambda$, we take the trace and obtain:
+        $$\lambda\dim V=\sum_{h\in C}\chi_V(h)=\#C\chi_V(g)$$ for any $g\in C$. It remains to show: $\lambda \in\bar \Z$.
+        According to \ref{cor:2.37}, $\gamma_C^o$ fulfills an equation
+        $$(\gamma_c^o)^m+a_{m-1}(\gamma_c^o)^{m-1}+\dots+ a_1\gamma_C^o+a_0=0$$
+        with $a_0,\dots,a_{m-1}\in\Z$. Applying the ring homomorphism $\tilde\rho_V$ gives an equation:
+        $$\lambda^m+a_{m-1}\lambda^{m-1}+\dots+a_1\lambda+a_0=0$$
+        Therefore $\lambda\in\bar\Z$
+    \end{proof}
 
+%    \begin{proof}[Proof of \ref{prop:2.33}]
+%
+%    \end{proof}
+    
 \section{Applications}
     \subsection{Normal subgroups}
 
@@ -2469,10 +2496,11 @@
     \begin{proposition}{}{2.43}
         
     \end{proposition}
+    
+\separline{VL 13}
 \section{Bursides' theorem}
     As an application of character theory, we prove Burnsides' theorem. The following proof is mostly due to Burnside. A proof without representation theory is only known since the 1970s.
-
-    \separline{VL 13}
+    
     \begin{theorem}{Burnside 1904}{2.44}
         Let $p,q$ be two prime numbers and $a,b \in \N$. Any group of order $p^a \cdot q^b$ is solvable.
     \end{theorem}
@@ -2516,11 +2544,11 @@
         \begin{equation*}
             \sum_{i=2}^t \chi_i(e) \overline{\chi_i(g)} = -1
         \end{equation*}
-        We claim that $\exists 2 \leq j \leq t$ such that $\overline{\chi_j(g)} \neq 0$ and $p \nmid \chi_j(e)$. Otherwise, we will obtain
+        We claim that $\exists \ 2 \leq j \leq t$ such that $\overline{\chi_j(g)} \neq 0$ and $p \nmid \chi_j(e)$. Otherwise, we will obtain
         \begin{equation*}
             \sum_{i=2}^t \frac{\chi_i(e)}{p} \overline{\chi_i(g)} = -\frac{1}{p}
         \end{equation*}
-        but the left-hand side is in $\overline{\Z} \cap \Q = \Z$, but so must be the right-hand side, which is a contradiction.
+        but the left-hand side is in $\overline{\Z} \cap \Q = \Z$, so must be the right-hand side, which is a contradiction.
 
         Therefore $p^t$ and $\chi_j(e)$ are coprime. Bézout tells us that there exist $a,b \in \Z$:
         \begin{equation*}
@@ -2571,15 +2599,15 @@
 
     \begin{exercise}{}{15}
         \begin{enumerate}
-            \item Show that fore three distinct prime number $p,q,r$ a group of order $pqr$ is solvable.
+            \item Show that for three distinct prime numbers $p,q,r$ a group of order $pqr$ is solvable.
             \item Show that any group of order $<60$ is solvable.
             \item Show that any group of order $>60$ and $<120$ is solvable. 
         \end{enumerate}
     \end{exercise}
     
-    \begin{proof}
-        
-    \end{proof}
+%    \begin{proof}
+%        
+%    \end{proof}
     
 \chapter{Semi-simple algebras}
     In the last chapter we have seen that studying the representation theory of groups is equivalent to studying modules over the group algebra $\C[G]$, see Exercise \ref{exc:12}.
@@ -2632,14 +2660,14 @@
             
             The above diagram describes associativity not only for algebras but for groups, monoids, rings and so on. Similarly, we can realize all the other requirements for a group say.
             
-            Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\Set$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group}.
+            Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\Set$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group} (the same works for algebraic groups etc.).
             
             In contrast - if we were to just write out the definition of a topological group the "choice" of definition would be way less natural.
 
             To summarize: Mathematics likes to reward generalization, and we like rewards, so we should strive for abstraction. In this case, we got rewarded with a deeper understanding of the definition of a (topological)group and structure in general.
         \end{remark*}
 
-        Returning to the lecture notes, we define modules over $K$-algebras just as in the commutative case, we just have to make a difference between left and right modules.
+        Returning to the lecture notes, we define modules over $K$-algebras just as in the commutative case, we just have to make a difference between the left and right modules.
 
         \begin{definition}{}{3.2}
             Let $A$ be a $K$-algebra. A left $A$-module $M$ is a $K$-vector space $M$ together with a $K$-algebra homomorphism $\lambda_M: A \to \End_K(M)$.
@@ -2684,17 +2712,228 @@
         \end{example}
         But one should keep in mind that there is no \underline{natural} $A$-module structure on the tensor product of two $A$-modules. The group algebra (and the universal enveloping algebra you will see in the Liealgebren lecture) are very special because it admits a bialgebra structure.
 
-        \begin{definition}{}{3.5}
+\separline{Week 9}
+
+        \begin{definition}{Submodules}{3.5}
             \begin{enumerate}
                 \item
                     Let $\tensor[_A]{M}{}$ be an $A$-module. A $K$-vector subspace $N$ of $M$ is called an $\mathbf{A}$\textbf{-submodule} if for all $a \in A$ and $n \in N: \lambda_M(a)(n) \in N$.
                 \item
                     Submodules of the left/right $A$-module $A$ are called \textbf{left/right ideals} of $A$.
                 \item
-                    A subspace $I \subseteq A$ is called an ideal (or a two-sided ideal) if it is both a left and a right ideal in $A$.
+                    A subspace $I \subseteq A$ is called an ideal (or a two-sided ideal) if it is both a left and a right ideal in $A$. We will write $I \trianglelefteq A$ for a two-sided ideal.
             \end{enumerate}
         \end{definition}
-        
+
+        \textbf{Examples:}
+        \begin{enumerate}
+            \item Take $A$ to be a field, then $A$ is an $A$-algebra the $A$-modules are precisely the $A$ vector spaces.
+            \item Let $\varphi: A \to B$ be a homomorphism of $K$-algebras, then $\ker \varphi$ is an ideal.
+        \end{enumerate}
+
+        If we expand the definition (3), a subspace $I \leq A$ is a left (respective right) ideal if $\forall a \in A: aI \subseteq I$ (respective $Ia \subseteq I$), where $aI = \curly{ax \ | \ x \in I}$.
+
+        \begin{definition}{}{3.6}
+            A homomorphism between two left $A$-modules $\tensor[_A]{M}{},\tensor[_A]{N}{}$ is a $K$-linear map $\varphi: M \to N$ such that
+            \begin{equation*}
+                \forall a \in A, m \in M: \varphi(a.m) = a \cdot \varphi(m)
+            \end{equation*}
+            We denote the vector space of homomorphisms between $M$ and $N$ as $\Hom_A(M,N)$. We set $\End_A(M):= \Hom_A(M,M)$.
+        \end{definition}
+
+        Because we are in an abelian category, the isomorphism theorem holds. Let $\varphi \in \Hom_A(M,N)$, then $\faktor{M}{\ker \varphi} \cong \Img \varphi$ as $A$-modules.
+
+        \begin{example}{}{3.7}
+            We claim that $\End_A\round{\tensor[_A]{A}{}} \cong A^\op$. Take $\varphi \in \End_A \round{\tensor[_A]{A}{}}$, then
+            \begin{equation*}
+                \varphi(a) = \varphi(a \cdot 1_A) = a \cdot \varphi(1_A)
+            \end{equation*}
+            This means applying $\varphi$ to an element of $A$ just means right multiplication by $\varphi(1_A)$. Thus we define a $K$-linear map:
+            \begin{equation*}
+            \begin{split}
+                \Phi: \End_A \round{\tensor[_A]{A}{}} &\to A^\op \\
+                \varphi &\mapsto \varphi(1_A)
+            \end{split}
+            \end{equation*}
+            take $\varphi,\psi \in \End_A \round{\tensor[_A]{A}{}}$ and $\lambda \in K$, then we have
+            \begin{equation*}
+            \begin{split}
+                \Phi(\lambda \varphi + \psi) &= (\lambda \varphi + \psi)(1_A) = \lambda \varphi(1_A) + \psi(1_A) = \lambda \Phi(\varphi) + \Phi(\psi) \\
+                \Phi(\varphi \cdot \psi) &= (\varphi \cdot \psi)(1_A) = \varphi(1_A) \cdot \psi(1_A) = \Phi(\varphi) \cdot \Phi(\psi)
+            \end{split}
+            \end{equation*}
+            The inverse of $\Phi$ is given by
+            \begin{equation*}
+                \begin{split}
+                    \Psi: A^\op &\to \End_A \round{\tensor[_A]{A}{}} \\
+                            \alpha &\mapsto \mu_{\alpha}: a \mapsto a \cdot \alpha
+                \end{split}
+            \end{equation*}
+            because for all $a \in A$
+            \begin{equation*}
+            \begin{split}
+                \Psi \circ \Phi (\varphi)(a) &= \Psi(1_A)(a) = a \cdot 1_A = a \\
+                \Phi \circ \Psi (a) &= \Phi(\mu_a) = \mu_a(1) = a
+            \end{split}
+            \end{equation*}
+        \end{example}
+\subsection{Idempotents and decomposition}
+    Decomposing an algebra or a module simplifies the object we study: for example, using Maschke's theorem \ref{thm:maschke} we decomposed a module into a direct sum of irreducible ones. We have used idempotents (projector) in that proof. Here we study more decompositions from idempotents. This is quite important in the theory of finite dimensional algebras.
+
+    Let $A$ be a $K$-algebra.
+
+    \begin{definition}{}{3.8}
+        An element $e \in A \setminus \{0\}$ is called an \textbf{idempotent}, if $e^2 = e$.
+    \end{definition}
+
+    Let $M$ be an $A$-module and $\varphi \in \End_A(M)$ be an idempotent. The same proof as in Lemma \ref{lem:2.22} gives a decomposition of $M$ into a direct sum of $A$-modules:
+    \begin{equation*}
+        M \cong \Ker \varphi \oplus \Img \varphi
+    \end{equation*}
+
+    To deal with a decomposition into more than two components, we need the following definition:
+
+    \begin{definition}{}{3.9}
+        Two idempotents $e_1,e_2 \in A$ are called \textbf{orthogonal}, if $e_1e_2 = e_2 e_1 = 0$. More generally a family $(e_i)_{i \in I}$ of idempotents is called orthogonal, if for all $i \neq j$ from the index set $I$, $e_i$ and $e_j$ are orthogonal. 
+    \end{definition}
+
+    If $e_1$ and $e_2$ are orthogonal, then $e_1 + e_2$ is an idempotent.
+
+    \begin{proposition}{}{3.10}
+        Let $M$ be an $A$-module. There exists a bijection between
+        \begin{enumerate}
+            \item a decomposition of $M$ into a finite direct sum of its submodules
+            \item orthogonal idempotents in $\End_A(M)$ with sum $\id_M$
+        \end{enumerate}
+    \end{proposition}
+
+    \begin{proof}
+        \underline{$1) \Rightarrow 2)$:}
+        Let $M = \bigoplus_{i=1}^n M_i$ be a decomposition in \textit{1)}. Then for any $1 \leq i \leq n$ there exist two $A$-module homomorphisms:
+        \begin{equation*}
+        \begin{split}
+            \pi_i: M &\to M_i \\
+            (m_1,\dots,m_n) &\mapsto m_i \\
+            \iota_i: M_i &\to M \\
+            m_i &\mapsto (0,\dots,0,\underbrace{m_i}_{i\text{-th component}},0,\dots,0)=:m_i e_i
+        \end{split}
+        \end{equation*}
+        We set $\varphi_i := \iota_i \circ \pi_i \in \End_A(M)$. Now we have:
+        \begin{enumerate}
+            \item $\varphi_i^2 = \varphi_i$, because $\pi_i \circ \iota_i = \id M_i$
+            \item since $M_i \cap M_j = \{0\}$: $\varphi_i \circ \varphi_j = 0$ for all $i \neq j$ 
+            \item $\sum\limits_{i=1}^n \varphi_i = \id_M$, due to the fact that $\varphi_i(m_1,\dots,m_n) = m_i e_i$.
+        \end{enumerate}
+
+        \underline{$2) \Rightarrow 1)$:} Let $\varphi_1,\dots,\varphi_n \in \End_A(M)$ be orthogonal idempotents with $\sum_{i=1}^n \varphi_i = \id_M$. We denote $M_i := \Img \varphi_i$, which is an $A$-submodule of $M$. It follows from the last condition that $M \subseteq \sum_{i=1}^n M_i$. Hence $M = \sum_{i=1}^n M_i$. It remains to show that the sum is direct.
+
+        From the orthogonality, we have for a fixed $j$ and all $i \neq j: M_i \subseteq \ker \varphi_j$. Hence
+        \begin{equation*}
+            \sum_{i=1, i \neq j}^n M_i \subseteq \ker \varphi_j
+        \end{equation*}
+        Since $\varphi_i$ is idempotent, $\ker \varphi_i \cap \Img \varphi_i = \{0\}$ and hence
+        \begin{equation*}
+            M_i \cap \round{\sum_{i=1, i \neq j}^n M_i} = \{0\}
+        \end{equation*}
+    \end{proof}
+    In particular, if $A = K$, we obtain a decomposition of vector spaces. Having definition \ref{def:3.5} and example \ref{exa:3.7} in mind, taking $M = A$ in the above proposition gives a bijection between:
+    \begin{enumerate}
+        \item a decomposition of $A$ into a direct sum of its left ideals
+        \item orthogonal idempotents in $A^\op$ with sum $1_A$.
+    \end{enumerate}
+
+    To decompose $A$ into two-sided ideals, we need the notion of central idempotents.
+
+    \begin{definition}{}{3.11}
+        An idempotent $e \in A$ is called central, if for any $a \in A$, $ae = ea$.
+    \end{definition}
+
+    \begin{corollary}{}{3.12}
+        There exists a bijection between:
+        \begin{enumerate}
+            \item a decomposition of $A = \bigtimes\limits_{i=1}^n A_i$ into $K$-algebras
+            \item a decomposition of $1_A$ into a sum of orthogonal central idempotents.
+        \end{enumerate}
+    \end{corollary}
+
+    \begin{proof}
+        The map from $(1)$ to $(2)$ is easy, we set $e_i := (0,\dots,0,1_{A_i},0 ,\dots,0)$, then they are orthogonal central idempotents with $\sum_{i=1}^n e_i = 1_A$.
+
+        On the other hand, if $e_1,\dots,e_n$ are orthogonal central idempotents with sum $1_A$, we define a $K$-linear map
+        \begin{equation*}
+        \begin{split}
+            \varphi: A &\to \bigtimes_{i=1}^n A e_i \\
+                    a &\mapsto (ae_1, \dots, ae_n)
+        \end{split}
+        \end{equation*}
+        Since the $e_i$ are central idempotents, $(Ae_i) \cdot (Ae_i) = Ae_i$ and $Ae_i$ is a $K$-algebra with unit $e_i$ and $\varphi$ is a homomorphism of $K$-algebras. It suffices to verify that $\varphi$ is bijective.
+
+        Say $a \in \ker \varphi$, then $(ae_1,\dots,ae_n) = (0,\dots,0)$, hence
+        \begin{equation*}
+            a = a \cdot 1_A = a \cdot \round{\sum_{i=1}^n e_i} = \sum_{i=1}^n ae_i = 0
+        \end{equation*}
+        hence $\ker \varphi = \{0\}$.
+
+        The pre-image of $(a_1e_1,\dots,a_ne_n)$ is $\sum_{i=1}^n a_ie_i$, because
+        \begin{equation*}
+            \varphi \round{\sum_{i=1}^n a_ie_i} = \round{\sum_{i=1}^n a_ie_i e_1,\dots,\sum_{i=1}^n a_ie_i e_j,\dots, \sum_{i=1}^n a_ie_i e_n} = \round{a_1,\dots,a_j,\dots,a_n}
+        \end{equation*}
+    \end{proof}
+
+    Note that the $K$-algebras $A_1,\dots, A_n$ in \textit{(1)} are \underline{NOT} subalgebras of $A$ since they do not share the same unit.
+
+\section{Simple modules and algebras}
+    We first remove "semi" from the title of this chapter and study finite-dimensional simple algebras over $\C$. In the rest of this chapter, we fix $\C$ as the base field, although any algebraically closed field would make do.
+    
+\subsection{Simple modules}
+    The simplest modules are the simple modules.
+
+    \begin{definition}{}{3.13}
+        \begin{enumerate}
+            \item An $A$-module $M$ is called \textbf{simple}, if there are \underline{exactly} two submodules $\{0\}$ and $M$.
+            \item A $\C$-algebra $A$ is called \textbf{simple}, if it is a simple left $A$-module and a simple right $A$-module. That is to say, it has \underline{exactly} two two-sided ideals, $\{0\}$ and $A$.
+        \end{enumerate}
+    \end{definition}
+
+    \textbf{Examples:}
+    \begin{enumerate}
+        \item Let $A = \C$, then the simple $A$ modules are exactly the $1$-dimensional $A$-vector spaces.
+        \item Let $G$ be a finite group. The irreducible representations of $G$ are exactly the simple $\C[G]$-modules.
+        \item Simple modules are cyclic but the converse is not true (why?).
+        \item The zero module $\{0\}$ is \textbf{not} simple.
+    \end{enumerate}
+
+    \begin{example}{}{3.14}%pi :)
+        The matrix algebra $A = M_n(\C)$ is a simple algebra. The $M_n(\C)$-module $\C^n$ is simple. We prove the first statement and leave the second statement as an exercise.
+
+        Let $E_{i,j} \in M_n(\C)$ be the elementary matrix, whose only non-zero entry is a $1$ at entry $i,j$. To prove that $M_n(\C)$ is simple, we choose a non-zero matrix $M \in M_n(\C)$ with $M = (m_{i,j})_{i,j}$ and show that $AMA = M_n(\C)$ (here $AMA = \curly{XMY \ | \ X,Y \in M_n(\C)}$), is the smallest two-sided ideal containing $M$.
+
+        Since $M \neq 0$, we assume that a certain $m_{p,q} \neq 0$, then
+        \begin{equation*}
+            m_{p,q}^{-1} E_{p,p} M E_{q,q} = E_{p,q} \in AMA
+        \end{equation*}
+        Now for any $1 \leq i,j \leq n$, $E_{i,j} = E_{ip} E_{p,q} E_{q,j} \in AMA$, hence $A \subseteq AMA$.
+    \end{example}
+
+    For simple modules, we again have a version of Schurs Lemma \ref{lem:schur}. The proof is the same as in the last chapter.
+
+    \begin{lemma}{}{schurMOD}
+        Let $A$ be a $\C$-algebra, $M,N$ two finite-dimensional simple $A$-modules. Then
+        \begin{equation*}
+            \dim_{\C} \Hom_A(M,N) = \left\{ \begin{array}{rc}
+                1, &  \text{if } M \cong N\\
+                0, & \text{otherwise}
+            \end{array}\right.
+        \end{equation*}
+    \end{lemma}
+
+\subsection{Wedderburn's theorem}
+
+\separline{Week 10}
+
+
+
+    
 %\nocite{*}
 
 \printbibliography
