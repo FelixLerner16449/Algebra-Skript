@@ -201,7 +201,7 @@
                 \varphi': K(M) &\rightarrow K(M) \\
                             m &\mapsto \varphi(m)
             \end{align*}
-        This is well defined because of \ref{exc:3}. Since $p_\alpha(x)$ has only finitely many roots $[K(M):K] < \infty$ and thus $\varphi'$ is surjective. Since $\alpha$ was arbitrary $\varphi$ is surjective.
+        This is well defined because of \ref{exe:3}. Since $p_\alpha(x)$ has only finitely many roots $[K(M):K] < \infty$ and thus $\varphi'$ is surjective. Since $\alpha$ was arbitrary $\varphi$ is surjective.
         \end{proof}
             
     \subsection{Galois extensions}
@@ -251,7 +251,7 @@
         
         For a better understanding of the definition, we try to figure out what obstructs an extension from being Galois?
         \begin{example}{}{1.4}
-            We consider the extension $\Q\left(\sqrt[3]{2}\right)/\Q$. We have $p_{\sqrt[3]{2}}(x) = x^3-2$. Let $\sigma \in \Gal{\Q\left(\sqrt[3]{2}\right)/\Q }$. By Exercise \ref{exc:3}, $\sigma$ must send $\sqrt[3]{2}$ to an element in $\Q(\sqrt[3]{2})$ with minimal polynomial $x^3-2$. The only root of $x^3-2$ in $\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$ (the others are complex). Hence $\sigma$ must be the identity map. In this case $\Gal{ \Q(\sqrt[3]{2})/\Q} = \{\id\}$ and the extension is not Galois since $\left[\Q\left(\sqrt[3]{2}\right):\Q\right]=3$.
+            We consider the extension $\Q\left(\sqrt[3]{2}\right)/\Q$. We have $p_{\sqrt[3]{2}}(x) = x^3-2$. Let $\sigma \in \Gal{\Q\left(\sqrt[3]{2}\right)/\Q }$. By Exercise \ref{exe:3}, $\sigma$ must send $\sqrt[3]{2}$ to an element in $\Q(\sqrt[3]{2})$ with minimal polynomial $x^3-2$. The only root of $x^3-2$ in $\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$ (the others are complex). Hence $\sigma$ must be the identity map. In this case $\Gal{ \Q(\sqrt[3]{2})/\Q} = \{\id\}$ and the extension is not Galois since $\left[\Q\left(\sqrt[3]{2}\right):\Q\right]=3$.
         \end{example}
         
         What goes wrong in this example? The point is that $\Q\left( \sqrt[3]{2}\right)$ does not contain all roots of $x^3-2$.
@@ -876,7 +876,7 @@
                 For any prime number $p$ and any primitive $n$-th root of unity $\zeta$, if $p(\zeta) = 0$ then $p\left(\zeta^p\right) = 0$.
                 
             
-            Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From \ref{exc:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
+            Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From \ref{exe:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
             
             \begin{proof}[Proof of claim]
                 For this, we consider the canonical map
@@ -901,7 +901,7 @@
         \begin{proof}
             Proposition \ref{prop:1.23}
             
-            From Exercise \ref{exc:6}, $\mu_n = \{1,\zeta_n,\dots,\zeta_n^{n-1}\}$. We take $\sigma \in \Gal{\Q(\zeta_n)/\Q}$. Such a $\Q$-automorphism of $\Q(\zeta_n)$ is uniquely determined by the image of $\zeta_n$. Since $\sigma$ is an automorphism, it preserves the order of $\zeta_n$. From Exercise \ref{exc:6}, $\sigma(\zeta_n)$ must be a primitive $n$-th root of unity. Then $\sigma(\zeta_n) = \zeta_n^r$ for some $r \in \N$ such that $\overline{r} \in U_n$. We define a map:
+            From Exercise \ref{exe:6}, $\mu_n = \{1,\zeta_n,\dots,\zeta_n^{n-1}\}$. We take $\sigma \in \Gal{\Q(\zeta_n)/\Q}$. Such a $\Q$-automorphism of $\Q(\zeta_n)$ is uniquely determined by the image of $\zeta_n$. Since $\sigma$ is an automorphism, it preserves the order of $\zeta_n$. From Exercise \ref{exe:6}, $\sigma(\zeta_n)$ must be a primitive $n$-th root of unity. Then $\sigma(\zeta_n) = \zeta_n^r$ for some $r \in \N$ such that $\overline{r} \in U_n$. We define a map:
             \begin{equation*}
                 \begin{split}
                     \Gal{\Q(\zeta_n)/\Q} &\rightarrow U_n \\
@@ -1111,7 +1111,7 @@
         \faktor{\Gal{L(\zeta)/K}}{\Gal{L(\zeta)/K_f}} \cong \Gal{K_f / K}
     \end{equation*}
     
-    Hence $\Gal{K_f/K}$ is a quotient of the solvable group $\Gal{L(\zeta)/K}$. By Exercise \ref{exc:8} it is solvable.
+    Hence $\Gal{K_f/K}$ is a quotient of the solvable group $\Gal{L(\zeta)/K}$. By Exercise \ref{exe:8} it is solvable.
     
     \begin{proof} [proof of Claim]:
         We apply $\Gal{L(\zeta)/\_}$ to the above sequence and get:
@@ -1164,7 +1164,7 @@
     
     \begin{proof}
     
-    Assume that $\Gal{K_f/K}$ is solvable. Like in the part $(1) \Rightarrow (2)$ we set $r:=[K_f:K]$ and $\zeta$ to be a primitive $r$-th root unity. Then consider the extension $K_f(\zeta)/K(\zeta)$ which is also Galois. By restricting $\sigma \in \Gal{K_f(\zeta)(K(\zeta)}$ to $K_f$, since $\sigma$ fixes $\zeta$, we realised $\Gal{K_f(\zeta)/K(\zeta)}$ as a subgroup of $\Gal{K_f/K}$. As a consequence of Exercise \ref{exc:8} $\Gal{K_f(\alpha)/K(\alpha)}$ is solvable.
+    Assume that $\Gal{K_f/K}$ is solvable. Like in the part $(1) \Rightarrow (2)$ we set $r:=[K_f:K]$ and $\zeta$ to be a primitive $r$-th root unity. Then consider the extension $K_f(\zeta)/K(\zeta)$ which is also Galois. By restricting $\sigma \in \Gal{K_f(\zeta)(K(\zeta)}$ to $K_f$, since $\sigma$ fixes $\zeta$, we realised $\Gal{K_f(\zeta)/K(\zeta)}$ as a subgroup of $\Gal{K_f/K}$. As a consequence of Exercise \ref{exe:8} $\Gal{K_f(\alpha)/K(\alpha)}$ is solvable.
     
     We choose a composition series of it with cyclic subquotients:
     \begin{equation*}
@@ -1760,7 +1760,7 @@
             \begin{equation*}
             \begin{split}
                 \rho_V: \G &\to \GL(V) \\  
-                        \rho_V(g)(v) = \lambda(g)(v)
+                        \rho_V(g)(v) &= \lambda(g)(v)
             \end{split}
             \end{equation*}
         \end{enumerate}
@@ -1908,7 +1908,7 @@
             For $V,W \in \rep(G)$, we have $\chi_{\Hom(V,W)} = \chi_W \cdot \overline{\chi_V}$
         \end{corollary}
         \begin{proof}
-            By Exercise \ref{exc:11} (3), $\Hom(V,W) \cong W \tens V^*$, as $G$-reps, therefore using Lemma \ref{lem:2.10}:
+            By Exercise \ref{exe:11} (3), $\Hom(V,W) \cong W \tens V^*$, as $G$-reps, therefore using Lemma \ref{lem:2.10}:
             \begin{equation*}
                 \chi_{\Hom(V,W)} = \chi_{W \tens V^*} = \chi_W \cdot \chi_{V^*} = \chi_W \cdot \overline{\chi_V}
             \end{equation*}
@@ -2157,8 +2157,17 @@
         \end{enumerate}
     \end{proof}
     \begin{corollary}{}{2.27}
-        For $V\in\rep(G)$ irreducible and $z\in Z(\C[G])$, $\tilde\rho_V(z)=\Hom_G(V,V)$ equals to a scalar map $\lambda\id_V$
+        For $V\in\rep(G)$ irreducible and $z\in Z(\C[G])$, then $\tilde\rho_V(z) \in \Hom_G(V,V)$ equals to a scalar map $\lambda\id_V$
     \end{corollary}
+
+    \begin{proof}
+        Since $z \in Z(\C[G])$, for all $g \in G:$
+        \begin{equation*}
+            \rho_V(g) \tilde \rho_V(z) = \tilde \rho_V(z) \rho_V(g)
+        \end{equation*}
+        so $\rho_V(z)$ is $G$-equivariant. By Schur's Lemma \ref{lem:schur}, $\dim \Hom_G(V,V) = 1$, hence $\tilde \rho_V(z)$ is a scalar map.
+    \end{proof}
+    
 \section{Proof of Theorem \ref{thm:2.19}}
     We first show that for $V,W\in\Irr(G)$ $$\spitz{\chi_W,\chi_V}=\delta_{V,W}$$
     We have seen that $$\spitz{\chi_W,\chi_V}=\chi_{\Hom(V,W)}(P)=\Tr\round{\tilde\rho_{\Hom(V,W)}(P)}$$
@@ -2384,6 +2393,7 @@
     \end{equation*}
     where $\chi_{S_i}(z)$ is the extension of $\chi_{S_i}$ is the extension to $\C[G]$ by linearity.
     (i.e. $z$ acts on $S_i$ as this scalar). Then $(\omega_{S_1},\dots ,\omega_{S_t}): Z(\C[G]) \overset{\cong}{\to} \C \id_{S_1} \times\dots \times \C \id_{S_t}$ is the $\C$-algebra isomorphism above.
+    
     \separline{Week 8}
     
 \section{Integrality and divisibility}
@@ -2432,7 +2442,7 @@
     \begin{corollary}{}{2.36}
         \begin{enumerate}
             \item $\bar\Z$ is a ring
-            \item For any $V\in\rep(G), \chi_V:Gto\C$ has image in $\bar\Z$
+            \item For any $V\in\rep(G), \chi_V:G \to\C$ has image in $\bar\Z$
         \end{enumerate}
     \end{corollary}
 
@@ -2444,13 +2454,13 @@
     \end{proof}
     
     \begin{corollary}{}{2.37}
-        For any $C\in\cC(G)$, the element $\gamma_C^o\in Z(\C[G])$ is integral over $\Z$.
+        For any $C\in\cC(G)$, the element $\gamma_C^\circ\in Z(\C[G])$ is integral over $\Z$.
     \end{corollary}
 
     \begin{proof}
-        Let $\cC(G)=\curly{C_1,\dots,C_N}$. we consider the $\Z$-submodule $R:=\Z\gamma_{C_1}^o\oplus\dots\oplus\Z\gamma_{C_l}^o\subseteq Z(\C[G])$. From the multiplication formula $\gamma_{C_i}^o\cdot\gamma_{C_j}^o=\sum_{k=1}^lm_{ij}^k\gamma^o_{c_k}$ where $M_{ij}^k:=\#\curly{(g,h)\in C_i\times C_j| gh\in \C_k}$ (verify it!).
+        Let $\cC(G)=\curly{C_1,\dots,C_N}$. we consider the $\Z$-submodule $R:=\Z\gamma_{C_1}^\circ\oplus\dots\oplus\Z\gamma_{C_l}^\circ\subseteq Z(\C[G])$. From the multiplication formula $\gamma_{C_i}^\circ\cdot\gamma_{C_j}^\circ=\sum_{k=1}^lm_{ij}^k\gamma^\circ_{c_k}$ where $M_{ij}^k:=\#\curly{(g,h)\in C_i\times C_j| gh\in \C_k}$ (verify it!).
 
-        It follows that $R$ is a finitely generated $\Z$-submodule of $Z(\C[g])$ which contains $\Z[\gamma_{C_i}^o]$ for any $i\in [l]$.
+        It follows that $R$ is a finitely generated $\Z$-submodule of $Z(\C[g])$ which contains $\Z[\gamma_{C_i}^\circ]$ for any $i\in [l]$.
     \end{proof}
     
     \begin{lemma}{}{2.38}
@@ -2460,43 +2470,95 @@
     \end{lemma}
     
     \begin{proof}
-        Since $V$ is irreducible and $\gamma_C^o\in Z(\C[G])$, it follows from Schurs lemma (\ref{cor:2.27} to be precise) that $\tilde\rho_V(\gamma^o_C)=\sum_{h\in C}\rho_V(h)$ \textit{is} a scalar $\lambda\cdot \id_V$ for $\lambda\in\C$. To determine $\lambda$, we take the trace and obtain:
+        Since $V$ is irreducible and $\gamma_C^\circ\in Z(\C[G])$, it follows from Schurs lemma (\ref{cor:2.27} to be precise) that $\tilde\rho_V(\gamma^\circ_C)=\sum_{h\in C}\rho_V(h)$ \textit{is} a scalar $\lambda\cdot \id_V$ for $\lambda\in\C$. To determine $\lambda$, we take the trace and obtain:
         $$\lambda\dim V=\sum_{h\in C}\chi_V(h)=\#C\chi_V(g)$$ for any $g\in C$. It remains to show: $\lambda \in\bar \Z$.
-        According to \ref{cor:2.37}, $\gamma_C^o$ fulfills an equation
-        $$(\gamma_c^o)^m+a_{m-1}(\gamma_c^o)^{m-1}+\dots+ a_1\gamma_C^o+a_0=0$$
+        According to \ref{cor:2.37}, $\gamma_C^\circ$ fulfills an equation
+        $$(\gamma_c^\circ)^m+a_{m-1}(\gamma_c^\circ)^{m-1}+\dots+ a_1\gamma_C^\circ+a_0=0$$
         with $a_0,\dots,a_{m-1}\in\Z$. Applying the ring homomorphism $\tilde\rho_V$ gives an equation:
         $$\lambda^m+a_{m-1}\lambda^{m-1}+\dots+a_1\lambda+a_0=0$$
         Therefore $\lambda\in\bar\Z$
     \end{proof}
 
-%    \begin{proof}[Proof of \ref{prop:2.33}]
-%
-%    \end{proof}
+    \begin{proof}[Proof of \ref{prop:2.33}]
+        Let $\cC(G)=\curly{c_1,\dots,C_l}$ and choose $g_i\in C_i$. Since $V\in\Irr(G), \spitz{\X_V,\chi_V}=1$ gives us $$\#G=\sum_{i=1}^l\#C_i\cdot \chi_V(g_i)\bar{\chi_V(g_i)}$$
+        Dividing both sides by $\dim V$, we obtain $$\frac{\#G}{\dim V}=\sum_{i=1}^r\frac{\# C_i\cdot\chi_V(g_i)}{\dim V}\bar{\chi_V(g_i)}$$
+        since $\bar{\chi_V(g_i)}=\chi_V(g_i\inv$, it is in $\bar \Z$ by \ref{cor:2.36}.
+        Applying \ref{cor:2.36} agin, \ref{lem:2.38} implies that the right-hand side is in $\bar \Z$.So the left-hand side is in $\bar\Z$. So the left-hand side is in $\Q\cap\bar\Z=\Z$ (\ref{exe:14}).
+    \end{proof}
     
 \section{Applications}
+
+    We use representation theory to study the properties of finite groups.
+
+    We fix some notations: $\Irr(G)=\curly{S_1,\dots, S_t}$ where $S_1$ is the trivial representation. We write $\rho_i:=\rho_{S_i}$ and $\chi_i:= \chi_{S_i}$ for short.
     \subsection{Normal subgroups}
 
-    \begin{proposition}{}{2.39}
+        First notice that the kernel $\ker(\rho)$ is a normal subgroup of $G$ since $\rho_i$ is a group homomorphism.
         
-    \end{proposition}
-
-    \begin{lemma}{}{2.40}
-        
-    \end{lemma}
-
-    \begin{corollary}{}{2.41}
-        
-    \end{corollary}
+        \begin{proposition}{}{2.39}
+            Let $N\trianglelefteq G$. There exist $1\leq i_1,\dots, i_r\leq t$ such that $$N=\bigcap_{s=1}^r\ker\rho_{i_s}$$ 
+        \end{proposition}
     
-    \subsection{Center}
-
-    \begin{corollary}{}{2.42}
+        \begin{proof}
+            Let $\rho$ be the left regular representation of $G/N$ on $\C(G/N)$: $\rho: G/N\to\GL(\C(G/N))$.
+    
+            By composing $\pi:G\to G/N$ we obtain a representation of $G$: $\rho\circ \pi: G\to\GL(\C(G/N))$.
+    
+            By \ref{thm:maschke}, we decompose it into $$\C(G/N)\cong S_1^{\oplus n_1} \oplus \dots \oplus S_t^{\oplus n_t}$$
+            Let $i_1,\dots,i_r$ be the indices with $n_{i_1},\dots,n_{i_r}\neq 0$. It remains to show two things:
+            \begin{enumerate}
+                \item $\ker(\rho\circ \pi)=N$
+                \item $\ker(\rho\circ\pi)=\bigcap_{s=1}^r\ker\rho_{i_s}$
+            \end{enumerate} 
+            
+            The first point holds since $\ker\rho=\curly{e}$. For the second point, it suffices to notice that the above decomposition gives:
+            $$\rho\circ\pi=(\underbrace{\rho_{i_1},\dots, \rho_{i_1}}_{n_{i_1}\text{-times}}, \dots, \underbrace{\rho_{i_r},\dots, \rho_{i_r}}_{n_{i_r}\text{-times}})$$
+        \end{proof}
+    
+        Now the question is: how to compute $\ker\rho_{i_s}$? Character!
         
-    \end{corollary}
-
-    \begin{proposition}{}{2.43}
+        \begin{lemma}{}{2.40}
+            We have: $$\ker\rho_i = \curly{ g\in G \ | \ \chi_i(g)=\chi_i(e)}$$     
+        \end{lemma}
+        \begin{proof}
+            We show that: $\rho_i(g)=\id:{s_i}\Leftrightarrow \chi_i(g)=\chi_i(e)$.
+            Let $\lambda_1,\dots, \lambda_r$ denote the eigenvalues of $\rho_i(g)$ with multiplicities. Then $\chi_i(g)=\chi_i(e) \Leftrightarrow = r$. Since the $l_i$ are roots of unity
+            $$r=\vert{\lambda_1+\dots+\lambda_r}\leq\vert{\lambda_1}+\dots+\vert{\lambda_r}=r$$
+            which implies that $\lambda_1,\dots,\lambda_r$ are colinear. Together with $\lambda_1+\dots +\lambda_r=r$, it follows $\lambda_1=\dots =\lambda_r=1$. It is equivalent to $\rho_i(g)=\id_{s_i}$.
+        \end{proof}
+    
+        Recall that a group $G$ is called simple if it has exactly two subgroups $\curly{e}$ and itself.
         
-    \end{proposition}
+        \begin{corollary}{}{2.41}
+            The group $G$ is simple if and only if for any $2\leq i \leq t$ and $g\neq e$, $\chi_i(g)\neq \chi_i(e)$.     
+        \end{corollary}
+        
+    \subsection{Centre}
+
+        We propose two methods to compute the centre of the group $G$ using the character table.
+
+        The first one relies on the identity from \ref{cor:2.29}: For $C\in\cC(G)$ and $g\in C$:
+        
+        $$\sum_{i=1}^t \chi_i(g)\bar{\chi_i(g)}=\frac{\#G}{\#C}$$
+
+        Note that $g\in Z(G)\Leftrightarrow \curly g \in \cC(G)$. Therefore:
+        
+        \begin{corollary}{}{2.42}
+            $g\in Z(G)$ if and only if $$\#G=\sum_{i=1}^t\vert{\chi_i(g)}^2$$
+        \end{corollary}
+
+        The second method uses the notion of the centre of a character. 
+        \begin{definition*}{centre of a class function}
+            Let $\chi\in\CF(G)$. We define its centre $$ Z(\chi):=\curly{g\in G \ | \ \vert{\chi(g)}=\chi(e)}$$
+        \end{definition*}
+    
+        \begin{proposition}{}{2.43}
+            We have:
+            $$Z(G)=\bigcap_{i=1}^t Z(\chi_i)$$
+        \end{proposition}
+        \begin{proof}
+            Is left as an exercise (See also Blatt 7 Aufgabe 2b)).
+        \end{proof}
     
 \separline{VL 13}
 \section{Bursides' theorem}
@@ -2507,7 +2569,7 @@
     \end{theorem}
 
     To prove the theorem, we need two preliminary results.
-
+    
     \begin{lemma}{}{2.45}
         Let $\e_1,\dots,\e_n$ be roots of unity. If $\frac{1}{m}\round{\e_1 + \dots + \e_m }$ is an algebraic integer,
         then either $\e_1 + \dots + \e_m = 0$ or $\e_1 = \dots = \e_m$.
@@ -2588,13 +2650,13 @@
         For the base case just recall that $p$-groups are solvable.
 
         If $G$ is a non-trivial normal subgroup $N$, then both $N$ and $G/N$ have an order of form $p^c q^d$. The induction hypothesis implies that both of them are solvable.
-        By Exercise~\ref{exc:8}(4), $G$ is solvable.
+        By Exercise~\ref{exe:8}(4), $G$ is solvable.
 
         Now we can assume that $G$ is simple of order $p^a\cdot q^b$. Without loss of generality, we assume that $a,b \neq 0$ (otherwise $G$ is not simple, a $p$-group or a $q$-group).
         Let $P$ be a $p$-Sylow subgroup of $G$. Then the center of $P$ is non-trivial ($P$ is a $p$-group) and we choose $g \in Z(P) \setminus\{e\}$.
 
         Let $C_G(g) = \{h \in G \ | \ hg = gh\}$ be the \textbf{centralizer} of $g$. Since $g \in Z(P)$, $P \subseteq C_G(g)$.
-        Hence $[G:C_G(g)]|[G:P] = q^b$. Therefore $[C:C_G(g)]$ is a power of $q$, say $q^r$. Notice that $[G:C_G(g)]$ is the cardinality of the conjugacy class containing $g$ (by the orbit-stabilizer theorem).
+        Hence $[G:C_G(g)]$ divides $[G:P] = q^b$. Therefore $[C:C_G(g)]$ is a power of $q$, say $q^r$. Notice that $[G:C_G(g)]$ is the cardinality of the conjugacy class containing $g$ (by the orbit-stabilizer theorem).
         If $r \geq 1$, from the above propositon~\ref{prop:2.46}, $G$ is not simple, a contradiciton ($r=0 \Rightarrow G$ not simple since $e \neq g \in Z(G)$).
     \end{proof}
 
@@ -2611,7 +2673,7 @@
 %    \end{proof}
     
 \chapter{Semi-simple algebras}
-    In the last chapter we have seen that studying the representation theory of groups is equivalent to studying modules over the group algebra $\C[G]$, see Exercise \ref{exc:12}.
+    In the last chapter we have seen that studying the representation theory of groups is equivalent to studying modules over the group algebra $\C[G]$, see Exercise \ref{exe:12}.
 
     From this chapter on we will study the representation theory of finite dimensional algebras. In this chapter we study the simplest such algebras from a representation-theoretical point of view, they are essentially matrices.
 \section{Modules over algebras}
@@ -2661,7 +2723,7 @@
             
             The above diagram describes associativity not only for algebras but for groups, monoids, rings and so on. Similarly, we can realize all the other requirements for a group say.
             
-            Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\Set$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group} (the same works for algebraic groups etc.).
+            Now the maps given above are maps between sets, i.e. the diagram above is realized in the category $\mathrm{Set}$. Now we collect all the diagrams for the definition of a group, but we switch the category, say to $\Top$, the category of topological space, which in the case above means that $\mu$ needs to be a continuous map, collecting all the diagrams in the "new" setting, we gain the definition of a \textbf{topological group} (the same works for algebraic groups etc.).
             
             In contrast - if we were to just write out the definition of a topological group the "choice" of definition would be way less natural.
 
