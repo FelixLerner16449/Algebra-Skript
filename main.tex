@@ -2385,6 +2385,7 @@
     where $\chi_{S_i}(z)$ is the extension of $\chi_{S_i}$ is the extension to $\C[G]$ by linearity.
     (i.e. $z$ acts on $S_i$ as this scalar). Then $(\omega_{S_1},\dots ,\omega_{S_t}): Z(\C[G]) \overset{\cong}{\to} \C \id_{S_1} \times\dots \times \C \id_{S_t}$ is the $\C$-algebra isomorphism above.
     \separline{Week 8}
+    
 \section{Integrality and divisibility}
     In this part we will prove the following stronger divisibility result:
     \begin{proposition}{}{2.33}
@@ -2906,7 +2907,7 @@
     \begin{example}{}{3.14}%pi :)
         The matrix algebra $A = M_n(\C)$ is a simple algebra. The $M_n(\C)$-module $\C^n$ is simple. We prove the first statement and leave the second statement as an exercise.
 
-        Let $E_{i,j} \in M_n(\C)$ be the elementary matrix, whose only non-zero entry is a $1$ at entry $i,j$. To prove that $M_n(\C)$ is simple, we choose a non-zero matrix $M \in M_n(\C)$ with $M = (m_{i,j})_{i,j}$ and show that $AMA = M_n(\C)$ (here $AMA = \curly{XMY \ | \ X,Y \in M_n(\C)}$), is the smallest two-sided ideal containing $M$.
+        Let $E_{i,j} \in M_n(\C)$ be the elementary matrix, whose only non-zero entry is a $1$ at entry $i,j$. To prove that $M_n(\C)$ is simple, we choose a non-zero matrix $M \in M_n(\C)$ with $M = (m_{i,j})_{i,j}$ and show that $AMA = M_n(\C)$ (here $AMA = \curly{XMY \ | \ X, Y \in M_n(\C)}$), this set is contained in the smallest two-sided ideal containing $M$. %is the smallest two-sided ideal containing $M$.
 
         Since $M \neq 0$, we assume that a certain $m_{p,q} \neq 0$, then
         \begin{equation*}
@@ -2921,14 +2922,54 @@
         Let $A$ be a $\C$-algebra, $M,N$ two finite-dimensional simple $A$-modules. Then
         \begin{equation*}
             \dim_{\C} \Hom_A(M,N) = \left\{ \begin{array}{rc}
-                1, &  \text{if } M \cong N\\
+                1, &  \text{if } M \cong N \text{ as $A$-modules}\\
                 0, & \text{otherwise}
             \end{array}\right.
         \end{equation*}
+        
     \end{lemma}
 
 \subsection{Wedderburn's theorem}
+    The goal of this section is to prove the following theorem due to Wedderburn. The proof is a generalization of example \ref{exa:3.14}, because $\End(V) \cong M_n(\C)$, where $\dim V = n$.
 
+    \begin{theorem}{Wedderburn}{wedderburn}
+        Any finite-dimensional simple $\C$-algebra $A$ is isomorphic to $\End(V)$ for a $\C$-vector space $V$. In particular, the dimension of $A$ is a square.
+    \end{theorem}
+
+    The proof of the theorem relies on the following proposition:
+
+    \begin{proposition}{Burnside}{burnside}
+        Let $A$ be a finite-dimensional $\C$-algebra and $S$ be a finite-dimensional simple $A$-module. The structural map $\rho: A \to \End(S)$ is surjective.
+    \end{proposition}
+
+    We first assume the proposition and prove Wedderburn's theorem.
+
+    \begin{proof}
+        Theorem \ref{thm:wedderburn}
+
+        We first assume that $A$ has a finite-dimensional simple module $S$. Later we will argue why such a module exists.
+        
+        Since $A$ is simple, $\rho$ is injetive. By the proposition above, $\rho: A \to \End(S)$ is surjective, hence an isomorphism.
+
+        Now we show that such an $S$ exists. For this, we look at the regular $A$-module $A$. We take a submodule $\{0\} \neq S \subseteq A$ and $\dim_\C(S)$ minimal among all $A$-submodules in $A$. Since $A \neq \{0\}$ is a finite-dimensional submodule of $A$, such an $S$ exists. If $S$ is not a simple $A$-module, it will have a non-trivial submodule $S' \subseteq S$, which is an ideal of $A$ with $\dim_\C(S') < \dim_\C(S)$, which is a contradiction. Then $S$ is simple.
+    \end{proof}
+
+    Now to Proposition \ref{prop:burnside}
+
+    \begin{lemma}{}{3.18}
+        Using the notation from \ref{prop:burnside}, we have:
+        \begin{enumerate}
+            \item (cyclicity) Fix $0 \neq s \in S$, then for any $s' \in S$, there exists an $a \in A$ such that $\rho(a)(s) = s'$
+            \item (cocyclicity) Fix $0 \neq \alpha \in S^*$, for any $\alpha' \in S^*$, there exists an $a \in A$ such that $\alpha' = \alpha \cdot \rho(a)$ (i.e. $\forall s \in S, \alpha'(s) = \alpha(\rho(a)(s))$
+            \item If $n \in \rho(A)$ is of rank $\geq 2$, then there exists $u' \in \rho(A)$ such that $0 < \rank(u') < \rank(u)$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{proof}
+        
+    \end{proof}
+
+    
 \separline{Week 10}
 
 
