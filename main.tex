@@ -1582,7 +1582,7 @@
         One can easily check that there is an isomorphism of $G$-reps:
         
         \begin{equation*}
-        \xymatrix@C=40pt {
+        \xymatrix@C=40pt @R=40pt {
             V/W \ar^{\rho_{V/W}(g)}[r] \ar[d]_{\varphi} & V/W\ar[d]^{\varphi} \\
             H \ar[r]_{\rho_H(g)} & H\ar@{}|{\circlearrowleft}[ul]
         }
@@ -1648,7 +1648,7 @@
         
         A linear map $f: V \to W$ is called a \textbf{(homo)morphism of $G$-representations}, if $\forall g \in G$ the following diagram commutes:
         \begin{equation*}
-        \xymatrix @R=30pt{
+        \xymatrix @C=30pt @R=30pt{
             V \ar^{\rho_V(g)}[r] \ar_{f}[d] & V\ar^{f}[d] \\
             W \ar_{\rho_W(g)}[r] & W\ar@{}|{\circlearrowleft}[ul]
         }
@@ -1771,13 +1771,20 @@
         \begin{exercise}{}{12}
             Verify that under this correspondence, homomorphisms of $G$-representations are exactly the $\C[G]$-module homomorphisms and vice versa.
         \end{exercise}
-%        \begin{proof}
-%            
-%        \end{proof}
+        \begin{proof}
+            Let $M,N$ be $\C[G]$ modules (and in turn $G$-reps). Since the action of $\C[G]$ on $M, N$ is uniquely determined by $g.m = \rho(g)(m)$ (linear extension), a module homomorphism $\varphi: M \to N$ is $\C[G]$-linear, so it satisfies the diagram
+            \begin{equation*}
+            \xymatrix {
+                M\ar[d]_{\varphi} \ar[r]^{g} & M \ar[d]^{\varphi} \\
+                N \ar[r]^{g}& N\ar@{}|{\circlearrowleft}[ul]
+            }
+            \end{equation*}
+            but this is exactly the diagram for a morphism of $G$-reps.
+        \end{proof}
 \separline{Week 6}
 
 \section{Character theory}
-    The first question to answer in representation theory is: Given two representations, whether they are isomorphic or not? To always construct isomorphisms between them seems to be complicated, proving that none exist even more so.
+    The first question to answer in representation theory is: Given two representations, are they isomorphic? To always construct isomorphisms between them seems complicated, proving that none exist even more so.
     
     The goal of character theory is to give a numerical criterion to determine whether two given representations are isomorphic or not.
     
@@ -2313,9 +2320,9 @@
         \begin{tabular}{|c|c|c|c|}
         \hline
              & $C_1$ & $C_2$ & $C_3$  \\ \hline
-            $\rho^{\text{triv}}$ & $1$ & $1$ & $1$  \\ \hline
-            $S_2$ & $1$ & $-1$ & $1$ \\ \hline 
-            $S_3$ & $2$ & $0$ & $-1$ \\ \hline
+            $\chi_{\triv}$ & $1$ & $1$ & $1$  \\ \hline
+            $\chi_{S_2}$ & $1$ & $-1$ & $1$ \\ \hline 
+            $\chi_{S_3}$ & $2$ & $0$ & $-1$ \\ \hline
         \end{tabular}
     \end{table}
 
@@ -2326,11 +2333,19 @@
     We did not use the structure of $S_3$, but we have already computed all characters of $S_3$.
 
     \begin{exercise}{}{13}
-        Let $V = \C^3$ be the representation of $S_3$ arising from the action of $S_3$ on $[3]$. Decompose $V^{\tens n}$ into a direct sum of irreducible representations of $S_3$. (start from computing $\chi_V$ using the definition)
+        Let $V = \C^3$ be the representation of $S_3$ arising from the action of $S_3$ on $[3]$. Decompose $V^{\tens n}$ into a direct sum of irreducible representations of $S_3$ (start from computing $\chi_V$ using the definition).
     \end{exercise}
-%    \begin{proof}
-%        
-%    \end{proof}
+    \begin{proof}
+        Since every irreducible representation is contained in the regular representation with the multiplicity of its degree (this is shown right below this exercise), we write $\chi_V = \chi_{\triv} + \chi_{\sgn} + 2\chi_{\mathrm{std}}$, where $\chi_{\mathrm{std}}$ is the representation from exercise \ref{exe:10}. We have
+        \begin{equation*}
+            \chi_{V^{\tens n}}(g) = \chi_{\mathrm{reg}}^n(g) = \#G^n \delta_{g,e}
+        \end{equation*}
+        Hence we get a decomposition
+        \begin{equation*}
+            \chi_{V^{\tens n}} = \#G^{n-1} \chi_{\mathrm{reg}}(g) = \#G^{n-1}(\chi_\triv + \chi_\sgn + 2 \chi_\mathrm{std}) = 6^{n-1}(\chi_\triv + \chi_\sgn + 2 \chi_\mathrm{std})
+        \end{equation*}
+        since the irreducible character form a basis of $\CF(G)$, this is the decomposition of $V^{\tens n}$. Note that this technique works for any group.
+    \end{proof}
 \section{Left regular representation}
     We proceed to study the left regular representation in detail with the help of character theory.
 
@@ -2399,7 +2414,7 @@
 \section{Integrality and divisibility}
     In this part we will prove the following stronger divisibility result:
     \begin{proposition}{}{2.33}
-        Let $S\in\Irr(G)$. Then $\dim S|\dim G$.
+        Let $S\in\Irr(G)$. Then $\dim S|\# G$.
     \end{proposition}
     For this, we will need several basic results on algebraic integers.
     \begin{definition}{Integral of $\Z$}{2.34}
@@ -2557,10 +2572,9 @@
             $$Z(G)=\bigcap_{i=1}^t Z(\chi_i)$$
         \end{proposition}
         \begin{proof}
-            Is left as an exercise (See also Blatt 7 Aufgabe 2b)).
+            Is left as an exercise (See also exercise sheet 7, exercise 2b)).
         \end{proof}
     
-\separline{VL 13}
 \section{Bursides' theorem}
     As an application of character theory, we prove Burnsides' theorem. The following proof is mostly due to Burnside. A proof without representation theory is only known since the 1970s.
     
