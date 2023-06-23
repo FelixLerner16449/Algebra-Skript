@@ -2696,13 +2696,13 @@
 
     From this chapter on we will study the representation theory of finite dimensional algebras. In this chapter we study the simplest such algebras from a representation-theoretical point of view, they are essentially matrices.
 \setcounter{section}{-1}
-\section{Non commutative tensorproduct}
-    For the sake of completeness I (Felix) added this chapter. This is not actually part of the notes but I think this is actually nessecary for understanding the following sections (why do we only take $R$-structure on only one component of the tensorproduct), since we talk about tensorproducts over non-commutative rings.
+\section{Non commutative tensor product}
+    For the sake of completeness I (Felix) added this chapter. This is not actually part of the notes but I think this is actually nessecary for understanding the following sections in particular, why do we take $R$-structure on only one component of the tensor product.
 
-    Let us set the stage. Take a ring $R$ (unital and associative ofcourse). Now if $R$ is commutative, then we define the tensorproduct of two $R$-modules $M,N$ exactly as before:
+    Let us set the stage. Take a ring $R$ (unital and associative ofcourse). Now if $R$ is commutative, then we define the tensor product of two $R$-modules $M,N$ exactly as before:
     
-    \begin{definition*}{universal property of the commutative tensorproduct}{}
-        Let $R$ be a commutative ring and $M,N$ be $R$-modules. The tensorproduct is a map $\alpha: M \times N \to T$ such that for all $R$-modules $Z$ and all $f \in \Bil_R(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
+    \begin{definition*}{Universal property of the commutative tensor product}{}
+        Let $R$ be a commutative ring and $M,N$ be $R$-modules. The tensor product is a map $\alpha: M \times N \to T$ such that for all $R$-modules $Z$ and all $f \in \Bil_R(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
         \begin{equation*}
         \xymatrix {
             M \times N \ar[rr]^(.55){\forall f} \ar[dr]_(.45){\alpha}& & Z \\
@@ -2715,7 +2715,7 @@
             \begin{split}
                 S = \spitz{ \left. \begin{array}{c}
                     (m_1+m_2,n_1) - (m_1,n_1) - (m_2,n_1), \\ (m_1,n_1 + m_2) - (m_1,n_1) - (m_1,n_2),  \\
-                    (\lambda m_1, \mu n_1) - \lambda \mu m_1,n_1) 
+                    (\lambda m_1, \mu n_1) - (\mu\lambda)( m_1, n_1) 
                 \end{array}  \ \right| \ m_1,m_2 \in M, \ n_1,n_2 \in N \text{ and } \lambda,\mu \in R }_R        
             \end{split}
         \end{equation*}
@@ -2724,7 +2724,7 @@
     \begin{equation*}
         r.(m \tens n) = (rm) \tens n = m \tens (rn)
     \end{equation*}
-    Note that this definition of the $R$-module structure already uses the universal property of the tensorproduct, as we only defined the action of $R$ on elementary tensors $m \tens n$.
+    Note that this definition of the $R$-module structure already uses the universal property of the tensor product, as we only defined the action of $R$ on elementary tensors $m \tens n$.
 
     Sadly, if $R$ is not commutative, life is not that easy. Say we take two $R$-leftmodules $M,N$, then if we were to define $r.(m \tens n) := (rm) \tens n = m \tens (rn)$, then we would run into the following problem:
     \begin{equation*}
@@ -2736,8 +2736,8 @@
     \end{equation*}
     where $\star$ denotes the point, where we assumed the $R$-module structure to be associative. Thus we only get an abelian group $M \tens N$.
 
-    \begin{definition*}{universal property of the noncommutative tensorproduct}{}
-        Let $R$ be a ring and $M$ a right $R$-module and $N$ a left $R$-module. The tensorproduct is a map $\alpha: M \times N \to T$ such that for all abelian groups $Z$ and all $f \in \Bil_{\Z,R}(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
+    \begin{definition*}{Universal property of the noncommutative tensor product}{}
+        Let $R$ be a ring and $M$ a right $R$-module and $N$ a left $R$-module. The tensor product is a map $\alpha: M \times N \to T$ such that for all abelian groups $Z$ and all $f \in \Bil_{\Z,R}(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
         \begin{equation*}
         \xymatrix {
             M \times N \ar[rr]^(.55){\forall f} \ar[dr]_(.45){\alpha}& & Z \\
@@ -2745,8 +2745,18 @@
         }
         \end{equation*}
     \end{definition*}
+     The object $M \tens N :=(M \times N)/S$, where
+        \begin{equation*}
+            \begin{split}
+                S = \spitz{ \left. \begin{array}{c}
+                    (m_1+m_2,n_1) - (m_1,n_1) - (m_2,n_1), \\ (m_1,n_1 + m_2) - (m_1,n_1) - (m_1,n_2),  \\
+                    (m_1 \lambda , \mu n_1) -   (\mu \lambda)(m_1, n_1) 
+                \end{array}  \ \right| \ m_1,m_2 \in M, \ n_1,n_2 \in N \text{ and } \lambda,\mu \in R }_R        
+            \end{split}
+        \end{equation*}
+    satisfies this universal property. We denote $\overline{(m,n)}:= m \tens n$.
     
-    But we want to talk about modules, hence we have to make even more concessions. The fix is to let $R$ only operate on one component, i.e. $r.(m \tens n) = (rm) \tens n$ if $M$ is a left $R$-module. Now all the contradictions that we got above do not work any more, since we only have $R$-structure on one component of the tensorproduct.
+    But we want to talk about modules, hence we have to make even more concessions. The fix is to let $R$ only operate on one component, i.e. $r.(m \tens n) = (rm) \tens n$ if $M$ is a left $R$-module. Now all the contradictions that we got above do not work any more, since we only have $R$-structure on one component of the tensor product.
 
     Now we return to the lecture notes.
 \section{Modules over algebras}
@@ -2805,16 +2815,16 @@
 
         Returning to the lecture notes, we define modules over $K$-algebras just as in the commutative case, we just have to make a difference between the left and right modules.
 
-        \begin{definition}{}{3.2}
-            Let $A$ be a $K$-algebra. A left $A$-module $M$ is a $K$-vector space $M$ together with a $K$-algebra homomorphism $\lambda_M: A \to \End_K(M)$.
+        \begin{definition}{Modules}{3.2}
+            Let $A$ be a $K$-algebra. A \textbf{left} $A$\textbf{-module} $M$ is a $K$-vector space $M$ together with a $K$-algebra homomorphism $\lambda_M: A \to \End_K(M)$.
 
             For $a \in A, m \in M$ we will usually denote $a \cdot m := \lambda_M(a)(m)$.
 
             Let $A^{\op}$ be the $K$-algebra whose $K$-vector space structure is the same as $A$, and the multiplication is defined by $a \cdot_{\op} b:= b \cdot a$ for all $a,b \in A^{\op}$
+
+            We call the $K$-vector space $M$ a right $A$-module, if there exists a $K$-algebra homomorphism $\rho_M: A^\op \to \End_K(M)$.
         \end{definition}
-
-        We call $K$-vector space $M$ a right $A$-module, if there exists a $K$-algebra homomorphism $\rho_M: A^\op \to \End_K(M)$.
-
+        
         \begin{remark}{}{3.3}
             In general, $A$ is not isomorphic to $A^\op$ as a non-commutative ring could be quite different (for example, one can be noetherian but the other not). For an example of such an algebra see Section 2.8 in \cite{Jacobson.2009}.
         \end{remark}
@@ -3074,13 +3084,12 @@
     The proof of the theorem relies on the following proposition:
 
     \begin{proposition}{Burnside}{burnside}
-        Let $A$ be a finite-dimensional $\C$-algebra and $S$ be a finite-dimensional simple $A$-module. The structural map $\rho: A \to \End(S)$ is surjective.
+        Let $A$ be a finite-dimensional $\C$-algebra and $S$ be a finite-dimensional simple $A$-module. Then the structural map $\rho: A \to \End(S)$ is surjective.
     \end{proposition}
 
     We first assume the proposition and prove Wedderburn's theorem.
 
-    \begin{proof}
-        Theorem \ref{thm:wedderburn}
+    \begin{proof}[Proof of Theorem \ref{thm:wedderburn}]
 
         We first assume that $A$ has a finite-dimensional simple module $S$. Later we will argue why such a module exists.
         
@@ -3107,15 +3116,17 @@
 \separline{Week 10}
 
 \separline{VL 15}
-    \section{Finite dimensional modules}
+    \subsection{Finite dimensional modules}
 
     \begin{proposition}{}{3.19}
-        Let $M$ be a finite-dimensional $M_n(\C)$-module with structure map $\rho: M_n(\C) \to \End(M)$. Then $M \cong \round{C^n}^{\oplus r}$ as $M_n(\C)$-modules.
+        Let $M$ be a finite-dimensional $M_n(\C)$-module with structure map $\rho: M_n(\C) \to \End(M)$. Then $M \cong \round{\C^n}^{\oplus r}$ as $M_n(\C)$-modules.
     \end{proposition}
     
     \begin{corollary}{}{3.20}
-        
+        Any finite dimensional simple $M_n(\C)$-module is isomorphic to $\C^n$ as $M_n(\C)$-modules.
     \end{corollary}
+    
+    In particular, any two finite dimensional, simple $M_n(\C)$-modules are isomorphic as $M_n(\C)$-modules.
     
     \begin{proposition}{Isotypic decomposition}{3.21}
         Let $M$ be a finite dimensional $M_n(\C)$-module. The evaluation map
@@ -3149,9 +3160,265 @@
             \ev(A.(\varphi \tens v)) = \ev(\varphi \tens Av) = \varphi(Av) = A \varphi(v) = A.\ev(\varphi \tens v)
         \end{equation*}
         we do not need to check linearity because of the universal property of the tensor product.
+
+        We first write down a basis of $\Hom_{M_n(\C)}(\C^n,M)$. In the proof of Proposition \ref{prop:3.19}, we have shown that $M = \bigoplus_{i=1}^r W_i$ and there exist isomorphisms of $M_n(\C)$-modules $\psi_i:\C^n \to W_i$. By composing with the canonical inclusion $\iota_i: W_i \to M$ we obtain $\varphi_i:= \iota_i \circ \psi_i \in \Hom_{M_n(\C)}(\C^n,M)$. These $\varphi_i$ are linearily independent since their images are in pairwise distinct direct sum components.
+        Now we show the generating property. Take $\varphi \in \Hom_{M_n(\C)}(\C^n,M)$ and consider $\pi_i \circ \varphi \in \Hom_{M_n(\C)}(\C^n,W_i)$. Since $\psi_i: \C^n \to W_i$ is an isomorphism, by Schur, $\pi_i \circ \varphi = \lambda_i \psi_i$ for some $\lambda_i \in \C$. Now we consider
+        \begin{equation*}
+            \varphi = (\underbrace{\iota_1\pi_1 + \dots \iota_r \pi_r}_{=\id_M})\varphi = \sum_{i=1}^r \lambda_i \varphi_i
+        \end{equation*}
+        As a summary, we have shown that $\dim \Hom_{M_n(\C)}(\C^n,M) = r$ and hence both sides of the evluation maps have the same dimension. It remains tho show that the map is surjective. For this we take $m \in M$ and decompose it as $m = \sum_{i=1}^r m_i$ with $m_i \in W_i$. We denote the preimage of $m_i$ under $\psi_i$ with $x_i \in \C^n$. Then
+        \begin{equation*}
+            \ev \round{\sum_{i=1}^r \varphi_i \tens x_i} = \sum_{i=1}^r \varphi_i(x_i) = \sum_{i=1}^r \iota_i \circ \psi_i \circ \psi_i^{-1}(m_i) = \sum_{i=1}^r \iota_i(m_i) = m
+        \end{equation*}
     \end{proof}
+
+\section{Semisimple modules and algebras}
+    Let $A$ be a $\C$-algebra.
+    \begin{definition}{Semisimplicity}{3.22}
+        \begin{enumerate}
+            \item An $A$-module $M$ is call \textbf{semisimple} if it is a direct sum of simple $A$-modules.
+            \item A finite dimensional $\C$-algebra $A$ is called \textbf{semisimple}, if any non-zero finite dimensional $A$ module is semisimple.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{example}{}{3.23}
+        \begin{enumerate}
+            \item It follows from Proposition \ref{prop:3.19} and Corollary \ref{cor:3.20} that finite dimensional simple algebras are semisimple.
+            \item By Maschkes theorem \ref{thm:maschke} it follows that $\C[G]$ is semisimple if $G$ is a finite group. One can actually show that if $\cha(K) \nmid \#G$, then $K[G]$ is semisimple ($K$ is a field).
+        \end{enumerate}
+    \end{example}
+
+    \begin{remark*}{a comment on semisimplicity - F}
+        There is another quite useful, equivalent condition for semisimplicity, namely:
+
+        $M$ is semisimple iff any submodule $N$ has a complement $N'$ such that $M = N \oplus N'$.
+        
+        This also holds for infinite dimensional modules. The proof uses Zorns Lemma.
+    \end{remark*}
     
-%\nocite{*}
+    \begin{exercise}{}{16}
+        Let $M$ be a finite dimensional semisimple $A$-module. Any submodule and quotient module of $M$ is semisimple.
+    \end{exercise}
+    \begin{proof}
+        We proof it for any $A$-module $M$, for the finite dimensional case we dont need Zorns Lemma, but we just argue by dimension. If you need more details on the Zorns Lemma proofs just ask me (Felix).
+        
+        Write $M = \bigoplus_{i \in I}S_i$ for $S_i$ simple and $I$ need not be finite. Now take a submodule $N \subseteq M$. Then $M/N = \sum_{i \in I} \overline{S_i}$. Using Zorns Lemma we can refine this sum to be direct.
+
+        For the submodule, we write $N = \sum\limits_{S_i \subseteq N \text{ simple}} S_i$. This holds because since $M$ is semisimple, any $x \in M$ is contained in a simple module (using Zorns Lemma). Again using Zorns Lemma we can refine this sum to be direct.
+    \end{proof}
+
+    \begin{proposition}{}{3.24}
+        A finite dimensional $\C$-algebra is semisimple iff the left $A$-module $A$ is semisimple.
+    \end{proposition}
+
+    \begin{proof}
+        The direction $"\Rightarrow"$ follows from the defintion.
+
+        For the other direction "$\Leftarrow$", take any $A$-module $M$. Now consider $\pi: A^n \twoheadrightarrow M, e_i \mapsto m_i$, where the $m_i$ are a $\C$-basis of $M$, then $M \cong A^{n}/\ker \pi$ by the Noetherian isomorphism theorem, hence $M$ is semisimple by the exercise above.
+    \end{proof}
+
+    The main result of this section is the following:
+
+    \begin{theorem}{Artin-Wedderburn}{ArWb}
+        Let $A$ be a finite dimensional $\C$-algebra. The following statments are equivalent:
+        \begin{enumerate}
+            \item $A$ is semisimple
+            \item $A$ is a product of matrix algebras. That is to say there exist $n_1,\dots,n_k \geq 1$ such that $A \cong M_{n_1}(\C) \times \dots \times M_{n_k}(\C)$
+        \end{enumerate}
+    \end{theorem}
+
+    We will prove the theorem in the next two sections:
+    
+    \subsection{Hom-spaces}
+        We prove $(1) \Rightarrow (2)$ in this paragraph. By defintion, the $A$-module $A$ is semisimple. There exist simple $A$-modules $S_1,\dots,S_k$, pairwise non-isomorphic such that $A \cong \bigoplus\limits_{i=1}^k S_i^{\oplus n_i}$ as $A$-modules with $n_1,\dots,n_k \geq 1$.
+
+        According to Example \ref{exa:3.7}, $\End_A\round{\tensor[_A]{A}{}} \cong A^\op$. So we investigate $\End_A\round{\bigoplus\limits_{i=1}^k S_i^{\oplus n_i}}$. For this we consider the following general setup. Let $M_1,\dots,M_k$ be $A$-modules. The we have an isomorphism of $\C$-vectorspaces
+        \begin{equation*}
+            \Hom_A\round{\bigoplus_{i=1}^k M_i,\bigoplus_{i=1}^k M_i} \cong \bigoplus_{1 \leq i,j \leq k} \Hom_A(M_i,M_j)
+        \end{equation*}
+        We write down this map in detail. Let $\iota_i: M_i \hookrightarrow \bigoplus_{i=1}^k M_i$ and $\pi: \bigoplus_{i=1}^k M_i \twoheadrightarrow M_i$ be the canonical maps. Given $f$ in the space on the left hand side, the $\Hom_A(M_i,M_j)$-component of the image of $f$ under the above isomorphism is given by $\Phi(f)_{i,j} = \pi_j \circ f \circ \iota_i \in \Hom_A(M_i,M_j)$. Hence
+        \begin{equation*}
+            \Phi(f) = \bigoplus_{1 \leq i,j \leq k} \pi_j \circ f \circ \iota_i
+        \end{equation*}
+
+        How about composition of endomorphisms?
+
+        The big direct sum can be organized in a matrix form. Let $M$ be an $n \times n$ matrix whose $(i,j)$-th entry is from $\Hom_A(M_j,M_i)$ ({\color{green}I believe this is the correct way, in the notes it says $\Hom_A(M_i,M_j)$ but I dont think this is right. Just write out the case $k=2$}). Moreover, we can multiply $M$ with another Matrix $M'$ of this form where the usual multiplication of scalars is replaced composition of maps. This givs a $\C$-algebra structure on the right hand side.
+
+        \begin{exercise}{}{17}
+            Prove that the above linear isomorphism is indeed an isomorphism, and show that it is a homomorphism of $\C$-algebras.
+        \end{exercise}
+        \begin{proof}
+            Its inverse is given by the following map:
+            \begin{equation*}
+            \begin{split}
+                \Psi: \bigoplus_{1 \leq i,j \leq k} \Hom_A(M_i,M_j) &\to \Hom_A\round{\bigoplus_{i=1}^k M_i,\bigoplus_{i=1}^k M_i} \\
+                \bigoplus_{1 \leq i,j \leq k} \varphi_{i,j} & \mapsto \bigoplus_{1 \leq i,j \leq k} \iota_j \circ \varphi_{i,j} \circ \pi_i
+            \end{split}
+            \end{equation*}
+            One quickly calculates, that
+            \begin{equation*}
+                \Psi \circ \Phi (f) = \Psi \round{\bigoplus_{1 \leq i,j \leq k} \pi_j \circ f \circ \iota_i} = \bigoplus_{1 \leq i,j \leq k} \iota_j \circ \pi_j \circ f \circ \iota_i \circ p_i = \bigoplus_{1 \leq i,j \leq k} f_{i,j} = f
+            \end{equation*}
+            and
+            \begin{equation*}
+            \begin{split}
+                \Phi \circ \Psi \round{\bigoplus_{1 \leq i,j \leq k} \varphi_{i,j}} &= \Phi \round{\bigoplus_{1 \leq i,j \leq k} \iota_j \circ \varphi_{i,j} \circ \pi_i} \\
+                &= \bigoplus_{1 \leq l,m \leq k}  \bigoplus_{1 \leq i,j \leq k} \underbrace{\pi_l \circ \iota_j}_{\id_{M_j} \delta_{l,j}} \circ \varphi_{i,j} \circ \underbrace{\pi_i \circ \iota_m}_{\id_{M_i} \delta_{i,m}} 
+                = \bigoplus_{1 \leq i,j \leq k} \varphi_{i,j}
+            \end{split}
+            \end{equation*}
+            One can see, that $\Phi$ is linear. It remains to show that $\Phi$ is a homomorphism of $\C$-algebras, i.e. $\Phi(f \circ g) = \Phi(f) \cdot \Phi(g)$. This part will be delayed until the issue above is resolved.
+            %We just look at $\Phi(f \circ g)_{i,j}$. Clearly, we need to have something of the form $g_{l,j}$, then for the composition to make sense and go into $i$, we need $f_{i,l}$ but we can choose $l$ freely, hence $\Phi(f \circ g)_{i,j} = \sum_{l=1}^n f_{i,l} \circ g_{l,j}$
+        \end{proof}
+
+        Applying this general setup to the aboe special case and noticing that by Schurs Lemma (\ref{lem:schurMOD}), $\Hom_A(S_i,S_j) = \{0\}$ for $i \neq j$. We have in fact an isomorphism of $\C$-algebras
+        \begin{equation*}
+            \End_A\round{S_i^{\oplus n_i}} \cong \bigoplus_{1 \leq p,q \leq n_i} \End_A(S_i) \cong \bigoplus_{1 \leq p,q \leq n_i} \C
+        \end{equation*}
+
+        Writing this isomorphismin a matrix form as above, we obtain an isomorphism of $\C$-algebras $\End_A\round{S_i^{\oplus n_i}} \cong M_{n_i}(\C)$. It follows then, that there exists an isomorphism of $\C$-algebras:
+        \begin{equation*}
+        \begin{split}
+            A^\op \cong \End\round{\tensor[_A]{A}{}} \cong \bigtimes_{i=1}^k \End_A\round{S_i^{\oplus n_i}} \cong \bigtimes_{i=1}^k M_{n_i}(\C)
+        \end{split}
+        \end{equation*}
+        Since $M_n(\C)^\op \cong M_n(\C)$ by taking the transpose of a matrix, we proved that $A$ is isomorphic to a product of matrix algebras as $\C$-algebras.
+        
+    \subsection{Isotypic decomposition}
+        We prove $(2)\Rightarrow(1)$ by showing that if $A$ is a product of matrices, then every $A$-module is semisimple. We start from classifying simple $A$-modules. Let $\Irr(A)$ denote the set of \underline{simple} $A$-modules up to isomorphism.
+
+        \begin{proposition}{}{3.26}
+            Let $V_1,\dots,V_k$ be finite dimensional $\C$-vector spaces and $A:=\End(V_1) \times \dots \times \End(V_k)$. Then $\Irr(A) = \{V_1,\dots,V_k\}$.
+        \end{proposition}
+
+        \begin{proof}[Proof of Proposition \ref{prop:3.26}]
+            We divide the proof into steps:
+            \begin{enumerate}
+                \item The $V_1,\dots,V_k$ are simple $A$-modules
+                \item For $i \neq j$, $V_i \not \cong V_j$ as $A$-modules
+                \item Any simple $A$-module is isomorphic to some $V_l$ as $A$-modules.
+            \end{enumerate}
+            \underline{Step $1$:} From Corollary \ref{cor:3.20}, $V_i$ is a simple $\End(V_i)$-module, because the canoncial projection $\pi_i:A \to \End(V_i)$ is a surjective $\C$-algebra homomorphism $V_i$ is a simple $A$-module.
+
+            \underline{Step $2$:} For this we show that $\Hom_A(V_i,V_j) = \{0\}$ for $i \neq j$. Consider the following central orthogonal idempotents
+            \begin{equation*}
+                p_i = (0,\dots,0,\id_{V_i},0,\dots,0) \in A
+            \end{equation*}
+            with sum $1_A$. Let $\varphi \in \Hom_A(V_i,V_j)$, then for any $a \in A$, we have
+            \begin{equation*}
+                \pi_j(a) \circ \varphi = \varphi \circ \pi_i(a)
+            \end{equation*}
+            because $\pi_i,\pi_j$ are the structural maps of $V_i$ and $V_j$ as $A$-modules respectively. We take $a = p_j$, then $\pi_i(a) = 0$ and $\pi_j(a) = \id_{V_j}$, hence $\varphi \equiv 0$.
+
+            \underline{Step $3$:} Let $W$ be a simple $A$-module with structural map $\rho: A \to \End(W)$. We show that $W$ is isomorphic to some $V_l$ as $A$-modules.
+
+            First it follows from $1_A = \sum_{i=1}^k p_i$ that there exists $1 \leq l \leq k$ such that $\rho(p_l) \neq 0$. We set $W' = \rho(p_l)(W) \subseteq W$. Since $p_l$ is central, $\rho(a)\rho(p_l)(w) = \rho(p_l) \underbrace{\rho(a)(w)}_{\in W} \in W'$ for all $a \in A, w \in W$ and hence $W'$ is a non-zero $A$-submodule of $W$. Since $W$ is simple, we have $W' = W$.
+
+            We consider $p_i$ for $i \neq l$, then from the orthogonality of the idempotents it follows that
+            \begin{equation*}
+                \rho(p_i)(W) = \rho(p_i)\rho(p_l)(W) = \rho(p_ip_l)(W) = \{0\}
+            \end{equation*}
+            This implies that $\forall i \neq l$, $\rho|_{\End(V_i)} = 0$, therefore $\rho$ is infact $\rho_l:\End(V_l) \to \End(W)$ and this defines a simple $\End(V_l)$-module structure on $W$. It follows from Corollary \ref{cor:3.20} that there exists an $\End(V_l)$-module isomorphism $f: W \xrightarrow{\cong} V_l$, i.e. $\forall \alpha \in \End(V_l)$:
+            \begin{equation*}
+                \alpha \circ f = f \circ \rho_l(\alpha)
+            \end{equation*}
+            It remains to show that $f$ is an isomorphism of $A$-modules: Take $a \in A$. We need to show that $\pi_l(a) \circ f = f \circ \rho(a)$. Indeed
+            \begin{equation*}
+                f \circ \rho(a) = f \circ \rho(a p_l) = f \circ \underbrace{\rho_l(\pi_l(a))}_{\in \End(V_l)} = \pi_l(a) \circ f
+            \end{equation*}
+        \end{proof}
+
+\separline{Week 11}
+        
+\section{Proof of the Schur-Weyl Duality}
+
+    Let $V$ be a finite dimensional $\mathbb{C}$-vector space. 
+
+    The symmetric group $\mathfrak{S}_n$ acts on $V^{\otimes n}$ by permuting the position of the tensor components. In the language of representations, we have a group homomorphism 
+    $$\mathfrak{S}_n\to\mathrm{GL}(V^{\otimes n}),\ \ \sigma\mapsto(v_1\otimes\ldots\otimes v_n\mapsto v_{\sigma^{-1}(1)}\otimes\ldots\otimes v_{\sigma^{-1}(n)}).$$
+    It induces an algebra homomorphism $\rho_n:\mathbb{C}[\mathfrak{S}_n]\to\mathrm{End}(V^{\otimes n})$. Let $A:=\rho_n(\mathbb{C}[\mathfrak{S}_n])$. Then $A\subseteq\mathrm{End}(V^{\otimes n})$ is a semisimple subalgebra. 
+
+    The group $\mathrm{GL}(V)$ acts on $V^{\otimes n}$ in the standard way:
+    $$\mathrm{GL}(V)\to\mathrm{GL}(V^{\otimes n}),\ \ g\mapsto (v_1\otimes\ldots\otimes v_n\mapsto g(v_1)\otimes\ldots\otimes g(v_n)).$$
+    It induces an algebra homomorphism $\varphi_n:\mathbb{C}[\mathrm{GL}(V)]\to\mathrm{End}(V^{\otimes n})$.
+    We let $B$ denote the image of $\varphi_n$ in $\mathrm{End}(V^{\otimes n})$.
+
+    \begin{theorem}{Schur-Weyl duality}{SW}
+    We have $B=C(A)$, hence $B$ is semisimple and $A=C(B)$.
+    \end{theorem}
+
+    We need the following lemma:
+
+    \begin{lemma*}{}
+        By identifying $M_n(\mathbb{C})$ with $\mathbb{C}^{n^2}$, the subset $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$.
+    \end{lemma*}
+
+    \begin{proof}
+        For $A\in M_n(\mathbb{C})$ of rank $r$, we choose $P,Q\in\mathrm{GL}_n(\mathbb{C})$ such that $A=PI_{r,n} Q$ where $I_{r,n}=\mathrm{diag}(1,\ldots,1,0,\ldots,0)$ where there are $r$ copies of $1$. We consider a sequence of matrices $A_k:=PI_{r,n}(k)Q$ where $I_{r,n}(k)=\mathrm{diag}(1,\ldots,1,\frac{1}{k},\ldots,\frac{1}{k})$. Then $A_k\in\mathrm{GL}_n(\mathbb{C})$ and 
+        $$\lim_{k\to+\infty} A_k=A$$ 
+        since matrix multiplication is continuous.
+    \end{proof}
+
+    \begin{proof}[Proof of Theorem \ref{thm:SW}]
+        It follows from definition that $B\subseteq C(A)$ and $A\subseteq C(B)$. If we can prove that $B=C(A)$, it follows from the double commutant theorem that $B$ is semisimple and $A=C(B)$.
+    
+        We fix several notations. Let $e_1,\ldots,e_m$ be a basis of $V$. For a tuple $J=(j_1,\ldots,j_n)\in [m]^n$ with $1\leq j_s\leq m$, we denote $e_J:=e_{j_1}\otimes\ldots\otimes e_{j_n}\in V^{\otimes n}$. Then $\{e_J\mid J\in[m]^n\}$ forms a basis of $V^{\otimes n}$. For $\sigma\in\mathfrak{S}_n$, we denote $\sigma(J):=(j_{\sigma^{-1}(1)},\ldots,j_{\sigma^{-1}(n)})$. Then $e_{\sigma(J)}=\sigma(e_J)$.
+    
+        We split the proof into several parts:
+        \begin{enumerate}
+        \item[(a)] We first characterize elements in $C(A)$. Let $\varphi\in \mathrm{End}(V^{\otimes n})$. We write $\varphi$ into a linear combination of the basis:
+        $$\varphi(e_J)=\sum_{I\in[m]^n}a_{I,J}e_I$$
+        with $a_{I,J}\in\mathbb{C}$. Now $\varphi\in C(A)$ if and only if for any $\sigma\in \mathfrak{S}_n$, 
+        $$\varphi(\rho_n(\sigma)(e_J))=\rho_n(\sigma)(\varphi(e_J))$$
+        which is equivalent to say that 
+        $$\sum_{I\in [m]^n}a_{I,\sigma(J)}e_I=\sum_{I\in [m]^n}a_{I,J}e_{\sigma(I)}.$$
+        As a summary, $\varphi\in C(A)$ if and only if $a_{I,\sigma(J)}=a_{\sigma^{-1}(I),J}$ if and only if $a_{\sigma(I),\sigma(J)}=a_{I,J}$ for any $I,J\in[m]^n$ and $\sigma\in\mathfrak{S}_n$.
+    
+        Let $\Gamma:=\{(I,J)\mid I,J\in[m]^n\}$. The group $\mathfrak{S}_n$ acts on $\Gamma$ via: for $\sigma\in\Gamma$, $\sigma(I,J):=(\sigma(I),\sigma(J))$. We set $\mathcal{O}:=\Gamma/\mathfrak{S}_n$ be the set of orbits of this group action. The numbers $a_{I,J}$ above can be packed into a function $a$ on the set $\Gamma$ with values in $\mathbb{C}$. What we have proved above can be rephrased into: $\varphi\in C(A)$ if and only if the function $a$ is constant on each $\mathfrak{S}_n$-orbit in $\Gamma$. Therefore $\varphi$ is uniquely defined by a function $a:\mathcal{O}\to\mathbb{C}$, $\gamma\mapsto a_\gamma:=a_{I,J}$ for $(I,J)\in\gamma$.
+    
+        \item[(b)] We define a bilinear form on $\mathrm{End}(V^{\otimes n})$ by: for $\varphi,\psi\in\mathrm{End}(V^{\otimes n})$, 
+        $$\langle\varphi,\psi\rangle:=\mathrm{tr}(\varphi\circ\psi).$$ 
+        It is a non-degenerate symmetric bilinear form. We show that its restriction to the subspace $C(A)$, $\langle-,-\rangle:C(A)\times C(A)\to\mathbb{C}$ is also non-degenerate. 
+    
+        For this note that $C(A)=\mathrm{End}_{\mathfrak{S}_n}(V^{\otimes n})$. This suggests us to consider the projector in $\mathbb{C}[\mathfrak{S}_n]$:
+        $$P:\mathrm{End}(V^{\otimes n})\to \mathrm{End}(V^{\otimes n}),\ \ \varphi\mapsto\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\rho_n(\sigma)\circ\varphi\circ\rho_n(\sigma^{-1}).$$
+        The image of the projector is exactly $C(A)$. Moreover, if $\psi\in C(A)$ and $\varphi\in\mathrm{End}(V^{\otimes n})$ then 
+        $$\langle P(\varphi),\psi\rangle=\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\mathrm{tr}(\rho_n(\sigma)\varphi\rho_n(\sigma^{-1})\psi)=\mathrm{tr}(\varphi\psi)=\langle\varphi,\psi\rangle$$
+        since $\psi$ commutes with $\rho_n(\sigma^{-1})$.
+    
+        If $\psi\in C(A)$ is orthogonal to the entire $C(A)$ with respect to $\langle-,-\rangle$, then for any $\varphi\in\mathrm{End}(V^{\otimes n})$, 
+        $$\langle\varphi,\psi\rangle=\langle P(\varphi),\psi\rangle=0,$$
+        and hence $\psi=0$ since $\langle-,-\rangle$ is non-degenerate on $\mathrm{End}(V^{\otimes n})$.
+        \item[(c)] Since $B\subseteq C(A)$, to show that they are equal, it suffices to show that if for any $\varphi\in C(A)$ and $g\in\mathrm{GL}(V)$, $\langle\varphi,\varphi_n(g)\rangle=0$ holds, then $\varphi=0$. For this we describe $\varphi_n(g)$. 
+    
+        For $g\in\mathrm{GL}(V)$, 
+        $$\varphi_n(g)(e_I)=g(e_{i_1})\otimes\ldots\otimes g(e_{i_n})=\sum_{J\in [m]^n}g_{j_1,i_1}\cdots g_{j_n,i_n}e_J.$$
+        We set $g_{J,I}:=g_{j_1,i_1}\cdots g_{j_n,i_n}$. If $\varphi(e_J)=\sum_{K}a_{K,J}e_K$, then
+        $$0=\langle\varphi,\varphi_n(g)\rangle=\mathrm{tr}(\varphi\circ\varphi_n(g))=\sum_{I}e_I^*(\varphi\circ\varphi_n(g)(e_I))=\sum_{I,J}a_{I,J}g_{J,I}.$$
+        The function 
+        $$\mathrm{GL}(V)\to \mathbb{C},\ \ g\mapsto \langle\varphi,\varphi_n(g)\rangle$$
+        is the zero function. We identify $\mathrm{GL}(V)$ with $\mathrm{GL}_n(\mathbb{C})$ with the fixed basis of $V$, and  $g$ is then the matrix $(g_{i,j})$. So the function
+        $$\mathrm{GL}_n(\mathbb{C})\to \mathbb{C},\ \ (g_{i,j})\mapsto \sum_{I,J}a_{I,J}g_{J,I}$$
+        is identically zero. For $1\leq i,j\leq n$, we let $x_{i,j}:M_n(\mathbb{C})\to\mathbb{C}$ be the linear function taking the $(i,j)$-entry of a matrix. Since $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$, for any $(I,J)\in\Gamma$,
+        
+        \begin{equation}\label{Eq:AX}
+            \sum_{I,J}a_{I,J}x_{J,I}=0,
+        \end{equation}
+        
+        where $x_{J,I}:=x_{j_1,i_1}\cdots x_{j_n,i_n}$ is a polynomial function on $M_n(\mathbb{C})$.
+        To show that $\varphi=0$ it remains to show that for any $(I,J)\in\Gamma$, $a_{I,J}=0$.
+        \item[(d)] We complete the proof. Since $\varphi\in C(A)$, $a_{\sigma(I),\sigma(J)}=a_{I,J}$. It suffices to show that $a_\gamma=0$ for any $\gamma\in\mathcal{O}$. 
+        
+        Note that for $(I_1,J_1),\ldots,(I_k,J_k)\in\Gamma$, if for any $1\leq r\neq s\leq k$, $x_{I_r,J_r}\neq x_{I_s,J_s}$ then $x_{I_1,J_1},\ldots,x_{I_k,J_k}$ are linearly independent.
+        
+        We claim that for $(I,J),(I',J')\in\Gamma$, $x_{I,J}=x_{I',J'}$ if and only if there exists $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. The ``if'' part is clear from the definition of $x_{I,J}$. Assume that $x_{I,J}=x_{I',J'}$, there must be $1\leq p\leq n$ such that $x_{i_1',j_1'}=x_{i_p,j_p}$, otherwise there exists a matrix $M\in M_n(\mathbb{C})$ such that  $x_{I,J}(M)\neq x_{I',J'}(M)$. Applying this argument to $(i_2',j_2')$ and so on, one obtains a permutation $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. 
+        
+        From this claim, we can write the equation \eqref{Eq:AX} into 
+        $$\sum_{\gamma\in\mathcal{O}} n_\gamma a_\gamma x_\gamma=0$$
+        where $n_\gamma=\#\gamma$ and $x_\gamma=x_{I,J}$ for any $(I,J)\in\gamma$. Again from the claim, $\{x_\gamma\mid\gamma\in\mathcal{O}\}$ is linearly independent, and hence $a_\gamma=0$ for any $\gamma\in\mathcal{O}$.
+        \end{enumerate}
+    \end{proof}
 
 \printbibliography
 \end{document}
