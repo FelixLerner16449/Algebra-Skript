@@ -23,6 +23,8 @@
 \setlength{\parskip}{5pt}
 \addbibresource{literatur.bib}
 
+\nc\rk{\text{rank}}
+
 \begin{document}
 
 %titlepage
@@ -3105,17 +3107,36 @@
         \begin{enumerate}
             \item (cyclicity) Fix $0 \neq s \in S$, then for any $s' \in S$, there exists an $a \in A$ such that $\rho(a)(s) = s'$
             \item (cocyclicity) Fix $0 \neq \alpha \in S^*$, for any $\alpha' \in S^*$, there exists an $a \in A$ such that $\alpha' = \alpha \cdot \rho(a)$ (i.e. $\forall s \in S, \alpha'(s) = \alpha(\rho(a)(s))$
-            \item If $n \in \rho(A)$ is of rank $\geq 2$, then there exists $u' \in \rho(A)$ such that $0 < \rank(u') < \rank(u)$.
+            \item If $u \in \rho(A)$ is of rank $\geq 2$, then there exists $u' \in \rho(A)$ such that $0 < \rank(u') < \rank(u)$.
         \end{enumerate}
     \end{lemma}
 
     \begin{proof}
+    \begin{enumerate}
+        \item Since $S$ is simple and $\rho(A)(s)$ is a submodule of $S$, hence $\rho(A)(s)=S$.
+        \item We consider $S^o_\alpha = \curly{ s\in S | \forall a \in A, \spitz{\alpha, \rho(a)(s)} = 0}$, that is to say the set of elements in S that are annihilated by the cyclic module $\alpha \rho(A)$. If $S_\alpha^o\ni s \neq 0$, it follows from $\rho(A)(s)=S$ that $\alpha(S)=\curly 0$ hence $\alpha = 0$, which is not possible. Therefore $S_\alpha^o = \curly 0$ and hence $\alpha \rho(A) = S^*$.
+        \item Since $u$ has rank $\geq 2$, there exist $s_1, s_2 \in S$ such that $u(s_1), u(s_2)$ are linearly independent. From (1), there exists $a\in A$ such that $\rho(a)(u(s_1))=s_2$. Therefore $u \circ \rho(a) \circ u(s_1)$ and $u(s_1)$ are linearly independent, hence $\forall \lambda \in \C$, $u\circ\rho(a)\circ u - \lambda u\neq 0$. We look at $u \circ \rho(a): \Img(u) \to \Img (u)$. Since we are over $\C$, such an endomorphism must have an eigenvalue $\lambda$, i.e. $u':= u\circ \rho(a)\circ u -\lambda u$ is not invertible.
         
+        We show that $0<\rk(u') < \rk(u)$ and $u'\in \rho(A)$.
+        Since $u, \rho(A)\in \rho(a)$, it follows $u'\in \rho(A)$. Moreover, we have shown that $u'\neq 0$. Hence $\rk(u')> 0$.
+        
+        Since $u'=(u\circ \rho(a)-\lambda\id)u$ and $u\circ \rho(a) - \lambda \id$ is not invertible, it follows that $\rk(u')< \rk(u)$.
+    \end{enumerate}
     \end{proof}
     
 \separline{Week 10}
 
 \separline{VL 15}
+    \begin{proof}[Proof of \ref{prop:burnside}]
+        First notice, that any element in $\End(S)$ is a linear combination of rank 1 endomorphisms. Indeed, fix a basis of $S$ to identify it with $M_{\dim S}(\C)$, then the elementary matrices $E_{i,j}$ are of rank 1.
+
+        To show that $\rho$ is surjective, it suffices to show that all rank 1 endomorphisms are in $\rho(A)$.
+        Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\phi\in\rho(A)$. Without loss of generality, we assume $\phi$ to be of rank 1. Otherwise apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
+
+        Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\phi'$ has rank 1, we choose $S'$ a genarator of $\Img \phi'$ and $\alpha'\in S^*$ such that $\phi'(v) 0 \alpha'(v)s'$ 
+        
+    \end{proof}
+
     \subsection{Finite dimensional modules}
 
     \begin{proposition}{}{3.19}
@@ -3193,7 +3214,7 @@
 
         $M$ is semisimple iff any submodule $N$ has a complement $N'$ such that $M = N \oplus N'$.
         
-        This also holds for infinite dimensional modules. The proof uses Zorns Lemma.
+        This even holds for infinite dimensional modules. The proof uses Zorns Lemma.
     \end{remark*}
     
     \begin{exercise}{}{16}
@@ -3330,96 +3351,167 @@
         \end{proof}
 
 \separline{Week 11}
+
+        \begin{proposition}{Isotypic decomposition}{3.27}
+            The evaluation map
+            \begin{equation*}
+            \begin{split}
+                \ev: \bigoplus_{i=1}^k \Hom_A(V_i,W) \tens V_i &\to W \\
+                    \sum_{i=1}^k \varphi_i \tens v_i &\mapsto \sum_{i=1}^k \varphi_i(v_i)
+            \end{split}
+            \end{equation*}
+        \end{proposition}
+
+\section{Schur-Weyl duality}
+    \subsection{Commutant and double commutant}
+        \begin{definition}{}{3.28}
+            Let $S \subseteq \End(V)$, then the \textbf{commutant} of $S$ in $\End(V)$ is defined by:
+            \begin{equation*}
+                C(S):= \{u \in \End(V) \ | \ us = su \forall s \in S\}
+            \end{equation*}
+        \end{definition}
+        As $C(S) \subseteq \End(V)$, the \textbf{bicommutant} or \textbf{double commutant} of $S$ in $\End(V)$ is defined as $C(C(S))$.
+
+        \begin{theorem}{Double commutant}{3.29}
+            Let $A \subseteq \End(V)$ be a semisimple algebra and $B:=C(A)$. Then $B$ is semisimple and
+            \begin{equation*}
+                B \cong \bigoplus_{i=1}^t \End(U_i) \tens \id_{V_i}
+            \end{equation*}
+            In particular, $C(C(A)) = A$.
+        \end{theorem}
+
+        \begin{exercise}{}{18}
+            Let $V, W$ be two $K$-vector spaces. The $K$-linear map
+            \begin{equation*}
+            \begin{split}
+                \End(V) \tens \End(W) &\to \End(V \tens W) \\
+                    \varphi \tens \psi &\mapsto (v \tens w \mapsto \varphi(V) \tens \varphi(w))
+            \end{split}
+            \end{equation*}
+            is a $K$-algebra homomorphism. When $V,W$ are finite-dimensional, the above map is an isomorphism.
+        \end{exercise}
+
+        \begin{lemma}{}{3.30}
+            Let $U,W$ be finite-dimensional $\C$-vector spaces and $V:= U \tens W$. Then in the $\C$-algebra $\End(V)$, we have
+            \begin{equation*}
+            \begin{split}
+                C(\id_U \tens \End(W)) &= \End(U) \tens \id_W \\
+                C(\End(U) \tens \id_W) &= \id_U \tens \End(W)
+            \end{split}
+            \end{equation*}
+        \end{lemma}
+
+\separline{VL 18}
+
+        \begin{proposition}{}{3.31}
+            Let $A,B$ be two finite-dimensional $\C$-algebras and $\varphi: A \to B$ be a surjective $\C$-algebra homomorphism. Then if $A$ is semisimple, so is $B$. 
+        \end{proposition}
+
+    \subsection{Schur-Weyl Duality}
+
+        Let $V$ be a finite-dimensional $\mathbb{C}$-vector space. 
+    
+        The symmetric group $\mathfrak{S}_n$ acts on $V^{\otimes n}$ by permuting the position of the tensor components. In the language of representations, we have a group homomorphism 
+        $$\mathfrak{S}_n\to\mathrm{GL}(V^{\otimes n}),\ \ \sigma\mapsto(v_1\otimes\ldots\otimes v_n\mapsto v_{\sigma^{-1}(1)}\otimes\ldots\otimes v_{\sigma^{-1}(n)}).$$
+        It induces an algebra homomorphism $\rho_n:\mathbb{C}[\mathfrak{S}_n]\to\mathrm{End}(V^{\otimes n})$. Let $A:=\rho_n(\mathbb{C}[\mathfrak{S}_n])$. Then $A\subseteq\mathrm{End}(V^{\otimes n})$ is a semisimple subalgebra. 
+    
+        The group $\mathrm{GL}(V)$ acts on $V^{\otimes n}$ in the standard way:
+        $$\mathrm{GL}(V)\to\mathrm{GL}(V^{\otimes n}),\ \ g\mapsto (v_1\otimes\ldots\otimes v_n\mapsto g(v_1)\otimes\ldots\otimes g(v_n)).$$
+        It induces an algebra homomorphism $\varphi_n:\mathbb{C}[\mathrm{GL}(V)]\to\mathrm{End}(V^{\otimes n})$.
+        We let $B$ denote the image of $\varphi_n$ in $\mathrm{End}(V^{\otimes n})$.
+    
+        \begin{theorem}{Schur-Weyl duality}{SW}
+        We have $B=C(A)$, hence $B$ is semisimple and $A=C(B)$.
+        \end{theorem}
+    
+        We need the following lemma:
+    
+        \begin{lemma*}{}
+            By identifying $M_n(\mathbb{C})$ with $\mathbb{C}^{n^2}$, the subset $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$.
+        \end{lemma*}
+    
+        \begin{proof}
+            For $A\in M_n(\mathbb{C})$ of rank $r$, we choose $P,Q\in\mathrm{GL}_n(\mathbb{C})$ such that $A=PI_{r,n} Q$ where $I_{r,n}=\mathrm{diag}(1,\ldots,1,0,\ldots,0)$ where there are $r$ copies of $1$. We consider a sequence of matrices $A_k:=PI_{r,n}(k)Q$ where $I_{r,n}(k)=\mathrm{diag}(1,\ldots,1,\frac{1}{k},\ldots,\frac{1}{k})$. Then $A_k\in\mathrm{GL}_n(\mathbb{C})$ and 
+            $$\lim_{k\to+\infty} A_k=A$$ 
+            since matrix multiplication is continuous.
+        \end{proof}
+    
+        \begin{proof}[Proof of Theorem \ref{thm:SW}]
+            It follows from the definition that $B\subseteq C(A)$ and $A\subseteq C(B)$. If we can prove that $B=C(A)$, it follows from the double commutant theorem that $B$ is semisimple and $A=C(B)$.
         
-\section{Proof of the Schur-Weyl Duality}
-
-    Let $V$ be a finite dimensional $\mathbb{C}$-vector space. 
-
-    The symmetric group $\mathfrak{S}_n$ acts on $V^{\otimes n}$ by permuting the position of the tensor components. In the language of representations, we have a group homomorphism 
-    $$\mathfrak{S}_n\to\mathrm{GL}(V^{\otimes n}),\ \ \sigma\mapsto(v_1\otimes\ldots\otimes v_n\mapsto v_{\sigma^{-1}(1)}\otimes\ldots\otimes v_{\sigma^{-1}(n)}).$$
-    It induces an algebra homomorphism $\rho_n:\mathbb{C}[\mathfrak{S}_n]\to\mathrm{End}(V^{\otimes n})$. Let $A:=\rho_n(\mathbb{C}[\mathfrak{S}_n])$. Then $A\subseteq\mathrm{End}(V^{\otimes n})$ is a semisimple subalgebra. 
-
-    The group $\mathrm{GL}(V)$ acts on $V^{\otimes n}$ in the standard way:
-    $$\mathrm{GL}(V)\to\mathrm{GL}(V^{\otimes n}),\ \ g\mapsto (v_1\otimes\ldots\otimes v_n\mapsto g(v_1)\otimes\ldots\otimes g(v_n)).$$
-    It induces an algebra homomorphism $\varphi_n:\mathbb{C}[\mathrm{GL}(V)]\to\mathrm{End}(V^{\otimes n})$.
-    We let $B$ denote the image of $\varphi_n$ in $\mathrm{End}(V^{\otimes n})$.
-
-    \begin{theorem}{Schur-Weyl duality}{SW}
-    We have $B=C(A)$, hence $B$ is semisimple and $A=C(B)$.
-    \end{theorem}
-
-    We need the following lemma:
-
-    \begin{lemma*}{}
-        By identifying $M_n(\mathbb{C})$ with $\mathbb{C}^{n^2}$, the subset $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$.
-    \end{lemma*}
-
-    \begin{proof}
-        For $A\in M_n(\mathbb{C})$ of rank $r$, we choose $P,Q\in\mathrm{GL}_n(\mathbb{C})$ such that $A=PI_{r,n} Q$ where $I_{r,n}=\mathrm{diag}(1,\ldots,1,0,\ldots,0)$ where there are $r$ copies of $1$. We consider a sequence of matrices $A_k:=PI_{r,n}(k)Q$ where $I_{r,n}(k)=\mathrm{diag}(1,\ldots,1,\frac{1}{k},\ldots,\frac{1}{k})$. Then $A_k\in\mathrm{GL}_n(\mathbb{C})$ and 
-        $$\lim_{k\to+\infty} A_k=A$$ 
-        since matrix multiplication is continuous.
-    \end{proof}
-
-    \begin{proof}[Proof of Theorem \ref{thm:SW}]
-        It follows from definition that $B\subseteq C(A)$ and $A\subseteq C(B)$. If we can prove that $B=C(A)$, it follows from the double commutant theorem that $B$ is semisimple and $A=C(B)$.
-    
-        We fix several notations. Let $e_1,\ldots,e_m$ be a basis of $V$. For a tuple $J=(j_1,\ldots,j_n)\in [m]^n$ with $1\leq j_s\leq m$, we denote $e_J:=e_{j_1}\otimes\ldots\otimes e_{j_n}\in V^{\otimes n}$. Then $\{e_J\mid J\in[m]^n\}$ forms a basis of $V^{\otimes n}$. For $\sigma\in\mathfrak{S}_n$, we denote $\sigma(J):=(j_{\sigma^{-1}(1)},\ldots,j_{\sigma^{-1}(n)})$. Then $e_{\sigma(J)}=\sigma(e_J)$.
-    
-        We split the proof into several parts:
-        \begin{enumerate}
-        \item[(a)] We first characterize elements in $C(A)$. Let $\varphi\in \mathrm{End}(V^{\otimes n})$. We write $\varphi$ into a linear combination of the basis:
-        $$\varphi(e_J)=\sum_{I\in[m]^n}a_{I,J}e_I$$
-        with $a_{I,J}\in\mathbb{C}$. Now $\varphi\in C(A)$ if and only if for any $\sigma\in \mathfrak{S}_n$, 
-        $$\varphi(\rho_n(\sigma)(e_J))=\rho_n(\sigma)(\varphi(e_J))$$
-        which is equivalent to say that 
-        $$\sum_{I\in [m]^n}a_{I,\sigma(J)}e_I=\sum_{I\in [m]^n}a_{I,J}e_{\sigma(I)}.$$
-        As a summary, $\varphi\in C(A)$ if and only if $a_{I,\sigma(J)}=a_{\sigma^{-1}(I),J}$ if and only if $a_{\sigma(I),\sigma(J)}=a_{I,J}$ for any $I,J\in[m]^n$ and $\sigma\in\mathfrak{S}_n$.
-    
-        Let $\Gamma:=\{(I,J)\mid I,J\in[m]^n\}$. The group $\mathfrak{S}_n$ acts on $\Gamma$ via: for $\sigma\in\Gamma$, $\sigma(I,J):=(\sigma(I),\sigma(J))$. We set $\mathcal{O}:=\Gamma/\mathfrak{S}_n$ be the set of orbits of this group action. The numbers $a_{I,J}$ above can be packed into a function $a$ on the set $\Gamma$ with values in $\mathbb{C}$. What we have proved above can be rephrased into: $\varphi\in C(A)$ if and only if the function $a$ is constant on each $\mathfrak{S}_n$-orbit in $\Gamma$. Therefore $\varphi$ is uniquely defined by a function $a:\mathcal{O}\to\mathbb{C}$, $\gamma\mapsto a_\gamma:=a_{I,J}$ for $(I,J)\in\gamma$.
-    
-        \item[(b)] We define a bilinear form on $\mathrm{End}(V^{\otimes n})$ by: for $\varphi,\psi\in\mathrm{End}(V^{\otimes n})$, 
-        $$\langle\varphi,\psi\rangle:=\mathrm{tr}(\varphi\circ\psi).$$ 
-        It is a non-degenerate symmetric bilinear form. We show that its restriction to the subspace $C(A)$, $\langle-,-\rangle:C(A)\times C(A)\to\mathbb{C}$ is also non-degenerate. 
-    
-        For this note that $C(A)=\mathrm{End}_{\mathfrak{S}_n}(V^{\otimes n})$. This suggests us to consider the projector in $\mathbb{C}[\mathfrak{S}_n]$:
-        $$P:\mathrm{End}(V^{\otimes n})\to \mathrm{End}(V^{\otimes n}),\ \ \varphi\mapsto\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\rho_n(\sigma)\circ\varphi\circ\rho_n(\sigma^{-1}).$$
-        The image of the projector is exactly $C(A)$. Moreover, if $\psi\in C(A)$ and $\varphi\in\mathrm{End}(V^{\otimes n})$ then 
-        $$\langle P(\varphi),\psi\rangle=\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\mathrm{tr}(\rho_n(\sigma)\varphi\rho_n(\sigma^{-1})\psi)=\mathrm{tr}(\varphi\psi)=\langle\varphi,\psi\rangle$$
-        since $\psi$ commutes with $\rho_n(\sigma^{-1})$.
-    
-        If $\psi\in C(A)$ is orthogonal to the entire $C(A)$ with respect to $\langle-,-\rangle$, then for any $\varphi\in\mathrm{End}(V^{\otimes n})$, 
-        $$\langle\varphi,\psi\rangle=\langle P(\varphi),\psi\rangle=0,$$
-        and hence $\psi=0$ since $\langle-,-\rangle$ is non-degenerate on $\mathrm{End}(V^{\otimes n})$.
-        \item[(c)] Since $B\subseteq C(A)$, to show that they are equal, it suffices to show that if for any $\varphi\in C(A)$ and $g\in\mathrm{GL}(V)$, $\langle\varphi,\varphi_n(g)\rangle=0$ holds, then $\varphi=0$. For this we describe $\varphi_n(g)$. 
-    
-        For $g\in\mathrm{GL}(V)$, 
-        $$\varphi_n(g)(e_I)=g(e_{i_1})\otimes\ldots\otimes g(e_{i_n})=\sum_{J\in [m]^n}g_{j_1,i_1}\cdots g_{j_n,i_n}e_J.$$
-        We set $g_{J,I}:=g_{j_1,i_1}\cdots g_{j_n,i_n}$. If $\varphi(e_J)=\sum_{K}a_{K,J}e_K$, then
-        $$0=\langle\varphi,\varphi_n(g)\rangle=\mathrm{tr}(\varphi\circ\varphi_n(g))=\sum_{I}e_I^*(\varphi\circ\varphi_n(g)(e_I))=\sum_{I,J}a_{I,J}g_{J,I}.$$
-        The function 
-        $$\mathrm{GL}(V)\to \mathbb{C},\ \ g\mapsto \langle\varphi,\varphi_n(g)\rangle$$
-        is the zero function. We identify $\mathrm{GL}(V)$ with $\mathrm{GL}_n(\mathbb{C})$ with the fixed basis of $V$, and  $g$ is then the matrix $(g_{i,j})$. So the function
-        $$\mathrm{GL}_n(\mathbb{C})\to \mathbb{C},\ \ (g_{i,j})\mapsto \sum_{I,J}a_{I,J}g_{J,I}$$
-        is identically zero. For $1\leq i,j\leq n$, we let $x_{i,j}:M_n(\mathbb{C})\to\mathbb{C}$ be the linear function taking the $(i,j)$-entry of a matrix. Since $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$, for any $(I,J)\in\Gamma$,
+            We fix several notations. Let $e_1,\ldots,e_m$ be a basis of $V$. For a tuple $J=(j_1,\ldots,j_n)\in [m]^n$ with $1\leq j_s\leq m$, we denote $e_J:=e_{j_1}\otimes\ldots\otimes e_{j_n}\in V^{\otimes n}$. Then $\{e_J\mid J\in[m]^n\}$ forms a basis of $V^{\otimes n}$. For $\sigma\in\mathfrak{S}_n$, we denote $\sigma(J):=(j_{\sigma^{-1}(1)},\ldots,j_{\sigma^{-1}(n)})$. Then $e_{\sigma(J)}=\sigma(e_J)$.
         
-        \begin{equation}\label{Eq:AX}
-            \sum_{I,J}a_{I,J}x_{J,I}=0,
-        \end{equation}
+            We split the proof into several parts:
+            \begin{enumerate}
+            \item[(a)] We first characterize elements in $C(A)$. Let $\varphi\in \mathrm{End}(V^{\otimes n})$. We write $\varphi$ into a linear combination of the basis:
+            $$\varphi(e_J)=\sum_{I\in[m]^n}a_{I,J}e_I$$
+            with $a_{I,J}\in\mathbb{C}$. Now $\varphi\in C(A)$ if and only if for any $\sigma\in \mathfrak{S}_n$, 
+            $$\varphi(\rho_n(\sigma)(e_J))=\rho_n(\sigma)(\varphi(e_J))$$
+            which is equivalent to say that 
+            $$\sum_{I\in [m]^n}a_{I,\sigma(J)}e_I=\sum_{I\in [m]^n}a_{I,J}e_{\sigma(I)}.$$
+            As a summary, $\varphi\in C(A)$ if and only if $a_{I,\sigma(J)}=a_{\sigma^{-1}(I),J}$ if and only if $a_{\sigma(I),\sigma(J)}=a_{I,J}$ for any $I,J\in[m]^n$ and $\sigma\in\mathfrak{S}_n$.
         
-        where $x_{J,I}:=x_{j_1,i_1}\cdots x_{j_n,i_n}$ is a polynomial function on $M_n(\mathbb{C})$.
-        To show that $\varphi=0$ it remains to show that for any $(I,J)\in\Gamma$, $a_{I,J}=0$.
-        \item[(d)] We complete the proof. Since $\varphi\in C(A)$, $a_{\sigma(I),\sigma(J)}=a_{I,J}$. It suffices to show that $a_\gamma=0$ for any $\gamma\in\mathcal{O}$. 
+            Let $\Gamma:=\{(I,J)\mid I,J\in[m]^n\}$. The group $\mathfrak{S}_n$ acts on $\Gamma$ via: for $\sigma\in\Gamma$, $\sigma(I,J):=(\sigma(I),\sigma(J))$. We set $\mathcal{O}:=\Gamma/\mathfrak{S}_n$ be the set of orbits of this group action. The numbers $a_{I,J}$ above can be packed into a function $a$ on the set $\Gamma$ with values in $\mathbb{C}$. What we have proved above can be rephrased: $\varphi\in C(A)$ if and only if the function $a$ is constant on each $\mathfrak{S}_n$-orbit in $\Gamma$. Therefore $\varphi$ is uniquely defined by a function $a:\mathcal{O}\to\mathbb{C}$, $\gamma\mapsto a_\gamma:=a_{I,J}$ for $(I,J)\in\gamma$.
         
-        Note that for $(I_1,J_1),\ldots,(I_k,J_k)\in\Gamma$, if for any $1\leq r\neq s\leq k$, $x_{I_r,J_r}\neq x_{I_s,J_s}$ then $x_{I_1,J_1},\ldots,x_{I_k,J_k}$ are linearly independent.
+            \item[(b)] We define a bilinear form on $\mathrm{End}(V^{\otimes n})$ by: for $\varphi,\psi\in\mathrm{End}(V^{\otimes n})$, 
+            $$\langle\varphi,\psi\rangle:=\mathrm{tr}(\varphi\circ\psi).$$ 
+            It is a non-degenerate symmetric bilinear form. We show that its restriction to the subspace $C(A)$, $\langle-,-\rangle:C(A)\times C(A)\to\mathbb{C}$ is also non-degenerate. 
         
-        We claim that for $(I,J),(I',J')\in\Gamma$, $x_{I,J}=x_{I',J'}$ if and only if there exists $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. The ``if'' part is clear from the definition of $x_{I,J}$. Assume that $x_{I,J}=x_{I',J'}$, there must be $1\leq p\leq n$ such that $x_{i_1',j_1'}=x_{i_p,j_p}$, otherwise there exists a matrix $M\in M_n(\mathbb{C})$ such that  $x_{I,J}(M)\neq x_{I',J'}(M)$. Applying this argument to $(i_2',j_2')$ and so on, one obtains a permutation $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. 
+            For this note that $C(A)=\mathrm{End}_{\mathfrak{S}_n}(V^{\otimes n})$. This suggests us to consider the projector in $\mathbb{C}[\mathfrak{S}_n]$:
+            $$P:\mathrm{End}(V^{\otimes n})\to \mathrm{End}(V^{\otimes n}),\ \ \varphi\mapsto\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\rho_n(\sigma)\circ\varphi\circ\rho_n(\sigma^{-1}).$$
+            The image of the projector is exactly $C(A)$. Moreover, if $\psi\in C(A)$ and $\varphi\in\mathrm{End}(V^{\otimes n})$ then 
+            $$\langle P(\varphi),\psi\rangle=\frac{1}{\#\mathfrak{S}_n}\sum_{\sigma\in\mathfrak{S}_n}\mathrm{tr}(\rho_n(\sigma)\varphi\rho_n(\sigma^{-1})\psi)=\mathrm{tr}(\varphi\psi)=\langle\varphi,\psi\rangle$$
+            since $\psi$ commutes with $\rho_n(\sigma^{-1})$.
         
-        From this claim, we can write the equation \eqref{Eq:AX} into 
-        $$\sum_{\gamma\in\mathcal{O}} n_\gamma a_\gamma x_\gamma=0$$
-        where $n_\gamma=\#\gamma$ and $x_\gamma=x_{I,J}$ for any $(I,J)\in\gamma$. Again from the claim, $\{x_\gamma\mid\gamma\in\mathcal{O}\}$ is linearly independent, and hence $a_\gamma=0$ for any $\gamma\in\mathcal{O}$.
-        \end{enumerate}
-    \end{proof}
+            If $\psi\in C(A)$ is orthogonal to the entire $C(A)$ with respect to $\langle-,-\rangle$, then for any $\varphi\in\mathrm{End}(V^{\otimes n})$, 
+            $$\langle\varphi,\psi\rangle=\langle P(\varphi),\psi\rangle=0,$$
+            and hence $\psi=0$ since $\langle-,-\rangle$ is non-degenerate on $\mathrm{End}(V^{\otimes n})$.
+            \item[(c)] Since $B\subseteq C(A)$, to show that they are equal, it suffices to show that if for any $\varphi\in C(A)$ and $g\in\mathrm{GL}(V)$, $\langle\varphi,\varphi_n(g)\rangle=0$ holds, then $\varphi=0$. For this, we describe $\varphi_n(g)$. 
+        
+            For $g\in\mathrm{GL}(V)$, 
+            $$\varphi_n(g)(e_I)=g(e_{i_1})\otimes\ldots\otimes g(e_{i_n})=\sum_{J\in [m]^n}g_{j_1,i_1}\cdots g_{j_n,i_n}e_J.$$
+            We set $g_{J,I}:=g_{j_1,i_1}\cdots g_{j_n,i_n}$. If $\varphi(e_J)=\sum_{K}a_{K,J}e_K$, then
+            $$0=\langle\varphi,\varphi_n(g)\rangle=\mathrm{tr}(\varphi\circ\varphi_n(g))=\sum_{I}e_I^*(\varphi\circ\varphi_n(g)(e_I))=\sum_{I,J}a_{I,J}g_{J,I}.$$
+            The function 
+            $$\mathrm{GL}(V)\to \mathbb{C},\ \ g\mapsto \langle\varphi,\varphi_n(g)\rangle$$
+            is the zero function. We identify $\mathrm{GL}(V)$ with $\mathrm{GL}_n(\mathbb{C})$ with the fixed basis of $V$, and  $g$ is then the matrix $(g_{i,j})$. So the function
+            $$\mathrm{GL}_n(\mathbb{C})\to \mathbb{C},\ \ (g_{i,j})\mapsto \sum_{I,J}a_{I,J}g_{J,I}$$
+            is identically zero. For $1\leq i,j\leq n$, we let $x_{i,j}:M_n(\mathbb{C})\to\mathbb{C}$ be the linear function taking the $(i,j)$-entry of a matrix. Since $\mathrm{GL}_n(\mathbb{C})$ is dense in $M_n(\mathbb{C})$, for any $(I,J)\in\Gamma$,
+            
+            \begin{equation}\label{Eq:AX}
+                \sum_{I,J}a_{I,J}x_{J,I}=0,
+            \end{equation}
+            
+            where $x_{J,I}:=x_{j_1,i_1}\cdots x_{j_n,i_n}$ is a polynomial function on $M_n(\mathbb{C})$.
+            To show that $\varphi=0$ it remains to show that for any $(I,J)\in\Gamma$, $a_{I,J}=0$.
+            \item[(d)] We complete the proof. Since $\varphi\in C(A)$, $a_{\sigma(I),\sigma(J)}=a_{I,J}$. It suffices to show that $a_\gamma=0$ for any $\gamma\in\mathcal{O}$. 
+            
+            Note that for $(I_1,J_1),\ldots,(I_k,J_k)\in\Gamma$, if for any $1\leq r\neq s\leq k$, $x_{I_r,J_r}\neq x_{I_s,J_s}$ then $x_{I_1,J_1},\ldots,x_{I_k,J_k}$ are linearly independent.
+            
+            We claim that for $(I,J),(I',J')\in\Gamma$, $x_{I,J}=x_{I',J'}$ if and only if there exists $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. The ``if'' part is clear from the definition of $x_{I,J}$. Assume that $x_{I,J}=x_{I',J'}$, there must be $1\leq p\leq n$ such that $x_{i_1',j_1'}=x_{i_p,j_p}$, otherwise there exists a matrix $M\in M_n(\mathbb{C})$ such that  $x_{I,J}(M)\neq x_{I',J'}(M)$. Applying this argument to $(i_2',j_2')$ and so on, one obtains a permutation $\sigma\in\mathfrak{S}_n$ such that $I'=\sigma(I)$ and $J'=\sigma(J)$. 
+            
+            From this claim, we can write the equation \eqref{Eq:AX} into 
+            $$\sum_{\gamma\in\mathcal{O}} n_\gamma a_\gamma x_\gamma=0$$
+            where $n_\gamma=\#\gamma$ and $x_\gamma=x_{I,J}$ for any $(I,J)\in\gamma$. Again from the claim, $\{x_\gamma\mid\gamma\in\mathcal{O}\}$ is linearly independent, and hence $a_\gamma=0$ for any $\gamma\in\mathcal{O}$.
+            \end{enumerate}
+        \end{proof}
 
+        \begin{definition}{Partition}{3.33}
+            Let $n \in \N$. A tuple of positive integers $\lambda = (\lambda_1,\dots,\lambda_k)$ is called a \textbf{partition} of $n$, if $\lambda_1 \geq \dots \geq \lambda_k$ and $\lambda_1 + \dots + \lambda_k = n$. We let $\wp(n)$ denote the set of all partitions of $n$.
+        \end{definition}
+
+        \begin{lemma}{}{3.34}
+            There exists a bijection $\Irr(S_n) \leftrightarrow \wp(n)$.
+        \end{lemma}
+
+        \begin{corollary}{}{3.35}
+            For any $\lambda \in \wp(n)$, $S_\lambda(V)$, is either $\{0\}$ or an irreducible representation of $\GL(V)$.
+        \end{corollary}
+
+        \begin{proposition}{}{3.36}
+            Let $V \in \rep(S_n)$, then for all $g \in S_n$, $\chi_V(g) \in \Z$.
+        \end{proposition}
+\chapter{Toolbox: Homological algebra}
 \printbibliography
 \end{document}
 
