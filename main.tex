@@ -2161,7 +2161,7 @@
     \begin{proof}
         Let $\varphi: V \to W$  be a nonzero homomorphism of $G$-representations.
         \begin{enumerate}
-            \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\varphi-t\cdot\id_V\in\Hom_G(V,V)$ and hence $\ker(f\inv\circ\varphi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\varphi:V\to V$. Then $\ker(f\inv\circ\varphi-\lambda\id_V=V$ because $V$ is irreducible. That is to say, $\varphi=\lambda f$.
+            \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\varphi-t\cdot\id_V\in\Hom_G(V,V)$ and hence $\ker(f\inv\circ\varphi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\varphi:V\to V$. Then $\ker(f\inv\circ\varphi-\lambda\id_V) = V$ because $V$ is irreducible. That is to say, $\varphi=\lambda f$.
             \item Assume that $V\not\cong_G W$. Then $\ker\varphi$ is a subrepresentation of of $W$. since $\varphi\neq 0$, $\varphi$ is injective. Moreover, since $\Img\varphi$ is a subrepresentation of $W$ and $\varphi\neq 0$, $\varphi$ is surjective. This contradicts $V\not\cong W$, and hence such a map $\varphi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
         \end{enumerate}
     \end{proof}
@@ -2770,7 +2770,7 @@
         \begin{definition}{}{3.1}
             \begin{enumerate}
                 \item
-                    A $\mathbf{K}$\textbf{-algebra} $(A,+,\cdot)$ is a ring and a $K$-vector space satisfying:
+                    An $\mathbf{K}$\textbf{-algebra} $(A,+,\cdot)$ is a ring and a $K$-vector space satisfying:
                     \begin{equation*}
                         \forall a,b \in A, \lambda \in K: \lambda(ab) = (\lambda a)b = a (\lambda b)
                     \end{equation*}
@@ -3133,7 +3133,7 @@
         To show that $\rho$ is surjective, it suffices to show that all rank 1 endomorphisms are in $\rho(A)$.
         Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\phi\in\rho(A)$. Without loss of generality, we assume $\phi$ to be of rank 1. Otherwise apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
 
-        Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\phi'$ has rank 1, we choose $S'$ a genarator of $\Img \phi'$ and $\alpha'\in S^*$ such that $\phi'(v) 0 \alpha'(v)s'$ 
+        Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\phi'$ has rank 1, we choose $S'$ a genarator of $\Img \phi'$ and $\alpha'\in S^*$ such that $\phi'(v) = \alpha'(v)s'$ 
         
     \end{proof}
 
@@ -3360,6 +3360,7 @@
                     \sum_{i=1}^k \varphi_i \tens v_i &\mapsto \sum_{i=1}^k \varphi_i(v_i)
             \end{split}
             \end{equation*}
+            is an isomorphism of 
         \end{proposition}
 
 \section{Schur-Weyl duality}
@@ -3367,7 +3368,7 @@
         \begin{definition}{}{3.28}
             Let $S \subseteq \End(V)$, then the \textbf{commutant} of $S$ in $\End(V)$ is defined by:
             \begin{equation*}
-                C(S):= \{u \in \End(V) \ | \ us = su \forall s \in S\}
+                C(S):= \{u \in \End(V) \ | \ \forall s \in S: us = su \}
             \end{equation*}
         \end{definition}
         As $C(S) \subseteq \End(V)$, the \textbf{bicommutant} or \textbf{double commutant} of $S$ in $\End(V)$ is defined as $C(C(S))$.
@@ -3404,7 +3405,7 @@
 \separline{VL 18}
 
         \begin{proposition}{}{3.31}
-            Let $A,B$ be two finite-dimensional $\C$-algebras and $\varphi: A \to B$ be a surjective $\C$-algebra homomorphism. Then if $A$ is semisimple, so is $B$. 
+            Let $A,B \neq \{0\}$ be two finite-dimensional $\C$-algebras and $\varphi: A \to B$ be a surjective $\C$-algebra homomorphism. Then if $A$ is semisimple, so is $B$. 
         \end{proposition}
 
     \subsection{Schur-Weyl Duality}
@@ -3512,6 +3513,46 @@
             Let $V \in \rep(S_n)$, then for all $g \in S_n$, $\chi_V(g) \in \Z$.
         \end{proposition}
 \chapter{Toolbox: Homological algebra}
+
+    Here is a proof of the second part of the horseshoe lemma.
+
+    \begin{lemma}{Horseshoe Lemma}{4.24}
+        Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r]& P_\bullet^X \ar[r]^f & \ar[r]^g P_\bullet^Y & P_\bullet^Z \ar[r] & 0 
+        }
+        \end{equation*} is a short exact sequence of chain complexes.
+    \end{lemma}
+
+    \begin{proof}{Proof of Lemma \ref{lem:4.24}}
+        We argue via induction. We did the base case in the lecture, I will write that down later.
+
+        We consider the following diagram
+        \begin{equation*}
+        \xymatrix {
+                        &                          & 0 \ar[d] \\
+            \dots \ar[r] & P_{n}^X \ar[r]^{d_n^X} & \ker d_{n-1}^X \ar[r] \ar[d]& 0 \\
+            & & \ker d_{n-1}^Y \ar[d] \\
+            \dots \ar[r] & P_{n}^Z \ar[r]^{d_n^Z} & \ker d_{n-1}^Z \ar[r] \ar[d] & 0 \\
+            & & \coker d_{n-1}^X = 0
+        }
+        \end{equation*}
+        where the vertical row is an exact sequence given by the Snake lemma. We repeat the base case of the induction to get a sequence
+        
+        \begin{equation*}
+        \xymatrix {
+                        &  0 \ar[d] & 0 \ar[d] \\
+            \dots \ar[r] & P_{n}^X \ar[d]^{\iota_{X}} \ar[r]^{d_n^X} & \ker d_{n-1}^X \ar[r] \ar[d]& 0 \\
+            & P_{n}^Y \ar@{}[ur]|{\circlearrowleft} \ar[r] \ar[d]^{\pi_Z}& \ker d_{n-1}^Y \ar[d] \ar[r] & 0 \\
+            \dots \ar[r] & P_{n}^Z \ar[r]^{d_n^Z} \ar@{}[ur]|{\circlearrowleft} \ar[d] & \ker d_{n-1}^Z \ar[r] \ar[d] & 0 \\
+            & 0 &  0
+        }
+        \end{equation*}
+        Now we glue this diagram together with the one we get from the induction hypothesis and we are done.
+    \end{proof}
+
+    
 \printbibliography
 \end{document}
 
