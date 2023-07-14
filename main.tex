@@ -2698,10 +2698,10 @@
 
     From this chapter on we will study the representation theory of finite dimensional algebras. In this chapter we study the simplest such algebras from a representation-theoretical point of view, they are essentially matrices.
 \setcounter{section}{-1}
-\section{Non commutative tensor product}
-    For the sake of completeness I (Felix) added this chapter. This is not actually part of the notes but I think this is actually nessecary for understanding the following sections in particular, why do we take $R$-structure on only one component of the tensor product.
+\section{Non-commutative tensor product}\label{non-commTP}
+    For the sake of completeness, I (Felix) added this chapter. This is not actually part of the notes but I think this is actually necessary for understanding the following sections in particular, why we take $R$-structure on only one component of the tensor product.
 
-    Let us set the stage. Take a ring $R$ (unital and associative ofcourse). Now if $R$ is commutative, then we define the tensor product of two $R$-modules $M,N$ exactly as before:
+    Let us set the stage. Take a ring $R$ (unital and associative of course). Now if $R$ is commutative, then we define the tensor product of two $R$-modules $M,N$ exactly as before:
     
     \begin{definition*}{Universal property of the commutative tensor product}{}
         Let $R$ be a commutative ring and $M,N$ be $R$-modules. The tensor product is a map $\alpha: M \times N \to T$ such that for all $R$-modules $Z$ and all $f \in \Bil_R(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
@@ -3513,8 +3513,335 @@
             Let $V \in \rep(S_n)$, then for all $g \in S_n$, $\chi_V(g) \in \Z$.
         \end{proposition}
 \chapter{Toolbox: Homological algebra}
+    For this chapter, we will leave the semisimple world (chapter $2$ \& $3$). To discover the new world in a safe way, we need new weapons: homological methods.
+    
+    Our goal is not to develop this huge domain but to see the tip of the iceberg. What we will introduce in this chapter feels like a kid's toolbox, but it will be sufficient for our use in the next chapter where we study hereditary algebras.
 
-    Here is a proof of the second part of the horseshoe lemma.
+    Having mastered the material in this chapter, one can start reading the book of Weibel \cite{Weibel.2010} or the book of Rotman \cite{Rotman.2009}, both have the name "An Introduction to Homological Algebra".
+\setcounter{section}{-1}
+\section{Prelude - Categories}
+    This section is not part of the lecture. I just added it to introduce some basic language of category theory as I thought it might be interesting to "see the real world" as said by Mr. Schlösser.
+
+    When studying Algebra, one can notice a certain pattern:
+    We define some (algebraic) structures and then study the maps between objects that preserve these structures.
+    The most common examples are groups with group homomorphisms, vector spaces with linear maps and algebras with algebra homomorphisms.
+    The prelude aims to generalize this pattern to obtain the definition of a \textbf{category}.
+    We will develop some basic notions of category theory.
+    Being quite an abstract branch of mathematics we will accompany the definitions with a potpourri of examples
+    to gain familiarity with the definitions.
+    
+    \subsection{Defintion and basic examples}
+    The definition consists of multiple parts, all of which will be built up in this section.
+    Our goal to collect realisations of a specific structure and the structure-preserving ``maps'' between them.
+    Due to set-theoretic issues, we may not require that they be collected in a set,
+    hence we introduce the notion of a \textbf{class}. Sets make up a proper subset of classes,
+    whence classes that do not constitute a set shall be called \text{proper classes}.
+    For our purposes we need not see the intricacies concerning the differences of sets and classes,
+    it suffices to know most of the operations allowed for sets are compatible with the notion of a class.
+    The key point to avoid Russels' paradox is the inability for a class to contain a proper class.
+    Now that we pleased the set theorists we shall continue with the definition of a category.
+    
+    Given a structure, we shall denote the class of its realisations as the \textbf{objects} of the category.
+    The collection structure preserving ``maps'' we denote by the class of \textbf{morphsims} of the category.
+
+    \begin{example*}{}
+        Fix a field $k$ and the $k$-vector space structure.
+        The realisations of the $k$-vector space structure (objects) are the vector spaces and
+        linear maps constitute the morphisms.
+    \end{example*}
+
+    Now we wish to give the morphisms some more structure that resembles the usual behaviour of maps.
+    Say we have the following situation:
+    \begin{equation*}
+        \xymatrix {
+            A \ar[r]^{f} & B \ar[r]^g & C
+        }
+    \end{equation*}
+    Wishfully, we would like to compose $f$ and $g$ to a map $g \circ f: A \to C$.
+    This composition shall be associative, hence one can write $f \circ g \circ h$ or $fgh$ whenever defined and not worry about parentheses. Furthermore, we wish to have identity maps for each object.
+    
+    To summarise:
+
+    \begin{definition*}{Category}
+        A category $\cC$ consists of a class of \textbf{objects} $\Obj(\cC)$ and
+        a class of \textbf{morphisms} $\Mor(\cC)$ between two objects.
+        
+        For all $A,B,C \in \Obj(\cC)$
+        \begin{equation*}
+            \begin{split}
+               \circ: \Mor_{\cC}(A,B) \times \Mor_{\cC}(B,C) &\rightarrow \Mor_{\cC}(A,C) \\
+                (f,g) &\mapsto g \circ f
+            \end{split}
+        \end{equation*}
+        is associative. For every object $A \in \Obj(\cC)$ there is an identity $\id_A \in \Mor_{\cC}(A,A)$:
+        \begin{equation*}
+           \forall f,g \text{ with } \dom(f) = A, \ \codom(g) = A:  f \circ \id_A = f, \quad \id_A \circ g = g
+        \end{equation*}
+    \end{definition*}
+
+    Note that given a morphism $f$ its domain written as $\dom(f)$ and
+    its codomain written as $\codom(f)$ are uniquely defined,
+    hence $\Mor(A,B) \cap \Mor(C,D) = \varnothing$ if $(A,B) \neq (C,D)$.
+
+    Usually, a category is named after its objects. Now we give examples of categories.
+    To get oneself acquainted with the definition one should verify that these indeed make up categories.
+    
+    \textbf{Basic examples:}
+        \begin{enumerate}
+            \item
+                $\cC = \mathrm{Set}$, where the objects are sets and the morphisms are maps.
+            \item
+                Fix a field $k$, then $\cC = \Vect_k$ is the category of $k$-vector spaces, where the objects are the $k$-vector spaces and the morphisms are linear maps, this is the category mentioned in opening example of this section.
+            \item
+                Let $R$ be a ring. Then $\tensor[_R]{\Mod}{^{}}$ is the category of left $R$-modules where the objects are left $R$-modules and the morphisms are homomorphisms of left $R$-modules.
+            \item
+                Let $G = (V,E)$ be a graph. With $\Obj(\cC) = V$ and $\Mor (\cC) = \{\text{paths in } G\}$ we indeed get a category. What goes wrong if $\Mor(\cC) = E$?
+        \end{enumerate}
+
+    \begin{remark*}{}
+        The subscript $\cC$ in $\Mor_\cC(\_,\_)$ is often omitted when the category is clear from the context.
+    \end{remark*}
+    
+    Note that morphisms need not be maps. A standard example of this is the following:
+
+    \begin{example*}{}
+        Let $(S,\leq)$ be a poset (partially ordered set). This can be turned into a category via $\Obj(\cC) = S$ and
+        
+        \begin{equation*}
+            \Mor_{\cC}(A,B) = \left\{ \begin{array}{rl}
+                (A,B), & \text{if } A \leq B  \\
+                \varnothing, & \text{else} 
+            \end{array} \right.
+        \end{equation*}
+        We define a composition
+        \begin{equation*}
+            (C,D) \circ (A,B) = \left\{ \begin{array}{rl}
+                (A,D), & \text{if } B = C  \\
+                \varnothing, & \text{else} 
+            \end{array}\right.
+        \end{equation*}
+        Since $\leq$ is transitive, the composition is well-defined.
+        We always have an identity map since $\leq$ is reflexive. One can check that the composition is associative.
+    \end{example*}
+    
+\subsection{Functors}
+    Realising that we just defined a structure we shall follow the pattern mentioned in the beginning and ask:
+    What are the structure-preserving maps between categories?
+
+    One firstly has to ask what kind of structure shall be preserved. Since we only required composition and
+    identity to exist, it makes sense to preserve these. Naturally, we arrive at the following definition 
+
+    \begin{definition*}{covariant functor}
+        Let $\cC$ and $\cD$ be categories. A \textbf{covariant} functor $\cF: \cC \to \cD$ associates:
+        \begin{itemize}
+            \item $X \in \Obj(\cC)$ to an object $\cF(X) \in \Obj(\cD)$
+            \item $f \in \Mor_\cC(X,Y)$ to a morphism $\cF(f) \in \Mor_\cD(\cF(X),\cF(Y))$
+        \end{itemize}
+        such that
+        \begin{equation*}
+            \cF\round{\id_X} = \id_{\cF(X)}, \quad \cF(g \circ f) = \cF(g) \circ \cF(f)
+        \end{equation*}
+    \end{definition*}
+
+    \begin{definition*}{contravariant functor}
+        Let $\cC$ and $\cD$ be two categories. A \textbf{contravariant} functor $\cF: \cC \to \cD$
+        is a covariant functor $\cC^\op \to \cD$.
+        
+        This means
+        \begin{equation*}
+            \left(A \xrightarrow{f} B\right) \overset{\cF}{\mapsto} \left(\cF(B) \xrightarrow{\cF(f)}\cF(A)\right)
+            \text{ and  } \cF(g \circ f) = \cF(f \circ_\op g) = \cF(f) \circ \cF(g)
+        \end{equation*}
+
+    \end{definition*}
+    
+    \begin{example*}{The contravariant Homfunctor}
+        Let $R$ be a commutative ring and $\cC = \tensor[_R]{\Mod}{^{}}$ and $X \in \Obj(\cC) $. 
+        Then $\Hom(\bullet,X): \cC \to \cC$, with $\Hom(\bullet,X)(Y) = \Hom(Y,X)$ for $Y \in \Obj(\cC)$ (compare to $V \mapsto V^*$).
+        For $f \in \Mor(A,B)$,
+        \begin{equation*}
+            \begin{split}
+                \Hom(\bullet,X)(f) = f^*: \Hom(B,X) &\to \Hom(A,X) \\
+                \varphi &\mapsto \varphi \circ f  \\
+            \end{split}
+        \end{equation*}
+        \begin{equation*}
+            \xymatrix {
+                A \ar^{f}[r]\ar_(.4){f^*(\varphi)}[dr] & B\ar^(.4){\varphi}[d] \\
+                            & X
+            }
+        \end{equation*}
+        
+        $f^*$ is called the pullback of $f$.
+    \end{example*}
+    
+    The dual functor is a special example of the contravariant Homfunctor, namely $\Hom(\bullet,k)$ for a field $k$.
+    
+    There is a covariant analogon to the contravariant Hom functor, the covariant Hom functor. Here we call $f_*$ the push out of $f$.
+    
+    Given a sequence $\dots \xrightarrow{f_{i-1}} A_i \xrightarrow{f_i} A_{i+1} \xrightarrow{^f_{i+1}} \dots$
+    in $\cC$ and a covariant functor $\cF: \cC \to \cD$ we apply $\cF$ to the sequence in $\cC$ and
+    get a sequence in $\cD$:
+        
+        \begin{equation*}
+            \xymatrix {
+                \dots \ar^(.4){\cF(f_{i-1})}[r] & \cF(A_i)\ar^(.4){\cF(f_i)}[r] & \cF(A_{i+1})\ar^(.6){\cF(f_{i+1})}[r] & \dots
+            }
+        \end{equation*}
+        The natural question is: \textit{Given an exact sequence, is the resulting sequence exact?}
+        
+        In general, the answer is \textbf{no}, as illustrated in the succeeding example.
+
+        \begin{example*}{}
+            Take $R=\Z$ and $\cC = \tensor[_\Z]{\Mod}{^{}}$ together with $\cF = \Hom(\Z/2\Z,\bullet)$ a covariant Hom functor, then
+            \begin{equation*}
+                \xymatrix @C=35pt {
+                    0 \ar[r] & \Z \ar[r]^{\cdot 2} & \Z \ar[r]^{\pi} & \Z/2 \Z \ar[r] & 0
+                }
+            \end{equation*}
+            is exact, but applying $\cF$ yields the following sequence which is not exact:
+            \begin{equation*}
+                \xymatrix @C=18pt {
+                    0 \ar[r] & \Hom_\Z(\Z/2\Z,\Z \ar[r]^(.47){(\cdot 2)_*} & {\underbrace{\Hom_\Z(\Z/2\Z,\Z)}_{=\{0\}}} \ar[r]^{\pi_*} & {\underbrace{\Hom_\Z(\Z/2 \Z,\Z/2\Z)}_{ \neq\{0\}}} \ar[r] & 0
+                }
+            \end{equation*}
+        \end{example*}
+        One can derive conditions when the $\Hom$-functors are exact. We will do this in a later section.
+
+        We introduce some more language. A covariant functor is called \textbf{right-exact} if it preserves the exactness of sequences of the form
+        \begin{equation*}
+            \xymatrix {
+                A \ar[r] & B \ar[r] & C \ar[r] & 0
+            }
+        \end{equation*}
+        and \textbf{left-exact} if it preserves the exactness of sequences of the form
+        \begin{equation*}
+            \xymatrix {
+                 0 \ar[r] & A \ar[r] & B \ar[r] & C
+            }
+        \end{equation*}
+        
+    \subsection{Adjoint functors}
+        \begin{definition*}{adjoint functors}
+            Let $\cC,\cD$ be two categories and $\cF: \cC \to \cD, \cG: \cD \to \cC$ be two functors. The pair $(\cF,\cG)$ is an \textbf{adjunction of categories} $\cC$ and $\cD$ if for all $X \in \Obj(\cC), Y \in \Obj(\cD)$ there is an isomorphisms of \underline{sets}
+            \begin{equation*}
+                \Mor_\cC(X,\cG Y) \cong \Mor_\cD(\cF X,Y).
+            \end{equation*}
+            Furthermore, $\cF$ is called a \textbf{left adjoint} (functor) to $\cG$ and respectively $\cG$ is a \textbf{right adjoint} (functor) to $\cF$.
+        \end{definition*}
+        The $\Hom$-functor $\Hom(A,\bullet)$ and the tensor functor $A \tens_R \bullet$ are adjoint, since
+        \begin{equation*}
+            \Hom(X,\Hom(Y,Z)) \cong \Hom(X \tens Y, Z)
+        \end{equation*}
+        in the lecture, we called this map Cartan isomorphism \ref{prop:4.5}.
+        
+        \begin{lemma*}{}
+            If $(\cF,\cG)$ is an adjoint pair of functors, then $\cF$ is left-exact if and only if $\cG$ is right-exact.
+        \end{lemma*}
+        
+        Since the $\Hom$-functor is left-exact, the tensor functor has to be right-exact. 
+\section{Cartan isomorphism and applications}
+
+    One of the main topics of homological algebra is the study of $\Hom$ and $\tens$ (functors) in the setup of bimodules. We fix $A,B,C,D$ to be $K$-algebras.
+
+    \begin{definition}{}{4.1}
+        An $A-B$-bimodule $M$ is a left $A$-module and a right $B$-module $M$, such that for any $a \in A, b \in B, m \in M$:
+        \begin{equation*}
+            a.(m.b) = (a.m).b
+        \end{equation*}
+        We let $\tensor[_A]{\Mod}{_B}$ denote the set of all $A-B$-bimodules. An $A-A$-bimodule will be called an $A$-bimodule. Similarly, we will use the notation $\tensor[_A]{\Mod}{^{}}$ and $\Mod_B$.
+    \end{definition}
+
+    \begin{example}{}{4.2}
+        \begin{enumerate}
+            \item $A$ is an $A$-bimodule when we set $a.b.c = abc$ for all $a,b,c \in A$.
+            \item Let $\varphi: A \to B$ be a $K$-alebra homomorphism. Then $B$ is an $A$-bimodule. For $a_1,a_2 \in A$ and $b \in B$, set $a_1 . b . a_2 = \varphi(a_1) b \varphi(a_2)$
+        \end{enumerate}
+    \end{example}
+
+    \begin{definition}{}{4.3}
+        Homomorphisms of $A-B$-bimodules are homomorphisms of both left $A$-modules and right $B$-modules. For $M,N \in \tensor[_A]{\Mod}{_B}$, we let $\Hom_A(M,N)_B$ denote the $K$-vector space of homomorphisms of $A-B$-bimodules.
+    \end{definition}
+
+    Similar to the tensor product of vector spaces, we can define the tensor product of modules.
+
+    \begin{definition}{}{}
+        See \ref{non-commTP}.
+    \end{definition}
+
+    The tensor product $\tens_A$ will kill the right $A$-module structure on $M$ and the left $A$-module structure on $N$. Hence $M \tens_A N$ is just a $K$-vector space. If $M \in \tensor[_A]{\Mod}{_B}$ and $N \in \tensor[_B]{\Mod}{_C}$, then $M \tens_A N \in \tensor[_A]{\Mod}{_C}$ where for $a \in A, c \in C$ and $m \tens_B n \in M \tens_B N$ (via the universal property of the tensor product,) we set:
+    \begin{equation*}
+        a.(m \tens n).c := (a.m) \tens (n.c)
+    \end{equation*}
+
+    \begin{exercise}{}{19}
+        \begin{enumerate}
+            \item Show that for $M \in \tensor[_A]{\Mod}{^{}}$ the map
+            \begin{equation*}
+            \begin{split}
+                A \tens_A M &\to M \\
+                a \tens M &\mapsto a.m
+            \end{split}
+            \end{equation*}
+            is an isomorphism of $A$-modules.
+            \item State and prove the universal property of $M \tens_A N$
+            \item Show that for $M \in \tensor[_A]{\Mod}{_B}, N \in \tensor[_B]{\Mod}{_C}, P \in \tensor[_C]{\Mod}{_D}$, the map
+            \begin{equation*}
+            \begin{split}
+                \round{M \tens_B N} \tens_C P &\to M \tens_B \round{N \tens_C P} \\
+                \round{m \tens n} \tens p &\mapsto m \tens \round{n \tens p}
+            \end{split}
+            \end{equation*}
+            is an isomorphism of $A$-$D$-bimodules.
+            \item Show that $\End_A(A)_A \cong Z(A)$, where $Z(A)$ is the centre of $A$.
+        \end{enumerate}
+    \end{exercise}
+
+    Next, we move to $\Hom$. Let $M \in \tensor[_A]{\Mod}{_B}$ and $N \in \tensor[_A]{\Mod}{_C}$. Then $\Hom_A(M,N)$ is a $B$-$C$-bimdoule via
+
+    \begin{equation*}
+        \spitz{b.f.c,m} := \underbrace{\spitz{f,m.b}}_{\in N}.c 
+    \end{equation*}
+
+    for all $f \in \Hom_A(M,N), b \in B$ and $c \in C$.
+
+    One of the most important relations between $\Hom$ and $\tens$ is the following Cartan isomorphism.
+
+    \begin{proposition}{}{4.5}
+        Let $X \in \tensor[_A]{\Mod}{^{}}, Y \in \tensor[_B]{\Mod}{^{}}$ and $M \in \tensor[_A]{\Mod}{_B}$. There exists an isomorphism of $K$-vector spaces
+        \begin{equation*}
+        \begin{split}
+            \Hom_A(M \tens_B Y, X) &\xrightarrow{\cong} \Hom_B(Y,\Hom_A(M,X)) \\
+            \varphi &\mapsto (y \mapsto (m \mapsto \varphi(m \tens y)))
+        \end{split}
+        \end{equation*}
+    \end{proposition}
+    In the language of category theory: The functors $\Hom_A(M,\bullet)$ and $M \tens_B \bullet$ are adjoint.
+
+    \begin{proof}
+        The inverse map is given by
+        \begin{equation*}
+            \psi \mapsto (m \tens y \mapsto \psi(y)(m))
+        \end{equation*}
+        it is straightforward to verify that they are inverse to each other.
+    \end{proof}
+    In the next week, we apply this construction to study induction and restriction of representations.
+\separline{week 12}
+    \textbf{General setup:}
+        Let $A$ be a $K$-algebra and $B \subseteq A$ be a subalgebra. We look at $A \in \tensor[_A]{\Mod}{_B}$. The right $B$-module structure comes from the regular right $A$-module structure on $A$. Let $X \in \tensor[_A]{\Mod}{^{}}, Y \in \tensor[_B]{\Mod}{^{}}$. We define the induction and restriction as follows:
+        \begin{equation*}
+        \begin{split}
+            \Ind_B^A(Y) := A \tens_B Y \quad \text{it is a $A$-module} \\
+            \Res_B^A(X) := \Hom_A(A,X) \quad \text{it is a $B$-module}
+        \end{split}
+        \end{equation*}
+    
+    In this setup, the Cartan isomorphism with $M = A \in \tensor[_A]{\Mod}{_B}$ gives:
+    \begin{equation*}
+        \Hom_A(\Ind_B^A(Y),X) \cong \Hom_B(Y,\Res_B^A(X))
+    \end{equation*}
+
+    \textbf{Special case:}
 
     \begin{lemma}{Horseshoe Lemma}{4.24}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
@@ -3551,7 +3878,6 @@
         \end{equation*}
         Now we glue this diagram together with the one we get from the induction hypothesis and we are done.
     \end{proof}
-
     
 \printbibliography
 \end{document}
