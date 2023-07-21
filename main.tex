@@ -3031,7 +3031,7 @@
     Note that the $K$-algebras $A_1,\dots, A_n$ in \textit{(1)} are \underline{NOT} subalgebras of $A$ since they do not share the same unit.
 
 \section{Simple modules and algebras}
-    We first remove "semi" from the title of this chapter and study finite-dimensional simple algebras over $\C$. In the rest of this chapter, we fix $\C$ as the base field, although any algebraically closed field of characterstic $0$ would make do.
+    We first remove "semi" from the title of this chapter and study finite-dimensional simple algebras over $\C$. In the rest of this chapter, we fix $\C$ as the base field, although any algebraically closed field of characteristic $0$ would make do.
     
 \subsection{Simple modules}
     The simplest modules are the simple modules.
@@ -3114,7 +3114,7 @@
     \begin{proof}
     \begin{enumerate}
         \item Since $S$ is simple and $\rho(A)(s)$ is a submodule of $S$, hence $\rho(A)(s)=S$.
-        \item We consider $S^o_\alpha = \curly{ s\in S | \forall a \in A, \spitz{\alpha, \rho(a)(s)} = 0}$, that is to say the set of elements in S that are annihilated by the cyclic module $\alpha \rho(A)$. If $S_\alpha^o\ni s \neq 0$, it follows from $\rho(A)(s)=S$ that $\alpha(S)=\curly 0$ hence $\alpha = 0$, which is not possible. Therefore $S_\alpha^o = \curly 0$ and hence $\alpha \rho(A) = S^*$.
+        \item We consider $S^o_\alpha = \curly{ s\in S | \forall a \in A, \spitz{\alpha, \rho(a)(s)} = 0}$, that is to say, the set of elements in S that are annihilated by the cyclic module $\alpha \rho(A)$. If $S_\alpha^o\ni s \neq 0$, it follows from $\rho(A)(s)=S$ that $\alpha(S)=\curly 0$ hence $\alpha = 0$, which is not possible. Therefore $S_\alpha^o = \curly 0$ and hence $\alpha \rho(A) = S^*$.
         \item Since $u$ has rank $\geq 2$, there exist $s_1, s_2 \in S$ such that $u(s_1), u(s_2)$ are linearly independent. From (1), there exists $a\in A$ such that $\rho(a)(u(s_1))=s_2$. Therefore $u \circ \rho(a) \circ u(s_1)$ and $u(s_1)$ are linearly independent, hence $\forall \lambda \in \C$, $u\circ\rho(a)\circ u - \lambda u\neq 0$. We look at $u \circ \rho(a): \Img(u) \to \Img (u)$. Since we are over $\C$, such an endomorphism must have an eigenvalue $\lambda$, i.e. $u':= u\circ \rho(a)\circ u -\lambda u$ is not invertible.
         
         We show that $0<\rk(u') < \rk(u)$ and $u'\in \rho(A)$.
@@ -3131,7 +3131,7 @@
         First notice, that any element in $\End(S)$ is a linear combination of rank 1 endomorphisms. Indeed, fix a basis of $S$ to identify it with $M_{\dim S}(\C)$, then the elementary matrices $E_{i,j}$ are of rank 1.
 
         To show that $\rho$ is surjective, it suffices to show that all rank 1 endomorphisms are in $\rho(A)$.
-        Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\phi\in\rho(A)$. Without loss of generality, we assume $\phi$ to be of rank 1. Otherwise apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
+        Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\phi\in\rho(A)$. Without loss of generality, we assume $\phi$ to be of rank 1. Otherwise, apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
 
         Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\phi'$ has rank 1, we choose $S'$ a genarator of $\Img \phi'$ and $\alpha'\in S^*$ such that $\phi'(v) = \alpha'(v)s'$ 
         
@@ -3161,7 +3161,7 @@
     \end{proposition}
     
 \separline{VL 16}
-    Next we will explain the number $r$ from \ref{prop:3.19} in a more canonical way.
+    Next, we will explain the number $r$ from \ref{prop:3.19} in a more canonical way.
     Let $M$ be an $A$-module and $V$ be a vector space. We define an $A$-module structure on $V \tens M$ by:
     \begin{equation*}
     \begin{split}
@@ -3218,10 +3218,10 @@
     \end{remark*}
     
     \begin{exercise}{}{16}
-        Let $M$ be a finite dimensional semisimple $A$-module. Any submodule and quotient module of $M$ is semisimple.
+        Let $M$ be a finite-dimensional semisimple $A$-module. Any submodule and quotient module of $M$ is semisimple.
     \end{exercise}
     \begin{proof}
-        We proof it for any $A$-module $M$, for the finite dimensional case we dont need Zorns Lemma, but we just argue by dimension. If you need more details on the Zorns Lemma proofs just ask me (Felix).
+        We proof it for any $A$-module $M$, for the finite-dimensional case we don't need Zorns Lemma, but we just argue by dimension. If you need more details on the Zorns Lemma proofs just ask me (Felix).
         
         Write $M = \bigoplus_{i \in I}S_i$ for $S_i$ simple and $I$ need not be finite. Now take a submodule $N \subseteq M$. Then $M/N = \sum_{i \in I} \overline{S_i}$. Using Zorns Lemma we can refine this sum to be direct.
 
@@ -3229,11 +3229,11 @@
     \end{proof}
 
     \begin{proposition}{}{3.24}
-        A finite dimensional $\C$-algebra is semisimple iff the left $A$-module $A$ is semisimple.
+        A finite-dimensional $\C$-algebra is semisimple iff the left $A$-module $A$ is semisimple.
     \end{proposition}
 
     \begin{proof}
-        The direction $"\Rightarrow"$ follows from the defintion.
+        The direction $"\Rightarrow"$ follows from the definition.
 
         For the other direction "$\Leftarrow$", take any $A$-module $M$. Now consider $\pi: A^n \twoheadrightarrow M, e_i \mapsto m_i$, where the $m_i$ are a $\C$-basis of $M$, then $M \cong A^{n}/\ker \pi$ by the Noetherian isomorphism theorem, hence $M$ is semisimple by the exercise above.
     \end{proof}
@@ -3241,7 +3241,7 @@
     The main result of this section is the following:
 
     \begin{theorem}{Artin-Wedderburn}{ArWb}
-        Let $A$ be a finite dimensional $\C$-algebra. The following statments are equivalent:
+        Let $A$ be a finite-dimensional $\C$-algebra. The following statements are equivalent:
         \begin{enumerate}
             \item $A$ is semisimple
             \item $A$ is a product of matrix algebras. That is to say there exist $n_1,\dots,n_k \geq 1$ such that $A \cong M_{n_1}(\C) \times \dots \times M_{n_k}(\C)$
@@ -3253,7 +3253,7 @@
     \subsection{Hom-spaces}
         We prove $(1) \Rightarrow (2)$ in this paragraph. By defintion, the $A$-module $A$ is semisimple. There exist simple $A$-modules $S_1,\dots,S_k$, pairwise non-isomorphic such that $A \cong \bigoplus\limits_{i=1}^k S_i^{\oplus n_i}$ as $A$-modules with $n_1,\dots,n_k \geq 1$.
 
-        According to Example \ref{exa:3.7}, $\End_A\round{\tensor[_A]{A}{}} \cong A^\op$. So we investigate $\End_A\round{\bigoplus\limits_{i=1}^k S_i^{\oplus n_i}}$. For this we consider the following general setup. Let $M_1,\dots,M_k$ be $A$-modules. The we have an isomorphism of $\C$-vectorspaces
+        According to Example \ref{exa:3.7}, $\End_A\round{\tensor[_A]{A}{}} \cong A^\op$. So we investigate $\End_A\round{\bigoplus\limits_{i=1}^k S_i^{\oplus n_i}}$. For this, we consider the following general setup. Let $M_1,\dots,M_k$ be $A$-modules. We have an isomorphism of $\C$-vector spaces
         \begin{equation*}
             \Hom_A\round{\bigoplus_{i=1}^k M_i,\bigoplus_{i=1}^k M_i} \cong \bigoplus_{1 \leq i,j \leq k} \Hom_A(M_i,M_j)
         \end{equation*}
@@ -3262,9 +3262,9 @@
             \Phi(f) = \bigoplus_{1 \leq i,j \leq k} \pi_j \circ f \circ \iota_i
         \end{equation*}
 
-        How about composition of endomorphisms?
+        How about the composition of endomorphisms?
 
-        The big direct sum can be organized in a matrix form. Let $M$ be an $n \times n$ matrix whose $(i,j)$-th entry is from $\Hom_A(M_j,M_i)$ ({\color{green}I believe this is the correct way, in the notes it says $\Hom_A(M_i,M_j)$ but I dont think this is right. Just write out the case $k=2$}). Moreover, we can multiply $M$ with another Matrix $M'$ of this form where the usual multiplication of scalars is replaced composition of maps. This givs a $\C$-algebra structure on the right hand side.
+        The big direct sum can be organized in a matrix form. Let $M$ be an $n \times n$ matrix whose $(i,j)$-th entry is from $\Hom_A(M_j,M_i)$ ({\color{green}I believe this is the correct way, in the notes it says $\Hom_A(M_i,M_j)$ but I don't think this is right. Just write out the case $k=2$}). Moreover, we can multiply $M$ with another Matrix $M'$ of this form where the usual multiplication of scalars is replaced by the composition of maps. This gives a $\C$-algebra structure on the right-hand side.
 
         \begin{exercise}{}{17}
             Prove that the above linear isomorphism is indeed an isomorphism, and show that it is a homomorphism of $\C$-algebras.
@@ -3293,12 +3293,12 @@
             %We just look at $\Phi(f \circ g)_{i,j}$. Clearly, we need to have something of the form $g_{l,j}$, then for the composition to make sense and go into $i$, we need $f_{i,l}$ but we can choose $l$ freely, hence $\Phi(f \circ g)_{i,j} = \sum_{l=1}^n f_{i,l} \circ g_{l,j}$
         \end{proof}
 
-        Applying this general setup to the aboe special case and noticing that by Schurs Lemma (\ref{lem:schurMOD}), $\Hom_A(S_i,S_j) = \{0\}$ for $i \neq j$. We have in fact an isomorphism of $\C$-algebras
+        Applying this general setup to the above special case and noticing that by Schurs Lemma (\ref{lem:schurMOD}), $\Hom_A(S_i,S_j) = \{0\}$ for $i \neq j$. We have in fact an isomorphism of $\C$-algebras
         \begin{equation*}
             \End_A\round{S_i^{\oplus n_i}} \cong \bigoplus_{1 \leq p,q \leq n_i} \End_A(S_i) \cong \bigoplus_{1 \leq p,q \leq n_i} \C
         \end{equation*}
 
-        Writing this isomorphismin a matrix form as above, we obtain an isomorphism of $\C$-algebras $\End_A\round{S_i^{\oplus n_i}} \cong M_{n_i}(\C)$. It follows then, that there exists an isomorphism of $\C$-algebras:
+        Writing this isomorphism a matrix form as above, we obtain an isomorphism of $\C$-algebras $\End_A\round{S_i^{\oplus n_i}} \cong M_{n_i}(\C)$. It follows then, that there exists an isomorphism of $\C$-algebras:
         \begin{equation*}
         \begin{split}
             A^\op \cong \End\round{\tensor[_A]{A}{}} \cong \bigtimes_{i=1}^k \End_A\round{S_i^{\oplus n_i}} \cong \bigtimes_{i=1}^k M_{n_i}(\C)
@@ -3307,7 +3307,7 @@
         Since $M_n(\C)^\op \cong M_n(\C)$ by taking the transpose of a matrix, we proved that $A$ is isomorphic to a product of matrix algebras as $\C$-algebras.
         
     \subsection{Isotypic decomposition}
-        We prove $(2)\Rightarrow(1)$ by showing that if $A$ is a product of matrices, then every $A$-module is semisimple. We start from classifying simple $A$-modules. Let $\Irr(A)$ denote the set of \underline{simple} $A$-modules up to isomorphism.
+        We prove $(2)\Rightarrow(1)$ by showing that if $A$ is a product of matrices, then every $A$-module is semisimple. We start by classifying simple $A$-modules. Let $\Irr(A)$ denote the set of \underline{simple} $A$-modules up to isomorphism.
 
         \begin{proposition}{}{3.26}
             Let $V_1,\dots,V_k$ be finite dimensional $\C$-vector spaces and $A:=\End(V_1) \times \dots \times \End(V_k)$. Then $\Irr(A) = \{V_1,\dots,V_k\}$.
@@ -3448,7 +3448,7 @@
             $$\varphi(e_J)=\sum_{I\in[m]^n}a_{I,J}e_I$$
             with $a_{I,J}\in\mathbb{C}$. Now $\varphi\in C(A)$ if and only if for any $\sigma\in \mathfrak{S}_n$, 
             $$\varphi(\rho_n(\sigma)(e_J))=\rho_n(\sigma)(\varphi(e_J))$$
-            which is equivalent to say that 
+            which is equivalent to saying that 
             $$\sum_{I\in [m]^n}a_{I,\sigma(J)}e_I=\sum_{I\in [m]^n}a_{I,J}e_{\sigma(I)}.$$
             As a summary, $\varphi\in C(A)$ if and only if $a_{I,\sigma(J)}=a_{\sigma^{-1}(I),J}$ if and only if $a_{\sigma(I),\sigma(J)}=a_{I,J}$ for any $I,J\in[m]^n$ and $\sigma\in\mathfrak{S}_n$.
         
@@ -3825,7 +3825,8 @@
         \end{equation*}
         it is straightforward to verify that they are inverse to each other.
     \end{proof}
-    In the next week, we apply this construction to study induction and restriction of representations.
+    In the next week, we apply this construction to study the induction and restriction of representations.
+    
 \separline{week 12}
     \textbf{General setup:}
         Let $A$ be a $K$-algebra and $B \subseteq A$ be a subalgebra. We look at $A \in \tensor[_A]{\Mod}{_B}$. The right $B$-module structure comes from the regular right $A$-module structure on $A$. Let $X \in \tensor[_A]{\Mod}{^{}}, Y \in \tensor[_B]{\Mod}{^{}}$. We define the induction and restriction as follows:
@@ -3836,13 +3837,83 @@
         \end{split}
         \end{equation*}
     
-    In this setup, the Cartan isomorphism with $M = A \in \tensor[_A]{\Mod}{_B}$ gives:
-    \begin{equation*}
-        \Hom_A(\Ind_B^A(Y),X) \cong \Hom_B(Y,\Res_B^A(X))
-    \end{equation*}
+        In this setup, the Cartan isomorphism with $M = A \in \tensor[_A]{\Mod}{_B}$ gives:
+        \begin{equation*}
+            \Hom_A(\Ind_B^A(Y),X) \cong \Hom_B(Y,\Res_B^A(X))
+        \end{equation*}
 
     \textbf{Special case:}
+        We consider the case where $H \subseteq G$ is a subgroup of the finite group $G$, $X \in \rep G$ and $Y \in \rep H$. In this setup $\Ind_H^G(Y) \in \rep G$ is called the induced representation of $Y$ and $\Res_H^G(X) \in \rep H$ is called the restricted representation of $X$.
 
+        Note that the restriction is given by the inclusion $H \hookrightarrow G \to \GL(X)$. The reason for this is the isomorphism of $B$-modules
+        \begin{equation*}
+        \begin{split}
+            \Hom_A(A,X) &\to X \\
+            \varphi &\mapsto \varphi(1)
+        \end{split}
+        \end{equation*}
+        The above isomorphism gives:
+        \begin{corollary}{Frobenius reciprocity}{4.6}
+            With the notation from above, we have:
+            \begin{equation*}
+                \Hom_G(\Ind_H^G(Y),X) \cong \Hom_H(Y,\Res_H^G(X))
+            \end{equation*}
+            as $H$-reps.
+        \end{corollary}
+
+        \begin{proof}[Proof of corollary \ref{cor:4.6}]
+            Set $A = \C[G]$ and $B = \C[H]$ in propositon \ref{prop:4.5}. Since there is an equivalence of categories $\rep G$ and $ \C[G]-\Mod$ (each $G$ representation corresponds $1:1$ to a $\C[G]$-module and the morphism of $G$-reps are exactly the $\C[G]$-module homomorphism) we are done.
+        \end{proof}
+
+        We explain it 9in a numerical way using characters, where the name "reciprocity" is clear. We let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
+        
+        Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciporcity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
+        \begin{equation*}
+            \spitz{\chi_{\Res_H^G(S)},\chi_T}_H = \spitz{\chi_S,\chi_{\Ind_H^G(T)}}_G
+        \end{equation*}
+        which means that the multiplicity of $S$ in $\Ind_H^G(T)$ is the same as the multiplicity of $T$ in $\Res_H^G(S)$.
+
+        If we take $G=S_n$, $H = S_{n-1} \in S_n$, the embedding of $S_{n-1}$ in $S_n$ from the inclusion $[n-1] \hookrightarrow [n]$, then we get
+        \begin{theorem}{}{4.7}
+            For $V \in \Irr(S_n)$, $\Res_H^G(V) \in \rep(S_{n-1})$ is multiplicity free.
+
+            That is to say for all $S \in \Irr(S_{n-1}): \spitz{\chi_{\Res_H^G(V)},\chi_S}_H \leq 1$.
+        \end{theorem}
+
+        \begin{proof}{Proof omitted}
+        \end{proof}
+
+        This theorem is the starting point of the Okounkov-Vershik approach to the representation theory of the symmetric group. For details, see the paper \cite{VershikOkounkov.2005}
+
+\section{Chain complexes and projective resolutions}
+    We are going to the heart of homological algebra: (co)chain complexes and their (co)homology. Let $A$ be a $K$-algebra.
+
+    \subsection{Chain complexes and their homology}
+        \begin{definition}{}{}
+            \begin{enumerate}
+                \item A chain complex $(C_\bullet, d^C_\bullet)$ of $A$-modules consists of a collection of $A$-modules $\{ C_n \ | \  n \in \Z \}$ and $A$-module homomorphisms $d_i^C: C_i \to C_{i-1}$ such that for any $i$, $d_{i-1}^C \circ d_i^C = 0$. We usually write it in a diagram:
+                \begin{equation*}
+                \xymatrix {
+                    \dots \ar[r]^{d_{i+1}^C} & C_i \ar[r]^{d_{i}^C} & C_{i-1} \ar[r]^{d_{i-1}^C} & \dots
+                }
+                \end{equation*}
+                Elements in $C_i$ are called chains of degree $i$, and the maps $d_i^C$ are called differentials, or boundary maps.
+                \item A cochain complex $(C^\bullet,d^\bullet_C)$ of $A$-modules consists of a collection of $A$-mods $\{C^n \ | \ n \in \Z \}$ and $A$-module homomorphisms $d_C^i: C^i \to C^{i+1}$ such that for any $i$, $d_C^{i+1} \circ d_C^{i} = 0$. Again we can formulate this by means of a diagram
+                \begin{equation*}
+                \xymatrix {
+                    \dots \ar[r]^{d^{i-2}_C} & C^{i-1} \ar[r]^{d^{i-1}_C} & C^i \ar[r]^{d^{i}_C} & \dots
+                }
+                \end{equation*}
+                Elements in $C^i$ are called cochains of degree $i$ and the maps $d_C^i$ are called differentials.
+            \end{enumerate}
+        \end{definition}
+
+        This notion of chain and cochain complexes comes from algebraic topology. Homological algebra was initially developed to tackle problems from topology.
+
+        \begin{remark}{}{4.9}
+            
+        \end{remark}
+        
     \begin{lemma}{Horseshoe Lemma}{4.24}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
         \begin{equation*}
