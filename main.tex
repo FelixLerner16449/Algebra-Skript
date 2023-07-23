@@ -3911,8 +3911,104 @@
         This notion of chain and cochain complexes comes from algebraic topology. Homological algebra was initially developed to tackle problems from topology.
 
         \begin{remark}{}{4.9}
-            
+            \begin{enumerate}
+                \item If $(C_\bullet,d_\bullet^C)$ is a chain complex, then letting $C^n:=C_{-n}$ and $d_C^i:=d_{-i}^C$ defines a cochain complex $(C^\bullet,d^\bullet_C)$ (verify this!). So in some sense chain complexes and cochain complexes are the same thing.
+                \item A chain complex with only finitely many non-zero terms is called bounded.
+            \end{enumerate}
         \end{remark}
+
+        In the following, we will mainly focus on chain complexes. You should write down the cochain versions as a long-term exercise.
+
+        Notice that from the (only nontrivial) condition $d_{i-1}^C \circ d_i^C = 0$ it follows that $\im d_i^C \subseteq \ker d_{i-1}^C$ is a submodule.
+
+        \begin{definition}{}{4.10}
+            \begin{enumerate}
+                \item We denote $Z_i(C_\bullet):= \ker d_i^C \subseteq C_i, B_i(C_\bullet):=\im d_{i+1}^C \subseteq C_i$ and $H_i(C_\bullet):= Z_i(C_\bullet)/B_i(C_\bullet)$. Elements in $Z_i(C_\bullet)$ are called $i$-\textbf{cycles} and elements in $B_i(C_\bullet)$ are called $i$-\textbf{boundaries}. The $A$-module $H_i(C_\bullet)$ is called the $i$-th \textbf{homology group} of the complex $C_\bullet$. For $z \in Z_i(C_\bullet)$ we denote its class in $H_i(C_\bullet)$ by $[z]$.
+                
+                \item If $H_i(C_\bullet) = \{0\}$ we say that the complex is \textbf{exact} at degree $i$.
+                
+                \item The complex $C_\bullet$ is called acyclic if it is exact at all degrees. In this case, $C_\bullet$ is usually called an \textbf{exact sequence}.
+    
+                \item An exact sequence of $A$-modules and homomorphisms $\xymatrix@C=15pt{0 \ar[r] & X \ar[r] & Y \ar[r] & Z \ar[r] & 0}$ is called a short exact sequence (s.e.s. for short).
+            \end{enumerate}
+        \end{definition}
+
+        \begin{exercise}{}{20}
+            Show that
+            \begin{equation*}
+                \xymatrix@C=15pt {
+                    0 \ar[r] & X \ar[r]^f & Y \ar[r]^g & Z \ar[r] & 0
+                }
+            \end{equation*}
+            is a s.e.s. if and only if $f$ is injective, $g$ is surjective and $\im f = \ker g$.
+        \end{exercise}
+        \begin{proof}
+            We have seen this in Linear Algebra 1 \cite{LA}. Just note that $H_i(C_\bullet) = \{0\}$ if and only if $\ker d_i^C =: Z_i(C_\bullet) = B_i(C_\bullet) := \im d_{i+1}^C$, hence our definition of an exact sequence is equivalent to the one from Linear Algebra.
+        \end{proof}
+
+        \begin{definition}{}{4.11}
+            A homomorphism $f_\bullet$ between to chain complexes $(C_\bullet,d_\bullet^C)$ and $(D_\bullet,d_\bullet^D)$ is a sequence of $A$-module homomorphisms $f_n: C_n \to D_n$ such that for any $i$, $f_{i-1} \circ d_i^C = d_i^D \circ f_i$. By means of a diagram:
+            \begin{equation*}
+            \xymatrix {
+                \dots \ar[r]^{d_{i+1}^C} & C_i \ar[r]^{d_i^C} \ar[d]_{f_i} & C_{i-1} \ar[r]^{d_{i-1}^C} \ar[d]^{f_{i-1}} & \dots \\
+                \dots \ar[r]^{d_{i+1}^D} & D_i \ar[r]^{d_{i}^D} \ar@{}[ur]|{\circlearrowleft} & D_{i-1} \ar[r]^{d_{i-1}^D}& \dots 
+            }
+            \end{equation*}
+        \end{definition}
+        Such a homomorphism is usually called a \textbf{chain map}. Homomorphisms between chain complexes induce homomorphisms between homology groups.
+
+        \begin{lemma}{}{4.12}
+            Let $f_\bullet: C_\bullet \to D_\bullet$ and $g_\bullet: D_\bullet \to E_\bullet$ be two chain maps.
+            \begin{enumerate}
+                \item For all $i \in \Z$, $f_\bullet$ induces a homomorphism of $A$-modules:
+                    \begin{equation*}
+                        H_i(f_\bullet): H_i(C_\bullet) \to H_i(D_\bullet)
+                    \end{equation*}
+                \item For any $i \in Z$, $H_i(g_\bullet \circ f_\bullet) = H_i(g_\bullet) \circ H_i(f_\bullet)$
+            \end{enumerate}
+        \end{lemma}
+
+        \begin{remark*}{abstract nonsense -F}
+            In the language of category theory, this means that $H_i(\bullet)$ is a covariant functor from the category of chain complexes (check that this is a category!) to the category of $A$-modules.
+        \end{remark*}
+
+        \begin{proof}[Proof of Lemma \ref{lem:4.12}]
+            For \textit{(1)} we need to define an $A$-module homomorphism
+            \begin{equation*}
+                Z_i(C_\bullet)/B_i(C_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)
+            \end{equation*}
+            We start by defining a map from $Z_i(C_\bullet) \to Z_i(D_\bullet)$. For this, take $z_i \in C_i$ with $d_i^C(z_i) = 0$. We show that $f_i(z_i) \in Z_i(D_\bullet)$, i.e. $d_i^D(f_i(z_i)) = 0$. Since $f_\bullet$ is a homomorphisms of chain complexes, $d_i^D(f_i(z_i)) = f_{i-1}(d_i^C(z_i)) = 0$. Or by means of a diagram:
+            \begin{equation*}
+            \xymatrix {
+                C_i \ar[r]^{d_i^C} \ar[d]_{f_i} & C_{i-1} \ar[d]^{f_{i-1}}\\
+                D_i \ar[r]^{d_{i}^D} \ar@{}[ur]|{\circlearrowleft} & D_{i-1}
+            }
+            \end{equation*}
+
+            Now by composing with the canonical surjection $\pi: Z_i(D_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)$, we obtain an $A$-module homomorphsim $Z_i(C_\bullet) \to H_i(D_\bullet)$.
+
+            It suffices to show that the image of $B_i(C_\bullet) \subseteq Z_i(C_\bullet)$ under this map is zero. We take $b_i \in B_i(C_\bullet)$, then there exists $c_{i+1} \in C_{i+1}$ such that $d_{i+1}^C(c_{i+1}) = b_i$. Then
+            \begin{equation*}
+                f_i(b_i) = f_i(d_{i+1}^C(c_{i+1})) = d_{i+1}^D(f_{i+1}(c_{i+1})) \in B_i(D_\bullet)
+            \end{equation*} and therefore $\eckig{f_i(b_i)} = 0$ hence we obtain an $A$-module homomorphism
+            \begin{equation*}
+            \begin{split}
+                H_i(f_\bullet): H_i(C_\bullet) &\to H_i(D_\bullet) \\ [z_i] &\mapsto [f_i(z_i)] 
+            \end{split}
+            \end{equation*}
+            The proof of the second statement is similar and we leave it as an exercise. 
+        \end{proof}
+
+        Similarily for a cochain complex $(C^\bullet,d_C^\bullet)$ we define:
+        \begin{itemize}
+            \item $Z^i(C^\bullet):= \ker d_C^i$, the \textbf{cocylces} of degree $i$ 
+            \item $B^i(C^\bullet):= \im d_C^{i-1}$, the \textbf{coboundaries} of degree $i$
+            \item $H^i(C^\bullet):= Z^i(C^\bullet)/B^i(C^\bullet)$, the $i$-th \textbf{cohomology group} of the complex $C^\bullet, d_C^\bullet$
+        \end{itemize}
+
+        Similar results as in Lemma \ref{lem:4.12} hold for the cohomology groups: a homomorphism $f^\bullet: C^\bullet \to D^\bullet$ of two cochain complexes (think about how to define it!) induces $H^i(f^\bullet): H^i(C^\bullet) \to H^i(D^\bullet)$.
+
+    \subsection{Projective modules}
         
     \begin{lemma}{Horseshoe Lemma}{4.24}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
@@ -3933,7 +4029,7 @@
             \dots \ar[r] & P_{n}^X \ar[r]^{d_n^X} & \ker d_{n-1}^X \ar[r] \ar[d]& 0 \\
             & & \ker d_{n-1}^Y \ar[d] \\
             \dots \ar[r] & P_{n}^Z \ar[r]^{d_n^Z} & \ker d_{n-1}^Z \ar[r] \ar[d] & 0 \\
-            & & \coker d_{n-1}^X = 0
+            & & \coker d_{n-1}^X = \{0\}
         }
         \end{equation*}
         where the vertical row is an exact sequence given by the Snake lemma. We repeat the base case of the induction to get a sequence
