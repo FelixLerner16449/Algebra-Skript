@@ -2736,7 +2736,7 @@
     \begin{equation*}
         m \tens ((rs)n) = (rs).(m \tens n) \overset{\star}{=} r.(s.(m \tens n)) = r.((ms) \tens n) = (ms) \tens (rn) = m \tens ((sr)n)
     \end{equation*}
-    where $\star$ denotes the point, where we assumed the $R$-module structure to be associative. Thus we only get an abelian group $M \tens N$.
+    where $\star$ denotes the point, where we assumed the $R$-module structure to be associative. Thus we only get an abelian group $M \tens N$. To use the language of \ref{cat}, the tensor functor for non-commutative rings is a mapping $R\Mod \to \Ab$.
 
     \begin{definition*}{Universal property of the noncommutative tensor product}{}
         Let $R$ be a ring and $M$ a right $R$-module and $N$ a left $R$-module. The tensor product is a map $\alpha: M \times N \to T$ such that for all abelian groups $Z$ and all $f \in \Bil_{\Z,R}(M;N,Z)$ there exists a unique $\overline{f}: M \tens N \to Z$ satisfying the following diagram
@@ -3264,7 +3264,7 @@
 
         How about the composition of endomorphisms?
 
-        The big direct sum can be organized in a matrix form. Let $M$ be an $n \times n$ matrix whose $(i,j)$-th entry is from $\Hom_A(M_j,M_i)$ ({\color{green}I believe this is the correct way, in the notes it says $\Hom_A(M_i,M_j)$ but I don't think this is right. Just write out the case $k=2$}). Moreover, we can multiply $M$ with another Matrix $M'$ of this form where the usual multiplication of scalars is replaced by the composition of maps. This gives a $\C$-algebra structure on the right-hand side.
+        The big direct sum can be organized in a matrix form. Let $M$ be an $n \times n$ matrix whose $(i,j)$-th entry is from $\Hom_A(M_j,M_i)$. Moreover, we can multiply $M$ with another Matrix $M'$ of this form where the usual multiplication of scalars is replaced by the composition of maps. This gives a $\C$-algebra structure on the right-hand side.
 
         \begin{exercise}{}{17}
             Prove that the above linear isomorphism is indeed an isomorphism, and show that it is a homomorphism of $\C$-algebras.
@@ -3519,8 +3519,8 @@
 
     Having mastered the material in this chapter, one can start reading the book of Weibel \cite{Weibel.2010} or the book of Rotman \cite{Rotman.2009}, both have the name "An Introduction to Homological Algebra".
 \setcounter{section}{-1}
-\section{Prelude - Categories}
-    This section is not part of the lecture. I just added it to introduce some basic language of category theory as I thought it might be interesting to "see the real world" as said by Mr. Schlösser.
+\section{Prelude - Categories}\label{cat}
+    This section is not part of the lecture. I just added it to introduce some basic language of category theory as I thought it might be interesting to "see the real world" - Michael Schlösser.
 
     When studying Algebra, one can notice a certain pattern:
     We define some (algebraic) structures and then study the maps between objects that preserve these structures.
@@ -3596,6 +3596,8 @@
                 Let $R$ be a ring. Then $\tensor[_R]{\Mod}{^{}}$ is the category of left $R$-modules where the objects are left $R$-modules and the morphisms are homomorphisms of left $R$-modules.
             \item
                 Let $G = (V,E)$ be a graph. With $\Obj(\cC) = V$ and $\Mor (\cC) = \{\text{paths in } G\}$ we indeed get a category. What goes wrong if $\Mor(\cC) = E$?
+            \item
+                $\cC = \Ab$ where objects are abelian groups and morphisms are homomorphisms of groups. This is one of the most important categories, as it is in some sense minimal with the property of being quite a tame category.
         \end{enumerate}
 
     \begin{remark*}{}
@@ -3624,7 +3626,7 @@
         We always have an identity map since $\leq$ is reflexive. One can check that the composition is associative.
     \end{example*}
     
-\subsection{Functors}
+\subsection{Functors}\label{functors}
     Realising that we just defined a structure we shall follow the pattern mentioned in the beginning and ask:
     What are the structure-preserving maps between categories?
 
@@ -3739,7 +3741,7 @@
             If $(\cF,\cG)$ is an adjoint pair of functors, then $\cF$ is left-exact if and only if $\cG$ is right-exact.
         \end{lemma*}
         
-        Since the $\Hom$-functor is left-exact, the tensor functor has to be right-exact. 
+        Since the $\Hom$-functor is left-exact \ref{prop:4.13}, the tensor functor has to be right-exact. 
 \section{Cartan isomorphism and applications}
 
     One of the main topics of homological algebra is the study of $\Hom$ and $\tens$ (functors) in the setup of bimodules. We fix $A,B,C,D$ to be $K$-algebras.
@@ -4009,7 +4011,152 @@
         Similar results as in Lemma \ref{lem:4.12} hold for the cohomology groups: a homomorphism $f^\bullet: C^\bullet \to D^\bullet$ of two cochain complexes (think about how to define it!) induces $H^i(f^\bullet): H^i(C^\bullet) \to H^i(D^\bullet)$.
 
     \subsection{Projective modules}
+        The easiest $A$-modules are the free $A$-modules which are (most of the time infinite) direct sums of $A$. Free modules are rare $A$-modules. Those $A$-modules, which are not that rare but still easy are the projective modules. They are categorical notions.
+
+        \begin{proposition}{}{4.13}
+            Let $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ be a s.e.s. of $A$-modules and $M$ an $A$-module. The following sequences of $K$-vector spaces are exact:
+            \begin{enumerate}
+                \item
+                    \begin{equation*}
+                    \xymatrix{
+                        0 \ar[r] & \Hom_A(M,X) \ar[r]^{f_*} & \Hom_A(M,Y) \ar[r]^{g_*}  & \Hom_A(M,Z)
+                    }
+                    \end{equation*}
+                \item
+                    \begin{equation*}
+                    \xymatrix {
+                        0 \ar[r]& \Hom_A(Z,M) \ar[r]^{g^*} & \Hom_A(Y,M) \ar[r]^{f^*} & \Hom_A(X,M)
+                    }
+                    \end{equation*}
+            \end{enumerate}
+            where $f_*(\varphi) = f \circ \varphi$, analogously with $g_*$. We have seen $f^*$, $g^*$ in \ref{functors} already.
+        \end{proposition}
+
+        \begin{proof}
+            See the following two propositions.
+        \end{proof}
+
+        We say that the covariant Homfunctor is \textbf{left-exact} since it preserves injective maps.
+
+        Since the contravariant Homfucntor sends surjective maps to injective maps, it is also \textbf{left-exact}.
+
+        \begin{proposition*}{Stronger version of proposition \ref{prop:4.13} part 1 -F}
+            Let $R$ be a ring. Then the following are equivalent.
+            \begin{enumerate}
+                \item The sequence $0 \to L \xrightarrow{f} M \xrightarrow{g} N$ is exact.
+                \item For all $X \in R\Mod:
+                0 \to \Hom_R(X,L) \xrightarrow{f_*} \Hom_R(X,M) \xrightarrow{g_*} \Hom_R(X,N)$ is exact.
+            \end{enumerate}
+        \end{proposition*}
+
+        \begin{proof}
+            For both directions we have to show $2$ parts:
+        \begin{enumerate}
+            \item $f$ (or $f_*$) is injective
+            \item $\Img f =\Ker g$, $\Img f_* = \Ker g_*$
+        \end{enumerate}
+        ''$\Rightarrow$'': Take $X \in R\Mod$.
+        Let us assume that $\varphi \in \Ker f_* \subseteq \Hom(X,L)$.
+        That means $f \circ \varphi = 0 \in \Hom(X,M)$. But since $f$ is injective, $\varphi = 0 \in \Hom(X,L)$.
+
+        Take $\varphi \in \Img f_*$, then we can write $\varphi = f_* (\tau) = f \circ \tau$, hence
+        $g_*(\varphi) = g(f(\tau)) = 0$, hence $\Img f_* \subseteq \Ker g_*$.
+        For the other inclusion take $v \in \Ker g_* \subseteq \Hom(X,M)$, hence $g \circ v = 0$.
+        First note that since the sequence $L \xrightarrow{f} M \xrightarrow{g} N$ is exact, $f$ satisfies the
+        universal property of the kernel. But so does $v$, hence $v$ factors through $f$, id est there exists a unique $u \in \Hom(X,L)$, such that
+        \begin{equation*}
+            \xymatrix {
+                X \ar[r]^{v} \ar@{.>}[dr]_{u} & M\ar[r]^{g} & N \\
+                 & L \ar[u]^{f} \ar[ur]_{0}
+            }
+        \end{equation*}
+        commutes. Hence $v = f \circ u = f_*(u) \in \Img f_*$.
+
+        ''$\Leftarrow$'':
+        For the injectivity of $f$, take $X = \Ker f$ and $i: \Ker f \hookrightarrow L$, then
+        $f_*(i) = 0$, since $f_*$ is injetive, $i=0$, since $i$ is an embedding $\Ker f = \{0\}$.
+
+        For $\Img f \subseteq \Ker g$ take $X = L$, we have
+        \begin{equation*}
+            0 = (g_* \circ f_*)(\id_L) = g \circ f
+        \end{equation*}
+        On the other hand, take $X = \Ker g$ and $i: \Ker g \hookrightarrow M$. We have:
+        \begin{equation*}
+            \begin{split}
+                g(i) = 0 &\implies i \in \Ker g_* = \Img f_* \implies \exists \tau \in \Hom(X,L): i = f_*(\tau) = f(\tau) \\
+                        &\implies \Ker g = \Img i \subseteq \Img f
+            \end{split}
+        \end{equation*}
+        \end{proof}
         
+        The analogous statements hold for the contravariant Hom functor:
+        \begin{proposition*}{Stronger version of \ref{prop:4.13} part 2 -F}
+            Let $R$ be a ring. The following are equivalent:
+            \begin{itemize}
+                \item The sequence $L \xrightarrow{f} M \xrightarrow{g} N \to 0$ is exact.
+                \item For all $X \in R \Mod: 0 \to \Hom_R(N,X) \xrightarrow{g^*} \Hom_R(M,X) \xrightarrow{f^*} \Hom_R(L,X)$ is exact.
+            \end{itemize}
+        \end{proposition*}
+
+        \begin{proof}
+        ''$\Rightarrow$'': Take any $X \in R\Mod$. Now let us assume that $g^*(\tau) = 0$ for some $\tau \in \Hom(N,X)$,
+        then $\tau \circ g = 0$, because $g$ is surjective, $\tau = 0$, hence $g^*$ is injective.
+
+        Take $\tau \in \Hom(N,X)$, then $f^* \circ g^* (\tau) = f^*(\tau \circ g) = \tau \circ g \circ f = 0$.
+        This means $\Img g^* \subseteq \Ker f^*$.
+
+        For the other inclusion, take $\varphi \in \Ker f^* \subseteq \Hom(M,X)$. That means $\varphi \circ f = 0$,
+        hence $\varphi$ satisfies the universal property of the cokernel of $f$:
+        \begin{equation*}
+        \xymatrix {
+            X & M \ar[l]_{\varphi} \ar[d]^{g} & \ar[l]_{f} L \\
+            & N \ar@{.>}[ul]^{\exists ! \psi} & 
+        }
+        \end{equation*}
+        Hence $\varphi$ factors through $g$, which means $\varphi = \psi \circ g = g^*(\psi)$.
+        This means $\ker f^* \subseteq \Img g^* $.
+
+        ''$\Leftarrow$'': Take $X = \Coker g$, then $\pi: N \twoheadrightarrow N/\Img g = \Coker g$.
+        We have $g^*(\pi) = \pi \circ g = 0$, hence $\pi \in \Ker g^* $.
+        Because $g^*$ is injective, $\pi = 0 \implies \Img g = N$.
+
+        Take $X = N$, then $f^* \circ g^* (\id_N) = f^* (g) = g \circ f = 0$,
+        which means $\Img f \subseteq \Ker g$.
+
+        For the other inclusion take $X = \Coker f = M/\Img f$. Take $\pi: M \twoheadrightarrow M/\Img f \in \Hom(M,\Coker f)$.
+        Clearly $f^* \circ \pi = \pi \circ f = 0 \implies \pi \in \Ker f^* = \Img g^*$. Hence there exsits a $\tau \in \Hom(N,\Coker f): \pi = g^* \circ \tau = \tau \circ g$.
+        Now $\Ker g \subseteq \Ker \pi  = \Img f $. 
+    \end{proof}
+
+    \begin{definition}{Projective Module}{4.14}
+        An $A$-module $P$ is called projective, if $\Hom_A(P,-)$ sends exact sequences to exact sequences. I.e. the covariant Homfunctor $\Hom_A(P,-)$ is \textbf{exact}.
+    \end{definition}
+
+    We expand this definition. According to the above proposition \ref{prop:4.13}, a module $P$ is projective if and only if for any surjective map $g: Y \to Z$, $g_*: \Hom_A(P,Y) \to \Hom_A(P,Z)$ is surjective. This is equivalent to say that $\varphi: P \to Z$ factors through $g$, i.e. for any $\varphi: P \to Z$ there exists $\rho:P \to Z$ such that $g \circ \rho = \varphi$.
+
+    \begin{equation*}
+    \xymatrix {
+        & P \ar[d]^{\forall \varphi} \ar[dl]_{\exists \rho}^{\circlearrowleft} \\
+        Y \ar[r]_g & Z \ar[r] & 0
+    }
+    \end{equation*}
+
+    In the notes there is an $\exists!$, but this is incorrect, for example, take $P$ to be free and $g$ to have non-trivial kernel, then the image of $\rho$ in $Y$ can be chosen up to an element of the kernel of $g$, hence $\rho$ need to be unique.
+
+    \underline{Summary}: Maps form a projective module to the target of a surjective map can be lifted (along that map?) to the source.
+
+    \begin{example}{}{}
+        Free $A$-modules are projective. Let $F$ be a free $A$-module with basis $(f_i)_{i \in I}$ and $g: Y \to Z$ a surjective $A$-module homomorphism. Given $\varphi: F \to Z$, we denote $z_i:= \varphi(f_i)$ and $y_i \in Y$ be a preimage of $z_i$ (axiom of choice!), for any $i \in I$. Then $\rho: F \to Y, f_i \mapsto y_i$ is the lifiting of $\varphi$ with $g \circ \rho = \varphi$. Hence $F$ is projective.
+    \end{example}
+
+    We will give different characterizations of projective modules. For this we need the notion of a split exact sequence.
+
+    \begin{definition}{Split exact sequence}{4.16}
+        A s.e.s. (short exact, not split exact!) $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ of $A$-modules and homomorphisms is called split, if there exists $r \in \Hom_R(Z,Y)$ such that $g \circ r = \id_Z$.
+    \end{definition}
+
+    Note that a right-inverse of $g$ always exists, but if there is one, that is also a homomorphism of $R$-modules (which is not always the case), only then the sequence is split. This also means that in the category $\mathrm{Set}$ every short exact sequence splits.
+    
     \begin{lemma}{Horseshoe Lemma}{4.24}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
         \begin{equation*}
