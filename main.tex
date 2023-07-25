@@ -858,10 +858,8 @@
         Before going to the proof, we study the minimal polynomial of $\zeta_n$. We recall the $n$-th cyclotomic polynomial:
         
         \begin{equation*}
-            \Phi_n(x) := \prod_{ \begin{array}{c}
-                 \zeta \text{ primitive }  \\
-                 n \text{-th root of unity} 
-            \end{array}
+            \Phi_n(x) := \prod_{ \substack{\zeta \text{ primitive } \\
+            n \text{-th root of unity}}
             } (x-\zeta) 
         \end{equation*}
         
@@ -3724,13 +3722,15 @@
         \end{equation*}
         
     \subsection{Adjoint functors}
+    
         \begin{definition*}{adjoint functors}
-            Let $\cC,\cD$ be two categories and $\cF: \cC \to \cD, \cG: \cD \to \cC$ be two functors. The pair $(\cF,\cG)$ is an \textbf{adjunction of categories} $\cC$ and $\cD$ if for all $X \in \Obj(\cC), Y \in \Obj(\cD)$ there is an isomorphisms of \underline{sets}
+            Let $\cC,\cD$ be two categories and $\cF: \cC \to \cD, \cG: \cD \to \cC$ be two functors. The pair $(\cF,\cG)$ is an \textbf{adjunction of categories} $\cC$ and $\cD$ if for all $X \in \Obj(\cC), Y \in \Obj(\cD)$ there is an isomorphisms of \underline{sets}:
             \begin{equation*}
-                \Mor_\cC(X,\cG Y) \cong \Mor_\cD(\cF X,Y).
+                \Mor_\cC(X,\cG Y) \cong \Mor_\cD(\cF X,Y)
             \end{equation*}
-            Furthermore, $\cF$ is called a \textbf{left adjoint} (functor) to $\cG$ and respectively $\cG$ is a \textbf{right adjoint} (functor) to $\cF$.
+            Furthermore, $\cF$ is called a \textbf{left adjoint} (functor) to $\cG$ and respectively $\cG$ is called a \textbf{right adjoint} (functor) to $\cF$.
         \end{definition*}
+        
         The $\Hom$-functor $\Hom(A,\bullet)$ and the tensor functor $A \tens_R \bullet$ are adjoint, since
         \begin{equation*}
             \Hom(X,\Hom(Y,Z)) \cong \Hom(X \tens Y, Z)
@@ -4134,16 +4134,16 @@
 
     We expand this definition. According to the above proposition \ref{prop:4.13}, a module $P$ is projective if and only if for any surjective map $g: Y \to Z$, $g_*: \Hom_A(P,Y) \to \Hom_A(P,Z)$ is surjective. This is equivalent to say that $\varphi: P \to Z$ factors through $g$, i.e. for any $\varphi: P \to Z$ there exists $\rho:P \to Z$ such that $g \circ \rho = \varphi$.
 
-    \begin{equation*}
+    \begin{equation}\tag{$P$}\label{proj}
     \xymatrix {
         & P \ar[d]^{\forall \varphi} \ar[dl]_{\exists \rho}^{\circlearrowleft} \\
         Y \ar[r]_g & Z \ar[r] & 0
     }
-    \end{equation*}
+    \end{equation}
 
-    In the notes there is an $\exists!$, but this is incorrect, for example, take $P$ to be free and $g$ to have non-trivial kernel, then the image of $\rho$ in $Y$ can be chosen up to an element of the kernel of $g$, hence $\rho$ need to be unique.
+    In the notes, there is an $\exists!$, but this is incorrect, for example, take $P$ to be free and $g$ to have a non-trivial kernel, then the image of $\rho$ in $Y$ can be chosen up to an element of the kernel of $g$, hence $\rho$ need to be unique.
 
-    \underline{Summary}: Maps form a projective module to the target of a surjective map can be lifted (along that map?) to the source.
+    \underline{Summary}: Maps from a projective module to the target of a surjective map can be lifted (along that map?) to the source.
 
     \begin{example}{}{}
         Free $A$-modules are projective. Let $F$ be a free $A$-module with basis $(f_i)_{i \in I}$ and $g: Y \to Z$ a surjective $A$-module homomorphism. Given $\varphi: F \to Z$, we denote $z_i:= \varphi(f_i)$ and $y_i \in Y$ be a preimage of $z_i$ (axiom of choice!), for any $i \in I$. Then $\rho: F \to Y, f_i \mapsto y_i$ is the lifiting of $\varphi$ with $g \circ \rho = \varphi$. Hence $F$ is projective.
@@ -4156,6 +4156,172 @@
     \end{definition}
 
     Note that a right-inverse of $g$ always exists, but if there is one, that is also a homomorphism of $R$-modules (which is not always the case), only then the sequence is split. This also means that in the category $\mathrm{Set}$ every short exact sequence splits.
+
+    \begin{lemma}{}{4.17}
+        If the s.e.s. $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ splits, then $Y \cong X \oplus Z$ as $A$-modules.
+    \end{lemma}
+    Actually, the converse is also true. We will see this later, though we could have also proven it right here.
+    \begin{proof}[Proof of Lemma \ref{lem:4.17}]
+        This means there exists $h \in \Hom_A(Z,Y)$ such that $g \circ h = \id_Z$. Now write any $y \in Y$ as $y = y - h \circ g (y) + h \circ g (y)$. We have $y \in h \circ g (y) \in \ker g$ and $g(y) \in \im h$. Hence $Y = \ker g + \im h$. Now let us show that the sum is direct. Take $y \in \ker g \cap \im h$. Then we can write $y = h(z)$ for some $z \in Z$. But since $y \in \ker g$, we have:
+        \begin{equation*}
+            0 = g(y) = g \circ h (z) = z
+        \end{equation*}
+        hence $y = h(z) = 0$. Thus $Y = \ker g \oplus \im h$. Now $\ker g = \im f \cong X$ and $\im h \cong Z$, since $h$ is injective. So we get $Y \cong X \oplus Z$ as $A$-modules.
+    \end{proof}
+
+    \begin{example}{}{4.18}
+        Given two $A$-modules $X$ and $Z$, the s.e.s.
+        \begin{equation*}
+            \xymatrix {
+                0 \ar[r] & X \ar[r]^{\iota_X} & X \oplus Z \ar[r]^{\pi_Z} & Z \ar[r]& 0
+            }
+        \end{equation*}
+        is split, since $\iota_Z \in \Hom_A(Z,Z \oplus X)$ and $\pi_Z \circ \iota_Z = \id_Z$
+    \end{example}
+
+    \begin{proposition}{}{4.19}
+        Let $P$ be an $A$-module, then the following are equivalent.
+        \begin{enumerate}
+            \item $P$ is projective
+            \item Any s.e.s. $0 \to X \xrightarrow{f} Y \xrightarrow{g} P \to 0$ splits
+            \item $P$ is isomorphic to a direct summand of a free $A$-module. That is to say, there exists a free $A$-module $F$ and an $A$-module $M$ such that $F \cong P \oplus M$ as $A$-modules.
+        \end{enumerate}
+    \end{proposition}
+    Some parts of the following proof differ from the one in the notes.
+    \begin{proof}[Proof of Proposition \ref{prop:4.19}]
+        
+        $(1) \Rightarrow (2):$ Choosing $Z = P$ in \eqref{proj}, $\id_P$ factors through $g$, hence there is a $h \in \Hom_A(P,Y)$ such that $g \circ h = \id_P$, this means the sequence $0 \to X \xrightarrow{f} Y \xrightarrow{g} P \to 0$ splits.
+
+        $(2) \Rightarrow (3):$ Let $(p_i)_{i \in I}$ be a set of generators for $P$, then we have a short exact sequence
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r] & \ker \pi \ar[r] & A^{(I)} \ar[r]^{\pi} & P \ar[r] & 0
+        }
+        \end{equation*}
+        where $A^{(I)}:=\{f: I \to A \ | \ \# \supp f < \infty \}$ and $\pi(e_i) := p_i$. By $(2)$, $P \oplus \ker \pi \cong A^{(I)}$. Since $A^{(I)}$ is a free $A$-module, we are done.
+
+        $(3) \Rightarrow (1):$ We show the property \eqref{proj}. So let $g: Y \to Z$ be an epimorphism and $\varphi: P \to Z$ a homomorphism of $A$-modules. Since $P$ is a direct summand of a free $A$-module $F$, there are two maps $\iota_P: P \to F$ and $\pi_P: F \to P$, such that $\pi_P \circ \iota_P = \id_P$. Consider the diagram
+        \begin{equation*}
+        \xymatrix {
+            & F \ar[d]_{\pi_P} \\
+            & P \ar@/_1.0pc/@{.>}[u]_{\iota_P} \ar[d]^{\varphi} \\
+            Y \ar[r]^g & Z \ar[r] & 0
+        }
+        \end{equation*}
+        Since $F$ is projective, there is a map $\psi: F \to Y$ such that $g \circ \psi = \varphi \circ \pi_P$. Now we set $\rho := \psi \circ \iota_P$ (this is wrong in the notes). We get:
+        \begin{equation*}
+            g \circ \rho = g \circ \psi \circ \iota_P = \varphi \circ \pi_P \circ \iota_P = \varphi \circ \id_P = \varphi
+        \end{equation*}
+        or by means of a diagram:
+        \begin{equation*}
+        \xymatrix {
+            & F \ar[d]_{\pi_P} \ar@/_0.79pc/[ddl]_{\psi} \\
+            & P \ar@/_1.0pc/@{.>}[u]_{\iota_P} \ar[d]^{\varphi} \ar@{.>}[dl]_{\rho} \\
+            Y \ar[r]^g & Z \ar[r] & 0
+        }
+        \end{equation*}
+    \end{proof}
+
+    \begin{exercise}{}{21}
+        Let $A$ be a finite-dimensional semisimple $\C$-algebra and $M$ an $A$-module. Then $M$ is a projective $A$-module.
+    \end{exercise}
+
+    \begin{proof}
+        Let $m_i$ for $i \in I$ be a set of generators of $M$. Consider the map $\varphi: A^{(I)} \to M, e_i \mapsto m_i$. This is clearly surjective. Hence we have an exact sequence
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r]& \ker \varphi \ar[r]^\iota & A^{(I)} \ar[r]^\varphi& M \ar[r]& 0
+        }
+        \end{equation*}
+        Since $A^{(I)}$ is a semisimple $A$-module, $M \subseteq A^{(I)}$ has a complement $N$. In particular, $A^{(I)} \cong M \oplus N$, since $A^I$ is free, $M$ is projective by Proposition \ref{prop:4.19}.
+    \end{proof}
+
+\subsection{Projective resolutions}
+    The idea is to use projective modules and maps between them to study any arbitrary $A$-module and homomorphisms  between $A$-modules.
+
+    \begin{definition}{}{4.20}
+        Let $M$ be an $A$-module. A projective resoultion of $M$ is an exact sequence
+        \begin{equation*}
+            \xymatrix{
+                \dots \ar[r] & P_2 \ar[r]^{d_2} & P_1 \ar[r]^{d_1} & P_0 
+            }
+        \end{equation*}
+        of projective modules and an $A$-module homomorphism $\e: P_0 \to M$ such that the following sequence is exact:
+        \begin{equation*}
+        \xymatrix {
+            \dots \ar[r] & P_2 \ar[r]^{d_2} & P_1 \ar[r]^{d_1} & P_0 \ar[r]^{\e} & M \ar[r] & 0
+        }
+        \end{equation*}
+        We usually denote it by $P_\bullet \xrightarrow{\e} M \to 0$ and call $\e$ the agumentation map.
+    \end{definition}
+
+    First we deal with existence.
+
+    \begin{lemma}{}{4.21}
+        Let $M$ be an $A$-module. There exists a projective resoultion of $M$
+    \end{lemma}
+
+    \begin{proof}
+        We have seen in Cobra \cite{Cobra} that free resolutions exist. Since free modules are projective, we are done.
+    \end{proof}
+
+    Next we deal with the projective resolution of a $A$-module homomorphism $\varphi: M \to N$.
+
+    \begin{proposition}{}{4.22}
+        Let $P_\bullet \xrightarrow{\e} M \to 0$ be projective resolution of $M$ and $Q_\bullet \xrightarrow{\eta} N \to 0$ a long exact sequence. There exists a homomomorphism of chain complexes $\alpha_\bullet: P_\bullet \to Q_\bullet$ such that the following diagram (has exact rows) and commutes:
+
+        \begin{equation*}
+            \xymatrix {
+                \dots \ar[r] & P_2 \ar[r] \ar[d]_{\alpha_2} & P_1 \ar[r] \ar[d]_{\alpha_1} & P_0 \ar[r]^{\e} \ar[d]_{\alpha_0}& M \ar[r] \ar[d]_{\varphi} & 0 \\
+                \dots \ar[r] & Q_2 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_1 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_0 \ar[r]^{\eta} \ar@{}[ur]|{\circlearrowleft} & M \ar[r] & 0
+            }
+        \end{equation*}
+    \end{proposition}
+
+    \begin{proof}
+        We start from the following diagram and build up the ladder:
+        \begin{equation*}
+        \xymatrix {
+            P_1 \ar[r] & P_0 \ar[r]^{\e} \ar[dr]^{\varphi \e} \ar@{.>}[d]_{\alpha_0} & M \ar[r] \ar[d]^{\varphi} & 0 \\
+            Q_1 \ar[r] & Q_0 \ar[r]^{\eta} & N \ar[r]& 0
+        }
+        \end{equation*}
+        We get $\alpha_0$ since $P_0$ is projective (via \eqref{proj}) since $\eta: Q_0 \to N$ is surjective. This means the right square commutes. Next we examine the diagram
+        \begin{equation*}
+        \xymatrix {
+            P_2 \ar[r] & P_1 \ar[r]^{d_1^P} \ar@{.>}[d]_{\alpha_1} & P_0 \ar[r]^{\e} \ar[d]_{\alpha_0} & M \ar[r] \ar[d]^{\varphi} & 0 \\
+            Q_2 \ar[r] & Q_1 \ar[r]_{d_1^Q} \ar@{}[ur]|{\circlearrowleft} & Q_0 \ar[r]^{\eta} \ar@{}[ur]|{\circlearrowleft} & N \ar[r]& 0
+        }
+        \end{equation*}
+
+        To construct $\alpha_1: P_1 \to Q_1$ we consider $\im \alpha_0 d_1^P \subseteq \im d_1^Q = \ker \eta$ holds because $\e \circ d_1^P = 0$. From the projectivity of $P_1$ we have constructed $\alpha_1$ to satisfy the following diagram:
+        \begin{equation*}
+        \xymatrix {
+            & P_1 \ar@{.>}[dl]_{\alpha_1} \ar[d]^{\alpha_0 d_1^P} \\
+            Q_1 \ar[r]_{d_1^Q}& \im d_1^Q \ar[r] & 0
+        }
+        \end{equation*}
+        So the second square commutes. Repeating this construction gives $\alpha_\bullet: P_\bullet \to Q_\bullet$ which is a homomorphism of chain complexes by construction
+    \end{proof}
+
+    We have studied a single module, a homomorphsim (two modules). Next we move to three modules.
+
+    \begin{definition}{}{4.23}
+        Let $C_\bullet,C'_\bullet,C''_\bullet$ be three chain complexes. A s.e.s of chain complexes
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r] & C'_\bullet \ar[r]^{f_\bullet} & C_\bullet \ar[r]^{g_\bullet} & C''_\bullet \ar[r] & 0
+        }
+        \end{equation*}
+        
+        consists of maps of chain complexes $f_\bullet, g_\bullet$ such that for any fixed $n$
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r] & C'_n \ar[r]^{f_n} & C_n \ar[r]^{g_n} & C''_n \ar[r] & 0
+        }
+        \end{equation*}
+        is an exact sequence of $A$-modules.
+    \end{definition}
     
     \begin{lemma}{Horseshoe Lemma}{4.24}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
@@ -4165,11 +4331,50 @@
         }
         \end{equation*} is a short exact sequence of chain complexes.
     \end{lemma}
-
+    According to this lemma, short exact sequences can be "lifted" to projective resolutions. The name "horseshoe" comes from the proof.
+    
     \begin{proof}{Proof of Lemma \ref{lem:4.24}}
-        We argue via induction. We did the base case in the lecture, I will write that down later.
+        We argue via induction. For the base case  We need:
+        \begin{itemize}
+            \item a projective module $P_0^Y$
+            \item a surjective map $\e_Y: P_0^Y \to Y$
+            \item a s.e.s. $0 \to P_0^X \to P_0^Y \to P_0^Z \to 0$
+        \end{itemize}
+        satisfying the following diagram:
 
-        We consider the following diagram
+        \begin{equation*}
+        \xymatrix {
+            & & & 0 \ar[d] & 0 \ar[d] & \\
+            \dots \ar[r] & P_2^X \ar[r] & P_1^X \ar[r] & P_0^X \ar[d] \ar[r]^{\e_X} & X \ar[d]^f \ar[r] & 0 \\
+            & & & P_0^Y \ar[d] \ar[r]^{\e_Y} \ar@{}[ur]|{\circlearrowleft} & Y \ar[d]^g \ar[r] & 0 \\
+            \dots \ar[r] & P_2^Z \ar[r] & P_1^Z \ar[r] & P_0^Z \ar[d] \ar[r]^{\e_Z}\ar@{}[ur]|{\circlearrowleft} & Z \ar[d] \ar[r] & 0 \\
+            & & & 0 & 0
+        }
+        \end{equation*}
+       First, considering $(3)$, we have to set $P_0^Y:=P_0^X \oplus P_0^Z$ because of Proposition \ref{prop:4.19}, to have a split s.e.s., thus checking $(1)$ of the list (the sum of projective modules is projective using the characterisation from Proposition \ref{prop:4.19} (3)).
+       Next we tackle $(2)$. There already is a map $f \circ \e_X: P_0^X \to Y$. To define $\e_Y: P_0^Z \to Y$ we consider the following diagram
+
+       \begin{equation*}
+        \xymatrix {
+            & P_0^Z \ar@{.>}[dl]_{\lambda} \ar[d]^{\e_Z} \\
+            Y \ar[r]_{g}& Z \ar[r]& 0
+        }
+       \end{equation*}
+       Since $P_0^Z$ is projective, this $\lambda$ exists. Now we define
+       \begin{equation*}
+        \begin{split}
+            \e_Y: P_0^X \oplus P_0^Z &\to Y \\
+            (x,z) &\mapsto f \e_X(x) + \lambda(z)
+        \end{split}
+       \end{equation*}
+
+       It remains to show that $\e_Y$ is surjective and the squares commute.
+       
+       For the first part, take $y \in Y$ and choose $z \in P_0^Z$ such that $\e_Z(z) = g(y)$. Then $g(y - \lambda (z)) = g(y) - g \lambda (z) = \e_Z(z) - \e_Z(z) = 0$, hence $y - \lambda(z) \in \ker g = \im f$. So we write $y-\lambda(z) = f(\e_X(p))$ for some $p \in P_0^X$ since $\e_X$ is surjective. That is to say $\e_Y(p,z) = y$.
+
+       Secondly, the squares commute, since the maps of the two components commute (and the sum is direct).
+
+        For the induction step consider the following diagram
         \begin{equation*}
         \xymatrix {
                         &                          & 0 \ar[d] \\
@@ -4192,6 +4397,12 @@
         \end{equation*}
         Now we glue this diagram together with the one we get from the induction hypothesis and we are done.
     \end{proof}
+
+    The last question we want ot answer is: \textit{What is the relation between different projective resolutions?}
+
+    We want to use projective resolutions to study properties of $M$, so we need something which is independent of the choice of the projective resoultion. For this we introduce the notion of homotopy of chain complexes.
+
+    \separline{Week 13}
     
 \printbibliography
 \end{document}
