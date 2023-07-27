@@ -3129,10 +3129,15 @@
         First notice, that any element in $\End(S)$ is a linear combination of rank 1 endomorphisms. Indeed, fix a basis of $S$ to identify it with $M_{\dim S}(\C)$, then the elementary matrices $E_{i,j}$ are of rank 1.
 
         To show that $\rho$ is surjective, it suffices to show that all rank 1 endomorphisms are in $\rho(A)$.
-        Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\phi\in\rho(A)$. Without loss of generality, we assume $\phi$ to be of rank 1. Otherwise, apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
+        Since $\rho(1_A)=\id_S$, $\rho(A)\neq\curly{0}$ and we choose a nonzero endomorphism $\varphi\in\rho(A)$. Without loss of generality, we assume $\varphi$ to be of rank 1. Otherwise, apply the rank reduction \ref{lem:3.18}(3) until we get a rank 1 endomorphism.
 
-        Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\phi'$ has rank 1, we choose $S'$ a genarator of $\Img \phi'$ and $\alpha'\in S^*$ such that $\phi'(v) = \alpha'(v)s'$ 
-        
+        Let $\phi'$ be rank 1 endomorphism in $\End(S)$. Since $\varphi'$ has rank 1, we choose $S'$ a genarator of $\Img \varphi'$ and $\alpha'\in S^*$ such that $\varphi'(v) = \alpha'(v)s' \forall v\in S$. That is to say, the image of $\phi'\in\End(S)$ in $S\otimes S^*$ is $s\otimes a$. Similarly we denote by $s\otimes a$ the image of $\phi$ in $S\otimes S^*$. By \ref{lem:3.18}(1),(2), there exist $a,b \in A$ such that $s'=\rho(a)(s), \ \alpha'=\alpha \cdot \rho(b)$.
+
+        We claim that $\phi'=\rho(a)\circ \phi \circ \rho(b)$.
+
+        Indeed. $\forall v \in S$, $$\rho(a)\circ \phi \circ \rho(b)(v) = \rho(a)(\spitz{\alpha, \rho(b)(v)}s) = \alpha'(v)\rho(a)s = \alpha'(v)s' = \phi'(s)$$
+
+        Now if $\phi=\rho(c)$ for some $c\in A$, then $\phi'=\rho(acb)\in \rho(A)$. THerefore $\rho(A)$ contains all rank 1 endomorphisms.
     \end{proof}
 
     \subsection{Finite dimensional modules}
@@ -3983,7 +3988,7 @@
             \begin{equation*}
             \xymatrix {
                 C_i \ar[r]^{d_i^C} \ar[d]_{f_i} & C_{i-1} \ar[d]^{f_{i-1}}\\
-                D_i \ar[r]^{d_{i}^D} \ar@{}[ur]|{\circlearrowleft} & D_{i-1}
+                D_i \ar[r]_{d_{i}^D} \ar@{}[ur]|{\circlearrowleft} & D_{i-1}
             }
             \end{equation*}
 
@@ -4132,7 +4137,7 @@
         An $A$-module $P$ is called projective, if $\Hom_A(P,-)$ sends exact sequences to exact sequences. I.e. the covariant Homfunctor $\Hom_A(P,-)$ is \textbf{exact}.
     \end{definition}
 
-    We expand this definition. According to the above proposition \ref{prop:4.13}, a module $P$ is projective if and only if for any surjective map $g: Y \to Z$, $g_*: \Hom_A(P,Y) \to \Hom_A(P,Z)$ is surjective. This is equivalent to say that $\varphi: P \to Z$ factors through $g$, i.e. for any $\varphi: P \to Z$ there exists $\rho:P \to Z$ such that $g \circ \rho = \varphi$.
+    We expand this definition. According to the above proposition \ref{prop:4.13}, a module $P$ is projective if and only if for any surjective map $g: Y \to Z$, $g_*: \Hom_A(P,Y) \to \Hom_A(P,Z)$ is surjective. This is equivalent to saying that $\varphi: P \to Z$ factors through $g$, i.e. for any $\varphi: P \to Z$ there exists $\rho:P \to Z$ such that $g \circ \rho = \varphi$.
 
     \begin{equation}\tag{$P$}\label{proj}
     \xymatrix {
@@ -4141,7 +4146,7 @@
     }
     \end{equation}
 
-    In the notes, there is an $\exists!$, but this is incorrect, for example, take $P$ to be free and $g$ to have a non-trivial kernel, then the image of $\rho$ in $Y$ can be chosen up to an element of the kernel of $g$, hence $\rho$ need to be unique.
+    In the notes, there is an $\exists!$, but this is incorrect, for example, take $P$ to be free and $g$ to have a non-trivial kernel, then the image of $\rho$ in $Y$ can be chosen up to an element of the kernel of $g$, hence $\rho$ need not be unique.
 
     \underline{Summary}: Maps from a projective module to the target of a surjective map can be lifted (along that map?) to the source.
 
@@ -4149,7 +4154,7 @@
         Free $A$-modules are projective. Let $F$ be a free $A$-module with basis $(f_i)_{i \in I}$ and $g: Y \to Z$ a surjective $A$-module homomorphism. Given $\varphi: F \to Z$, we denote $z_i:= \varphi(f_i)$ and $y_i \in Y$ be a preimage of $z_i$ (axiom of choice!), for any $i \in I$. Then $\rho: F \to Y, f_i \mapsto y_i$ is the lifiting of $\varphi$ with $g \circ \rho = \varphi$. Hence $F$ is projective.
     \end{example}
 
-    We will give different characterizations of projective modules. For this we need the notion of a split exact sequence.
+    We will give different characterizations of projective modules. For this, we need the notion of a split exact sequence.
 
     \begin{definition}{Split exact sequence}{4.16}
         A s.e.s. (short exact, not split exact!) $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ of $A$-modules and homomorphisms is called split, if there exists $r \in \Hom_R(Z,Y)$ such that $g \circ r = \id_Z$.
@@ -4268,18 +4273,18 @@
     Next we deal with the projective resolution of a $A$-module homomorphism $\varphi: M \to N$.
 
     \begin{proposition}{}{4.22}
-        Let $P_\bullet \xrightarrow{\e} M \to 0$ be projective resolution of $M$ and $Q_\bullet \xrightarrow{\eta} N \to 0$ a long exact sequence. There exists a homomomorphism of chain complexes $\alpha_\bullet: P_\bullet \to Q_\bullet$ such that the following diagram (has exact rows) and commutes:
+        Let $P_\bullet \xrightarrow{\e} M \to 0$ be a projective resolution of $M$ and $Q_\bullet \xrightarrow{\eta} N \to 0$ a long exact sequence. Given a morphism $\varphi: M \to N$, there exists a homomorphism of chain complexes $\alpha_\bullet: P_\bullet \to Q_\bullet$ such that the following diagram (has exact rows) and commutes:
 
         \begin{equation*}
             \xymatrix {
                 \dots \ar[r] & P_2 \ar[r] \ar[d]_{\alpha_2} & P_1 \ar[r] \ar[d]_{\alpha_1} & P_0 \ar[r]^{\e} \ar[d]_{\alpha_0}& M \ar[r] \ar[d]_{\varphi} & 0 \\
-                \dots \ar[r] & Q_2 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_1 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_0 \ar[r]^{\eta} \ar@{}[ur]|{\circlearrowleft} & M \ar[r] & 0
+                \dots \ar[r] & Q_2 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_1 \ar[r] \ar@{}[ur]|{\circlearrowleft} & Q_0 \ar[r]^{\eta} \ar@{}[ur]|{\circlearrowleft} & N \ar[r] & 0
             }
         \end{equation*}
     \end{proposition}
 
     \begin{proof}
-        We start from the following diagram and build up the ladder:
+        We start with the following diagram and build up the ladder:
         \begin{equation*}
         \xymatrix {
             P_1 \ar[r] & P_0 \ar[r]^{\e} \ar[dr]^{\varphi \e} \ar@{.>}[d]_{\alpha_0} & M \ar[r] \ar[d]^{\varphi} & 0 \\
@@ -4398,11 +4403,90 @@
         Now we glue this diagram together with the one we get from the induction hypothesis and we are done.
     \end{proof}
 
-    The last question we want ot answer is: \textit{What is the relation between different projective resolutions?}
+    The last question we want to answer is: \textit{What is the relation between different projective resolutions?}
 
-    We want to use projective resolutions to study properties of $M$, so we need something which is independent of the choice of the projective resoultion. For this we introduce the notion of homotopy of chain complexes.
+    We want to use projective resolutions to study properties of $M$, so we need something which is independent of the choice of the projective resolution. For this, we introduce the notion of homotopy of chain complexes.
 
-    \separline{Week 13}
+\separline{Week 13}
+    \begin{definition}{}{4.25}
+        Let $C_\bullet$ and $D_\bullet$ be two chain complexes. Two homomorphisms of chain complexes $\alpha_\bullet,\beta_\bullet: C_\bullet \to D_\bullet$ are called \textbf{homotopic}, if there is a sequence (indexed by $i \in \Z$) of $A$-module homomorphisms $s_i:C_i \to D_{i+1}$ such that:
+        \begin{equation*}
+            \alpha_i - \beta_i = d_{i+1}^D \circ s_i + s_{i-1} \circ d_i^C
+        \end{equation*}
+    \end{definition}
+
+    This definition will be clearer if we write the maps in a diagram.
+    \begin{equation*}
+    \xymatrix@C=40pt @R=40pt{
+        \dots \ar[r] & C_{i+2} \ar[r]^{d_{i+2}^C} \ar@<-0.5ex>[d]_{\alpha_{i+2}} \ar@<0.5ex>[d]^{\beta_{i+2}} & C_{i+1} \ar[r]^{d_{i+1}^C} \ar@<-0.5ex>[d]_{\alpha_{i+1}} \ar@<0.5ex>[d]^{\beta_{i+1}} \ar@{.>}[dl]_(.4){s_{i+1}} & C_i \ar[r]^{d_i^C} \ar@<-0.5ex>[d]_{\alpha_{i}} \ar@<0.5ex>[d]^{\beta_{i}} \ar@{.>}[dl]_(.4){s_{i}} & C_{i-1} \ar[r] \ar@<-0.5ex>[d]_{\alpha_{i-1}} \ar@<0.5ex>[d]^{\beta_{i-1}} \ar@{.>}[dl]_(.4){s_{i-1}} & \dots \\
+        \dots \ar[r] & D_{i+2} \ar[r]\ar[r]_{d_{i+2}^D} & D_{i+1} \ar[r]\ar[r]_{d_{i+1}^D} & D_i \ar[r]\ar[r]_{d_{i}^D} & D_{i-1} \ar[r] & \dots
+    }
+    \end{equation*}
+
+    This notion comes from algebraic topology. For us the important insight is the following
+
+    \begin{lemma}{}{4.26}
+        If two morphisms of complexes $\alpha_\bullet: C_\bullet \to D_\bullet$ are homotopic, then they induce the same map on the homology group. That is to say:
+        \begin{equation*}
+            H_i(\alpha_\bullet) = H_i(\beta_\bullet): H_i(C_\bullet) \to H_i(D_\bullet)
+        \end{equation*}
+    \end{lemma}
+
+    \begin{proof}
+        Take $z_i \in Z_i(C_\bullet)$. From the definition \ref{lem:4.12}, we get
+        \begin{equation*}
+        \begin{split}
+            H_i(\alpha_\bullet)([z_i]) &= \eckig{\alpha_i(z_i)} = [\beta_i(z_i) + \underbrace{d_{i+1}^D \circ s_i(z_i)}_{\in B_i(D_\bullet)} + s_{i-1} \circ \underbrace{d_i^C(z_i)}_{=0}]z_i = [\beta_i(z_i)] = H_i(\beta_\bullet)([z_i])
+        \end{split}
+        \end{equation*}
+    \end{proof}
+
+    \begin{proposition}{}{4.27}
+        Let $P_\bullet \xrightarrow{\e} M \to 0$ and $Q_\bullet \xrightarrow{\eta} N \to 0$ be two projective resolutions and $\varphi: M \to N$ a homomorphism of $A$-modules. Assume that $\alpha_\bullet$ and $\beta_\bullet: P_\bullet \to Q_\bullet$ are two chain maps, both of which are obtained from Proposition \ref{prop:4.22}. Then $\alpha_\bullet$ and $\beta_\bullet$ are homotopic.
+    \end{proposition}
+
+    \begin{equation*}
+    \xymatrix@C=40pt @R=40pt{
+        \dots \ar[r] & P_{2} \ar[r]^{d_{2}^P} \ar@<-0.5ex>[d]_{\alpha_{2}} \ar@<0.5ex>[d]^{\beta_{2}} & P_{1} \ar[r]^{d_{1}^P} \ar@<-0.5ex>[d]_{\alpha_{1}} \ar@<0.5ex>[d]^{\beta_{1}} \ar@{.>}[dl]_(.4){s_{1}} & P_0 \ar[r]^{\e} \ar@<-0.5ex>[d]_{\alpha_{0}} \ar@<0.5ex>[d]^{\beta_{0}} \ar@{.>}[dl]_(.4){s_{0}} & M \ar[r] \ar[d]^{\varphi} & 0\\
+        \dots \ar[r] & Q_{2} \ar[r]\ar[r]_{d_{2}^Q} & Q_1 \ar[r]\ar[r]_{d_{1}^Q} & Q_0 \ar[r]\ar[r]_{\eta} & N \ar[r] & 0
+    }
+    \end{equation*}
+
+    \begin{proof}[Proof of Proposition \ref{prop:4.27}]
+        We need to construct $s_i:P_i \to Q_{i+1}$ such that for $i \geq 1$
+        \begin{equation*}
+            \alpha_i - \beta_i = d_{i+1}^Q \circ s_i + s_{i-1} \circ d_i^P
+        \end{equation*}
+        and $\alpha_0 - \beta_ 0 = d_1^Q \circ s_0$. The proof is similar to the previous ones. We start from $\alpha_0 - \beta_0$. Using that $P_0$ is projective, we can apply the characterisation \ref{proj}
+        \begin{equation*}
+        \xymatrix {
+            & P_0 \ar[d]^{\alpha_0 - \beta_0} \ar@{.>}[dl]_{s_0} \\
+            Q_1 \ar[r]_{d_1^Q} & \im d_1^Q \ar[r] & 0
+        }
+        \end{equation*}
+        to get an $s_0: P_0 \to Q_1$ such that the above diagram commutes. For this to work, we have to show that $\im (\alpha_0 - \beta_0) \subseteq \im d_1^Q = \ker \eta$, i.e. $\eta(\alpha_0 - \beta_0) = 0$. This follows from the assumption that $\eta \alpha_0 = \varphi \e = \eta \beta_0$.
+
+        Next, we look at $\alpha_1 - \beta_1$. Consider the diagram (via \ref{proj})
+        \begin{equation*}
+        \xymatrix {
+            & P_1 \ar[d]^{\alpha_1 - \beta_1 - s_0 d_1^P} \ar@{.>}[dl]_{s_1} \\
+            Q_2 \ar[r]_{d_2^Q} & \im d_2^Q \ar[r] & 0
+        }
+        \end{equation*}
+        Again we verify that
+        \begin{equation*}
+            \im \round{\alpha_1 - \beta_1 - s_0 d_1^P} \subseteq \im d_2^Q = \ker d_1^Q
+        \end{equation*}
+        i.e. $d_1^Q(\alpha_1 - \eta_1 - s_0 d_1^P) = 0$. We have:
+        \begin{equation*}
+            d_1^Q(\alpha_1 - \beta_1) - d_1^Q s_0 d_1^P = (\alpha_0 - \beta_0)d_1^P - (\alpha_0 - \beta_0) d_1^P = 0
+        \end{equation*}
+
+        Now we can repeat this procedure to obtain the desired homotopy
+    \end{proof}
+
+\subsection{Ext}
+
     
 \printbibliography
 \end{document}
