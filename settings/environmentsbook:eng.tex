@@ -50,6 +50,14 @@ attach boxed title to top left={yshift=-2mm,xshift=2mm},
 boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{def}
 
 
+\newtcbtheorem[use counter from=definition]{notation}{Notation}
+{enhanced jigsaw,breakable,colback=def_shade_color, colframe=def_frame_color,
+coltitle=def_title_color,fonttitle=\bfseries, colbacktitle=def_shade_color,
+borderline={0.5mm}{0mm}{def_frame_color},
+borderline={0.5mm}{0mm}{def_frame_color},
+attach boxed title to top left={yshift=-2mm,xshift=2mm},
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{not}
+
 
 \newtcbtheorem[use counter from=definition]{theorem}{Theorem}
 {enhanced jigsaw,breakable,colback=thm_shade_color,colframe=thm_frame_color,
@@ -124,7 +132,7 @@ coltitle=black,fonttitle=\bfseries ,colbacktitle=Proposition_color!40,
 borderline={0.5mm}{0mm}{Proposition_color},
 borderline={0.5mm}{0mm}{Proposition_color},
 attach boxed title to top left={yshift=-2mm,xshift=2mm},
-boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{clm}
+boxed title style={boxrule=0.8pt},varwidth boxed title,parbox=false}{claim}
 
 
 \newtcbtheorem[use counter from=definition]{conjecture}{Conjecture}
