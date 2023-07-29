@@ -3467,7 +3467,7 @@
             Let $A,B \neq \{0\}$ be two finite-dimensional $\C$-algebras and $\varphi: A \to B$ be a surjective $\C$-algebra homomorphism. Then if $A$ is semisimple, so is $B$. 
         \end{proposition}
 
-    \subsection{Schur-Weyl Duality}
+    \subsection{Schur-Weyl duality}
 
         Let $V$ be a finite-dimensional $\mathbb{C}$-vector space. 
     
@@ -3589,19 +3589,20 @@
     Being quite an abstract branch of mathematics we will accompany the definitions with a potpourri of examples
     to gain familiarity with the definitions.
     
-    \subsection{Defintion and basic examples}
-    The definition consists of multiple parts, all of which will be built up in this section.
-    Our goal to collect realisations of a specific structure and the structure-preserving ``maps'' between them.
-    Due to set-theoretic issues, we may not require that they be collected in a set,
-    hence we introduce the notion of a \textbf{class}. Sets make up a proper subset of classes,
-    whence classes that do not constitute a set shall be called \text{proper classes}.
-    For our purposes we need not see the intricacies concerning the differences of sets and classes,
+\subsection{Defintion and basic examples}
+   The definition consists of multiple parts, all of which will be built up in this section.
+    First note that we somehow wish to collect realisations of a specific structure and
+    the structure-preserving ''maps'' between them.
+    Due to set-theoretic issues, we may not require that they will be collected in a set,
+    hence we introduce the notion of a \textbf{class}. Every set is a class but not the other way around. 
+    Therefore classes that do not constitute a set shall be called \text{proper classes}.
+    For our purposes we need not go into detail about the difference between sets and classes,
     it suffices to know most of the operations allowed for sets are compatible with the notion of a class.
-    The key point to avoid Russels' paradox is the inability for a class to contain a proper class.
-    Now that we pleased the set theorists we shall continue with the definition of a category.
+    The key point to avoid Russels' paradox is the inability of a class to contain a proper class.
+    Now that we have pleased the set theorists, we shall continue with the definition of a category.
     
     Given a structure, we shall denote the class of its realisations as the \textbf{objects} of the category.
-    The collection structure preserving ``maps'' we denote by the class of \textbf{morphsims} of the category.
+    The collection of structure-preserving ''maps'' is denoted by the class of \textbf{morphsims} of the category.
 
     \begin{example*}{}
         Fix a field $k$ and the $k$-vector space structure.
@@ -3733,12 +3734,12 @@
             }
         \end{equation*}
         
-        $f^*$ is called the pullback of $f$.
+        $f^*$ is called the \textbf{pullback} of $f$.
     \end{example*}
     
     The dual functor is a special example of the contravariant Homfunctor, namely $\Hom(\bullet,k)$ for a field $k$.
     
-    There is a covariant analogon to the contravariant Hom functor, the covariant Hom functor. Here we call $f_*$ the push out of $f$.
+    There is a covariant analogon to the contravariant Hom functor, the covariant Hom functor. Here we call $f_*$ the \textbf{pushout} of $f$.
     
     Given a sequence $\dots \xrightarrow{f_{i-1}} A_i \xrightarrow{f_i} A_{i+1} \xrightarrow{^f_{i+1}} \dots$
     in $\cC$ and a covariant functor $\cF: \cC \to \cD$ we apply $\cF$ to the sequence in $\cC$ and
@@ -4266,7 +4267,7 @@
         Given two $A$-modules $X$ and $Z$, the s.e.s.
         \begin{equation*}
             \xymatrix {
-                0 \ar[r] & X \ar[r]^{\iota_X} & X \oplus Z \ar[r]^{\pi_Z} & Z \ar[r]& 0
+                0 \ar[r] & X \ar[r]^(.4){\iota_X} & X \oplus Z \ar[r]^(.6){\pi_Z} & Z \ar[r]& 0
             }
         \end{equation*}
         is split, since $\iota_Z \in \Hom_A(Z,Z \oplus X)$ and $\pi_Z \circ \iota_Z = \id_Z$
@@ -4345,10 +4346,10 @@
             \dots \ar[r] & P_2 \ar[r]^{d_2} & P_1 \ar[r]^{d_1} & P_0 \ar[r]^{\e} & M \ar[r] & 0
         }
         \end{equation*}
-        We usually denote it by $P_\bullet \xrightarrow{\e} M \to 0$ and call $\e$ the agumentation map.
+        We usually denote it by $P_\bullet \xrightarrow{\e} M \to 0$ and call $\e$ the augmentation map.
     \end{definition}
 
-    First we deal with existence.
+    First, we deal with existence.
 
     \begin{lemma}{}{4.21}
         Let $M$ be an $A$-module. There exists a projective resolution of $M$.
@@ -4615,9 +4616,9 @@
     \begin{theorem}{}{4.29}
         Let $R_\bullet: P_\bullet \to M \to 0$ and $R_\bullet': Q_\bullet \to M \to 0$ two projective resolutions of $M$. Then for any $A$-module $N$ and $i \geq 0$:
         \begin{equation*}
-            H^I(\Hom_A(P_\bullet,N)) \cong H^i(\Hom_A(Q_\bullet,N))
+            H^i(\Hom_A(P_\bullet,N)) \cong H^i(\Hom_A(Q_\bullet,N))
         \end{equation*}
-        In particular, up to an isomorphism of vector spaces, the $K$ vector space $\Ext^n_A(M,N)$ does not depend on the choice of the projective resolutiion of $M$.
+        In particular, up to an isomorphism of vector spaces, the $K$ vector space $\Ext^n_A(M,N)$ does not depend on the choice of the projective resolution of $M$.
     \end{theorem}
 
     \begin{proof}
@@ -4683,12 +4684,83 @@
     We start with the famous snake Lemma. The proof of the Lemma is standard diagram chasing.
 
     \begin{lemma}{Snake Lemma}{snake}
-        
+        Given a commutative diagram in $A\Mod$ 
+        \begin{equation*}
+        \xymatrix {
+            & X \ar[r]^f \ar[d]^\alpha & Y \ar[r]^g \ar[d]^\beta & Z \ar[r] \ar[d]^\gamma & 0 \\
+            0 \ar[r] & X' \ar[r]^{f'} & Y' \ar[r]^{g'} & Z'
+        }
+        \end{equation*}
+        where the rows are exact, one can construct an exact sequence
+        \begin{equation*}
+        \xymatrix {
+            \ker \alpha \ar[r]^f & \ker \beta \ar[r]^g & \ker \gamma \ar[r]^\partial & \coker \alpha \ar[r]^{f'} & \coker \beta \ar[r]^{g'} & \coker \gamma
+        }
+        \end{equation*}
     \end{lemma}
 
     \begin{proof}[Proof by "It's My Turn":]
         \url{https://www.youtube.com/watch?v=etbcKWEKnvg} :)
     \end{proof}
+
+    The map $\partial: \ker \gamma \to \coker \alpha$ is called the connecting homomorphism or connecting map for simplicity.
+
+    With the help of the Snake Lemma \ref{lem:snake}, we can prove the following.
+
+    \begin{proposition}{}{4.34}
+        \begin{enumerate}
+            \item
+                Let $0 \to C_\bullet' \xrightarrow{f_\bullet} C_\bullet \xrightarrow{g_\bullet} C_\bullet'' \to 0$ be a s.e.s. of chain complexes. Then it gives rise to a long exact sequence
+                \begin{equation*}
+                \xymatrix {
+                    \dots \ar[r] & H_{n+1}(C_\bullet'') \ar[r]^{\partial_{n+1}} & H_n(C_\bullet') \ar[r]^{H_n(f_n)} & H_n(C_\bullet) \ar[r]^{H_n(g_n)} & H_n(C_\bullet'') \ar[r]^(.45){\partial_{n}} & H_{n-1}(C_\bullet') \ar[r] & \dots
+                }
+                \end{equation*}
+            \item
+                Let $0 \to C^\bullet \xrightarrow{f^\bullet} D^\bullet \xrightarrow{g^\bullet} E^\bullet \to 0 $ be a s.e.s. of cochain complexes. Then it gives rise to a long exact sequence
+                \begin{equation*}
+                    \xymatrix {
+                        \dots \ar[r] & H^{n-1}(E^\bullet) \ar[r]^{\partial^{n-1}} & H^n(C^\bullet) \ar[r]^{H^n(f^n)} & H^n(D^\bullet) \ar[r]^{H^n(g^n)} & H^n(E^\bullet) \ar[r]^{\partial^{n}} & H^{n-1}(C^\bullet) \ar[r] & \dots
+                    }
+                \end{equation*}
+        \end{enumerate}
+    \end{proposition}
+
+    \begin{proof}
+        We only prove (1). To prove it, we try to find the snake. We find the following commutative diagram with exact rows (verify this!)
+        \begin{equation*}
+            \xymatrix {
+                & \faktor{C_n'}{B_n(C_\bullet')} \ar[r]^{f_n} \ar[d]^{d_n^{C'}} & \faktor{C_n}{B_n(C_\bullet)} \ar[r]^{g_n} \ar[d]^{d_n^C} & \faktor{C_n''}{B_n(C_\bullet'')} \ar[r] \ar[d]^{d_n^{C''}} & 0 \\
+                0 \ar[r] & Z_{n-1}(C_\bullet') \ar[r]_{f_{n-1}} \ar@{}[ur]|{\circlearrowleft} & Z_{n-1}(C_\bullet) \ar[r]_{g_{n-1}} \ar@{}[ur]|{\circlearrowleft} & Z_{n-1}(C_\bullet'')
+            }
+        \end{equation*}
+        We have $\ker d_n^{C} = H_n(C_\bullet)$ and $\coker d_n^C = Z_{n-1}(C_\bullet)/\im d_n = Z_{n-1}(C_\bullet)/B_{n-1}(C_\bullet) = H_{n-1}(C_\bullet)$.
+
+        The Snake Lemma \ref{lem:snake} gives an exact sequence
+
+        \begin{equation*}
+                \xymatrix {
+                    \dots \ar[r] & H_{n+1}(C_\bullet'') \ar[r]^{\partial_{n+1}} & H_n(C_\bullet') \ar[r]^{H_n(f_n)} & H_n(C_\bullet) \ar[r]^{H_n(g_n)} & H_n(C_\bullet'') \ar[r]^(.45){\partial_{n}} & H_{n-1}(C_\bullet') \ar[r] & \dots
+                }
+                \end{equation*}
+    \end{proof}
+
+    Now we can deduce the long exact sequence of $\Ext$.
+
+    \begin{corollary}{}{4.35}
+        Let $0 \to X \to Y \to Z \to 0$ be a s.e.s. of $A$-modules. then there exist two long exact sequences of $\Ext$ for any $A$-module $M$:
+        \begin{equation*}
+        \xymatrix {
+        0 \ar[r] & \Hom_A(M,X) \ar[r] & \Hom_A(M,Y) \ar[r] & \Hom_A(M,Z) \ar[r] & \Ext_A^1(M,X) \ar[r] & \dots 
+        }
+        \end{equation*}
+        and
+        \begin{equation*}
+        \xymatrix{
+            0 \ar[r] & \Hom_A(Z,M) \ar[r] & \Hom_A(Y,M) \ar[r] & \Hom_A(X,M) \ar[r] & \Ext_A^1(Z,M) \ar[r] & \dots
+        }
+        \end{equation*}
+    \end{corollary}
     
 \printbibliography
 \end{document}
