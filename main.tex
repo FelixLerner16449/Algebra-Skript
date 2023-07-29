@@ -4761,6 +4761,76 @@
         }
         \end{equation*}
     \end{corollary}
+
+    \begin{proof}
+        We first show that the first long exact sequence exists. For this, we take a projective resolution $P_\bullet \to M \to 0$. Since the modules in $P_\bullet$ are projective, we have an exact sequence of cochain complexes
+        \begin{equation*}
+        \xymatrix{
+            0 \ar[r] & \Hom(P_\bullet,X) \ar[r] & \Hom(P_\bullet,Y) \ar[r] & \Hom(P_\bullet,Z) \ar[r] & 0
+        }
+        \end{equation*}
+        Applying Proposition \ref{prop:4.34} yields
+        \begin{equation*}
+        \xymatrix{
+            0 \ar[r] & H^0 \round{\Hom(P_\bullet,X)} \ar[r] & H^0 \round{\Hom(P_\bullet,Y)} \ar[r] & H^0 \round{\Hom(P_\bullet,Z)} \ar[r] & H^1 \round{\Hom(P_\bullet,X)} \ar[r]  & \dots
+        }
+        \end{equation*}
+
+        which by definition of $\Ext$ gives
+        \begin{equation*}
+        \xymatrix {
+        0 \ar[r] & \Hom_A(M,X) \ar[r] & \Hom_A(M,Y) \ar[r] & \Hom_A(M,Z) \ar[r] & \Ext_A^1(M,X) \ar[r] & \dots 
+        }
+        \end{equation*}
+
+        Now we construct the second one.
+
+        Applying the horseshoe Lemma \ref{lem:4.24} to the exact sequence $0 \to X \to Y \to Z \to 0$ gives rise to an exact sequence of projective resolutions $0 \to P^X_\bullet \to P^Y_\bullet \to P^Z_\bullet \to 0$ where $P^X_\bullet, P^Y_\bullet, P^Z_\bullet$ are the projective resolutions of $X,Y,Z$ respectively. Applying $\Hom(-,M)$ to the resolution gives an exact sequence of cochain complexes
+        \begin{equation*}
+            \xymatrix{
+                0 \ar[r] & \Hom(P_\bullet^Z,M) \ar[r] & \Hom(P_\bullet^Y,M) \ar[r] & \Hom(P_\bullet^X,M) \ar[r] & 0
+            }
+        \end{equation*}
+        Now it suffices to apply Proposition \ref{prop:4.34} to cohomology to obtain the second long exact sequence of $\Ext$.
+    \end{proof}
+
+    As a quick application, we obtain the following characterization of projective modules:
+    \begin{corollary}{}{4.36}
+        The following statements are equivalent:
+        \begin{enumerate}
+            \item $P$ is a projective $A$-module
+            \item for any $A$-module $M$, $\Ext_A^1(P,M) = \{0\}$
+            \item for any $A$-module $M$ and any $n \geq 1$, $\Ext_A^n(P,M) = \{0\}$
+        \end{enumerate}
+    \end{corollary}
+
+    \begin{proof} We show that $1 \Rightarrow 3 \Rightarrow 2 \Rightarrow 1$.
+        \begin{itemize}
+            \item[(1)$\Rightarrow$(3):]
+                If $P$ is projective, $\underbrace{0 \to P}_{P_\bullet} \to P \to 0$ is a projective resolution of $P$. The cochain complex $\Hom(P_\bullet,M)$ is then
+                \begin{equation*}
+                \xymatrix{
+                    \Hom(P,M) \ar[r]^0 & {\underbrace{\Hom(0,M)}_{=\{0\}}} \ar[r] & 0 \ar[r] & \dots
+                }
+                \end{equation*}
+                Therefore, $\Ext_A^n(P,M) = \ker 0 / \im 0 = \{0\}$.
+            \item[(3)$\Rightarrow$(2):]
+                clear.
+            \item[(2)$\Rightarrow$(1):]
+                Assume $\Ext_A^1(P,M) = \{0\}$ for any $A$-module $M$. Now take an exact sequence $0 \to X \to Y \to Z \to 0$. Then Proposition \ref{prop:4.34} gives a long exact sequence
+                \begin{equation*}
+                \xymatrix{
+                    0 \ar[r] & \Hom_A(P,X) \ar[r] & \Hom_A(P,Y) \ar[r] & \Hom_A(P,Z) \ar[r] & \Ext_A^1(P,X) = \{0\}
+                }
+                \end{equation*}
+                Therefore $\Hom_A(P,-)$ is exact, hence $P$ is a projective $A$-module.
+        \end{itemize}
+    \end{proof}
+    
+
+    
+    
+    
     
 \printbibliography
 \end{document}
