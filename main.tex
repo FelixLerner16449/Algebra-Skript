@@ -22,7 +22,7 @@
 \usepackage[english]{babel}             %language declaration
 \setlength{\parskip}{5pt}
 \addbibresource{literatur.bib}
-
+\usepackage{stmaryrd}
 \nc\rk{\text{rank}}
 
 \begin{document}
@@ -2687,9 +2687,45 @@
         \end{enumerate}
     \end{exercise}
     
-%    \begin{proof}
-%        
-%    \end{proof}
+   \begin{proof}
+    \underline{Ad (1):}
+        Let $G$ be a finite group with $\#G = p q r$. Say $G$ is not simple, then there exists a non-trivial normal subgroup $\{e\} \trianglelefteq N \trianglelefteq G$. Hence $\#N \in \{p,q,r,pq,pr,qr\}$, thus solvable by Burnside's theorem and similarly $\# G/N \in \{qr,pr,pq,r,q,p\}$, which is also solvable by Burnside's theorem. Thus both $G/N$ and $N$ are solvable, hence $G$ is solvable.
+        Now for the sake of contradiction, let us assume that $G$ is not simple. Without loss of generality, we assume $p > q > r$. By $S_p$ denote the set of $p$-sylows, similarly $S_q$ and $S_r$. By the Sylow theorems, we have:
+        \begin{equation*}
+        \begin{split}
+            \#S_p \equiv 1 \mod p &\qquad \#S_p \mid qr \\
+            \#S_q \equiv 1 \mod q &\qquad \#S_q \mid pr \\
+            \#S_r \equiv 1 \mod r &\qquad \#S_r \mid pq
+        \end{split}
+        \end{equation*}
+        If any of the $\#S_p,\#S_q,\#S_r$ were equal to $1$, we would have a normal subgroup (by 2nd Sylow). Because $\#S_p \equiv 1 \mod p$, we get $\#S_p \geq p > q > r$. But since $\#S_p \mid qr \overset{q,r
+        \text{ prime}}{\implies} \#S_p \in \{q,r,qr\}$, we have $\#S_p = qr$. But since each $p$-Sylow has carnality $p$, they are all cyclic and thus two distinct $p$-Sylow's intersect only in $\{e\}$. Similarly, if we take two Sylows of distinct order, their intersection also has to be $\{e\}$, because any element apart from the identity inside them would be of order $p$ and $q$ at the same time.
+
+        Moreover
+        \begin{equation*}
+        \begin{split}
+            \#S_q &\in \{p,r,pr\} \\
+            \#S_r &\in \{p,q,pq\}
+        \end{split}
+        \end{equation*}
+        Hence $\#S_q \geq r$ and $\#S_r \geq q$. Thus
+        \begin{equation*}
+        \begin{split}
+            \#G &\geq \#S_q (q-1) + \#S_r(r-1) + \#S_p(p-1) \geq r(q-1) + q(r-1) + qr(p-1) \\
+            &= rq - r +qr - q + pqr - qr = \#G + qr - r - q > \#G \ \lightning 
+        \end{split}
+        \end{equation*}
+        because $qr \geq q \cdot 2 > q + r$.
+        
+    \underline{Ad (2):}
+        This follows immediately from \textit{(1)} and Burnsides theorem, because the first number with $3$ distinct prime factors not of form $pqr$ is $2^2 \cdot 3 \cdot 5 = 60$.
+        
+    \underline{Ad (3):}
+        If we want to show that groups $G$ with $60<\#G<120$ are solvable, we have to look for numbers that are not of form $p^a q^b$ or $pqr$ for $p,q,r$ distinct primes and $a,b \in \N_0$. We have $2 \cdot 3 \cdot 5 \cdot 7 = 210 > 120$, so we can restrict ourselves to $3$ distinct prime factors. We have $90 = 2 \cdot 3^2 \cdot 5$, $120 < 150 = 2 \cdot 3 \cdot 5^2$ and $120 = 2^3 \cdot 3 \cdot 5 $, hence we only have to show that all groups of order $90$ are solvable.
+        
+        Consider the action of $G$ on itself by conjugation. Then we have two maps $\varphi:(G \hookrightarrow S_{90} \twoheadrightarrow S_{90}/A_{90})$. We would like to show that $\ker \varphi \neq G$. Take an element $g\in G$ of order $2$. We want to show that $\# G^g \equiv 2 \mod 4$. Since $G^g = Z(g) \leq G$, and $2 \mid G^g$ as $g \in G^g$, we have $\#G^g \equiv 2 \mod 4$. So $90 - \#G^g$ is not divisble by $4$, hence there is an odd number of transpositions in the cycle decomposition of the image of $g$ in $S_{90}$. Thus the image of $\varphi(g) \neq [0]$ and hence the kernel is non-trivial and we found a normal subgroup. Clearly $\ker \varphi \neq \{e\}$, so $G/\ker \varphi$ is solvable either by the $p^a q^b$ theorem or by the $pqr$-theorem. Also $\ker \varphi$ is solvable by the $p^aq^b$ or $qpr$-theorem. Hence $G$ is solvable.
+        
+    \end{proof}
     
 \chapter{Semi-simple algebras}
     In the last chapter we have seen that studying the representation theory of groups is equivalent to studying modules over the group algebra $\C[G]$, see Exercise \ref{exe:12}.
@@ -3124,7 +3160,6 @@
     
 \separline{Week 10}
 
-\separline{VL 15}
     \begin{proof}[Proof of \ref{prop:burnside}]
         First notice, that any element in $\End(S)$ is a linear combination of rank 1 endomorphisms. Indeed, fix a basis of $S$ to identify it with $M_{\dim S}(\C)$, then the elementary matrices $E_{i,j}$ are of rank 1.
 
@@ -3219,7 +3254,6 @@
     We first write down a basis of $\Hom_{M_n}(\C^n,M)$: In the proof of \ref{prop:3.19}, we have shown that $M= W_1 \oplus \dots \oplus W_r$ and there exists an $M_n$-module isomorphism $\psi_i: \C^n\to W_i$ by composing with the canonical inclusion $\iota_i: W_i \to M$ (it is an $M_n$-module homomorphism).
     \end{proof}
     
-\separline{VL 16}
     Next, we will explain the number $r$ from \ref{prop:3.19} in a more canonical way.
     Let $M$ be an $A$-module and $V$ be a vector space. We define an $A$-module structure on $V \tens M$ by:
     \begin{equation*}
@@ -3232,8 +3266,7 @@
 
     Note that in proposition $\ref{prop:3.21}$ there is no need to choose anything (for example the number $r$), this means the isomorphism is natural.
 
-    \begin{proof}
-        Proposition \ref{prop:3.21}.
+    \begin{proof}[Proof of Proposition \ref{prop:3.21}]
 
         Take $A \in M_n(\C)$ and $\varphi \in \Hom_{M_n(\C)}(\C^n, M), v \in \C^n$, then
         \begin{equation*}
@@ -3366,8 +3399,10 @@
         Since $M_n(\C)^\op \cong M_n(\C)$ by taking the transpose of a matrix, we proved that $A$ is isomorphic to a product of matrix algebras as $\C$-algebras.
         
     \subsection{Isotypic decomposition}
+    \begin{comment}
         We prove $(2)\Rightarrow(1)$ by showing that if $A$ is a product of matrices, then every $A$-module is semisimple. We start by classifying simple $A$-modules. Let $\Irr(A)$ denote the set of \underline{simple} $A$-modules up to isomorphism.
-
+    \end{comment}
+    
         \begin{proposition}{}{3.26}
             Let $V_1,\dots,V_k$ be finite dimensional $\C$-vector spaces and $A:=\End(V_1) \times \dots \times \End(V_k)$. Then $\Irr(A) = \{V_1,\dots,V_k\}$.
         \end{proposition}
@@ -3409,8 +3444,10 @@
             \end{equation*}
         \end{proof}
 
-\separline{Week 11}
+        Now we prove the isotypic decomposition, which writes a finite dimensional $A$-module $W$ into a direct sum of simple modules in a canonical way.
 
+        For this we define an $A$-module structure on $\bigoplus_{i=1}^k \Hom_A(V_i,W)\otimes V_i$ by acting on the second factor, that is to say, for $a\in A, \phi_i \in \Hom_A(V_i,W)$ and $v_i\in V_i$, 
+        $$a.\round{\sum_{i=1}^k\phi_i\otimes v_i} := \sum_{k=1}^k \phi_i\otimes av_i$$
         \begin{proposition}{Isotypic decomposition}{3.27}
             The evaluation map
             \begin{equation*}
@@ -3419,39 +3456,82 @@
                     \sum_{i=1}^k \varphi_i \tens v_i &\mapsto \sum_{i=1}^k \varphi_i(v_i)
             \end{split}
             \end{equation*}
-            is an isomorphism of 
+            is an isomorphism of $A$-modules.
         \end{proposition}
+        \begin{proof}
+            We keep notations as in the above proof.
+
+            Let $\rho:A\to\End(W)$ be the structural map. Since $\rho$ is a $\C$-algebra homomorphism, $\rho(p_1), \dots, \rho(p_k)$ are orthogonal idempotents in $\End(W)$ (They are not necessarily central because we do not know whether $\rho$ is surjective or not) with sum $\id_W$. It then follows from \ref{prop:3.10}, that $W=W_1 \oplus \dots \oplus W_k$ with $W_i:=\im \rho(p_i)$ as $A$-modules.
+
+            We claim that $W_i$ is an $\End(V_i)$-module.
+            Indeed, this follows fro the fact, that the inclusion $\End(V_i)\to A$ is a $\C$-algebra homomorphism (see the 3rd Step in the proof of \ref{prop:3.26}).
+
+            Now we apply \ref{prop:3.21} to get an $\End(V_i)$-module isomorphism $$\Hom_{\End(V_i)}(V_i,W_i) \otimes V_i \cong W_i$$ given by the evaluation map.
+
+            We claim that $\Hom_{\End(V_i)}(V_i,W_i) = \Hom_A(V_i,W)$.
+            First take $f\in\Hom_{\End(V_i)}(V_i,W_i)$, composed with the canonical inclusion $\iota_i: W_i \to W$. It is an $A$-module homomorphism since the $A$-module structure on $V_i$ is given by $\pi_i A\End(V_i)$, whose image is $\End_{V_i}$.
+            On the other hand, take $f\in\Hom_A(V_i,W)$, it suffices to show that $\im f \subseteq W_i = \im \rho(p_i)$. For this we show taht $\forall j \neq i, \rho(p_j)\circ f = 0$, but this follows from the fact that $rho(p_j)\circ f = f\circ \pi_j(p_j) = 0$.
+
+            Gathering all these isomorphisms we obtain an isomorphism of vector spaces $$\sigma: \bigoplus_{i=1}^k \Hom_A(V_i,W) \otimes V_i \to \bigoplus_{i=1}^k W_i$$
+            It remains to show that $\sigma$ is an $A$-module homomorphism. Let $a\in A, \phi_i \in \Hom_A(V_i, W), v_i\in V_i$. Then indeed
+            \begin{align*}
+                \sigma\round{a.\sum_i=1^k\phi_i\otimes v_i} &= \sigma\round{\sum_{i=1}^k \phi_i \otimes av_i}\\
+                &= \sum_{i=1}^k\phi_i(a v_i)\\
+                &= a \sum_{i=1}^k \phi_i(v_i)\\
+                &= a \sigma\round{\sum_{i=1}^k \phi_i\otimes v_i}
+            \end{align*}
+        \end{proof}
+        
+        If we set $d_i := \dim\Hom_A(V_i, W)$, then $W$ has the decomposition $W\cong V_1^{\oplus d_1} \oplus \dots \oplus V_k^{\oplus d_k}$. That is to say, the numbers $d_1, \dots, d_k$ called the multiplicities of $V_1, \dots, V_k$ in $W$, are uniquely determined. Note that when $A=\C[G]$, we have proved this using characer theory.
+
+\separline{Week 11}
 
 \section{Schur-Weyl duality}
+
+    The Schur-Weyl duality establishes a strong connection between the representation theory of the symmetric group $S_n$ and the general linear group $\GL(V)$. Generalizing this result to other groups and algebras, and their geometric components, is still an active domain in the modern representation theory.
+    
     \subsection{Commutant and double commutant}
+
+        We fix a finite dimensional $\C$-vector space $V$. In linear algebra we have seen that if diagonalizable Endomorohisms commute with each other, they are diagonalizable with the same basis.
+
         \begin{definition}{}{3.28}
             Let $S \subseteq \End(V)$, then the \textbf{commutant} of $S$ in $\End(V)$ is defined by:
             \begin{equation*}
                 C(S):= \{u \in \End(V) \ | \ \forall s \in S: us = su \}
             \end{equation*}
-        \end{definition}
-        As $C(S) \subseteq \End(V)$, the \textbf{bicommutant} or \textbf{double commutant} of $S$ in $\End(V)$ is defined as $C(C(S))$.
 
-        \begin{theorem}{Double commutant}{3.29}
-            Let $A \subseteq \End(V)$ be a semisimple algebra and $B:=C(A)$. Then $B$ is semisimple and
+            As $C(S) \subseteq \End(V)$, the \textbf{bicommutant} or \textbf{double commutant} of $S$ in $\End(V)$ is defined as $C(C(S))$.
+        \end{definition}
+        
+        Let $A\subseteq \End(V)$ be a subalgebra. Then by definition $A\subseteq C(C(A))$ always holds. We want to answer the question in which cases equality holds.
+
+        Let $A\subseteq \End(V)$ be a semisimple $\C$-algebra, the identity map $A\overset\rho\rightarrow\End(V)$ endows $V$ with an $A$-module structure. Ket $\Irr(A)=\curly{V_1, \dots, V_t}$ and $U_i := \Hom_A(V_i,V)$. 
+        The isotypic decomposition is then $$V\cong \bigoplus_{i=1}^t U_i\otimes V_i \qquad \text{as $A$-modules.}$$
+
+        By the Artin-Wedderburn theorem, $A\cong \End(V_1) \times \dots \times \End(V_t)$. Hence as a subalgebra of $\End(V) = \End\round{\bigoplus_{i=1}^t U_i\otimes V_i}$ we can write $A \overset \rho \cong \bigoplus_{i=1}^t \id_{U_i} \otimes \End(V_i)$ \footnote{Detail: The image of $A$ in $\End(V)=\End\round{\bigoplus_{i=1}^t U_i\otimes V_i}$ lands in the subspace $\bigoplus_{i=1}^t \End(U_i \otimes V_i) \overset {\ref{exe:18}}= \bigoplus_{i=1}^t \End(U_i) \otimes \End(V_i)$ (Since $V_i$ are simple). } (Note that here we used the direct sum notation for the product of subalgebras).
+
+        \begin{theorem}{Double commutant}{double_comm}
+            Let $A \subseteq \End(V)$ be a semisimple algebra. Then $C(A)$ is semisimple and
             \begin{equation*}
-                B \cong \bigoplus_{i=1}^t \End(U_i) \tens \id_{V_i}
+                C(A) \cong \bigoplus_{i=1}^t \End(U_i) \tens \id_{V_i}
             \end{equation*}
             In particular, $C(C(A)) = A$.
         \end{theorem}
+
+        In the proof we need the following result on tensor products:
 
         \begin{exercise}{}{18}
             Let $V, W$ be two $K$-vector spaces. The $K$-linear map
             \begin{equation*}
             \begin{split}
                 \End(V) \tens \End(W) &\to \End(V \tens W) \\
-                    \varphi \tens \psi &\mapsto (v \tens w \mapsto \varphi(V) \tens \varphi(w))
+                    \varphi \tens \psi &\mapsto (v \tens w \mapsto \varphi(v) \tens \varphi(w))
             \end{split}
             \end{equation*}
-            is a $K$-algebra homomorphism. When $V,W$ are finite-dimensional, the above map is an isomorphism.
+            is a $K$-algebra homomorphism. The above map is an isomorphism when $V,W$ are finite-dimensional.
         \end{exercise}
 
-        \begin{lemma}{}{3.30}
+        \begin{claim*}{}
             Let $U,W$ be finite-dimensional $\C$-vector spaces and $V:= U \tens W$. Then in the $\C$-algebra $\End(V)$, we have
             \begin{equation*}
             \begin{split}
@@ -3459,21 +3539,54 @@
                 C(\End(U) \tens \id_W) &= \id_U \tens \End(W)
             \end{split}
             \end{equation*}
-        \end{lemma}
+        \end{claim*}
 
-\separline{VL 18}
+        \begin{proof}
+            We show the first identity, the second one is analogous. The inclusions $\End(U) \otimes \id_W\subseteq C(\id_U\otimes \End(W))$ is clear.
 
-        \begin{proposition}{}{3.31}
+            Let $\phi\in\End(U\tens W)$ be such that it commutes with $\id_U \tens \End(W)$. We fix a basis $\curly{\phi_i | i\in I}$ of $\End(U)$. By the above exercise, we can write $\phi = \sum_{i\in I} \phi_i \tens u_i$ with $u_i \in \End(W)$. The assumption implies that $\forall u\in \End(W),\ \phi(\id\tens u) = (\id \tens u)\phi$, i.e. $$\sum_{i\in I}\phi_i\tens u_iu = \sum_{i\in I} \phi_i\tens uu_i$$
+
+            Since $\curly{\phi_i| i\in I}$ is a basis of $\End(U)$, it follows that $\forall u \in \End(W)$ and $i\in I,\ uu_i= u_iu \in \End(W)$. This implies $u_i\in Z(\End(W)) = \C.\id_W$, i.e. $\exists\lambda_i\in\C$ such that $u_i=\lambda_i\id_W$. Therefore $\phi=\sum_{i\in I}\lambda_i\phi_i\tens\id_W\in\End(U)\tens\id_W$.
+        \end{proof}
+
+    \subsection{Proof of \ref{thm:double_comm}}
+        \begin{proof}
+            Recall that $A\cong \bigoplus_{i=1}^t \id_{U_i}\tens \End(V_i)$. Let $\pi_i\in\End(V)$ be the projection onto $U_i\tens V_i$. Then $\pi_i$ is in fact in $\bigoplus_{i=1}^t \End(U_i) \tens \End(V_i)$ and is given by $\id_{U_i} \tens \id_{V_i}$. This shows that $\pi_i\in A$.
+
+            Let $\phi\in\End(V)$ be commuting with $A$. Then it follows from $\pi_i\phi = \phi\pi_i$ that $\phi(U_i\tens V_i)\subseteq U_i\tens V_i$ and hence the restriction $\phi_{|U_i\tens V_i}\in\End(U_i)\tens \End(V_i)$ commutes with the entire $\id_{U_i}\tens \End(V_i)$. According to the claim, $\phi_{|U_i\tens V_i}\in\End(U_i)\tens \id_{V_i}$ and hence $\phi\in\bigoplus_{i=1}^t \End(U_i)\tens\id_{V_i}$.
+
+            Since $\bigoplus_{i=1}^t \End(U_i)\tens\id_{V_i}$ clearly commutes with $A$, we have shown that this is already $C(A)$.
+            
+            Since $C(A)$ is isomorphic to the product of $\End(E_i)$, it is semisimple by \ref{thm:ArWb}.
+
+            The result $C(C(A))=A$ then follows by applying these results twice.
+        \end{proof}
+
+            We take a closer look at the assumption in the double commutant theorem.
+
+        \begin{proposition}{}{claim*}
             Let $A,B \neq \{0\}$ be two finite-dimensional $\C$-algebras and $\varphi: A \to B$ be a surjective $\C$-algebra homomorphism. Then if $A$ is semisimple, so is $B$. 
         \end{proposition}
+
+        \begin{proof}
+            We show that every nonzero finite dimensional $B$-module $M$ is semisimple. with the help of the $\C$-algebra homomorphism $\phi:A\to B$we define an $A$-module structure on $M$ by
+            $$\underbrace{a.n}_{A\text{-module}}=\underbrace{\phi(a).n}_{B\text{-module}}\text{\footnote{this is called a \textbf{pullback}}}$$
+
+            Since $A$ is semisimple, we write $M=S_1\oplus \dots \oplus S_r$ as a direct sum of simple $A$-modules. It remains to show that each $S_i$ is simple as $B$-module.
+
+            We first show that $S_i$ is a $B$-module. For this take $b\in B$ and $s\in S_i$. Since $\phi$ is surjective, there exists $a\in A$ such that $\phi(a)=b$. Then $$n.s_i = \phi(a).s_i = a.s_i \in S_i$$
+            If $W\subseteq S_i$ is a nonzero $B$-submodule of $S_i$, then $W$ is a nonzero $A$-submodule of $S_i$, hence $W=S_i$.
+        \end{proof}
+
+        As a summary if $A$ is a finite dimensional semisimple algebra and $M$ is a finite dimensional $A$-module with structural map $\rho:A\to \End(M)$, then $\rho(A)\subseteq \End(M)$ is semisimple. Then we can apply the double commutant theorem.
 
     \subsection{Schur-Weyl duality}
 
         Let $V$ be a finite-dimensional $\mathbb{C}$-vector space. 
     
-        The symmetric group $\mathfrak{S}_n$ acts on $V^{\otimes n}$ by permuting the position of the tensor components. In the language of representations, we have a group homomorphism 
-        $$\mathfrak{S}_n\to\mathrm{GL}(V^{\otimes n}),\ \ \sigma\mapsto(v_1\otimes\ldots\otimes v_n\mapsto v_{\sigma^{-1}(1)}\otimes\ldots\otimes v_{\sigma^{-1}(n)}).$$
-        It induces an algebra homomorphism $\rho_n:\mathbb{C}[\mathfrak{S}_n]\to\mathrm{End}(V^{\otimes n})$. Let $A:=\rho_n(\mathbb{C}[\mathfrak{S}_n])$. Then $A\subseteq\mathrm{End}(V^{\otimes n})$ is a semisimple subalgebra. 
+        The symmetric group $S_n$ acts on $V^{\otimes n}$ by permuting the position of the tensor components. In the language of representations, we have a group homomorphism 
+        $$S_n\to\mathrm{GL}(V^{\otimes n}),\ \ \sigma\mapsto(v_1\otimes\ldots\otimes v_n\mapsto v_{\sigma^{-1}(1)}\otimes\ldots\otimes v_{\sigma^{-1}(n)}).$$
+        It induces an algebra homomorphism $\rho_n:\mathbb{C}[S_n]\to\mathrm{End}(V^{\otimes n})$. Let $A:=\rho_n(\mathbb{C}[S_n])$. Then $A\subseteq\mathrm{End}(V^{\otimes n})$ is a semisimple subalgebra. 
     
         The group $\mathrm{GL}(V)$ acts on $V^{\otimes n}$ in the standard way:
         $$\mathrm{GL}(V)\to\mathrm{GL}(V^{\otimes n}),\ \ g\mapsto (v_1\otimes\ldots\otimes v_n\mapsto g(v_1)\otimes\ldots\otimes g(v_n)).$$
@@ -3562,15 +3675,44 @@
 
         \begin{lemma}{}{3.34}
             There exists a bijection $\Irr(S_n) \leftrightarrow \wp(n)$.
+
+            For $\lambda \in \wp(n)$, we denote the corresponding irreducible module by $V_\lambda$.
         \end{lemma}
+
+        \begin{proof}
+            From \cite{Cobra} we know, that partitions and conjugacy classes in the $S_n$ are in bijection, from the "squareness" of character tables we know that $\Irr(S_n)$ is in bijection to the conjugacy classes aswell\footnote{There are more canonical ways to define these (even though Xin would argue that any bijection between finite sets is canonical) but these require objects like \textit{Specht-modules} or \textit{Frobenius-Young-modules}, which are beyond the scope of this lecture. With these, we get some very powerful results which ultimately culminate in \textit{Frobenius' character formula}, which provides a purely combinatorial way to calculate arbitrary entries of the charactar table of a symmetric group. A reference would be \cite{Flag}, 1st chapter, which Giulia and we can provide you.}.
+        \end{proof}
+
+        According to \ref{thm:ArWb}, we have the isotypic decomposition $$V^{\otimes n}= \bigoplus_{\lambda\in\wp(n)} \Hom_{S_n}(V_\lambda, V^{\otimes n})\otimes V^{\otimes n}$$
+
+        and we set $S_\lambda(V):=\Hom_{S_n}(V_\lambda, V^{\otimes n}$. For a fixed $\lambda\in\wp(n)$, the map $S_\lambda$ sending a finite dimensional $\C$-vector space $V$ to $S_\lambda(V)$ is called a \textbf{Schur functor}.
+
+        According to \ref{thm:double_comm} and \ref{thm:SW} we obtain:
 
         \begin{corollary}{}{3.35}
             For any $\lambda \in \wp(n)$, $S_\lambda(V)$, is either $\{0\}$ or an irreducible representation of $\GL(V)$.
         \end{corollary}
 
+        This is the correct place to make a pause and leave deeper and more concrete results to more advanced lectures.
+
+        Before we move to the next chapter, we prove:
+
         \begin{proposition}{}{3.36}
             Let $V \in \rep(S_n)$, then for all $g \in S_n$, $\chi_V(g) \in \Z$.
         \end{proposition}
+
+        \begin{proof}
+            Let $g\in S_n$ be of order $m$. We fix a primitive $n$-th root of unity $\zeta_m$.
+
+            First, by \ref{lem:3.34}, for any $k\geq 1$ with $\text{gcd}(k,m)=1$, $g$ and $g^k$ are conjugate since they have the same cycle decomposition.
+
+            therefore $\chi_V(g) = \chi_V(g^k)$.
+
+            Notice that $\chi_V(g)\in\Q(g^k)$ since the eigenvalues of $g$ are $m$-th roots of unity, The Galois group is $\Gal{\Q(\zeta_m)/\Q} \cong U_m$ For $k\geq 1$ with $\text{gcd}(k,m)=1,\ \bar k\in U_m$ corresponding element in the galois group, say $\sigma$, sends $\zeta_m$ to $\zeta_m^k$. Therefore $\sigma(\chi_V(g))=\chi_V(g^k)$ since the eigenvalues of $\rho_V(g^k)$ are $k$-th powers of those of $\rho_V(g)$.
+
+            This implies that $\forall \sigma \in \Gal{\Q(\zeta_m)/\Q},\ \sigma(\chi_V(g)) = \chi_V(g)$ i.e. $\chi_V(g) \in \Q$. But from \ref{cor:2.36} and \ref{exe:14}, $\chi_V(g)\in\Q\cap\bar\Z = \Z$.
+        \end{proof}
+        
 \chapter{Toolbox: Homological algebra}
     For this chapter, we will leave the semisimple world (chapter $2$ \& $3$). To discover the new world in a safe way, we need new weapons: homological methods.
     
@@ -4417,7 +4559,7 @@
         is an exact sequence of $A$-modules.
     \end{definition}
     
-    \begin{lemma}{Horseshoe Lemma}{4.24}
+    \begin{lemma}{Horseshoe Lemma}{horseshoe}
         Take a short exact sequence $\xymatrix{0 \ar[r]& X\ar[r]^{f} & Y\ar[r]^g & Z\ar[r] & 0}$ and two projective resolutions $\xymatrix {P_\bullet^X \ar[r]^{\e_X} & X \ar[r] & 0}$, $\xymatrix {P_\bullet^Z \ar[r]^{\e_Z} & Z \ar[r] & 0}$. There there exists a projective resolution $\xymatrix {P_\bullet^Y \ar[r]^{\e_Y} & Y \ar[r] & 0}$ and chain maps $f_\bullet:P_\bullet^X \to P_\bullet^Y, g_\bullet: P_\bullet^Y \to P_\bullet^Z$ such that
         \begin{equation*}
         \xymatrix {
@@ -4427,7 +4569,7 @@
     \end{lemma}
     According to this lemma, short exact sequences can be "lifted" to projective resolutions. The name "horseshoe" comes from the proof.
     
-    \begin{proof}{Proof of Lemma \ref{lem:4.24}}
+    \begin{proof}[Proof of Lemma \ref{lem:horseshoe}]
         We argue via induction. For the base case  We need:
         \begin{itemize}
             \item a projective module $P_0^Y$
@@ -4478,7 +4620,7 @@
             & & \coker d_{n-1}^X = \{0\}
         }
         \end{equation*}
-        where the vertical row is an exact sequence given by the Snake lemma. We repeat the base case of the induction to get a sequence
+        where the vertical row is an exact sequence given by the Snake Lemma \ref{lem:snake}. We repeat the base case of the induction to get a sequence
         
         \begin{equation*}
         \xymatrix {
@@ -4602,10 +4744,10 @@
     \end{exercise}
 
     \begin{proof}
-        Since the contravariant Homfunctor is left-exact as shown in \ref{prop:4.13}, applying $\Hom(-,N)$ to the exact sequence $P_\bullet \xrightarrow{\e} M \to 0$ yields an exact sequence
+        Since the contravariant Homfunctor is left-exact as shown in \ref{prop:4.13}, applying $\Hom(-,N)$ to the exact sequence $P_1 \xrightarrow{d_1} P_0 \xrightarrow{\e} M \to 0$ yields an exact sequence
         \begin{equation*}
         \xymatrix {
-            0 \ar[r] & \Hom_A(M,N) \ar[r]^{\e^*} & \Hom_A(P_0,N) \ar[r]^{d_1^*} & \Hom_A(P_1,N) \ar[r] & \dots
+            0 \ar[r] & \Hom_A(M,N) \ar[r]^{\e^*} & \Hom_A(P_0,N) \ar[r]^{d_1^*} & \Hom_A(P_1,N)
         }
         \end{equation*}
         That means $\Ext^0(M,N) = \ker d_1^* = \im \e^* \cong \Hom_A(M,N)$.
@@ -4720,7 +4862,7 @@
                 Let $0 \to C^\bullet \xrightarrow{f^\bullet} D^\bullet \xrightarrow{g^\bullet} E^\bullet \to 0 $ be a s.e.s. of cochain complexes. Then it gives rise to a long exact sequence
                 \begin{equation*}
                     \xymatrix {
-                        \dots \ar[r] & H^{n-1}(E^\bullet) \ar[r]^{\partial^{n-1}} & H^n(C^\bullet) \ar[r]^{H^n(f^n)} & H^n(D^\bullet) \ar[r]^{H^n(g^n)} & H^n(E^\bullet) \ar[r]^{\partial^{n}} & H^{n-1}(C^\bullet) \ar[r] & \dots
+                        \dots \ar[r] & H^{n-1}(E^\bullet) \ar[r]^{\partial^{n-1}} & H^n(C^\bullet) \ar[r]^{H^n(f^n)} & H^n(D^\bullet) \ar[r]^{H^n(g^n)} & H^n(E^\bullet) \ar[r]^{\partial^{n}} & H^{n+1}(C^\bullet) \ar[r] & \dots
                     }
                 \end{equation*}
         \end{enumerate}
@@ -4743,12 +4885,13 @@
                     \dots \ar[r] & H_{n+1}(C_\bullet'') \ar[r]^{\partial_{n+1}} & H_n(C_\bullet') \ar[r]^{H_n(f_n)} & H_n(C_\bullet) \ar[r]^{H_n(g_n)} & H_n(C_\bullet'') \ar[r]^(.45){\partial_{n}} & H_{n-1}(C_\bullet') \ar[r] & \dots
                 }
                 \end{equation*}
+        I encourage you to prove (2). All the steps are very similar to (1).
     \end{proof}
 
     Now we can deduce the long exact sequence of $\Ext$.
 
     \begin{corollary}{}{4.35}
-        Let $0 \to X \to Y \to Z \to 0$ be a s.e.s. of $A$-modules. then there exist two long exact sequences of $\Ext$ for any $A$-module $M$:
+        Let $0 \to X \to Y \to Z \to 0$ be a s.e.s. of $A$-modules. Then there exist two long exact sequences of $\Ext$ for any $A$-module $M$:
         \begin{equation*}
         \xymatrix {
         0 \ar[r] & \Hom_A(M,X) \ar[r] & \Hom_A(M,Y) \ar[r] & \Hom_A(M,Z) \ar[r] & \Ext_A^1(M,X) \ar[r] & \dots 
@@ -4769,10 +4912,10 @@
             0 \ar[r] & \Hom(P_\bullet,X) \ar[r] & \Hom(P_\bullet,Y) \ar[r] & \Hom(P_\bullet,Z) \ar[r] & 0
         }
         \end{equation*}
-        Applying Proposition \ref{prop:4.34} yields
+        Applying Proposition \ref{prop:4.34}(2) yields
         \begin{equation*}
         \xymatrix{
-            0 \ar[r] & H^0 \round{\Hom(P_\bullet,X)} \ar[r] & H^0 \round{\Hom(P_\bullet,Y)} \ar[r] & H^0 \round{\Hom(P_\bullet,Z)} \ar[r] & H^1 \round{\Hom(P_\bullet,X)} \ar[r]  & \dots
+            0 \ar[r] & H^0 \round{\Hom(P_\bullet,X)} \ar[r] & H^0 \round{\Hom(P_\bullet,Y)} \ar[r] & H^0 \round{\Hom(P_\bullet,Z)} \ar[r]^{\partial^0} & H^1 \round{\Hom(P_\bullet,X)} \ar[r]  & \dots
         }
         \end{equation*}
 
@@ -4785,13 +4928,24 @@
 
         Now we construct the second one.
 
-        Applying the horseshoe Lemma \ref{lem:4.24} to the exact sequence $0 \to X \to Y \to Z \to 0$ gives rise to an exact sequence of projective resolutions $0 \to P^X_\bullet \to P^Y_\bullet \to P^Z_\bullet \to 0$ where $P^X_\bullet, P^Y_\bullet, P^Z_\bullet$ are the projective resolutions of $X,Y,Z$ respectively. Applying $\Hom(-,M)$ to the resolution gives an exact sequence of cochain complexes
+        Applying the horseshoe Lemma \ref{lem:horseshoe} to the exact sequence $0 \to X \to Y \to Z \to 0$ gives rise to an exact sequence of projective resolutions $0 \to P^X_\bullet \to P^Y_\bullet \to P^Z_\bullet \to 0$ where $P^X_\bullet, P^Y_\bullet, P^Z_\bullet$ are the projective resolutions of $X,Y,Z$ respectively. Applying $\Hom(-,M)$ to the resolution gives an exact sequence of cochain complexes
         \begin{equation*}
             \xymatrix{
                 0 \ar[r] & \Hom(P_\bullet^Z,M) \ar[r] & \Hom(P_\bullet^Y,M) \ar[r] & \Hom(P_\bullet^X,M) \ar[r] & 0
             }
         \end{equation*}
-        Now it suffices to apply Proposition \ref{prop:4.34} to cohomology to obtain the second long exact sequence of $\Ext$.
+        Now it suffices to apply Proposition \ref{prop:4.34}(2) to obtain a second long exact:
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r] & H^0(\Hom(P_\bullet^Z,M)) \ar[r] & H^0(\Hom(P_\bullet^Y,M)) \ar[r] & H^0(\Hom(P_\bullet^X,M)) \ar[r]^{\partial^0} & H^1(\Hom(P_\bullet^Z,M)) \ar[r] & \dots
+        }
+        \end{equation*}
+        by defintion of $\Ext$ this is
+        \begin{equation*}
+        \xymatrix {
+            0 \ar[r] & \Ext^0_A(Z,M) \ar[r] & \Ext^0_A(Y,M) \ar[r] & \Ext^0_A(X,M) \ar[r]^{\partial^0} & \Ext^1_A(Z,M) \ar[r] & \dots
+        }
+        \end{equation*}
     \end{proof}
 
     As a quick application, we obtain the following characterization of projective modules:
@@ -4826,11 +4980,54 @@
                 Therefore $\Hom_A(P,-)$ is exact, hence $P$ is a projective $A$-module.
         \end{itemize}
     \end{proof}
-    
 
+\section{Global dimension}
+    We are prepared to define the global dimension of a $K$-algebra $A$.
+
+    \begin{definition}{}{4.37}
+        \begin{enumerate}
+            \item Let $M$ be an $A$-module. The projective dimension of $M$, denoted by $\prd(M)$, is defined to be the smallest $n$ such that there exists a projective resolution $0 \to P_n \to \dots \to P_1 \to P_0 \to M \to 0$. If such an $n$ does not exist, we define $\prd(M) = \infty$.
+            \item The global dimension of $A$ is defined by
+            \begin{equation*}
+                \gldim A := \sup \{\prd (M) \ | \ M \in A-\Mod\}
+            \end{equation*}
+        \end{enumerate}
+    \end{definition}
+
+    \begin{exercise}{}{23}
+        Let $0 \to X \to Y \to Z \to 0$ be a s.e.s. of $A$-modules. Show that $\prd(Y) \leq \max\{\prd(X),\prd(Z)\}$.
+    \end{exercise}
+
+    \begin{proof}
+        If $\prd(X)$ or $\prd(Z)$ are infinite, then there is nothing to show. So say we have to projective resolution of $X$ and $Z$, then using the horseshoe Lemma \ref{lem:horseshoe}, we get a projective resolution of $Y$ of form
+        \begin{equation*}
+            0 \to P^X_{\max{\prd(X),\prd(Z)}} \oplus P^Z_{\max{\prd(X),\prd(Z)}} \to \dots \to P^X_0 \oplus P^Z_0 \to Y \to 0
+        \end{equation*}
+        hence $\prd(Y) \leq \max\{\prd(X),\prd(Z)\}$.
+    \end{proof}
     
+    The goal of the last part of the lecture is to study finite-dimensional $\C$-algebras of global dimension $\leq 1$.
+
+    \begin{proposition}{}{4.38}
+        Let $A$ be a finite-dimensional $\C$-algebra of global dimension $0$. Then $A$ is semisimple.
+    \end{proposition}
+
+    \begin{proof}
+        Since $\gldim A = 0$ all $A$-modules have a projective resolution of length $0$, hence are projective themselves. Let $M$ be a finite-dimensional $A$-module. We show that $M$ is semisimple. If $M$ is simple, then we are done. Otherwise $M$ has a non-trivial submodule $N \subsetneq M$. We consider the short exact sequence of $A$-modules:
+        \begin{equation*}
+            0 \to N \to M \to M/N \to 0
+        \end{equation*}
+        Since $M/N$ is projective, by Proposition \ref{prop:4.19} the above sequence is split and $M \cong N \oplus M/N$ as $A$-modules by Lemma \ref{lem:4.17}. Since we found a complement of any submodule of $M$, we are done.
+    \end{proof}
     
-    
+    \begin{remark}{}{4.39}
+        In the lecture we have focused our attention on finite-dimensional algebras and modules. The notion of a semisimple algebra and module can be defined for any $K$-algebra and modul (not necessarily finite-dimensional). In this case, one can show that $A$ is of global dimension $0$ if and only if $A$ is semisimple.
+    \end{remark}
+
+    Next we will move to study algebra of global dimension $1$. These algebras, their varaints and generalizations, stand in a central place in different branches of representation theory and even different domains in mathematics and physics.
+
+\chapter{Hereditary algebras, outlooks}
+    As this is not relevant for the exam this chapter will be delayed a bit.
     
 \printbibliography
 \end{document}
