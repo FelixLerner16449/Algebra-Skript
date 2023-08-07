@@ -3962,9 +3962,9 @@
             Set $A = \C[G]$ and $B = \C[H]$ in propositon \ref{prop:4.5}. Since there is an equivalence of categories $\rep G$ and $ \C[G]-\Mod$ (each $G$ representation corresponds $1:1$ to a $\C[G]$-module and the morphism of $G$-reps are exactly the $\C[G]$-module homomorphism) we are done.
         \end{proof}
 
-        We explain it 9in a numerical way using characters, where the name "reciprocity" is clear. We let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
+        We explain in a numerical way using characters, why the name "reciprocity" is clear. Let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
         
-        Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciporcity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
+        Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciprocity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
         \begin{equation*}
             \spitz{\chi_{\Res_H^G(S)},\chi_T}_H = \spitz{\chi_S,\chi_{\Ind_H^G(T)}}_G
         \end{equation*}
@@ -4082,7 +4082,7 @@
             }
             \end{equation*}
 
-            Now by composing with the canonical surjection $\pi: Z_i(D_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)$, we obtain an $A$-module homomorphsim $Z_i(C_\bullet) \to H_i(D_\bullet)$.
+            Now by composing with the canonical surjection $\pi: Z_i(D_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)$, we obtain an $A$-module homomorphism $Z_i(C_\bullet) \to H_i(D_\bullet)$.
 
             It suffices to show that the image of $B_i(C_\bullet) \subseteq Z_i(C_\bullet)$ under this map is zero. We take $b_i \in B_i(C_\bullet)$, then there exists $c_{i+1} \in C_{i+1}$ such that $d_{i+1}^C(c_{i+1}) = b_i$. Then
             \begin{equation*}
@@ -4654,11 +4654,11 @@
         Two s.e.s. $\zeta: 0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ and $\zeta: 0 \to X \xrightarrow{f'} Y' \xrightarrow{g'} Z \to 0$ are called equivalent if there exists a morphism $\varphi: Y \to Y'$ such that the following diagram commutes:
         \begin{equation*}
         \xymatrix {
-            0 \ar[r] & X \ar[r] \ar@{=}[d] & Y \ar[r]^f \ar[d]^{\varphi} & Z \ar[r] \ar@{=}[d] & 0 \\
+            0 \ar[r] & X \ar[r]^f \ar@{=}[d] & Y \ar[r]^g \ar[d]^{\varphi} & Z \ar[r] \ar@{=}[d] & 0 \\
             0 \ar[r] & X \ar[r] \ar[r]^{f'} & Y' \ar[r]^{g'} & Z \ar[r] & 0
         }
         \end{equation*}
-        We denote write $\zeta \sim \zeta'$ if $\zeta$ is equivalent to $\zeta'$. This is an equivalence relation (check this!).
+        We write $\zeta \sim \zeta'$ if $\zeta$ is equivalent to $\zeta'$. This is an equivalence relation (check this!).
     \end{definition}
 
     \begin{lemma}{}{4.31}
