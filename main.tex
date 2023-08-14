@@ -562,7 +562,7 @@
             Let $N\trianglelefteq G$ be a normal subgroup. To see that $L^N/K$ is Galois, consider
             $$\#(G/N)= \frac{\#G}{\#N}\overset{(1)}=\eckig{L^N:K}\geq\#\Gal{L^N/K}\overset{(3)} = \#(G/N)$$
             
-            Now let $M\in\Sigma\round{L^N/K}$ be a Galois intermediate field. From \ref{prop:1.7} $(1)\Rightarrow(3)$, there exists a separable polynomial $p\in K[x]$ such that $M$ is a splitting field of $p$. We write $p=\prod_{i=1}^r(x-\beta_i)$ (with the $\beta_i$ being pairwise distinct). We show that $\forall\sigma \in\Gal{L/K}: \sigma(M)=M$. Since $L^{\Gal{L/M}}=M$ (with (1)) this will prove that $\Gal(L/M) \trianglelefteq G$ (with the claim above).
+            Now let $M\in\Sigma\round{L^N/K}$ be a Galois intermediate field. From \ref{prop:1.7} $(1)\Rightarrow(3)$, there exists a separable polynomial $p\in K[x]$ such that $M$ is a splitting field of $p$. We write $p=\prod_{i=1}^r(x-\beta_i)$ (with the $\beta_i$ being pairwise distinct). We show that $\forall\sigma \in\Gal{L/K}: \sigma(M)=M$. Since $L^{\Gal{L/M}}=M$ (with (1)) this will prove that $\Gal{L/M} \trianglelefteq G$ (with the claim above).
             
             To show $\sigma(M)=M$, notice that $\sigma$ fixes every element in $K$, hence $\sigma(p)=p$, i.e. $\curly{\beta_1,\dots,\beta_r}=\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}$,
             then $\sigma(M)=K(\sigma(\beta_1),\dots,\sigma(\beta_r))=K(\beta_1,\dots,\beta_r)=M$
@@ -676,7 +676,7 @@
             \end{tikzpicture}
             \end{center}
         
-            The Galois group $\Gal{L/K}$ is the symmetric group of the triangle, also known as $D_3$ (sometimes $D_6$).
+            The Galois group $\Gal{L/K}$ is the symmetry group of the triangle, also known as $D_3$ (sometimes $D_6$).
             
         \end{example}
         
@@ -916,16 +916,45 @@
             Since $\#U_n = \varphi(n)$, the above map is an isomorphism of groups.
         \end{proof}
         \begin{exercise}{Kummer-Extension}{7}
-            Let $K$ be a field with $\cha K = 0$ and $n\geq 2$. Assume $K$ contains a primitive $n$-th root of unity. Let $a\in K\setminus\curly{0}, p=x^n-a\in K[x]$ and $K_p$ be a splitting field of $p$ over $K$. Show that $\Gal{L/K}$ is isomorphic to a subgroup of $\Z/n\Z$. Show that $\Gal{L/K}\cong \Z/n\Z$ if and only if $p$ is irreducible in $K[x]$.
+            Let $K$ be a field with $\cha K = 0$ and $n\geq 2$. Assume $K$ contains a primitive $n$-th root of unity. Let $a\in K\setminus\curly{0}$, $p=x^n-a\in K[x]$ and $K_p$ be a splitting field of $p$ over $K$. Show that:
+            \begin{enumerate}
+                \item $\Gal{L/K}$ is isomorphic to a subgroup of $\Z/n\Z$
+                \item $\Gal{L/K}\cong \Z/n\Z$ if and only if $p$ is irreducible in $K[x]$.
+            \end{enumerate}
         \end{exercise}
 
-%         \begin{proof}
-%             
-%         \end{proof}
+         \begin{proof}
+             \underline{Ad (1):}
+                Denote the primitive $n$-th root of unity as $\zeta$. Take $\alpha \in K_p$, sucht that $\alpha^n = a$. The roots of $p$ are $\{\alpha, \zeta \alpha, \zeta^2 \alpha, \dots,  \zeta^{n-1} \alpha\}$. Hence $K_p = K(\zeta,\alpha) \overset{\zeta \in K}{=} K(\alpha)$. The extension $K(\alpha)/K$ is Galois by Corollary \ref{cor:1.8}. Now consider the map
+                \begin{equation*}
+                \begin{split}
+                    \varphi: \Z &\to \Gal{K(\alpha)/K} \\
+                        k &\mapsto (\alpha \mapsto \zeta^k \alpha)
+                \end{split}
+                \end{equation*}
+                This map is well-defined as there is a isomorphism of sets
+                \begin{equation*}
+                    \{\text{roots of } p_\alpha\} \cong \Hom_K(K(\alpha),K(\alpha)) = \Gal{K(\alpha)/K}
+                \end{equation*}
+                Then $\Img \varphi = \Gal{K(\alpha)/K}$. Clearly $n\Z \subseteq \ker \varphi = d \Z$ for some $d \mid n$, as the kernel is an ideal. Now write $n = kd$ for some $k \in \Z$. Then $\Gal{K(\alpha)/K} \cong \Z/d\Z \cong k\Z/n\Z \leq \Z/n\Z$.
+                
+            \underline{Ad 2:}
+                For "$\Rightarrow$" we assume that $\ker \varphi = n\Z$, hence
+                \begin{equation*}
+                    n = \# \Gal{K(\alpha)/K} = [K(\alpha):K] \leq \deg p = n
+                \end{equation*}
+                Hence $[K(\alpha):K] = n$, and since $p$ is monic, we have $p_\alpha = p$.
+
+                Conversely, for "$\Leftarrow$", we assume that $p$ is irreducible, thus
+                \begin{equation*}
+                    \#\Gal{K(\alpha)/K} = [K(\alpha):K] = \deg p = n
+                \end{equation*}
+                Hence $\Gal{K(\alpha)/K} \cong \Z/n\Z$.
+         \end{proof}
     
 \section{Solvable by radicals}
     \subsection{Radical extensions}
-        The question we plan to answer is: Given a polynomial $f\in\Q[x]$ whether one can express all roots of $f$ by applying only $+,-,\cdot,\textdiv$ and $\sqrt[k]\cdot$ to elements in $\Q$?
+        The question we plan to answer is: Given a polynomial $f\in\Q[x]$ whether one can express all roots of $f$ by applying only $+,-,\cdot$,\textdiv \ and $\sqrt[k]\cdot$ to elements in $\Q$?
         
         When $f=x^2+px+q$ we have roots $\frac{-p\pm\sqrt{p^2-4q}}2$ and $f$ can be solved by radicals. In general, there might be roots of the form $$\sqrt[r]{a+\sqrt[s]{b+\sqrt[t]{c}}}$$
         for $a,b,c\in\Q, r,s,t\in\Z_{\geq 2}$.
@@ -933,8 +962,8 @@
         So our first task is to translate the notion "can be solved by radicals" to the language of fields and their extensions.
         \begin{definition}{radical extensions}{1.25}
             \begin{enumerate}
-                \item A field extension $L/K$ is called \textbf{simple radical} if $L=K(\alpha)$ where there exists an integer $n\geq 0$ and $a\in K$ such that $\alpha^n=a$. We also denote such an extension by $K(\sqrt[n]a)$ for short (note that $\sqrt[n]a$ is not a single fixed element in our field, we differ here from the definition in Analysis).
-                \item A field extension $L/K$ is called radical if there exists a chain of field extensions $$K=K_1\subseteq K_2\subseteq\dots\subseteq K_{r+1}= L$$
+                \item A field extension $L/K$ is called \textbf{simple radical} if there exists an $\alpha \in L$ such that $L=K(\alpha)$, there exists an integer $n\geq 0$ and $a\in K$ such that $\alpha^n=a$. We also denote such an extension by $K(\sqrt[n]a)$ for short (note that $\sqrt[n]a$ is not a single fixed element in our field, we differ here from the definition in Analysis).
+                \item A field extension $L/K$ is called \textbf{radical} if there exists a chain of field extensions $$K=K_1\subseteq K_2\subseteq\dots\subseteq K_{r+1}= L$$
                 such that each extension $K_{i+1}/K_i$ is simple radical.
             \end{enumerate}
         \end{definition}
@@ -943,7 +972,7 @@
         \textbf{Examples}:
         \begin{enumerate}
             \item $\Q \left( \sqrt[3]2, \sqrt[5]{7+\sqrt[3]{4}} \right)/\Q$ is radical
-            \item any quadratic extension $L/K$ is radical, if $\cha(K) \neq 2$
+            \item any quadratic extension $L/K$ is radical, if $\cha(K) \neq 2$.
         \end{enumerate}
     \subsection{Galois solvability theorem}
         With the help of radical extensions, we can give a rigorous definition of the notion "solvable by radicals". From now on, we will assume $\cha(K)=0$.
@@ -954,10 +983,10 @@
         \end{definition}
         We expand this definition. The roots of $f$ are contained in $K_f$. If $K_f$ is contained in  a radical extension $L=K(u_1,\dots,u_r)$ as above, then all roots of $f$ can be expressed in polynomials in $u_1,\dots,u_r$, which are iterated radicals of elements over $K$. Hence this definition coincides with our intuition of "is solvable by radicals".
         
-        Before stating the main theorem, we quickly recall the notion of solvable groups in Cobra.
+        Before stating the main theorem, we quickly recall the notion of solvable groups from Cobra.
         
         \begin{definition}{solvable group}{1.27}
-            A finite group $G$ is called solvable. if there exists a series of subgroups
+            A finite group $G$ is called solvable, if there exists a series of subgroups
             $$\curly e = G_n\subseteq G_{n-1}\subseteq \dots \subseteq G_2\subseteq G_1= G$$
             such that \begin{itemize}
                 \item $G_{i+1}$ is a normal subgroup in $G_i$
@@ -965,7 +994,7 @@
             \end{itemize}
         \end{definition}
         \begin{remark}{}{1.27}
-            In Cobra, the last condition reads: "$G_i/G_{i+1}$ is an abelian group. Since $G$ is finite, $G_i/G_{i+1}$ is a finite abelian group. Using the Smith normal form from LAII, we get
+            In Cobra, the last condition reads: "$G_i/G_{i+1}$ is an abelian group". Since $G$ is finite, $G_i/G_{i+1}$ is a finite abelian group. Using the Smith normal form from LAII, we get
             $$G_i/G_{i+1} \cong \Z/n_1\Z \times \dots \times \Z/n_r\Z$$ with $n_1,\dots, n_r\in\N$ satisfying $n_1|\dots|n_r$ which means that the above series can be refined with cyclic subquotients. Details are left as an exercise.
         \end{remark}
         \begin{exercise}{Equivalence of the notions of solvability}{8}
@@ -978,7 +1007,32 @@
         \end{exercise}
 
          \begin{proof}
-             \underline{Ad (1):}
+             \underline{Ad (1):} For Cobra $\Rightarrow$ Algebra, say we have a composition series
+             \begin{equation*}
+                 \{e\} = G_1 \trianglelefteq \dots \trianglelefteq G_n = G
+             \end{equation*}
+             such that $G_{i+1}/G_i$ is abelian. Then we have to refine this series such that the subquotients are cyclic. We do this for $G_{i+1}/G_i$ for some $i \in \{1,\dots,n-1\}$ and iterate the construction. Since $G_{i+1}/G_i$ is abelian, there is an isomorphism
+             \begin{equation*}
+                 \varphi: \Z/d_1\Z \times \dots \times \Z/d_l\Z \to G_{i+1}/G_i
+             \end{equation*}
+             with $d_1 \mid \dots \mid d_l$ natural numbers. Denote by $\pi$ the canonical map $G_{i+1} \to G_{i+1}/G_i$. Now for $0 \leq j \leq l$ set
+             \begin{equation*}
+                 H_j:= \pi^{-1}\round{\varphi \bigtimes_{m=1}^j \Z/d_m\Z \times \{0\}^{l-j}}
+             \end{equation*}
+             We have a map
+             \begin{equation*}
+                \begin{split}
+                    \psi_i: H_i &\to \frac{\Z/d_1\Z \times \dots \times \Z/d_i\Z \times \{0\}^{l-i} }{\Z/d_1\Z \times \dots \times \Z/d_{i-1} \Z \times \{0\}^{l-i+1}} \cong \Z/d_i \Z \\
+                    h &\mapsto [\varphi^{-1} \circ \pi (h)]
+                \end{split}
+             \end{equation*}
+             We compute $\ker \psi_i$:
+             \begin{equation*}
+                 h \in \ker \psi_i \Leftrightarrow \varphi^{-1} \circ \pi(h) \in \Z/d_1 \Z \times \dots \times \Z_{d_{i-1}\Z} \times \{0\}^{l-i+1} \Leftrightarrow h \in H_{i-1}
+             \end{equation*}
+             Hence $H_i/H_{i-1} \cong \Z/d_i\Z$. Hence $G$ is solvable as of definition \ref{def:1.27}.
+
+             The direction Algebra $\Rightarrow$ Cobra is clear, since cyclic groups are abelian.
          \end{proof}
         
         The goal of this section is to prove the following:
@@ -1089,7 +1143,7 @@
     
     Although $L/K$ is Galois, each step $K_{i+1}/K_i$ is not necessarily Galois. But this time it is not hard to repair it since we can fix it by adjoining roots of unity:
     Let $\ell = n_1 \dots n_r$ and $\zeta$ be a primitive $\ell$-th root of unity. Note that if we set $a_i := u_i^{n_i} \in K_i$, then $K_{i+1}(\zeta) = K_i(u_i,\zeta)$ is a splitting field of the equation $x^{n_i} - a_i \in K_i(\zeta)[x]$ (any $n_i$-th root of unity is a power of $\zeta$) so it is Galois.
-    According to Exercise \textit{7}. $\Gal{K_{i+1}(\zeta)/K_i(\zeta)}$ is a cyclic group.
+    According to Exercise \ref{exe:7}, $\Gal{K_{i+1}(\zeta)/K_i(\zeta)}$ is a cyclic group.
     
     Now we consider another chain of field extensions
     
@@ -1121,9 +1175,7 @@
         
         According to Galois correspondence, applied to $L(\zeta)/K'_{i+1}/K'_i$, this property follows from the fact that $K'_{i+1}/K'_i$ is Galois.
         
-        The subquotients $\Gal{L(\zeta)/K'_i}/\Gal{L(\zeta)/K'_{i+1}}$ are cyclic.
-        
-        Applying Corollary \ref{cor:1.14} again this group is isomorphic to $\Gal{K'_{i+1}/K'_i}$, which is cyclic.
+        The subquotients $\Gal{L(\zeta)/K'_i}/\Gal{L(\zeta)/K'_{i+1}}$ are cyclic, since we can apply Corollary \ref{cor:1.14} again, this group is isomorphic to $\Gal{K'_{i+1}/K'_i}$, which is cyclic.
         
     \end{proof}
     
@@ -1759,7 +1811,7 @@
             \item On the other hand, if $\lambda: \C[G] \to \End_\C(V)$ we obtain a $\C[G]$-module structure on $V$. We define a representation of $G$ on $V$ by
             \begin{equation*}
             \begin{split}
-                \rho_V: \G &\to \GL(V) \\  
+                \rho_V: G &\to \GL(V) \\  
                         \rho_V(g)(v) &= \lambda(g)(v)
             \end{split}
             \end{equation*}
@@ -2020,7 +2072,7 @@
         The $\C$-vector space $Z(\C[G])$ has a basis $\round{\sum\limits_{g \in C} g \ | \ C \in \cC(G)}$. In particular $\dim_\C(Z(\C[G])) = \# \cC(G)$.
     \end{corollary}
     \begin{proof}
-        Combining Corollary \ref{cor:2.14} and Lemma \ref{lem:2.15}, $\round{\gamma_C^\circ \ | \ C \in \cC(G)}$ forms a basis of $\Z(\C[G])$. It suffices to notice that $\gamma_C^\circ = \sum\limits_{g \in G} \gamma_C(g)g = \sum\limits_{g \in G} g$
+        Combining Corollary \ref{cor:2.14} and Lemma \ref{lem:2.15}, $\round{\gamma_C^\circ \ | \ C \in \cC(G)}$ forms a basis of $Z(\C[G])$. It suffices to notice that $\gamma_C^\circ = \sum\limits_{g \in G} \gamma_C(g)g = \sum\limits_{g \in G} g$
     \end{proof}
 
     We introduce a Hermitian form on the $\C$-vector space $\CF(G)$.
@@ -2050,7 +2102,7 @@
         \begin{equation*}
             \spitz{\gamma_C,\gamma_{C'}} = \frac{1}{\#G} \sum_{g \in G}\gamma_C \overline{\gamma_{C'}(g)}
         \end{equation*}
-        If $C \neq C'$, then for all $g \in G$, either $\gamma_C(g) = 0$ or $\gamma_{C'}(g) = 0$ hence $\spitz{\gamma_C,\gamma_{C'}}$.
+        If $C \neq C'$, then for all $g \in G$, either $\gamma_C(g) = 0$ or $\gamma_{C'}(g) = 0$ hence $\spitz{\gamma_C,\gamma_{C'}} = 0$.
         
         If $C = C'$, then
         \begin{equation*}
@@ -2127,7 +2179,7 @@
         $$\rho_V(g)(\tilde\rho_V(P)(v)) = \tilde{\rho}_V(g) \circ \tilde{\rho}_V(P)(v) = \tilde\rho_V(gP)(v) = \tilde\rho_V(P)(v)$$
         hence $\rho_V(g)\round{\tilde\rho_V(P)(v)}\in V^G$.
         
-        The other inclusion "$\supseteq$" is clear: if $v\in V^G$, then $\tilde\rho_V(P)(v)=\sum\frac1{\#G}\sum_{g\in G}\rho_V(g)(v)=v$
+        The other inclusion "$\supseteq$" is clear: if $v\in V^G$, then $\tilde\rho_V(P)(v)=\sum\frac1{\#G}\sum_{g\in G}\rho_V(g)(v)=v$.
         The statement on $\Hom(V,W)$ follows from \ref{lem:2.7}.
     \end{proof}
 
@@ -2160,7 +2212,7 @@
         Let $\varphi: V \to W$  be a nonzero homomorphism of $G$-representations.
         \begin{enumerate}
             \item Assume that $f:V\cong_G W$. For any $t\in\C$, $f\inv\circ\varphi-t\cdot\id_V\in\Hom_G(V,V)$ and hence $\ker(f\inv\circ\varphi-t\id_V)$ is a subrepresentation of $V$. Let $\lambda$ be an eigenvalue of $f\inv\circ\varphi:V\to V$. Then $\ker(f\inv\circ\varphi-\lambda\id_V) = V$ because $V$ is irreducible. That is to say, $\varphi=\lambda f$.
-            \item Assume that $V\not\cong_G W$. Then $\ker\varphi$ is a subrepresentation of of $W$. since $\varphi\neq 0$, $\varphi$ is injective. Moreover, since $\Img\varphi$ is a subrepresentation of $W$ and $\varphi\neq 0$, $\varphi$ is surjective. This contradicts $V\not\cong W$, and hence such a map $\varphi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
+            \item Assume that $V\not\cong_G W$. Then $\ker\varphi$ is a subrepresentation of $W$. since $\varphi\neq 0$, $\varphi$ is injective. Moreover, since $\Img\varphi$ is a subrepresentation of $W$ and $\varphi\neq 0$, $\varphi$ is surjective. This contradicts $V\not\cong W$, and hence such a map $\varphi$ does not exist. It follows $\Hom_G(V,W)=\curly 0$.
         \end{enumerate}
     \end{proof}
     \begin{corollary}{}{2.27}
@@ -2343,7 +2395,7 @@
         where $\chi_{\std}$ is the representation from exercise \ref{exe:10}. Using the relations
         \begin{equation*}
             \begin{split}
-                \chi_triv \cdot \chi_i = \chi_i, \quad \chi_\sgn \chi_\std = \chi_\std, \quad \chi_\std^2 = \chi_\triv + \chi_\sgn + \chi_\std
+                \chi_\triv \cdot \chi_i = \chi_i, \quad \chi_\sgn \chi_\std = \chi_\std, \quad \chi_\std^2 = \chi_\triv + \chi_\sgn + \chi_\std
             \end{split}
         \end{equation*}
         one can show via induction that
@@ -2468,7 +2520,7 @@
 
     \begin{proof}
         \begin{enumerate}
-            \item It suffices to show: for $\alpha,\beta\in\bar\Z$, $\alpha+\beta, \alpha\beta$ are in $\bar\Z$. Assume that $\Z[\beta]$ is generated by $1,\alpha,\dots,\alpha^m$ and $\Z[\alpha]$ is generated by $1,\beta,\dots,\beta^n$. Then $\Z[\alpha,\beta]$ is contained in the $\Z$-module $M$ generated by $\curly{\alpha^i\beta^j|0\leq i\leq m, 0\leq j\leq n}$. Applying \ref{lem:2.35} $(3)\Rightarrow (1)$ to $\Z[\alpha+\beta], \Z[\alpha\beta]\subseteq\Z[\alpha,\beta]\subseteq M$ prooves what we needed to show.
+            \item It suffices to show: for $\alpha,\beta\in\bar\Z$, $\alpha+\beta, \alpha\beta$ are in $\bar\Z$. Assume that $\Z[\beta]$ is generated by $1,\alpha,\dots,\alpha^m$ and $\Z[\alpha]$ is generated by $1,\beta,\dots,\beta^n$. Then $\Z[\alpha,\beta]$ is contained in the $\Z$-module $M$ generated by $\curly{\alpha^i\beta^j|0\leq i\leq m, 0\leq j\leq n}$. Applying \ref{lem:2.35} $(3)\Rightarrow (1)$ to $\Z[\alpha+\beta], \Z[\alpha\beta]\subseteq\Z[\alpha,\beta]\subseteq M$ proves what we needed to show.
             \item For $g\in G,\ \chi_V(g)$ is a sum of roots of unity, which are algebraic integers, hence by (1), $\chi_V$ has an image in $\bar\Z$.
         \end{enumerate}
     \end{proof}
@@ -2490,8 +2542,8 @@
     \end{lemma}
     
     \begin{proof}
-        Since $V$ is irreducible and $\gamma_C^\circ\in Z(\C[G])$, it follows from Schurs lemma (\ref{cor:2.27} to be precise) that $\tilde\rho_V(\gamma^\circ_C)=\sum_{h\in C}\rho_V(h)$ \textit{is} a scalar $\lambda\cdot \id_V$ for $\lambda\in\C$. To determine $\lambda$, we take the trace and obtain:
-        $$\lambda\dim V=\sum_{h\in C}\chi_V(h)=\#C\chi_V(g)$$ for any $g\in C$. It remains to show: $\lambda \in\bar \Z$.
+        Since $V$ is irreducible and $\gamma_C^\circ\in Z(\C[G])$, it follows from Schurs lemma (\ref{cor:2.27} to be precise) that $\tilde\rho_V(\gamma^\circ_C)=\sum_{h\in C}\rho_V(h)$ is a scalar $\lambda\cdot \id_V$ for $\lambda\in\C$. To determine $\lambda$, we take the trace and obtain:
+        $$\lambda\dim V=\sum_{h\in C}\chi_V(h)=\#C \cdot \chi_V(g)$$ for any $g\in C$. It remains to show: $\lambda \in\bar \Z$.
         According to \ref{cor:2.37}, $\gamma_C^\circ$ fulfills an equation
         $$(\gamma_c^\circ)^m+a_{m-1}(\gamma_c^\circ)^{m-1}+\dots+ a_1\gamma_C^\circ+a_0=0$$
         with $a_0,\dots,a_{m-1}\in\Z$. Applying the ring homomorphism $\tilde\rho_V$ gives an equation:
@@ -2499,11 +2551,11 @@
         Therefore $\lambda\in\bar\Z$
     \end{proof}
 
-    \begin{proof}[Proof of \ref{prop:2.33}]
-        Let $\cC(G)=\curly{C_1,\dots,C_l}$ and choose $g_i\in C_i$. Since $V\in\Irr(G), \spitz{\X_V,\chi_V}=1$ gives us $$\#G=\sum_{i=1}^l\#C_i\cdot \chi_V(g_i)\bar{\chi_V(g_i)}$$
+    \begin{proof}[Proof of Proposition \ref{prop:2.33}]
+        Let $\cC(G)=\curly{C_1,\dots,C_l}$ and choose $g_i\in C_i$. Since $V\in\Irr(G)$, we have $\spitz{\chi_V,\chi_V}=1$ which gives us $$\#G=\sum_{i=1}^l\#C_i\cdot \chi_V(g_i)\bar{\chi_V(g_i)}$$
         Dividing both sides by $\dim V$, we obtain $$\frac{\#G}{\dim V}=\sum_{i=1}^r\frac{\# C_i\cdot\chi_V(g_i)}{\dim V}\bar{\chi_V(g_i)}$$
-        since $\bar{\chi_V(g_i)}=\chi_V(g_i\inv$, it is in $\bar \Z$ by \ref{cor:2.36}.
-        Applying \ref{cor:2.36} agin, \ref{lem:2.38} implies that the right-hand side is in $\bar \Z$.So the left-hand side is in $\bar\Z$. So the left-hand side is in $\Q\cap\bar\Z=\Z$ (\ref{exe:14}).
+        since $\bar{\chi_V(g_i)}=\chi_V(g_i\inv)$, it is in $\bar \Z$ by \ref{cor:2.36}.
+        Applying \ref{cor:2.36} again, \ref{lem:2.38} implies that the right-hand side is in $\bar \Z$. So the left-hand side is in $\bar\Z$. So the left-hand side is in $\Q\cap\bar\Z=\Z$ (by Exercise \ref{exe:14}).
     \end{proof}
     
 \section{Applications}
@@ -2535,16 +2587,16 @@
             $$\rho\circ\pi=(\underbrace{\rho_{i_1},\dots, \rho_{i_1}}_{n_{i_1}\text{-times}}, \dots, \underbrace{\rho_{i_r},\dots, \rho_{i_r}}_{n_{i_r}\text{-times}})$$
         \end{proof}
     
-        Now the question is: how to compute $\ker\rho_{i_s}$? Character!
+        Now the question is: how to compute $\ker\rho_{i_s}$? The anwser lies in the characters!
         
         \begin{lemma}{}{2.40}
             We have: $$\ker\rho_i = \curly{ g\in G \ | \ \chi_i(g)=\chi_i(e)}$$     
         \end{lemma}
         \begin{proof}
-            We show that: $\rho_i(g)=\id:{s_i}\Leftrightarrow \chi_i(g)=\chi_i(e)$.
-            Let $\lambda_1,\dots, \lambda_r$ denote the eigenvalues of $\rho_i(g)$ with multiplicities. Then $\chi_i(g)=\chi_i(e) \Leftrightarrow = r$. Since the $l_i$ are roots of unity
+            We show that: $\rho_i(g)=\id_{S_i} \Leftrightarrow \chi_i(g)=\chi_i(e)$.
+            Let $\lambda_1,\dots, \lambda_r$ denote the eigenvalues of $\rho_i(g)$ with multiplicities. Then $\chi_i(g)=\chi_i(e) \Leftrightarrow \vert{\lambda_1 + \dots + \lambda_r} = r$. Since the $\lambda_i$ are roots of unity
             $$r=\vert{\lambda_1+\dots+\lambda_r}\leq\vert{\lambda_1}+\dots+\vert{\lambda_r}=r$$
-            which implies that $\lambda_1,\dots,\lambda_r$ are colinear. Together with $\lambda_1+\dots +\lambda_r=r$, it follows $\lambda_1=\dots =\lambda_r=1$. It is equivalent to $\rho_i(g)=\id_{s_i}$.
+            which implies that $\lambda_1,\dots,\lambda_r$ are colinear. Together with $\lambda_1+\dots +\lambda_r=r$, it follows $\lambda_1=\dots =\lambda_r=1$. It is equivalent to $\rho_i(g)=\id_{S_i}$.
         \end{proof}
     
         Recall that a group $G$ is called simple if it has exactly two subgroups $\curly{e}$ and itself.
@@ -2609,7 +2661,7 @@
         \begin{equation*}
             \beta := \prod_{\sigma \in \Gal{L/\Q}} \sigma(\alpha) \in L
         \end{equation*}
-        Then $\beta \in L^{\Gal{L/\Q}} = \Q $ by Artins Lemma~\ref{lem:artin}. As a prodcut of algebraic integers, $\beta \in \overline{\Z}$ and moreover $\vert{\beta} < 1$.
+        Then $\beta \in L^{\Gal{L/\Q}} = \Q $ by Artins Lemma~\ref{lem:artin}. As a product of algebraic integers, $\beta \in \overline{\Z}$ and moreover $\vert{\beta} < 1$.
         Therefore $\beta \in \Q \cap \overline{\Z} = \Z$, hence $\beta = 0$.
 
         This means $\sigma(\alpha) = 0$ for some $\sigma \in \Gal{L/\Q}$. It follows that $\alpha = 0$.
@@ -3129,7 +3181,7 @@
 
         We first assume that $A$ has a finite-dimensional simple module $S$. Later we will argue why such a module exists.
         
-        Since $A$ is simple, $\rho$ is injetive. By the proposition above, $\rho: A \to \End(S)$ is surjective, hence an isomorphism.
+        Since $A$ is simple, $\rho$ is injective. By the proposition above, $\rho: A \to \End(S)$ is surjective, hence an isomorphism.
 
         Now we show that such an $S$ exists. For this, we look at the regular $A$-module $A$. We take a submodule $\{0\} \neq S \subseteq A$ and $\dim_\C(S)$ minimal among all $A$-submodules in $A$. Since $A \neq \{0\}$ is a finite-dimensional submodule of $A$, such an $S$ exists. If $S$ is not a simple $A$-module, it will have a non-trivial submodule $S' \subseteq S$, which is an ideal of $A$ with $\dim_\C(S') < \dim_\C(S)$, which is a contradiction. Then $S$ is simple.
     \end{proof}
@@ -3232,7 +3284,7 @@
     
     Next we will explain this number $r$ in a more canonical way.
 
-    Let $M$ be an $A$-module and $V$ be a vector space. WE define an $A$-module structure on $V\otimes V$ by $\rho: A \to \End(V\otimes M): \rho(a)(v\otimes m):= v \otimes \rho(a)(m)$ for $a\in A, v\in V$ and $m\in M$.
+    Let $M$ be an $A$-module and $V$ be a vector space. We define an $A$-module structure on $V\otimes V$ by $\rho: A \to \End(V\otimes M): \rho(a)(v\otimes m):= v \otimes \rho(a)(m)$ for $a\in A, v\in V$ and $m\in M$.
 
     This $A$-module structure is not natural because it has nothing to do with $V$.
     \begin{proposition}{Isotypic decomposition}{3.21}
@@ -3473,12 +3525,12 @@
             On the other hand, take $f\in\Hom_A(V_i,W)$, it suffices to show that $\im f \subseteq W_i = \im \rho(p_i)$. For this we show taht $\forall j \neq i, \rho(p_j)\circ f = 0$, but this follows from the fact that $rho(p_j)\circ f = f\circ \pi_j(p_j) = 0$.
 
             Gathering all these isomorphisms we obtain an isomorphism of vector spaces $$\sigma: \bigoplus_{i=1}^k \Hom_A(V_i,W) \otimes V_i \to \bigoplus_{i=1}^k W_i$$
-            It remains to show that $\sigma$ is an $A$-module homomorphism. Let $a\in A, \phi_i \in \Hom_A(V_i, W), v_i\in V_i$. Then indeed
+            It remains to show that $\sigma$ is an $A$-module homomorphism. Let $a\in A, \varphi_i \in \Hom_A(V_i, W), v_i\in V_i$. Then indeed
             \begin{align*}
-                \sigma\round{a.\sum_i=1^k\phi_i\otimes v_i} &= \sigma\round{\sum_{i=1}^k \phi_i \otimes av_i}\\
-                &= \sum_{i=1}^k\phi_i(a v_i)\\
-                &= a \sum_{i=1}^k \phi_i(v_i)\\
-                &= a \sigma\round{\sum_{i=1}^k \phi_i\otimes v_i}
+                \sigma\round{a.\sum_i=1^k\varphi_i\otimes v_i} &= \sigma\round{\sum_{i=1}^k \varphi_i \otimes av_i}\\
+                &= \sum_{i=1}^k\varphi_i(a v_i)\\
+                &= a \sum_{i=1}^k \varphi_i(v_i)\\
+                &= a \sigma\round{\sum_{i=1}^k \varphi_i\otimes v_i}
             \end{align*}
         \end{proof}
         
@@ -3569,12 +3621,14 @@
         \end{proposition}
 
         \begin{proof}
-            We show that every nonzero finite dimensional $B$-module $M$ is semisimple. with the help of the $\C$-algebra homomorphism $\phi:A\to B$we define an $A$-module structure on $M$ by
-            $$\underbrace{a.n}_{A\text{-module}}=\underbrace{\phi(a).n}_{B\text{-module}}\text{\footnote{this is called a \textbf{pullback}}}$$
+            We show that every nonzero finite dimensional $B$-module $M$ is semisimple. with the help of the $\C$-algebra homomorphism $\varphi:A\to B$ we define an $A$-module structure on $M$ by
+            \begin{equation*}
+                \underbrace{a.n}_{A\text{-module}}=\underbrace{\varphi(a).n}_{B\text{-module}}\footnote{this is called a \textbf{pullback}}
+            \end{equation*}
 
             Since $A$ is semisimple, we write $M=S_1\oplus \dots \oplus S_r$ as a direct sum of simple $A$-modules. It remains to show that each $S_i$ is simple as $B$-module.
 
-            We first show that $S_i$ is a $B$-module. For this take $b\in B$ and $s\in S_i$. Since $\phi$ is surjective, there exists $a\in A$ such that $\phi(a)=b$. Then $$n.s_i = \phi(a).s_i = a.s_i \in S_i$$
+            We first show that $S_i$ is a $B$-module. For this take $b\in B$ and $s\in S_i$. Since $\varphi$ is surjective, there exists $a\in A$ such that $\varphi(a)=b$. Then $$n.s_i = \varphi(a).s_i = a.s_i \in S_i$$
             If $W\subseteq S_i$ is a nonzero $B$-submodule of $S_i$, then $W$ is a nonzero $A$-submodule of $S_i$, hence $W=S_i$.
         \end{proof}
 
@@ -3680,7 +3734,7 @@
         \end{lemma}
 
         \begin{proof}
-            From \cite{Cobra} we know, that partitions and conjugacy classes in the $S_n$ are in bijection, from the "squareness" of character tables we know that $\Irr(S_n)$ is in bijection to the conjugacy classes aswell\footnote{There are more canonical ways to define these (even though Xin would argue that any bijection between finite sets is canonical) but these require objects like \textit{Specht-modules} or \textit{Frobenius-Young-modules}, which are beyond the scope of this lecture. With these, we get some very powerful results which ultimately culminate in \textit{Frobenius' character formula}, which provides a purely combinatorial way to calculate arbitrary entries of the charactar table of a symmetric group. A reference would be \cite{Flag}, 1st chapter, which Giulia and we can provide you.}.
+            From \cite{LA} we know, that partitions and conjugacy classes in the $S_n$ are in bijection, from the "squareness" of character tables we know that $\Irr(S_n)$ is in bijection to the conjugacy classes aswell\footnote{There are more canonical (combinatorial) ways to define these (even though Xin would argue that any bijection between finite sets is canonical) but these require more (combinatorially) involved objects like \textit{Specht-modules} or \textit{Frobenius-Young-modules}, which are beyond the scope of this lecture. With these, we get some very powerful results which ultimately culminate in \textit{Frobenius' character formula}, which provides a purely combinatorial way to calculate arbitrary entries of the charactar table of any symmetric group. See \cite{FultonHarris.1991} chapter 6 or \cite{Flag}}.
         \end{proof}
 
         According to \ref{thm:ArWb}, we have the isotypic decomposition $$V^{\otimes n}= \bigoplus_{\lambda\in\wp(n)} \Hom_{S_n}(V_\lambda, V^{\otimes n})\otimes V^{\otimes n}$$
@@ -4310,7 +4364,7 @@
 
         ''$\Leftarrow$'':
         For the injectivity of $f$, take $X = \Ker f$ and $i: \Ker f \hookrightarrow L$, then
-        $f_*(i) = 0$, since $f_*$ is injetive, $i=0$, since $i$ is an embedding $\Ker f = \{0\}$.
+        $f_*(i) = 0$, since $f_*$ is injective, $i=0$, since $i$ is an embedding $\Ker f = \{0\}$.
 
         For $\Img f \subseteq \Ker g$ take $X = L$, we have
         \begin{equation*}
