@@ -24,6 +24,20 @@
 \addbibresource{literatur.bib}
 \usepackage{stmaryrd}
 \nc\rk{\text{rank}}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{%
+  matrix,%
+  calc,%
+  arrows%
+}
+
+
+%workflow
+\newcommand\TODO[1]
+%{}                             %ignore
+%{#1}                           %print
+{\color{red}{#1}}              %highlight
 
 \begin{document}
 
@@ -43,16 +57,58 @@
     \vspace*{-4.8mm}
     {\rule{15cm}{3pt}\par}
     
-	\vspace{2cm}
+	\vspace{1cm}
 	
-	{\scshape\Large Dr. Xin Fang \par}
+	{\scshape\Large Xin Fang \par}
 	
-	\vspace{1.5cm}
+	\vspace{1cm}
 	
 	{\Large read during \\
     Summer Term 2023 \par}
+
+    \vspace{1cm}
     
-    \vspace{3cm}
+    \begin{center}
+    \begin{tikzpicture}
+            \matrix[matrix of math nodes,column sep={60pt,between origins},row
+            sep={60pt,between origins},nodes={asymmetrical rectangle}] (s)
+            {
+            &|[name=ka]| \ker \alpha &|[name=kb]| \ker \beta &|[name=kc]| \ker \gamma \\
+            %
+            &|[name=A]| X &|[name=B]| Y &|[name=C]| Z &|[name=01]| 0 \\
+            %
+            |[name=02]| 0 &|[name=A']| X' &|[name=B']| Y' &|[name=C']| Z' \\
+            %
+            &|[name=ca]| \coker \alpha &|[name=cb]| \coker \beta &|[name=cc]| \coker \gamma \\
+            };
+            \draw[->] (ka) edge (A)
+                  (kb) edge (B)
+                  (kc) edge (C)
+                  (A) edge node[auto] {$f$} (B)
+                  (B) edge node[auto] {\(g\)} (C)
+                  (C) edge (01)
+                  (A) edge node[auto] {\(\alpha\)} (A')
+                  (B) edge node[auto] {\(\beta\)} (B')
+                  (C) edge node[auto] {\(\gamma\)} (C')
+                  (02) edge (A')
+                  (A') edge node[auto] {\(f'\)} (B')
+                  (B') edge node[auto] {$g'$} (C')
+                  (A') edge (ca)
+                  (B') edge (cb)
+                  (C') edge (cc)
+            ;
+            \draw[->,black] (ka) edge (kb)
+                           (kb) edge (kc)
+                           (ca) edge (cb)
+                           (cb) edge (cc)
+            ;
+            \draw[->,black,rounded corners,dotted] (kc) -| node[auto,text=black,pos=.7]
+            {\(\partial\)} ($(01.east)+(.5,0)$) |- ($(B)!.35!(B')$) -|
+            ($(02.west)+(-.5,0)$) |- (ca);
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{1cm}
     {\Large written by \\
     \itshape Elias Cleusters \\
     and Felix Lerner}
@@ -71,7 +127,7 @@
 \chapter{Galois theory}
     The goal of this chapter can be summarized as follows:
     
-    Given a polynomial $f(x) = x^n + a_{n-1}x^{n-1} + \dots + a_1x + x_0 \in K[x]$, $K \in \{\Q,\R\}$, determine whether it can be solved by radicals. That means all roots of $f(x)$ can expressed in terms of its coefficients only using $+,-,\cdot,$ \textdiv, $\sqrt[k]{\cdot}$.
+    Given a polynomial $f(x) = x^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0 \in K[x]$, $K \in \{\Q,\R\}$, determine whether it can be solved by radicals. That means all roots of $f(x)$ can expressed in terms of its coefficients only using $+,-,\cdot,$ \textdiv, $\sqrt[k]{\cdot}$.
 
     For $\deg f(x) = 2$, we have the $pq$-formula and for $\deg f(x) \in \{3,4\}$ there are the Cardano-Ferrari formulae. But if $\deg f(x) \geq 5$ for a general $f(x)$ the answer is \textit{no} (Abel-Ruffini theorem). Later Galois gave a criterion on the solvability by radicals using the solvability of the Galois group of the polynomial.
     
@@ -88,8 +144,10 @@
         Given two fields $K$ and $L$, a \textbf{field homomorphism} between them is a ring homomorphism $\varphi: K \rightarrow L$. The kernel of such a field homomorphism is a ($K$-)ideal in the ring $K$, hence either $\ker(\varphi) = \{0\}$ or $\ker(\varphi) = K$. That is to say, either $\varphi$ is the zero map, or $\varphi$ is injective.
         
         To summarize: For $\varphi \neq 0$, $\varphi(K)$ is a subfield of $L$ and $L/\varphi(K)$ is a field extension.
-        
-        Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
+
+        \begin{definition*}
+            Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
+        \end{definition*}
         
         Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-homomorphisms. Similarly, we have the notion of $K$-isomorphisms.
         
@@ -123,19 +181,19 @@
         \begin{equation*}
             \faktor{K[x]}{\Ker(\ev_\alpha)} \cong \Img(\ev_\alpha)
         \end{equation*}
-        The kernel $\ker(\ev_\alpha)$ is a $K-$ideal in $K[x]$, which is a PID (principal ideal domain), hence either there exists a monic polynomial $p_\alpha(x) \in K[x]$ (monic means $\LK(p_\alpha(x))=1$) of positive degree such that $\Ker(\ev_\alpha) = (p_\alpha(x))$ or $\ker(\ev_\alpha) = \{0\}$.
+        The kernel $\ker(\ev_\alpha)$ is a $K$-ideal in $K[x]$, which is a PID (principal ideal domain), hence either there exists a monic polynomial $p_\alpha(x) \in K[x]$ (monic means $\LK(p_\alpha(x))=1$) of positive degree such that $\Ker(\ev_\alpha) = (p_\alpha(x))$ or $\ker(\ev_\alpha) = \{0\}$.
         
         In the second case $\alpha$ is not a root of any polynomial in $K[x]$, hence the set $\{1,\alpha,\alpha^2,\dots\}$ is linearly independent over $K$ and thus the $K$-vector space $L$ is of infinite dimension. In this case, we say $\alpha$ is \textbf{transcendental} over $K$.
         
-        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is an integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
+        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is an integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we denote by $\Irr(\alpha,K)$.
         
-        Moreover, in a principal ideal ring prime ideals are maximal. so $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case, $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
+        Moreover, in a principal ideal ring prime ideals are maximal, so $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case, $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
         
         Generalising this notation: for a subset $S \subseteq L$ we will denote $K(S)$ as the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $S$. If $S$ is a finite set we call $K(S)$ finitely generated.
         
         For a finite extension $L/K$ any element $\alpha \in L$ is algebraic over $K$ since $\dim_K K(\alpha) \leq \dim_K(L) < \infty$, so we are never in the second case above.
         
-        In general the extension $L/K$ is finite iff there exist $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$.
+        In general the extension $L/K$ is finite if and only if there exist $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$.
         
         A field extension $L/K$ is called algebraic, if all elements in $L$ are algebraic over $K$. Any finite extension is algebraic, but not vice versa. For example take $S = \left\{\sqrt{p} \ | \ p \text{ prime} \right\} \subseteq \R$ and consider the field extension $\Q(S)/\Q$.
         
@@ -159,7 +217,7 @@
             \end{equation}
             
             What remains to show is that $[\Q(\sqrt{p_1},\dots,\sqrt{p_s}):\Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})] = 2$.
-            For the sake of contradiction let us assume that $\sqrt{p_s} \in \Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})$. Because of \eqref{*} there exist $q,a_1,\dots,a_{s-1} \in \Q$ where we assume wlog (without loss of generality) that $a_{s-1} \neq 0$:
+            For the sake of contradiction let us assume that $\sqrt{p_s} \in \Q(\sqrt{p_1},\dots,\sqrt{p_{s-1}})$. Because of \eqref{*} there exist $q,a_1,\dots,a_{s-1} \in \Q$ where we assume without loss of generality that $a_{s-1} \neq 0$:
             \begin{align*}
                 \sqrt{p_s} &= q + \sum_{i=1}^{s-1} a_i \sqrt{p_i} \\
                 \implies p_s &= \left(q + \sum_{i=1}^{s-2} a_i \sqrt{p_i}\right)^2 + 2  \left(q + \sum_{i=1}^{s-2} a_i \sqrt{p_i}\right) \sqrt{p_{s-1}} + a_{s-1}^2 p_{s-1}
@@ -258,7 +316,7 @@
         
         What goes wrong in this example? The point is that $\Q\left( \sqrt[3]{2}\right)$ does not contain all roots of $x^3-2$.
         
-        So to get a Galois extension, we need that the minimal polynomial split into linear factors.
+        So to get a Galois extension, we need the minimal polynomial to split into linear factors.
         
         Even if we assume that $L$ is a splitting field of $K$ the equality $\#\Gal{L/K} = [L:K]$ may still fail. We consider $K = \F_p(t)$ and $L= \F_p\left( \sqrt[p]{t}\right)$, where $\alpha:=\sqrt[p]{t}$ has minimal polynomial $p_\alpha = x^p - t \in K[x]$. This polynomial is irreducible but since $\F_p$ has characteristic $p$ we get $x^p-t = (x-\alpha)^p$. Let $\sigma \in \Gal {L/K}$ then $\sigma$ sends $\alpha$ to a root of $p_\alpha$ in $L$ which can only be $\alpha$. Therefore again $\#\Gal {L/K} = 1$.
         
@@ -385,7 +443,7 @@
         \end{example}
         
 \section{Galois correspondence}
-        In this section, we will state and prove the fundamental theorem of Galois theory. Roughly speaking it gives a correspondence (called Galois correspondence) between an intermediate field in a Galois extension and the subgroups of the Galois group. This correspondence translates problems in field theory to group theory, which is the key idea of Galois.
+        In this section, we will state and prove the fundamental theorem of Galois theory. Roughly speaking it gives a correspondence (called Galois correspondence) between the intermediate fields in a Galois extension and the subgroups of the Galois group. This correspondence translates problems in field theory to group theory, which is the key idea of Galois.
     
     \subsection{Fundamental theorem}
         We need to introduce certain notations to state the main result.
@@ -419,16 +477,18 @@
             
             \textit{Ad} $(2)$: Since $\Gal{L/K}$ only contains $K$-automorphisms of $L$, for any $k \in K, \sigma \in H \subseteq \Gal{L/K}: \sigma(k) = k$ and thus $K \subseteq L^H$.
         \end{proof}
-        
-        Let $G$ be a group. We denote $\Gamma(G) = \{U \ | \ U \leq G\}$. The set $\Gamma(G)$ has a partial order:
-        \begin{align*}
-            H_1,H_2 \in \Gamma(G), \quad H_1 \prec H_2 :\Leftrightarrow H_1 \subseteq H_2
-        \end{align*}
-        
-        Let $L/K$ be a field extension. We let $\Sigma(L/K) = \{M \ | \ L/M/K \text{ intermediate extension}\}$. The set $\Sigma(L/K)$ has a partial order:
-        \begin{align*}
-            M_1,M_2 \in \Sigma(L/K), \quad M_1 \succ M_2 :\Leftrightarrow M_1 \supseteq M_2
-        \end{align*}
+
+        \begin{notation*}
+            Let $G$ be a group. We denote the set of its subgroups as $\Gamma(G) := \{U \ | \ U \leq G\}$. The set $\Gamma(G)$ has a partial order:
+            \begin{align*}
+                H_1,H_2 \in \Gamma(G), \quad H_1 \prec H_2 :\Leftrightarrow H_1 \subseteq H_2
+            \end{align*}
+            
+            Let $L/K$ be a field extension. We let $\Sigma(L/K) = \{M \ | \ L/M/K \text{ intermediate extension}\}$. The set $\Sigma(L/K)$ has a partial order:
+            \begin{align*}
+                M_1,M_2 \in \Sigma(L/K), \quad M_1 \succ M_2 :\Leftrightarrow M_1 \supseteq M_2
+            \end{align*}
+        \end{notation*}
         
         If we consider a finite extension $L/K$ then the Galois group is finite (it is bounded by $[L:K]$). For a finite group, there exist only finitely many subgroups (i.e. $\Gamma(\Gal{L/K})$) is a finite set). If there were a correspondence between $\Gamma(\Gal{L/K})$ and $\Sigma(\Gal{L/K})$, then there should only be finitely many intermediate fields. According to Korollar 1.3.51 of Cobra \cite{Cobra}, the extension $L/K$ has to be primitive or we should at least assume that $L/K$ is separable.
         
@@ -445,7 +505,7 @@
             \end{enumerate}
         \end{theorem}
         
-        So (2) gives us (in comparison to \ref{cor:1.3}) that all of that also the lower extension is Galois.
+        So (2) gives us (in comparison to \ref{cor:1.3}) that all of that, also the lower extension is Galois. It is a caracterization of when this is the case.
         
         \begin{equation*}
             \xymatrix
@@ -598,7 +658,7 @@
         \begin{example}{}{1.19}
             We consider the Galois group of the polynomial $x^3-2$. Let $L = \Q(\sqrt[3]{2},\zeta)$, where $\zeta = \exp{\frac{2 \pi i}{3}}$ be a splitting field of $x^3 - 2$ over $\Q$.
             
-            We first compute $L:\Q$. For this we consider the intermediate field $\Q(\zeta)$ and $\Q(\sqrt[3]{2})$. The minimal polynomial of $\zeta$ over $\Q$ is $x^2 + x + 1 \in \Q[x]$ and the minimal polynomial of $\sqrt[3]{2}$ over $\Q$ is $x^3 - 2 \in \Q[x]$. We set $a:= [L:\Q(\zeta)]$ and $b:=[L:\Q(\sqrt[3]{2})]$. Then by the degree formula $2a = 3b$ and hence $2 | b$. But $\zeta \not \in \Q(\sqrt[3]{2}) \subseteq \R$ so $[L:\Q(\sqrt[3]{2})] \geq 2$ hence $b = 2$, which means $[L:\Q] = 6$.
+            We first compute $\eckig{L:\Q}$. For this we consider the intermediate field $\Q(\zeta)$ and $\Q(\sqrt[3]{2})$. The minimal polynomial of $\zeta$ over $\Q$ is $x^2 + x + 1 \in \Q[x]$ and the minimal polynomial of $\sqrt[3]{2}$ over $\Q$ is $x^3 - 2 \in \Q[x]$. We set $a:= [L:\Q(\zeta)]$ and $b:=[L:\Q(\sqrt[3]{2})]$. Then by the degree formula $2a = 3b$ and hence $2 | b$. But $\zeta \not \in \Q(\sqrt[3]{2}) \subseteq \R$ so $[L:\Q(\sqrt[3]{2})] \geq 2$ hence $b = 2$, which means $[L:\Q] = 6$.
             
             \begin{equation*}
                 \xymatrix@W=15pt
@@ -679,7 +739,7 @@
             
         \end{example}
         
-        But if we look at the splitting field of $x^3 - 1$ over $\Q$, which is $\Q(\zeta)$. Then the three roots of $x^3 - 1$ are $\zeta,\zeta^2$. Note that $1 \in \Q$, so every element in $\Gal{\Q(\zeta)/\Q}$ will fix $1$ and the group is isomorphic to $S_2$. The only non trivial element will swap $\zeta$ and $\zeta^2$. Note that the restriction of the complex conjugation map $\sigma:z \mapsto \overline{z}$ to $\Q(\zeta)$ is well defined and it gives the above non trivial element in $\Gal{\Q(\zeta)/\Q}$
+        But if we look at the splitting field of $x^3 - 1$ over $\Q$, which is $\Q(\zeta)$. Then the three roots of $x^3 - 1$ are $1,\zeta,\zeta^2$. Note that $1 \in \Q$, so every element in $\Gal{\Q(\zeta)/\Q}$ will fix $1$ and the group is isomorphic to $S_2$. The only non trivial element will swap $\zeta$ and $\zeta^2$. Note that the restriction of the complex conjugation map $\sigma:z \mapsto \overline{z}$ to $\Q(\zeta)$ is well defined and it gives the above non trivial element in $\Gal{\Q(\zeta)/\Q}$
         
         
         \begin{center}
@@ -843,7 +903,6 @@
             
             \textit{Ad (2):}
             The roots of $x^n - 1$ are precisely $\mu_n$. Since $\zeta_n$ is primitive, by \textit{1 b)}, we have $\mu_n = \spitz{\zeta}$ which means $\Q(\mu_n) = \Q(\zeta_n)$, which is a splitting field of $x^n - 1$, thus normal. Since $\Q$ is perfect, the algebraic extension $\Q(\zeta_n)/\Q$ is also separable thus Galois.
-            
         \end{proof}
         
         We let $U_n$ denote the subset of multiplicative invertible elements in $\Z/n\Z$. So $\# U_n = \varphi(n)$. $U_n$ is a group with multiplication and is of order $\varphi(n)$.
@@ -1139,16 +1198,10 @@
     \end{lemma}
     
     \begin{proof}
-    {\color{blue} Let $\sigma$ be a generator of $\Gal{L/K}$. It follows from $\sigma^m=\mathrm{id}_L$ that the minimal polynomial of $\sigma$ over $K$ divides $x^m-1$, which splits into linear factors over $K$. Hence $\sigma$ is diagonalizable over $K$. We let $\Lambda$ denote the set of its eigenvalues. We claim that $\Lambda$ is a subgroup of $(\mu_m,\cdot)$. Indeed, if $\lambda_1,\lambda_2\in\Lambda$ then $\lambda_1^{-1},\lambda_1\lambda_2\in\Lambda$ since if $\ell_1,\ell_2$ are eigenvectors associated to eigenvalues $\lambda_1$ and $\lambda_2$, then $\ell_1^{-1}$ and $\ell_1\ell_2$ are eigenvectors having eigenvalues $\lambda_1^{-1}$ and $\lambda_1\lambda_2$ respectively.} {\color{green} Moreover $1 \in \Lambda$.}
-    
-    {\color{blue} Let $k:=\#\Lambda$. Then any element $\lambda\in\Lambda$ satisfies $\lambda^k=1$. If $k<m$, then $\sigma$ would have order strictly less than $m$. This contradiction forces $k=m$ and $\Lambda=\mu_m$. It follows that there exists $0\neq \ell\in L$ such that $\sigma(\ell)=\zeta^{-1}\ell$. Since $\sigma$ is a $K$-automorphism, applying repeatedly $\sigma$ shows that $\ell$, $\ell^2$, $\ldots$, $\ell^m$ are eigenvectors of $\sigma$ with eigenvalues $\zeta^{-1},\ldots,\zeta^{-(m-1)},\zeta^{-m}=1$.}
-        %There are some inaccuracies in the proof. For a more detailed proof see "Non-vanishing of resolvent" in Moodle.
-%First, since $L/K$ is finite and separable, from the primitive element theorem, we can assume that $L = K(\alpha)$ for some $\alpha \in L$.
+        Let $\sigma$ be a generator of $\Gal{L/K}$. It follows from $\sigma^m=\mathrm{id}_L$ that the minimal polynomial of $\sigma$ over $K$ divides $x^m-1$, which splits into linear factors over $K$. Hence $\sigma$ is diagonalizable over $K$. We let $\Lambda$ denote the set of its eigenvalues. We claim that $\Lambda$ is a subgroup of the $m$-th roots of unity $(\mu_m,\cdot)$. Indeed, if $\lambda_1,\lambda_2\in\Lambda$ then $\lambda_1^{-1},\lambda_1\lambda_2\in\Lambda$ since if $\ell_1,\ell_2$ are eigenvectors associated to eigenvalues $\lambda_1$ and $\lambda_2$, then $\ell_1^{-1}$ and $\ell_1\ell_2$ are eigenvectors having eigenvalues $\lambda_1^{-1}$ and $\lambda_1\lambda_2$ respectively. Moreover $1 \in \Lambda$.
         
-        %The crucial construction is the following Lagrange resolvent: For $\sigma \in \Gal{L/K}$ a generator:
-        %\begin{equation*}
-         %   \ell := \alpha + \zeta \sigma(\alpha) + \zeta^2 \sigma^2(\alpha) + \dots + \zeta^{m-1}\sigma^{m-1}(\alpha)
-       % \end{equation*}
+        Let $k:=\#\Lambda$. Then any element $\lambda\in\Lambda$ satisfies $\lambda^k=1$. If $k<m$, then $\sigma$ would have order strictly less than $m$. This contradiction forces $k=m$ and $\Lambda=\mu_m$. It follows that there exists $0\neq \ell\in L$ such that $\sigma(\ell)=\zeta^{-1}\ell$. Since $\sigma$ is a $K$-automorphism, applying repeatedly $\sigma$ shows that $\ell$, $\ell^2$, $\ldots$, $\ell^m$ are eigenvectors of $\sigma$ with eigenvalues $\zeta^{-1},\ldots,\zeta^{-(m-1)},\zeta^{-m}=1$.
+    
         From $\zeta \in K$ and $\sigma(\ell) = \zeta^{-1} \ell$ it follows $\sigma^k(\ell) = \zeta^{-k} \ell$. Now we consider the intermediate field $L/K(\ell)/K$ and look at $\Gal{L/K(\ell)}$ as a subgroup of $\Gal{L/K}$.
         
         Notice that $\sigma,\sigma^2,\dots,\sigma^{m-1}$ do not fix $\ell$, hence they are not in $\Gal{L/K(\ell)}$. It follows from $\Gal{L/K} \cong \Z/m\Z$ that $\Gal{L/K(\ell)}$ is the trivial group and hence $L = K(\ell)$ (Galois correspondence).
@@ -1189,49 +1242,50 @@
     
     \subsection{Quadratic and cubic equations}
 
-    {\color{blue}We start from Lagrange resolvent. We keep notations as in Lemma \ref{lem:1.33} with $G:=\Gal{L/K}$.
+    We start from Lagrange resolvent. We keep notations as in Lemma \ref{lem:1.33} with $G:=\Gal{L/K}$.
     
-    Let $L^\times:=L\setminus\{0\}$ be the multiplicative group of the field $L$. A \emph{character} of $G$ (with value in $L^\times$) is a group homomorphism $\chi:G\to L^\times$. We denote $\mathrm{Ch}(G,L^\times)$ the set of such characters. Note that these characters are different to those we will see in group representation theory.
+    Let $L^\times:=L\setminus\{0\}$ be the multiplicative group of the field $L$. A \textbf{character} of $G$ (with value in $L^\times$) is a group homomorphism $\chi:G\to L^\times$. We denote $\mathrm{Ch}(G,L^\times)$ the set of such characters. Note that these characters are different to those we will see in group representation theory.
     
     \begin{lemma}{Dedekind}{1.34}
         Different characters of $G$ are linearly independent over $L$.
     \end{lemma}
 
     \begin{proof}
-    Assume the statement is false, that is to say, there exist different characters $\chi_1,\ldots,\chi_m$ of $G$ which are linearly dependent over $L$. We assume that $m$ is minimal, that is to say, for any $1\leq k<m$, any $k$ characters in $G$ are independent over $L$ (such an $m$ exists since any single character is linearly independent). Then there exists a linear relation $a_1\chi_1+\ldots+a_m\chi_m=0$ with $a_1,\ldots,a_m\in L^\times$. 
-
-    The linear relation means: for any $g\in G$, 
-    \begin{equation}\label{Eq}
-    a_1\chi_1(g)+\ldots+a_m\chi_m(g)=0.
-    \end{equation} 
-    Since $\chi_1\neq \chi_2$, we choose $h$ such that $\chi_1(h)\neq\chi_2(h)$. Replacing $g$ by $gh$ in \eqref{Eq} and noticing that $\chi_i$ are characters, we obtain:
-    $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_2(h)+\ldots+a_m\chi_m(g)\chi_m(h)=0.$$
-    Multiplying \eqref{Eq} by $\chi_1(h)$ gives
-    $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_1(h)+\ldots+a_m\chi_m(g)\chi_1(h)=0.$$
-    Subtracting the above two identities gives
-    $$a_2(\chi_2(h)-\chi_1(h))\chi_2(g)+\ldots+a_m(\chi_m(h)-\chi_1(h))\chi_m(g)=0.$$
-    Since $\chi_2(h)-\chi_1(h)\neq 0$ and $g$ is an arbitrary element in $G$, we obtain a linear dependency relation of $\chi_2,\ldots,\chi_m$ over $L$, a contradiction.
+        Assume the statement is false, that is to say, there exist different characters $\chi_1,\ldots,\chi_m$ of $G$ which are linearly dependent over $L$. We assume that $m$ is minimal, that is to say, for any $1\leq k<m$, any $k$ characters in $G$ are independent over $L$ (such an $m$ exists since any single character is linearly independent). Then there exists a linear relation $a_1\chi_1+\ldots+a_m\chi_m=0$ with $a_1,\ldots,a_m\in L^\times$. 
+    
+        The linear relation means: for any $g\in G$, 
+        \begin{equation}\label{Eq}
+            a_1\chi_1(g)+\ldots+a_m\chi_m(g)=0.
+        \end{equation} 
+        Since $\chi_1\neq \chi_2$, we choose $h$ such that $\chi_1(h)\neq\chi_2(h)$. Replacing $g$ by $gh$ in \eqref{Eq} and noticing that $\chi_i$ are characters, we obtain:
+        $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_2(h)+\ldots+a_m\chi_m(g)\chi_m(h)=0.$$
+        Multiplying \eqref{Eq} by $\chi_1(h)$ gives
+        $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_1(h)+\ldots+a_m\chi_m(g)\chi_1(h)=0.$$
+        Subtracting the above two identities gives
+        $$a_2(\chi_2(h)-\chi_1(h))\chi_2(g)+\ldots+a_m(\chi_m(h)-\chi_1(h))\chi_m(g)=0.$$
+        Since $\chi_2(h)-\chi_1(h)\neq 0$ and $g$ is an arbitrary element in $G$, we obtain a linear dependency relation of $\chi_2,\ldots,\chi_m$ over $L$, a contradiction.
     \end{proof}
 
 
     \begin{corollary}{}{1.35}
         With the same assumption as in Lemma \ref{lem:1.33}, there exists $a\in L$ such that $$\ell(a):=a+\zeta\sigma(a)+\ldots+\zeta^{m-1}\sigma^{m-1}(a)\neq 0$$
         where $\sigma\in\Gal{L/K}$ is a generator. Moreover, $\ell(a)$ is an eigenvector of $\sigma$ of eigenvalue $\zeta^{-1}$.
+        
+        This element $\ell(a)$ in the Lemma is called a \textbf{Lagrange resolvent}.
     \end{corollary}
 
-    This element $\ell(a)$ in the Lemma is called a \emph{Lagrange resolvent}.
 
     \begin{proof}
         In the Dedekind Lemma we choose $G=L^\times$ to be the multiplicative group. Any element in the Galois group $\mathrm{Gal}(L/K)$, when restricted to $L^\times$, gives a character in $\mathrm{Ch}(L^\times,L^\times)$ because it is invertible. Therefore there is no linear relations between elements in the Galois group $\mathrm{Gal}(L/K)$ over $L$. This proves that $$\mathrm{id}_L+\zeta\sigma+\ldots+\zeta^{m-1}\sigma^{m-1}\neq 0\in \mathrm{End}_K(L),$$
         and hence one can choose $a\in L$ such that $\ell(a)\neq 0$. The second statement is clear since both $\zeta$ and $\sigma$ have order $m$.
-    \end{proof}}
+    \end{proof}
 
         \subsubsection{(1) Quadratic equations} 
             Let $f(x) = x^2 + ax + b \in \Q[x]$. Without loss of generality, we assume that it has two distinct roots $x_1$ and $x_2$. Then $x_1 + x_2 = -a$ and $x_1x_2 = b$. We let $\zeta$ be a primitive $2$nd root of unity $(\zeta = -1)$ and define the Lagrange resolvent
             \begin{equation*}
                 \ell := x_1 + \zeta x_2
             \end{equation*}
-            {\color{blue} Note that it follows from $x_1\neq x_2$ that $\ell\neq 0$.}
+            Note that it follows from $x_1\neq x_2$ that $\ell\neq 0$.
             %Since $x_2 = -a - x_1 \implies \Q(x_1,x_2) = \Q(x_1)$. 
             The Galois group $\Gal{f} \cong S_2 = \{\id, (12)=: \tau \}$ where $\tau$ permutes the two roots. Under the action of $\tau$, $\tau(\ell) = \zeta x_1 + x_2 = \zeta \ell$.
             
@@ -1274,29 +1328,22 @@
             Let $\zeta = e^{\frac{2\pi i}3}$ be a primitive 3rd root of unity. We consider the Lagrange resolvent
             $$\ell:=x_1+\zeta x_2+ \zeta^2 x_3 \qquad (\sigma = (123) \in A_3).$$
             (Note that a composition series of $S_3$ is $S_3\supset A_3 \supset \curly{e}$ where $S_3/A_3 \cong \Z/2\Z$ and $A_3\cong \Z/3\Z$. Here we study the intermediate extension $\Q(\zeta,x_1)/\Q(\zeta,x_1)^{A_3}$ with galois group isomorphic to $\Z/2\Z$).
-            {\color{blue}We show that $\ell\neq 0$. Indeed, let $\tau_3=(123)\in\Gal{f}$ and consider $\mathrm{id}+\zeta\tau_3+\zeta^2\tau_3^2$. If its value at $x_1$ were zero, then it would be zero on $\mathbb{Q}(\zeta)(x_1)$, contradicts to the linear independency of characters.}
+            We show that $\ell\neq 0$. Indeed, let $\tau_3=(123)\in\Gal{f}$ and consider $\mathrm{id}+\zeta\tau_3+\zeta^2\tau_3^2$. If its value at $x_1$ were zero, then it would be zero on $\mathbb{Q}(\zeta)(x_1)$, contradicts to the linear independency of characters.
             
             
             We name the elements of $S_3$:
             \begin{center}
-            \begin{tabular}{cccccc}
-            $\tau_1=\id$,& $\tau_2=(132)$, &$\tau_3=(123)$, &$\tau_4=(23)$, &$\tau_5=(12)$, &$\tau_6=(13)$.
-            \end{tabular}
+                \begin{tabular}{cccccc}
+                    $\tau_1=\id$,& $\tau_2=(132)$, &$\tau_3=(123)$, &$\tau_4=(23)$, &$\tau_5=(12)$, &$\tau_6=(13)$.
+                \end{tabular}
             \end{center}
-            %\begin{align*}
-             %   \tau_1=\id,& \tau_2=(132), &\tau_3=(123), &\tau_4=(23), &&&&\tau_5=(12), &&&&&\tau_6=(13)
-            %\end{align*}
             Applying them to $\ell$ gives 
             \begin{center}
-            \begin{tabular}{ccc}
-            $\tau_1(\ell)=\ell$,& $\tau_2(\ell)=\zeta\ell$, &$\tau_3(\ell)=\zeta^2\ell$, \\
-            $\tau_4(\ell)=\omega$, &$\tau_5(\ell)=\zeta\omega$, &$\tau_6(\ell)=\zeta^2\omega$.
-            \end{tabular}
+                \begin{tabular}{ccc}
+                    $\tau_1(\ell)=\ell$,& $\tau_2(\ell)=\zeta\ell$, &$\tau_3(\ell)=\zeta^2\ell$, \\
+                    $\tau_4(\ell)=\omega$, &$\tau_5(\ell)=\zeta\omega$, &$\tau_6(\ell)=\zeta^2\omega$.
+                \end{tabular}
             \end{center}
-            %\begin{align*}
-            %    &\tau_1(\ell)=\ell, &&\tau_2(\ell)=\zeta\ell, &&&\tau_3(\ell)=\zeta^2\ell\\
-            %    &\tau_4(\ell)=\omega, &&\tau_5(\ell)=\zeta\omega, &&&\tau_6(\ell)=\zeta^2\omega
-            %\end{align*}
             where $\omega=x_1+\zeta^2x_2+\zeta x_3$. Now notice that both $u_1:=\ell^3$ and $u_2:=\omega^3$ are fixed by $A_3$-permutations.Hence they are in the fixed field $\Q(x_1,x_2,x_3)^{A_3}$, which is of degree 2 over $\Q$. Therefore they have to satisfy a degree 2 equation:
             $$y^2+py+q=0 \qquad \text{ with } p=-(u_1+u_2),\quad q=u_1u_2$$
             After some computation one finds
@@ -1445,7 +1492,7 @@
         \end{definition}
         
         \begin{example}{}{2.4}
-            Let $G \circlearrowleft X$, i.e. $X$ is a $G$-set. By definition, there exists a homomorphism of groups
+            Let $G \circlearrowleft X$, i.e. $X$ is a finite $G$-set. By definition, there exists a homomorphism of groups
             \begin{equation*}
             \begin{split}
                 \rho_X: G &\to S_X:=\Bij(X,X) \\
@@ -1453,18 +1500,20 @@
             \end{split}
             \end{equation*}
             
-            We consider the vector space $\C(X)$ whose elements are $\C$-linear combinations of elements in $X$. In notation
+            We consider the vector space $\C(X)$ which is the free vector space of $X$:
             \begin{equation*}
-                \C(X) = \left\{\sum_{i=1}^{k} \lambda_i x_i \ | \ \lambda_i \in \C, x_i \in X \right\}
+                \C(X) = \left\{\sum_{i=1}^{k} \lambda_i e_{x_i} \ | \ \lambda_i \in \C, x_i \in X \right\}
             \end{equation*}
             The vector space $V:= \C(X)$ admits a $G$-rep structure via the map
             \begin{equation*}
             \begin{split}
                 \rho_V: G &\to \GL(V) \\
-                    g &\mapsto \left(x_i \mapsto \rho_X(g)(x_i)\right)
+                    g &\mapsto \left(e_{x_i} \mapsto \rho_X(g)(x_i)\right)
             \end{split}
             \end{equation*}
             Since $\rho_X(g) \in S_X$ it permutes the basis elements of $V$. Hence the linear continuation of $\rho_X(g)$ is in $\GL(V)$.
+
+            We will often simplify this notation by writing $g$ instead of $e_g$, when this does no lead to confusion.
         \end{example}
         
         We look at some special cases:
@@ -1480,6 +1529,7 @@
             \end{equation*}
             
             where $\perm(\sigma)$ is the permutation matrix of $\sigma$. Clearly $\perm(\sigma) \in \GL_n(\C)$, since $\det(\perm(\sigma)) = \sgn(\sigma)$. Furthermore $\perm(\sigma \circ \tau) = \perm(\sigma) \circ \perm(\tau)$.
+            This is called the \textbf{standard representation}.
             
         \underline{(2): $X=G$:}
         
@@ -1490,7 +1540,7 @@
                 g &\mapsto \round{\sum_{h \in G} \lambda_h h } \mapsto \round{\sum_{h \in G} \lambda_h gh }
             \end{split}
             \end{equation*}
-            Such a representation is called the left regular representation of $G$.
+            Such a representation is called the \textbf{(left) regular representation} of $G$.
             
         \underline{(3): $X = \{x\}$:}
         
@@ -1501,7 +1551,7 @@
             g &\mapsto \id_\C \mapsto 1
         \end{split}
         \end{equation*}
-        such a representation is called the trivial representation of $G$. It is a one-dimensional representation.
+        such a representation is called the \textbf{trivial representation} of $G$. It is a one-dimensional representation.
         
 \separline{Week 5}
 
@@ -1513,7 +1563,7 @@
         
         We consider the example \ref{exa:2.4} (1) above with $G=S_n$ and $V=\C^n$. Let $W = \spitz{e_1 + \dots + e_n}$ then for any $g \in S_n$, $\rho_V(g)(e_1 + \dots + e_n) = e_1 + \dots + e_n$, hence $\rho_V(g)|_W \in \GL(W)$ and $(W,\rho_V(g)|_W)$ is a subrepresentation of $(V,\rho_V)$.
         
-        Note that for a representation $(V,\rho_V)$, there always two subrepresentations $(\{0\},\rho_V|_{\{0\}})$ and $(V,\rho_V)$.
+        Note that for a representation $(V,\rho_V)$, there are always the two subrepresentations $(\{0\},\rho_V|_{\{0\}})$ and $(V,\rho_V)$.
         
         
         \begin{definition}{Irreducible representation}{2.5}
@@ -1523,7 +1573,7 @@
         \textbf{Examples}:
         \begin{enumerate}
             \item The trivial representation $\rho^{\text{triv}}: G \to \GL(\C), \quad \rho(g) = \id $ is irreducible
-            \item The representation in Example \ref{exa:2.4} (1) is not irreducible.
+            \item The representation in Example \ref{exa:2.4} (1) is not irreducible for $n\geq 2$.
             \item The $0$ representation $\rho_{0}: G \to \GL\round{\{0\}}$ is \textbf{not} irreducible
         \end{enumerate}
     
@@ -1759,7 +1809,7 @@
             \item On the other hand, if $\lambda: \C[G] \to \End_\C(V)$ we obtain a $\C[G]$-module structure on $V$. We define a representation of $G$ on $V$ by
             \begin{equation*}
             \begin{split}
-                \rho_V: \G &\to \GL(V) \\  
+                \rho_V: G &\to \GL(V) \\  
                         \rho_V(g)(v) &= \lambda(g)(v)
             \end{split}
             \end{equation*}
@@ -1961,7 +2011,7 @@
     \begin{definition*}{center}
         For a monoid $M$, we denote its center $Z(M) = \{m \in M \ | \ \forall n \in M: mn = nm\}$.
     \end{definition*}
-    Since $\C[G]$ is a monoid with $\cdot$, $Z(\C[G]) = \{x \in \C[G] \ | \ \forall y \in \C[G]: xy = yx \}$.
+    Since $\C[G]$ is a monoid with multiplication, $Z(\C[G]) = \{x \in \C[G] \ | \ \forall y \in \C[G]: xy = yx \}$.
 
     \begin{corollary}{}{2.14}
         When restricted to $\CF(G)$, the above isomorphism gives on isomorphism of $\C$-algebras
@@ -1974,7 +2024,7 @@
         \begin{equation*}
             h \round{\sum_{g \in G} \alpha(g) g} = \round{\sum_{g \in G} \alpha(g)g}h
         \end{equation*}
-        It suffices to show that $\sum_{g \in G} \alpha(g) h g h^{-1} = \sum_{g \in G} \alpha(g)$.
+        It suffices to show that $\sum_{g \in G} \alpha(g) h g h^{-1} = \sum_{g \in G} \alpha(g)g$.
         
         Since $\inn_h: G \to G, g \mapsto hgh^{-1}$ is a bijection, the left hand side reads:
         \begin{equation*}
@@ -1982,11 +2032,11 @@
         \end{equation*}
         Where RHS means right-hand side, i.e. we have shown equality.
 
-        Thus we obtained a $\C$-algebra homomorphism $\CF(G) \to Z(\C[G])$ which is injective. We show that it is also surjective:
+        Thus we obtained a $\C$-algebra homomorphism $\CF(G) \to Z(\C[G])$ which is injective (as the restriction of an isomorphism). We show that it is also surjective:
 
-        Take $x = \sum_{\lambda_g} g \in Z(\C[G])$ and $h \in G$, since $hx^h{-1} = x$ it follows that
+        Take $x = \sum \lambda_g g \in Z(\C[G])$ and $h \in G$, since $hxh^{-1} = x$ it follows that
         \begin{equation*}
-            \sum_{g \in g} \lambda_g h g h^ {-1} = \sum_{g \in G} \lambda_g g
+            h\round{\sum_{g\in G} \lambda_gg}h\inv= \sum_{g \in G} \lambda_g h g h^ {-1} = \sum_{g \in G} \lambda_g g
         \end{equation*}
         which implies that $\lambda_g = \lambda_{hgh^{-1}}$ by comparing coefficients in $\C[G]$. So the coefficients of $x$ are constant on each conjugacy class which means
         \begin{equation*}
@@ -2017,10 +2067,10 @@
             \end{equation*}
     \end{proof}
     \begin{corollary}{}{2.16}
-        The $\C$-vector space $Z(\C[G])$ has a basis $\round{\sum\limits_{g \in C} g \ | \ C \in \cC(G)}$. In particular $\dim_\C(Z(\C[G])) = \# \cC(G)$.
+        The $\C$-vector space $Z(\C[G])$ has a basis $\curly{\sum\limits_{g \in C} g \ \Bigg| \ C \in \cC(G)}$. In particular $\dim_\C(Z(\C[G])) = \# \cC(G)$.
     \end{corollary}
     \begin{proof}
-        Combining Corollary \ref{cor:2.14} and Lemma \ref{lem:2.15}, $\round{\gamma_C^\circ \ | \ C \in \cC(G)}$ forms a basis of $\Z(\C[G])$. It suffices to notice that $\gamma_C^\circ = \sum\limits_{g \in G} \gamma_C(g)g = \sum\limits_{g \in G} g$
+        Combining Corollary \ref{cor:2.14} and Lemma \ref{lem:2.15}, $\curly{\gamma_C^\circ \ \Bigg| \ C \in \cC(G)}$ forms a basis of $\Z(\C[G])$. It suffices to notice that $\gamma_C^\circ = \sum\limits_{g \in G} \gamma_C(g)g = \sum\limits_{g \in G} g$
     \end{proof}
 
     We introduce a Hermitian form on the $\C$-vector space $\CF(G)$.
@@ -2721,9 +2771,9 @@
         This follows immediately from \textit{(1)} and Burnsides theorem, because the first number with $3$ distinct prime factors not of form $pqr$ is $2^2 \cdot 3 \cdot 5 = 60$.
         
     \underline{Ad (3):}
-        If we want to show that groups $G$ with $60<\#G<120$ are solvable, we have to look for numbers that are not of form $p^a q^b$ or $pqr$ for $p,q,r$ distinct primes and $a,b \in \N_0$. We have $2 \cdot 3 \cdot 5 \cdot 7 = 210 > 120$, so we can restrict ourselves to $3$ distinct prime factors. We have $90 = 2 \cdot 3^2 \cdot 5$, $120 < 150 = 2 \cdot 3 \cdot 5^2$ and $120 = 2^3 \cdot 3 \cdot 5 $, hence we only have to show that all groups of order $90$ are solvable.
+        If we want to show that groups $G$ with $60 < \#G <120$ are solvable, we have to look for numbers that are not of form $p^a q^b$ or $pqr$ for $p,q,r$ distinct primes and $a,b \in \N_0$. We have $2 \cdot 3 \cdot 5 \cdot 7 = 210 > 120$, so we can restrict ourselves to $3$ distinct prime factors. We have $90 = 2 \cdot 3^2 \cdot 5$, $120 < 150 = 2 \cdot 3 \cdot 5^2$ and $120 = 2^3 \cdot 3 \cdot 5 $, hence we only have to show that all groups of order $90$ are solvable.
         
-        Consider the action of $G$ on itself by conjugation. Then we have two maps $\varphi:(G \hookrightarrow S_{90} \twoheadrightarrow S_{90}/A_{90})$. We would like to show that $\ker \varphi \neq G$. Take an element $g\in G$ of order $2$. We want to show that $\# G^g \equiv 2 \mod 4$. Since $G^g = Z(g) \leq G$, and $2 \mid G^g$ as $g \in G^g$, we have $\#G^g \equiv 2 \mod 4$. So $90 - \#G^g$ is not divisble by $4$, hence there is an odd number of transpositions in the cycle decomposition of the image of $g$ in $S_{90}$. Thus the image of $\varphi(g) \neq [0]$ and hence the kernel is non-trivial and we found a normal subgroup. Clearly $\ker \varphi \neq \{e\}$, so $G/\ker \varphi$ is solvable either by the $p^a q^b$ theorem or by the $pqr$-theorem. Also $\ker \varphi$ is solvable by the $p^aq^b$ or $qpr$-theorem. Hence $G$ is solvable.
+        Consider the action of $G$ on itself by conjugation. Then we have two maps $\varphi:(G \hookrightarrow S_{90} \twoheadrightarrow S_{90}/A_{90})$. We would like to show that $\ker \varphi \neq G$. Take an element $g\in G$ of order $2$. We want to show that $\# G^g \equiv 2 \mod 4$. Since $G^g = Z(g) \leq G$, and $2 \mid G^g$ as $g \in G^g$, we have $\#G^g \equiv 2 \mod 4$. So $90 - \#G^g$ is not divisible by $4$, hence there is an odd number of transpositions in the cycle decomposition of the image of $g$ in $S_{90}$. Thus the image of $\varphi(g) \neq [0]$ and hence the kernel is non-trivial and we found a normal subgroup. Clearly $\ker \varphi \neq \{e\}$, so $G/\ker \varphi$ is solvable either by the $p^a q^b$ theorem or by the $pqr$-theorem. Also $\ker \varphi$ is solvable by the $p^aq^b$ or $qpr$-theorem. Hence $G$ is solvable.
         
     \end{proof}
     
@@ -4096,14 +4146,14 @@
             \begin{equation*}
                 \Hom_G(\Ind_H^G(Y),X) \cong \Hom_H(Y,\Res_H^G(X))
             \end{equation*}
-            as $H$-reps.
+            as $\mathbb{C}$-vector spaces.
         \end{corollary}
 
         \begin{proof}[Proof of corollary \ref{cor:4.6}]
             Set $A = \C[G]$ and $B = \C[H]$ in propositon \ref{prop:4.5}. Since there is an equivalence of categories $\rep G$ and $ \C[G]-\Mod$ (each $G$ representation corresponds $1:1$ to a $\C[G]$-module and the morphism of $G$-reps are exactly the $\C[G]$-module homomorphism) we are done.
         \end{proof}
 
-        We explain it 9in a numerical way using characters, where the name "reciprocity" is clear. We let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
+        We explain it in a numerical way using characters, where the name ``reciprocity'' is clear. We let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
         
         Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciporcity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
         \begin{equation*}
@@ -4111,7 +4161,7 @@
         \end{equation*}
         which means that the multiplicity of $S$ in $\Ind_H^G(T)$ is the same as the multiplicity of $T$ in $\Res_H^G(S)$.
 
-        If we take $G=S_n$, $H = S_{n-1} \in S_n$, the embedding of $S_{n-1}$ in $S_n$ from the inclusion $[n-1] \hookrightarrow [n]$, then we get
+        If we take $G=S_n$, $H = S_{n-1} \subseteq S_n$, the embedding of $S_{n-1}$ in $S_n$ from the inclusion $[n-1] \hookrightarrow [n]$, then we get
         \begin{theorem}{}{4.7}
             For $V \in \Irr(S_n)$, $\Res_H^G(V) \in \rep(S_{n-1})$ is multiplicity free.
 
@@ -4241,7 +4291,7 @@
         \begin{itemize}
             \item $Z^i(C^\bullet):= \ker d_C^i$, the \textbf{cocylces} of degree $i$ 
             \item $B^i(C^\bullet):= \im d_C^{i-1}$, the \textbf{coboundaries} of degree $i$
-            \item $H^i(C^\bullet):= Z^i(C^\bullet)/B^i(C^\bullet)$, the $i$-th \textbf{cohomology group} of the complex $C^\bullet, d_C^\bullet$
+            \item $H^i(C^\bullet):= Z^i(C^\bullet)/B^i(C^\bullet)$, the $i$-th \textbf{cohomology group} of the complex $(C^\bullet, d_C^\bullet)$
         \end{itemize}
 
         Similar results as in Lemma \ref{lem:4.12} hold for the cohomology groups: a homomorphism $f^\bullet: C^\bullet \to D^\bullet$ of two cochain complexes (think about how to define it!) induces $H^i(f^\bullet): H^i(C^\bullet) \to H^i(D^\bullet)$.
@@ -4843,6 +4893,47 @@
 
     \begin{proof}[Proof by "It's My Turn":]
         \url{https://www.youtube.com/watch?v=etbcKWEKnvg} :)
+
+        \begin{center}
+        \begin{tikzpicture}
+            \matrix[matrix of math nodes,column sep={60pt,between origins},row
+            sep={60pt,between origins},nodes={asymmetrical rectangle}] (s)
+            {
+            &|[name=ka]| \ker \alpha &|[name=kb]| \ker \beta &|[name=kc]| \ker \gamma \\
+            %
+            &|[name=A]| X &|[name=B]| Y &|[name=C]| Z &|[name=01]| 0 \\
+            %
+            |[name=02]| 0 &|[name=A']| X' &|[name=B']| Y' &|[name=C']| Z' \\
+            %
+            &|[name=ca]| \coker \alpha &|[name=cb]| \coker \beta &|[name=cc]| \coker \gamma \\
+            };
+            \draw[->] (ka) edge (A)
+                  (kb) edge (B)
+                  (kc) edge (C)
+                  (A) edge node[auto] {$f$} (B)
+                  (B) edge node[auto] {\(g\)} (C)
+                  (C) edge (01)
+                  (A) edge node[auto] {\(\alpha\)} (A')
+                  (B) edge node[auto] {\(\beta\)} (B')
+                  (C) edge node[auto] {\(\gamma\)} (C')
+                  (02) edge (A')
+                  (A') edge node[auto] {\(f'\)} (B')
+                  (B') edge node[auto] {$g'$} (C')
+                  (A') edge (ca)
+                  (B') edge (cb)
+                  (C') edge (cc)
+            ;
+            \draw[->,black] (ka) edge (kb)
+                           (kb) edge (kc)
+                           (ca) edge (cb)
+                           (cb) edge (cc)
+            ;
+            \draw[->,black,rounded corners,dotted] (kc) -| node[auto,text=black,pos=.7]
+            {\(\partial\)} ($(01.east)+(.5,0)$) |- ($(B)!.35!(B')$) -|
+            ($(02.west)+(-.5,0)$) |- (ca);
+        \end{tikzpicture}
+        \end{center}
+        
     \end{proof}
 
     The map $\partial: \ker \gamma \to \coker \alpha$ is called the connecting homomorphism or connecting map for simplicity.
