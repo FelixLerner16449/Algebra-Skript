@@ -138,7 +138,7 @@
     \subsection{Fields and extensions}
         We briefly recall what we have done in the Cobra lecture \cite{Cobra} last semester.
         
-        In Algebra people study algebraic structures (like groups, rings, fields, vector spaces) and the maps between them preserving these structures (grouphom., ringhom, etc.). For fields, such maps are field extensions.
+        In Algebra people study algebraic structures (like groups, rings, fields, vector spaces) and the maps between them preserving these structures (grouphom., ringhom., etc.). For fields, such maps are field extensions.
         
         A \textbf{field} $K$ is a commutative ring with exactly two ideals ($\{0\}$ and $K$).
         Given two fields $K$ and $L$, a \textbf{field homomorphism} between them is a ring homomorphism $\varphi: K \rightarrow L$. The kernel of such a field homomorphism is a ($K$-)ideal in the ring $K$, hence either $\ker(\varphi) = \{0\}$ or $\ker(\varphi) = K$. That is to say, either $\varphi$ is the zero map, or $\varphi$ is injective.
@@ -261,7 +261,7 @@
                 \varphi': K(M) &\rightarrow K(M) \\
                             m &\mapsto \varphi(m)
             \end{align*}
-        This is well defined because of \ref{exe:3}. Since $p_\alpha(x)$ has only finitely many roots $[K(M):K] < \infty$ and thus $\varphi'$ is surjective. Since $\alpha$ was arbitrary $\varphi$ is surjective.
+        This is well defined because of Exercise \ref{exe:3}. Since $p_\alpha(x)$ has only finitely many roots $[K(M):K] < \infty$ and thus $\varphi'$ is surjective. Since $\alpha$ was arbitrary $\varphi$ is surjective.
         \end{proof}
             
     \subsection{Galois extensions}
@@ -347,7 +347,7 @@
             \end{enumerate}
         \end{proposition}
         
-        The definition of the Galois extension is not easy to use when determining whether a given extension is Galois or not, because computing $\Gal{L/K}$ is usually a hard task. The following proposition gives a convenient way to determine Galois extensions.
+        The definition of the Galois extension is not easy to use when determining whether a given extension is Galois or not, because computing $\Gal{L/K}$ is usually a hard task. The following proposition gives a convenient way to determine whether an extension is Galois.
 
         \begin{proposition}{}{1.7}
         	Let $L/K$ be a finite extension. The following statements are equivalent:
@@ -376,7 +376,7 @@
         	
         	Since $[K(\alpha):K] = \deg p_\alpha(x) $, combined with the bijection above gives: $p_\alpha(x)$ has $\deg p_\alpha(x)$ roots in $L$ and hence $p_\alpha(x)$ splits into linear factors in $L[x]$.
         	
-        	$2 \Rightarrow 3$: Since $L/K$ is separable, from Proposition \ref{prop:1.6} (2c), we choose separable elements $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$. The minimal polynomials $p_{\alpha_1}(x),\dots,p_{\alpha_k}$ have roots in $L$. Since $L/K$ is normal, they split into linear factors in $L[x]$.
+        	$2 \Rightarrow 3$: Since $L/K$ is separable, from Proposition \ref{prop:1.6} (2c), we choose separable elements $\alpha_1,\dots,\alpha_k \in L$ such that $L = K(\alpha_1,\dots,\alpha_k)$. The minimal polynomials $p_{\alpha_1}(x),\dots,p_{\alpha_k}(x)$ have roots in $L$. Since $L/K$ is normal, they split into linear factors in $L[x]$.
         	We denote $p(x) = \lcm(p_{\alpha_1}(x),\dots,p_{\alpha_k}(x))$. Then $p(x) \in K[x]$ and it has no multiple roots. Denote the roots of $p(x)$ in $L$ as $\beta_1, \dots, \beta_n$ . Then we have:
         	\begin{align*}
         		L = K(\alpha_1, \dots, \alpha_k) \subseteq K(\beta_1,\dots,\beta_n)\subseteq L
@@ -398,11 +398,11 @@
         In the next corollary, we show that the Galois group encodes symmetries between roots.
         
         \begin{corollary}{}{1.9}
-            Let $L/K$ be a Galois extension where $L$ is a splitting field of a separable polynomial $p(x) \in K[x]$ of degree $n$. Then there exists an invective group hom. $\varphi: \Gal{L/K} \rightarrow S_n$. In particular $[L:K]|n!$
+            Let $L/K$ be a Galois extension where $L$ is a splitting field of a separable polynomial $p(x) \in K[x]$ of degree $n$. Then there exists an injective group hom. $\varphi: \Gal{L/K} \rightarrow S_n$. In particular $[L:K]|n!$
         \end{corollary}
         
         \begin{proof}
-            We first construct the map $\varphi: \Gal{L/K} \rightarrow S_n$. since $p(x)$ is separable, we let $r_1,\dots,r_n$ denote the distinct roots of $p(x)$. Since $L$ is the splitting field of $p(x)$, we have $r_1,\dots,r_n \in L$.
+            We first construct the map $\varphi: \Gal{L/K} \rightarrow S_n$. Since $p(x)$ is separable, we let $r_1,\dots,r_n$ denote the distinct roots of $p(x)$. Since $L$ is the splitting field of $p(x)$, we have $r_1,\dots,r_n \in L$.
             
             Let $g \in \Gal{L/K}$. Then for a fixed $r_k, g(r_k)$ is also a root of $p(x)$. Hence there exists a map:
             \begin{align*}
@@ -433,11 +433,11 @@
         
         We will not prove the theorem in general, but we will see examples for $n=3,5$ (same idea for $n$ prime).
         
-        We finish this section by the following examples. Computations of Galois groups will be discussed later.
+        We finish this section with the following examples. Computations of Galois groups will be discussed later.
         
         \begin{example}{}{1.11}
             \begin{enumerate}
-                \item Let $K=\Q$ and $L = \Q(\zeta,\sqrt[3]{2})$, where $\zeta = \exp{\frac{2\pi i}{3}}$ is a root of unity. The field $L$ is a splitting field of the polynomial $x^3-2 \in \Q[x]$. The $L/K$ is Galois (since $\Q$ is perfect). We consider an intermediate field $N = \Q(\sqrt[3]{2})$. The $N/K$ is not Galois since it is not normal.
+                \item Let $K=\Q$ and $L = \Q(\zeta,\sqrt[3]{2})$, where $\zeta = \exp{\frac{2\pi i}{3}}$ is a root of unity. The field $L$ is a splitting field of the polynomial $x^3-2 \in \Q[x]$. Then $L/K$ is Galois (since $\Q$ is perfect). We consider an intermediate field $N = \Q(\sqrt[3]{2})$. Then $N/K$ is not Galois since it is not normal.
                 \item Let $K$ be a finite field with $\cha K = p > 0$. We claim that any finite extension $L/K$ is Galois. Indeed there exists an $n$ such that $[K:\F_p] = n$. Let $m = [L:K]$. Then $[L:\F_p] = mn$ and from Cobra \cite{Cobra} Lemma 1.3.26, $L$ is a splitting field of the separable polynomial $x^{p^{mn}}-x\in \F_p[x]$. By Proposition \ref{prop:1.7} $L/\F_p$ is Galois and by Corollary \ref{cor:1.3} $L/K$ is Galois. %$\}ether$ 
             \end{enumerate}
         \end{example}
@@ -461,7 +461,7 @@
             \end{enumerate}
         \end{exercise}
         \begin{proof}
-            \textit{Ad} $(1)$: Since the $\sigma$ are a field homomorphisms we get that $(L^H,+)$ is an subgroup of $L,+$, since:
+            \textit{Ad} $(1)$: Since the $\sigma$ are field homomorphisms we get that $(L^H,+)$ is an subgroup of $L,+$, since:
             \begin{align*}
                 \sigma(\alpha - \beta) = \sigma(\alpha) - \sigma(\beta) = \alpha - \beta
             \end{align*}
@@ -473,7 +473,7 @@
             \begin{align*}
                 \sigma(\alpha \beta^{-1}) = \sigma(\alpha) \sigma(\beta^{-1}) = \alpha \beta^{-1}
             \end{align*}
-            Because $1 \in L^H$, we also get that $L^H,\cdot$ is a subgroup of $(L,\cdot)$. The other properties are inherited.
+            Because $1 \in L^H$, we also get that $(L^H,\cdot)$ is a subgroup of $(L,\cdot)$. The other properties are inherited.
             
             \textit{Ad} $(2)$: Since $\Gal{L/K}$ only contains $K$-automorphisms of $L$, for any $k \in K, \sigma \in H \subseteq \Gal{L/K}: \sigma(k) = k$ and thus $K \subseteq L^H$.
         \end{proof}
@@ -505,7 +505,7 @@
             \end{enumerate}
         \end{theorem}
         
-        So (2) gives us (in comparison to \ref{cor:1.3}) that all of that, also the lower extension is Galois. It is a caracterization of when this is the case.
+        So (2) gives us (in comparison to \ref{cor:1.3}) that the lower extension is also Galois. It is a characterization of when this is the case.
         
         \begin{equation*}
             \xymatrix
@@ -527,14 +527,14 @@
         \end{corollary}
         
         \begin{proof}
-            From $(2)$ of \ref{thm:1.13}, $\Gal{L/M}$ is a normal subgroup in $\Gal{L/K}$.\\ From $(1)$ of \ref{thm:1.13}, $L^{\Gal{L/M}} = M$. Now we take $N = \Gal{L/M}$ in $(3)$ of \ref{thm:1.13}, which yields the isomorphism of groups above.
+            From $(2)$ of Theorem \ref{thm:1.13}, $\Gal{L/M}$ is a normal subgroup in $\Gal{L/K}$.\\ From $(1)$ of Theorem \ref{thm:1.13}, $L^{\Gal{L/M}} = M$. Now we take $N = \Gal{L/M}$ in $(3)$ of Theorem \ref{thm:1.13}, which yields the isomorphism of groups above.
         \end{proof}
         
         \begin{remark}{}{1.15}
             Usually determining $\Gamma(G)$ is not an easy task. But later we will use group representation theory to compute normal subgroups of a finite group.
         \end{remark}
         
-        The poset $\Gamma(G)$ has the maximal element $G$ and the minimal element $\curly \id$. The poset $\Sigma(L/K)$ has the maximal Element $L$ and minimal element $K$. From the first part of the theorem, we obtain $\Fix(G)=L^G=K$. This special case has used the full power of the Galois condition. For example, for $L=\Q\round{\sqrt[3]2}$ and $K=\Q$, we have seen in \ref{exa:1.4} that $\Gal{L/K}=\curly \id$, hence $L^G=L$.
+        The poset $\Gamma(G)$ has the maximal element $G$ and the minimal element $\curly \id$. The poset $\Sigma(L/K)$ has the maximal Element $L$ and minimal element $K$. From the first part of the theorem, we obtain $\Fix(G)=L^G=K$. This special case has used the full power of the Galois condition. For example, for $L=\Q\round{\sqrt[3]2}$ and $K=\Q$, we have seen in Example \ref{exa:1.4} that $\Gal{L/K}=\curly \id$, hence $L^G=L$.
 
 \separline{Week 2}
 
@@ -579,7 +579,7 @@
         \begin{proof}[Proof of \ref{prop:1.16}]
             Note that $\Gal{L/K}$ is a finite group.
             \begin{enumerate}
-                \item [$\Leftarrow$:] Since $K\subseteq L^{\Gal{L/K}}=L^G$, it suffices to show that $[L:L^G]=[L:K]$. From Artins Lemma, $L/G^L$ is Galois, hence $$[L:L^G]=\#\Gal{L/L^G}=\#\Gal{L/K}=[L:K]$$
+                \item [$\Leftarrow$:] Since $K\subseteq L^{\Gal{L/K}}=L^G$, it suffices to show that $[L:L^G]=[L:K]$. From Artins Lemma, $L/L^G$ is Galois, hence $$[L:L^G]=\#\Gal{L/L^G}=\#\Gal{L/K}=[L:K]$$
                 \item [$\Rightarrow$:] With Artins Lemma \ref{lem:artin}, $L/L^G$ is Galois, hence $L/G$ is Galois.
             \end{enumerate}
         \end{proof}
@@ -605,7 +605,8 @@
                 \begin{align*}
                     \alpha\in L^{\sigma N \sigma^{-1}} &\Leftrightarrow \forall g\in N: \sigma g \sigma^{-1}(\alpha)=\alpha \\
                     &\Leftrightarrow \forall g\in N: g\sigma^{-1}(\alpha)=\sigma^{-1}(\alpha)\\
-                    &\Leftrightarrow \sigma^{-1}(\alpha)\in L^N \Leftrightarrow \alpha\in \sigma\round{L^N}
+                    &\Leftrightarrow \sigma^{-1}(\alpha)\in L^N \\
+                    &\Leftrightarrow \alpha\in \sigma\round{L^N}
                 \end{align*}
                 Now, if $N$ is normal, then $\forall \sigma\in G: L^{\sigma N \sigma^{-1}}=L^N$. Artins Lemma then gives us $$\sigma N\sigma^{-1} = \Gal{L/L^{\sigma N \sigma\inv}} = \Gal{L/L^N} = N $$
                 The other direction is clear.
@@ -644,7 +645,7 @@
         \end{corollary}
         
         \begin{proof}
-            First, any finite group $G$ is a subgroup of a certain symmetric group $S_n$. The proof is similar to \ref{cor:1.9}. Take $h \in G$ and write $G = \{g_1, \dots, g_n\}$. then multiplication by $h$ gives $h.g_i = g_{\sigma_h(i)}$ for a unique $\sigma_h(i) \in [n]$.
+            First, any finite group $G$ is a subgroup of a certain symmetric group $S_n$. The proof is similar to Corollary \ref{cor:1.9}. Take $h \in G$ and write $G = \{g_1, \dots, g_n\}$. Then multiplication by $h$ gives $h.g_i = g_{\sigma_h(i)}$ for a unique $\sigma_h(i) \in [n]$.
             
             The map $\sigma_h: [n] \rightarrow [n]$ is a bijection with inverse $\sigma_{h^{-1}}$. Then the map $G \hookrightarrow S_n, \, h \mapsto \sigma_h$ gives the desired group embedding.
             
@@ -735,11 +736,11 @@
             \end{tikzpicture}
             \end{center}
         
-            The Galois group $\Gal{L/K}$ is the symmetric group of the triangle, also known as $D_3$.
+            The Galois group $\Gal{L/K}$ is the symmetric group of the triangle, also known as $D_3$ (or $D_6$ if you are a group theorist).
             
         \end{example}
         
-        But if we look at the splitting field of $x^3 - 1$ over $\Q$, which is $\Q(\zeta)$. Then the three roots of $x^3 - 1$ are $1,\zeta,\zeta^2$. Note that $1 \in \Q$, so every element in $\Gal{\Q(\zeta)/\Q}$ will fix $1$ and the group is isomorphic to $S_2$. The only non trivial element will swap $\zeta$ and $\zeta^2$. Note that the restriction of the complex conjugation map $\sigma:z \mapsto \overline{z}$ to $\Q(\zeta)$ is well defined and it gives the above non trivial element in $\Gal{\Q(\zeta)/\Q}$
+        If we look at the splitting field of $x^3 - 1$ over $\Q$, it is $\Q(\zeta)$. But then the three roots of $x^3 - 1$ are $1,\zeta,\zeta^2$. Note that $1 \in \Q$, so every element in $\Gal{\Q(\zeta)/\Q}$ will fix $1$ and the group is isomorphic to $S_2$. The only non-trivial element will swap $\zeta$ and $\zeta^2$. Note that the restriction of the complex conjugation map $\sigma:z \mapsto \overline{z}$ to $\Q(\zeta)$ is well defined and it gives the above non-trivial element in $\Gal{\Q(\zeta)/\Q}$
         
         
         \begin{center}
@@ -761,7 +762,7 @@
             \draw[blue] (180:2.6cm) node[fill=white] {$\sigma$};
         \end{tikzpicture}
         \end{center}
-        Next we study the Galois correspondence for $L/\Q$. We have $L = \Q(\sqrt[3]{2},\zeta)$ from \ref{exa:1.19}. The non trivial subgroups of $S_3$ are of order $2$ or $3$. There are four of them, namely:
+        Next, we study the Galois correspondence for $L/\Q$. We have $L = \Q(\sqrt[3]{2},\zeta)$ from \ref{exa:1.19}. The non-trivial subgroups of $S_3$ are of order $2$ or $3$. There are four of them, namely:
         \begin{equation*}
             H_1 = \spitz{(123)}, \quad H_2 = \spitz{(12)}, \quad H_3 = \spitz{(23)}, \quad H_4 = \spitz{(13)}
         \end{equation*}
@@ -800,7 +801,7 @@
 	
     	\begin{example}{}{1.20}
     		Let $K= \F_p$ with a prime number $p$ and $L$ an extension of $K$ with $[L:K] = n$. We have seen in Example \ref{exa:1.11} that $L/K$ is Galois.
-    		We show that $\Gal{L/K} \cong (\Z/n\Z.+)$ as groups.
+    		We show that $\Gal{L/K} \cong (\Z/n\Z,+)$ as groups.
     		Recall that $L$ is a splitting field of the polynomial $x^{p^n}-x \in \F_p[x]$. We define a map $\mathrm{Fr}: L \rightarrow L, \alpha \mapsto \alpha^p$. It follows from $\Fr^n = \id$ that $\Fr$ is a field automorphism. Since for any $\alpha \in \F_p, \alpha^p = \alpha$ by Fermats little theorem, $\Fr \in \Gal{L/K}$.
     		
     		We denote by $H:= \spitz{\Fr}$ the subgroup of $\Gal{L/K}$ generated by $\Fr$.
@@ -3771,7 +3772,7 @@
     Having mastered the material in this chapter, one can start reading the book of Weibel \cite{Weibel.2010} or the book of Rotman \cite{Rotman.2009}, both have the name "An Introduction to Homological Algebra".
 \setcounter{section}{-1}
 \section{Prelude - Categories}\label{cat}
-    This section is not part of the lecture. I just added it to introduce some basic language of category theory as I thought it might be interesting to "see the real world" - Michael Schlösser.
+    This section is not part of the lecture. I just added it to introduce some basic language of category theory as I thought it might be interesting to "see the real world" - Michael Schlößer.
 
     When studying Algebra, one can notice a certain pattern:
     We define some (algebraic) structures and then study the maps between objects that preserve these structures.
@@ -4155,7 +4156,7 @@
 
         We explain it in a numerical way using characters, where the name ``reciprocity'' is clear. We let $\spitz{-,-}_G$ and $\spitz{-,-}_H$ be the hermitian forms on $G$ and $H$ respectively.
         
-        Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciporcity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
+        Recall that $\spitz{\chi_V,\chi_W}_G = \dim \Hom_G(V,W)$. The Forbenius reciprocity implies for $S \in \Irr(G)$ and $T \in \Irr(H)$ that:
         \begin{equation*}
             \spitz{\chi_{\Res_H^G(S)},\chi_T}_H = \spitz{\chi_S,\chi_{\Ind_H^G(T)}}_G
         \end{equation*}
@@ -4273,7 +4274,7 @@
             }
             \end{equation*}
 
-            Now by composing with the canonical surjection $\pi: Z_i(D_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)$, we obtain an $A$-module homomorphsim $Z_i(C_\bullet) \to H_i(D_\bullet)$.
+            Now by composing with the canonical surjection $\pi: Z_i(D_\bullet) \to Z_i(D_\bullet)/B_i(D_\bullet)$, we obtain an $A$-module homomorphism $Z_i(C_\bullet) \to H_i(D_\bullet)$.
 
             It suffices to show that the image of $B_i(C_\bullet) \subseteq Z_i(C_\bullet)$ under this map is zero. We take $b_i \in B_i(C_\bullet)$, then there exists $c_{i+1} \in C_{i+1}$ such that $d_{i+1}^C(c_{i+1}) = b_i$. Then
             \begin{equation*}
@@ -4572,7 +4573,7 @@
             Q_1 \ar[r] & Q_0 \ar[r]^{\eta} & N \ar[r]& 0
         }
         \end{equation*}
-        We get $\alpha_0$ since $P_0$ is projective (via \eqref{proj}) since $\eta: Q_0 \to N$ is surjective. This means the right square commutes. Next we examine the diagram
+        We get $\alpha_0$ since $P_0$ is projective (via \eqref{proj}) since $\eta: Q_0 \to N$ is surjective. This means the right square commutes. Next, we examine the diagram
         \begin{equation*}
         \xymatrix {
             P_2 \ar[r] & P_1 \ar[r]^{d_1^P} \ar@{.>}[d]_{\alpha_1} & P_0 \ar[r]^{\e} \ar[d]_{\alpha_0} & M \ar[r] \ar[d]^{\varphi} & 0 \\
@@ -4590,7 +4591,7 @@
         So the second square commutes. Repeating this construction gives $\alpha_\bullet: P_\bullet \to Q_\bullet$ which is a homomorphism of chain complexes by construction
     \end{proof}
 
-    We have studied a single module, a homomorphsim (two modules). Next we move to three modules.
+    We have studied a single module, a homomorphism (two modules). Next, we move to three modules.
 
     \begin{definition}{}{4.23}
         Let $C_\bullet,C'_\bullet,C''_\bullet$ be three chain complexes. A s.e.s of chain complexes
@@ -4845,11 +4846,11 @@
         Two s.e.s. $\zeta: 0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ and $\zeta: 0 \to X \xrightarrow{f'} Y' \xrightarrow{g'} Z \to 0$ are called equivalent if there exists a morphism $\varphi: Y \to Y'$ such that the following diagram commutes:
         \begin{equation*}
         \xymatrix {
-            0 \ar[r] & X \ar[r] \ar@{=}[d] & Y \ar[r]^f \ar[d]^{\varphi} & Z \ar[r] \ar@{=}[d] & 0 \\
+            0 \ar[r] & X \ar[r]^f \ar@{=}[d] & Y \ar[r]^g \ar[d]^{\varphi} & Z \ar[r] \ar@{=}[d] & 0 \\
             0 \ar[r] & X \ar[r] \ar[r]^{f'} & Y' \ar[r]^{g'} & Z \ar[r] & 0
         }
         \end{equation*}
-        We denote write $\zeta \sim \zeta'$ if $\zeta$ is equivalent to $\zeta'$. This is an equivalence relation (check this!).
+        We write $\zeta \sim \zeta'$ if $\zeta$ is equivalent to $\zeta'$. This is an equivalence relation (check this!).
     \end{definition}
 
     \begin{lemma}{}{4.31}
