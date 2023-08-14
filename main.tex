@@ -91,7 +91,7 @@
         
         Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
         
-        Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-homomorphisms. Similarly, we have the notion of $K$-isomorphisms.
+        Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-\textbf{homomorphisms}. Similarly, we have the notion of $K$-isomorphisms.
         
         \begin{exercise}{}{1}
                 Let $L_1/K, \, L_2/K$ be two field extensions of $K$. Show that:
@@ -127,7 +127,7 @@
         
         In the second case $\alpha$ is not a root of any polynomial in $K[x]$, hence the set $\{1,\alpha,\alpha^2,\dots\}$ is linearly independent over $K$ and thus the $K$-vector space $L$ is of infinite dimension. In this case, we say $\alpha$ is \textbf{transcendental} over $K$.
         
-        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is an integral domain (i.e. nonzero, commutative and zero divisor free) and the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
+        In the first case, the image $\Img(\ev_\alpha)$ is a subring of the field $L$, so it is an integral domain (i.e. nonzero, commutative and zero divisor free) so the ideal $(p_\alpha(x))$ is prime, which means that the polynomial $p_\alpha(x)$ is prime and hence irreducible. This monic irreducible polynomial is called the \textbf{minimal polynomial} of $\alpha$ over $K$, which we used to denote by $\Irr(\alpha,K)$ in Cobra.
         
         Moreover, in a principal ideal ring prime ideals are maximal. So $\Img(\ev_\alpha)$ is a field. It is the smallest (w.r.t. set inclusion) field in $L$ containing $K$ and $\alpha$. We denote it by $K(\alpha)$ or $K[\alpha]$. In this case, $\alpha$ is called algebraic over $K$. The $K$-vector space $K(\alpha)$ is finite dimensional with basis $1,\alpha,\alpha^2,\dots,\alpha^{m-1}$, where $m=\deg\left(p_\alpha(x)\right)$. That is to say $\dim_K K(\alpha) = m$.
         
@@ -226,7 +226,7 @@
             If the equality holds, then $\#\Hom_N(L,L) = [L:N]$ and $\#\Hom_K(N,L) = [N:K]$.
         \end{proof}
         
-        Applying the above exercise, we have a first estimation of the Galois group:
+        Applying the above exercise \ref{exe:4}, we have a first estimation of the Galois group:
         \begin{align*}
             \# \Gal{L/K} \leq [L:K]
         \end{align*}
@@ -258,7 +258,7 @@
         
         What goes wrong in this example? The point is that $\Q\left( \sqrt[3]{2}\right)$ does not contain all roots of $x^3-2$.
         
-        So to get a Galois extension, we need that the minimal polynomial split into linear factors.
+        So to get a Galois extension, we need that the minimal polynomial splits into linear factors.
         
         Even if we assume that $L$ is a splitting field of $K$ the equality $\#\Gal{L/K} = [L:K]$ may still fail. We consider $K = \F_p(t)$ and $L= \F_p\left( \sqrt[p]{t}\right)$, where $\alpha:=\sqrt[p]{t}$ has minimal polynomial $p_\alpha = x^p - t \in K[x]$. This polynomial is irreducible but since $\F_p$ has characteristic $p$ we get $x^p-t = (x-\alpha)^p$. Let $\sigma \in \Gal {L/K}$ then $\sigma$ sends $\alpha$ to a root of $p_\alpha$ in $L$ which can only be $\alpha$. Therefore again $\#\Gal {L/K} = 1$.
         
@@ -359,7 +359,7 @@
                 \implies &\varphi(g \circ h) = \varphi(g) \circ \varphi(h)
             \end{align*}
             
-            It remains to show that $\varphi$ is injective. Indeed if $\varphi(g) =\id$, the for any $1 \leq k \leq n$: $g(r_k) = r_k$. Since $L = K(r_1, \dots, r_n)$, we have $g = \id$.
+            It remains to show that $\varphi$ is injective. Indeed if $\varphi(g) =\id$, then for any $1 \leq k \leq n$: $g(r_k) = r_k$. Since $L = K(r_1, \dots, r_n)$, we have $g = \id$.
         \end{proof}
         
         The idea in this Corollary is helpful in the computation of Galois groups since it realises an abstract group of automorphisms as permutations of roots. This is the fundamental idea of representation theory, which we will discuss in the next Chapter.
@@ -368,7 +368,7 @@
         
         \begin{theorem}{}{1.10}
         \begin{enumerate}
-            \item Hilbert: For any $n \leq 2$, there exists a separable polynomial $p(x) \in \Q[x]$ of degree $n$ such that the Galois group $\Gal{L/\Q}$ with $L = \Q_p(x)$, is isomorphic to $S_n$.
+            \item Hilbert: For any $n \geq 2$, there exists a separable polynomial $p(x) \in \Q[x]$ of degree $n$ such that the Galois group $\Gal{L/\Q}$ with $L = \Q_{p(x)}$, is isomorphic to $S_n$.
             \item Nart, Vila: $p(x) = x^n - x -1$ does this job.
         \end{enumerate}
         \end{theorem}
@@ -500,15 +500,15 @@
                 \begin{itemize}
                     \item $\alpha$ is algebraic over $L^H$: For this we consider the orbit $H.\alpha = \curly{\sigma(\alpha)|\sigma\in H}$ and let $\beta_1,\dots,\beta_r$ be the distinct elements in $H.\sigma$. We consider the polynomial $q_\alpha(x)=\prod_{i=1}^r(x-\beta_i)\in L^H[x]$.
 
-                    Since $\id\in H$, $\alpha$ is a root of $q_\alpha$. To show that $q_\alpha\in K[x]$ notice, that $\sigma\in H$ implies $\sigma H=H$, hence $\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}=\curly{\beta_1,\dots,\beta_r}$ and thus
-                    $q_\alpha(x)=\prod_{i=1}^r(x-\beta_i)=\prod_{i=1}^r(x-\sigma(\beta_i))=\sigma(q_\alpha)$ holds for all $\sigma\in H$. So because of the remark at the beginning of the proof, $q_\alpha\in L^H$ and $\alpha$ is algebraic.
-                    \item $p_\alpha$ is separable: We will show that in fact $p_\alpha=q_\alpha$ hence $p_\alpha$ is separable (we chose the $\beta_i$ to be pairwise distinct). From $q_\alpha(\alpha)=0$ follows $p_\alpha|q_\alpha$. Now in $L[x]$ we have  $x-\alpha|p_\alpha$. Applying a $\sigma\in H$, we get $$(x-\alpha)h=p_\alpha=\sigma(p_\alpha)=\sigma(x-\alpha)\sigma(h)$$
+                    Since $\id\in H$, $\alpha$ is a root of $q_\alpha$. To show that $q_\alpha \in L^H[x]$ notice, that $\sigma\in H$ implies $\sigma H=H$, hence $\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}=\curly{\beta_1,\dots,\beta_r}$ and thus
+                    $q_\alpha(x)=\prod_{i=1}^r(x-\beta_i)=\prod_{i=1}^r(x-\sigma(\beta_i))=\sigma(q_\alpha)$ holds for all $\sigma\in H$. So because of the remark at the beginning of the proof, $q_\alpha\in L^H[x]$ and $\alpha$ is algebraic.
+                    \item $p_\alpha$ is separable: We will show that in fact $p_\alpha=q_\alpha$ hence $p_\alpha$ is separable (we chose the $\beta_i$ to be pairwise distinct). From $q_\alpha(\alpha)=0$ follows $p_\alpha|q_\alpha$. Now in $L[x]$ we have  $x-\alpha|p_\alpha$. Applying $\sigma\in H$, we get $$(x-\alpha)h=p_\alpha=\sigma(p_\alpha)=\sigma(x-\alpha)\sigma(h)$$
                     where $\sigma(x-\alpha)=x-\beta_i$ for a $\beta_i\in H.\alpha$. By definition of the $\beta_i$ we get $x-\beta_i|p_\alpha\ \forall1\leq i\leq r$, therefore $q_\alpha|p_\alpha$ (and even equality, since both polynomials are monic).
                 \end{itemize}
-                \item We show that there exists $\alpha\in L$ such that $L=L^K(\alpha)$ (note that we cannot directly use the primitive element theorem since we do not know, whether $L/L^K$ is finite):
+                \item We show that there exists $\alpha\in L$ such that $L=L^H(\alpha)$ (note that we cannot directly use the primitive element theorem since we do not know, whether $L/L^H$ is finite):
                 We pick $\alpha\in L$ to be such that $\eckig{L^H(\alpha):L^H}$ is maximal. Such an element exists since every $\alpha$ is algebraic with degree bounded by $\eckig{L^H(\alpha):L^H}=\deg(p_\alpha)=\#H.\alpha\leq\#H<\infty$.
                 
-                It suffices to show that $L\subseteq L^H(\alpha)$. For this fix an arbitrary $\beta\in L$ and consider the extension $L^H(\alpha,\beta)/L^H$. This extension is finite and separable (it is generated by separable elements). Now we can apply the primitive element theorem (Proposition 16(iii) in \cite{Cobra}), which gives $\gamma\in L$ with $K(\alpha)=K(\alpha,\beta)$. Because of the maximality property of $\alpha$, we have that $\gamma$ is already in $L^H(\alpha)$. The same must then be true for $\beta$. As a consequence, the extension $L/K$ is finite.
+                It suffices to show that $L\subseteq L^H(\alpha)$. For this fix an arbitrary $\beta\in L$ and consider the extension $L^H(\alpha,\beta)/L^H$. This extension is finite and separable (it is generated by separable elements). Now we can apply the primitive element theorem (Proposition 16(iii) in \cite{Cobra}), which gives $\gamma\in L$ with $L^H(\gamma)=L^H(\alpha,\beta)$. Because of the maximality property of $\alpha$, we have that $\gamma$ is already in $L^H(\alpha)$. The same must then be true for $\beta$. As a consequence, the extension $L/K$ is finite.
                 \item We complete the proof: It suffices to show that $\eckig{L:L^H}\leq\Gal{L/L^H}$. Indeed, by choosing $\alpha\in L$ like in (2), we get from (1) that
                  $$\eckig{L^H(\alpha):K}=\#H.\alpha\leq \#H\leq \#\Gal{L/L^H}$$
                 where the last inequality follows from $H\subseteq \Gal{L/L^H}$. 
@@ -519,8 +519,8 @@
         \begin{proof}[Proof of \ref{prop:1.16}]
             Note that $\Gal{L/K}$ is a finite group.
             \begin{enumerate}
-                \item [$\Leftarrow$:] Since $K\subseteq L^{\Gal{L/K}}=L^G$, it suffices to show that $[L:L^G]=[L:K]$. From Artins Lemma, $L/L^G$ is Galois, hence $$[L:L^G]=\#\Gal{L/L^G}=\#\Gal{L/K}=[L:K]$$
-                \item [$\Rightarrow$:] With Artins Lemma \ref{lem:artin}, $L/L^G$ is Galois, hence $L/G$ is Galois.
+                \item ["$\Rightarrow$":] Since $K\subseteq L^{\Gal{L/K}}=L^G$, it suffices to show that $[L:L^G]=[L:K]$. From Artins Lemma, $L/L^G$ is Galois, hence $$[L:L^G]=\#\Gal{L/L^G}=\#\Gal{L/K}=[L:K]$$
+                \item ["$\Leftarrow$":] With Artins Lemma \ref{lem:artin}, $L/L^G$ is Galois, hence $L/K$ is Galois.
             \end{enumerate}
         \end{proof}
         \subsection{Proof of Theorem \ref{thm:1.13}}
@@ -534,13 +534,13 @@
                 \item $\Gal{L/\_}\circ\Fix=\id$: that is $\Gal{L/L^H}=H\ \forall H\in\Gamma(G)$. Since $H$ is a finite group, it follows from Artins Lemma.
             \end{itemize}
             We compute $[L^H:K]$ for $H\in\Gamma(G)$. For this we consider the extensions $L/L^H/K$ and have $$\eckig{L:K}=\eckig{L:L^H}\eckig{L^H:K}$$
-            Again we can use Artins Lemma and get $\eckig{L:L^H}=\#H$ and since $L/K$ is Galois $\eckig{L:K}=\#G$. Hence $\#G/\#H$.
-            
+            Again we can use Artins Lemma and get $\eckig{L:L^H}=\#H$ and since $L/K$ is Galois $\eckig{L:K}=\#G$. Hence $\#G/\#H = [L^H:K]$.
             
             \begin{claim*}{}
             $N\in\Gamma(G)$ is a normal subgroup if and only if $\sigma\round{L^N}=L^N\ \forall \sigma\in N$
             \end{claim*}
             \begin{proof}
+            \underline{"$\Leftarrow$":}
                 By plugging in the definitions we see, that $\sigma\round{L^N}=L^{\sigma N\sigma^{-1}}$
                 \begin{align*}
                     \alpha\in L^{\sigma N \sigma^{-1}} &\Leftrightarrow \forall g\in N: \sigma g \sigma^{-1}(\alpha)=\alpha \\
@@ -548,24 +548,24 @@
                     &\Leftrightarrow \sigma^{-1}(\alpha)\in L^N \\
                     &\Leftrightarrow \alpha\in \sigma\round{L^N}
                 \end{align*}
-                Now, if $N$ is normal, then $\forall \sigma\in G: L^{\sigma N \sigma^{-1}}=L^N$. Artins Lemma then gives us $$\sigma N\sigma^{-1} = \Gal{L/L^{\sigma N \sigma\inv}} = \Gal{L/L^N} = N $$
+                We have $\forall \sigma\in G: L^{\sigma N \sigma^{-1}}=L^N$. Artins Lemma then gives us $$\sigma N\sigma^{-1} = \Gal{L/L^{\sigma N \sigma\inv}} = \Gal{L/L^N} = N $$
                 The other direction is clear.
             \end{proof}
             \item[(3)]    
             We are now ready for $(3)$: Let $N\trianglelefteq G$ be normal. We consider the restriction map
             $$\pi: \Gal{L/K} \to \Gal{L^N/K}: \sigma \mapsto \sigma_{|L^N}$$
-            Since $N$ is normal, $\sigma(L^N)=L^N$, hence $\pi$ is well defined. Per construction $N\subseteq \Ker\pi$. Now take $\sigma\in \ker\pi$, then $\sigma\in\Gal{L/L^N}$. By Artins Lemma $\sigma\in N$, therefore $N\supseteq \ker\pi$.
+            Since $N$ is normal, $\sigma(L^N)=L^N$, hence $\pi$ is well defined. By construction $N\subseteq \Ker\pi$. Now take $\sigma\in \ker\pi$, then $\sigma\in\Gal{L/L^N}$. By Artins Lemma $\sigma\in N$, therefore $N\supseteq \ker\pi$.
             
             All in all, we have a group isomorphism $\overline\pi:G/N\to \Gal{L^N/K}$, which was to show for (3).
             
             \item[(2)]
             Let $N\trianglelefteq G$ be a normal subgroup. To see that $L^N/K$ is Galois, consider
-            $$\#(G/N)= \frac{\#G}{\#H}\overset{(1)}=\eckig{L^N:K}\geq\#\Gal{L^N/K}\overset{(3)} = \#(G/N)$$
+            $$\#(G/N)= \frac{\#G}{\#N}\overset{(1)}=\eckig{L^N:K}\geq\#\Gal{L^N/K}\overset{(3)} = \#(G/N)$$
             
-            Now let $M\in\Sigma\round{L^N/K}$ be a Galois intermediate field. From \ref{prop:1.7} $(1)\Rightarrow(3)$, there exists a separable polynomial $p\in K[x]$ such that $M$ is a splitting field of $p$. We write $p=\prod_{i=1}^r(x-\beta_i)$ (with the $\beta_i$ being pairwise distinct). We show that $\forall\sigma \in\Gal{L/K}: \sigma(M)=M$. Since $L^{\Gal{L/M}}=M$ (with (1)) this will prove that $M\trianglelefteq G$ (with the claim above).
+            Now let $M\in\Sigma\round{L^N/K}$ be a Galois intermediate field. From \ref{prop:1.7} $(1)\Rightarrow(3)$, there exists a separable polynomial $p\in K[x]$ such that $M$ is a splitting field of $p$. We write $p=\prod_{i=1}^r(x-\beta_i)$ (with the $\beta_i$ being pairwise distinct). We show that $\forall\sigma \in\Gal{L/K}: \sigma(M)=M$. Since $L^{\Gal{L/M}}=M$ (with (1)) this will prove that $\Gal(L/M) \trianglelefteq G$ (with the claim above).
             
-            To show $\sigma(M)=M$, notice that $\sigma$ fixes every element in $K$, hence $\sigma(p)=p$, i.e. $\curly{\beta_1,\dots,\beta_r}=\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}$
-            Then $\sigma(M)=K(\sigma(\beta_1),\dots,\sigma(\beta_r))=K(\beta_1,\dots,\beta_r)=M$
+            To show $\sigma(M)=M$, notice that $\sigma$ fixes every element in $K$, hence $\sigma(p)=p$, i.e. $\curly{\beta_1,\dots,\beta_r}=\curly{\sigma(\beta_1),\dots,\sigma(\beta_r)}$,
+            then $\sigma(M)=K(\sigma(\beta_1),\dots,\sigma(\beta_r))=K(\beta_1,\dots,\beta_r)=M$
         \end{enumerate}
         \end{proof}
         
@@ -599,7 +599,7 @@
         \begin{example}{}{1.19}
             We consider the Galois group of the polynomial $x^3-2$. Let $L = \Q(\sqrt[3]{2},\zeta)$, where $\zeta = \exp{\frac{2 \pi i}{3}}$ be a splitting field of $x^3 - 2$ over $\Q$.
             
-            We first compute $L:\Q$. For this we consider the intermediate field $\Q(\zeta)$ and $\Q(\sqrt[3]{2})$. The minimal polynomial of $\zeta$ over $\Q$ is $x^2 + x + 1 \in \Q[x]$ and the minimal polynomial of $\sqrt[3]{2}$ over $\Q$ is $x^3 - 2 \in \Q[x]$. We set $a:= [L:\Q(\zeta)]$ and $b:=[L:\Q(\sqrt[3]{2})]$. Then by the degree formula $2a = 3b$ and hence $2 | b$. But $\zeta \not \in \Q(\sqrt[3]{2}) \subseteq \R$ so $[L:\Q(\sqrt[3]{2})] \geq 2$ hence $b = 2$, which means $[L:\Q] = 6$.
+            We first compute $[L:\Q]$. For this we consider the intermediate field $\Q(\zeta)$ and $\Q(\sqrt[3]{2})$. The minimal polynomial of $\zeta$ over $\Q$ is $x^2 + x + 1 \in \Q[x]$ and the minimal polynomial of $\sqrt[3]{2}$ over $\Q$ is $x^3 - 2 \in \Q[x]$. We set $a:= [L:\Q(\zeta)]$ and $b:=[L:\Q(\sqrt[3]{2})]$. Then by the degree formula $2a = 3b$ and hence $2 | b$. But $\zeta \not \in \Q(\sqrt[3]{2}) \subseteq \R$ so $[L:\Q(\sqrt[3]{2})] \geq 2$ hence $b = 2$, which means $[L:\Q] = 6$.
             
             \begin{equation*}
                 \xymatrix@W=15pt
@@ -759,7 +759,7 @@
     		\overline{\varphi}: \Z/n\Z \xrightarrow{\cong} \Gal{L/K}, \, \overline{k} \mapsto \Fr^k
     	\end{equation*}
     	
-    	To show: $H = \Gal{L/K}$. According to the Galois correspondence, it suffices to show that $L^H = \F_p$. For this, we show that $\#L^H \leq \# \F_p$. Indeed, take $\alpha \in L^H$, then $\Fr(\alpha) = a$ implies that $\alpha^p = \alpha$ and $\alpha$ is a root of the polynomial $x^p - x \in \F_p[x]$. But this polynomial has at most $p$ roots, hence $\# L^H \leq p$.
+    	To show: $H = \Gal{L/\F_p}$. According to the Galois correspondence, it suffices to show that $L^H = \F_p$. For this, we show that $\#L^H \leq \# \F_p$. Indeed, take $\alpha \in L^H$, then $\Fr(\alpha) = a$ implies that $\alpha^p = \alpha$ and $\alpha$ is a root of the polynomial $x^p - x \in \F_p[x]$. But this polynomial has at most $p$ roots, hence $\# L^H \leq p$.
     	
     	In general, if $K$ is a finite field with $\cha K = p > 0$ and $L/K$ is a finite extension with $[L:K] = m$ and $[K:\F_p] = n$. Then from Example \ref{exa:1.11}, the extension $K/\F_p$ is Galois. Applying Corollary \ref{cor:1.14} gives: %dieser Satz ergab in den Notizen keinen Sinn. Muss ich nochmal nachschauen. $\Gal{L/K}$ is the kernel of
     	
@@ -785,8 +785,8 @@
     	\begin{definition}{}{1.21}
     		A Galois extension $L/K$ is called
     		\begin{enumerate}
-    			\item \textbf{cyclic} if $\Gal{L/K}$ is a cyclic group
-    			\item \textbf{abelian} if $\Gal{L/K}$ is an abelian group
+    			\item \textbf{cyclic} if $\Gal{L/K}$ is a cyclic group,
+    			\item \textbf{abelian} if $\Gal{L/K}$ is an abelian group.
     		\end{enumerate}
     	\end{definition}
     
@@ -798,7 +798,7 @@
         The complex roots of $x^n -1 $ are $\exp{\frac{2 k \pi i}{n}}$ for $k \in \{0,1,\dots,n-1\}$. These roots of unity, form a group together multiplication of complex numbers $(\mu_n,\cdot)$. It is straightforward to see that:
         \begin{equation*}
             \begin{split}
-                (\mu_n,\cdot) &\rightarrow (\Z/n\Z) \\
+                (\mu_n,\cdot) &\rightarrow (\Z/n\Z,+) \\
                     \exp{\frac{2 k \pi i}{n}} &\mapsto \overline{k}
             \end{split}
         \end{equation*}
@@ -871,13 +871,13 @@
         \end{lemma}
         
         \begin{proof}
-            We denote $p(x)$ as the minimal polynomial of $\zeta_n$ over $\Q$. Since $\zeta_n$ is a root of $x^n - 1$, there exists $q(x) \in \Q[x]$ such that $x^n - 1 = p(x)q(x)$. By Gauss Lemma, both $p(x)$ and $q(x)$ are in $\Z[x]$. We show that all primitive $n$-th root of unity are roots of $p(x)$. Since $p(x)$ is monic, we have $p(x) = \Phi_n(x)$.
+            We denote $p(x)$ as the minimal polynomial of $\zeta_n$ over $\Q$. Since $\zeta_n$ is a root of $x^n - 1$, there exists $q(x) \in \Q[x]$ such that $x^n - 1 = p(x)q(x)$. By Gauss Lemma, both $p(x)$ and $q(x)$ are in $\Z[x]$. We show that all primitive $n$-th roots of unity are roots of $p(x)$. Since $p(x)$ is monic, we have $p(x) = \Phi_n(x)$.
             
             \underline{claim:}
-                For any prime number $p$ and any primitive $n$-th root of unity $\zeta$, if $p(\zeta) = 0$ then $p\left(\zeta^p\right) = 0$.
+                For any prime number $p$ with $p \nmid n$ and any primitive $n$-th root of unity $\zeta$, if $p(\zeta) = 0$ then $p\left(\zeta^p\right) = 0$.
                 
             
-            Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From \ref{exe:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
+            Assume that the claim is proven and we completed the proof. Let $\zeta$ be a primitive $n$-th root unity. From Exercise \ref{exe:6} there exists $r$ with $\gcd(r,n) = 1$ such that $\zeta = \zeta_n^r$. We write down the prime decomposition of $r$, say $r = p_1^{n_1} \dots p_k^{n_k}$ with $n_1,\dots,n_k > 0$. Then from $p(\zeta_n) = 0$ and the above claim, we know that $p\left(\zeta_n^{p_1}\right) = 0$ and hence $p\left(\zeta_n^{p_1^{n_1}}\right) = 0$ by applying the argument $n_1$ times. Repeating this argument gives $p\left(\zeta_n^{p_1^{n_1}p_2}\right) = 0$ and with induction $p\left(\zeta_n^r\right) = p(\zeta) = 0$. Then all primitive $n$-th roots of unity are roots of $p(x)$ and hence $\Phi_n(x) | p(x)$. Since $p(x)$ is the minimal polynomial, $p(x) | \Phi_n(x)$ and hence $p(x) = \Phi_n(x)$.
             
             \begin{proof}[Proof of claim]
                 For this, we consider the canonical map
@@ -899,8 +899,7 @@
         
         Now we can prove Proposition \ref{prop:1.23}
         
-        \begin{proof}
-            Proposition \ref{prop:1.23}
+        \begin{proof}[Proof of Proposition \ref{prop:1.23}]
             
             From Exercise \ref{exe:6}, $\mu_n = \{1,\zeta_n,\dots,\zeta_n^{n-1}\}$. We take $\sigma \in \Gal{\Q(\zeta_n)/\Q}$. Such a $\Q$-automorphism of $\Q(\zeta_n)$ is uniquely determined by the image of $\zeta_n$. Since $\sigma$ is an automorphism, it preserves the order of $\zeta_n$. From Exercise \ref{exe:6}, $\sigma(\zeta_n)$ must be a primitive $n$-th root of unity. Then $\sigma(\zeta_n) = \zeta_n^r$ for some $r \in \N$ such that $\overline{r} \in U_n$. We define a map:
             \begin{equation*}
@@ -926,7 +925,7 @@
     
 \section{Solvable by radicals}
     \subsection{Radical extensions}
-        The question we plan to answer is: Given a polynomial $f\in\Q[x]$ whether one can express all roots of $f$ by applying only $+,-,\cdot,\div$ and $\sqrt[k]\cdot$ to elements in $\Q$?
+        The question we plan to answer is: Given a polynomial $f\in\Q[x]$ whether one can express all roots of $f$ by applying only $+,-,\cdot,\textdiv$ and $\sqrt[k]\cdot$ to elements in $\Q$?
         
         When $f=x^2+px+q$ we have roots $\frac{-p\pm\sqrt{p^2-4q}}2$ and $f$ can be solved by radicals. In general, there might be roots of the form $$\sqrt[r]{a+\sqrt[s]{b+\sqrt[t]{c}}}$$
         for $a,b,c\in\Q, r,s,t\in\Z_{\geq 2}$.
@@ -5000,7 +4999,7 @@
     \end{exercise}
 
     \begin{proof}
-        If $\prd(X)$ or $\prd(Z)$ are infinite, then there is nothing to show. So say we have to projective resolution of $X$ and $Z$, then using the horseshoe Lemma \ref{lem:horseshoe}, we get a projective resolution of $Y$ of form
+        If $\prd(X)$ or $\prd(Z)$ are infinite, there is nothing to show. So say we have to projective resolution of $X$ and $Z$, then using the horseshoe Lemma \ref{lem:horseshoe}, we get a projective resolution of $Y$ of form
         \begin{equation*}
             0 \to P^X_{\max{\prd(X),\prd(Z)}} \oplus P^Z_{\max{\prd(X),\prd(Z)}} \to \dots \to P^X_0 \oplus P^Z_0 \to Y \to 0
         \end{equation*}
@@ -5014,7 +5013,7 @@
     \end{proposition}
 
     \begin{proof}
-        Since $\gldim A = 0$ all $A$-modules have a projective resolution of length $0$, hence are projective themselves. Let $M$ be a finite-dimensional $A$-module. We show that $M$ is semisimple. If $M$ is simple, then we are done. Otherwise $M$ has a non-trivial submodule $N \subsetneq M$. We consider the short exact sequence of $A$-modules:
+        Since $\gldim A = 0$ all $A$-modules have a projective resolution of length $0$, hence are projective themselves. Let $M$ be a finite-dimensional $A$-module. We show that $M$ is semisimple. If $M$ is simple, then we are done. Otherwise, $M$ has a non-trivial submodule $N \subsetneq M$. We consider the short exact sequence of $A$-modules:
         \begin{equation*}
             0 \to N \to M \to M/N \to 0
         \end{equation*}
@@ -5022,10 +5021,10 @@
     \end{proof}
     
     \begin{remark}{}{4.39}
-        In the lecture we have focused our attention on finite-dimensional algebras and modules. The notion of a semisimple algebra and module can be defined for any $K$-algebra and modul (not necessarily finite-dimensional). In this case, one can show that $A$ is of global dimension $0$ if and only if $A$ is semisimple.
+        In the lecture, we focused our attention on finite-dimensional algebras and modules. The notion of a semisimple algebra and module can be defined for any $K$-algebra and module (not necessarily finite-dimensional). In this case, one can show that $A$ is of global dimension $0$ if and only if $A$ is semisimple.
     \end{remark}
 
-    Next we will move to study algebra of global dimension $1$. These algebras, their varaints and generalizations, stand in a central place in different branches of representation theory and even different domains in mathematics and physics.
+    Next, we will move to study algebra of global dimension $1$. These algebras, their variants and generalizations, stand in a central place in different branches of representation theory and even different domains in mathematics and physics.
 
 \chapter{Hereditary algebras, outlooks}
     As this is not relevant for the exam this chapter will be delayed a bit.
