@@ -24,6 +24,20 @@
 \addbibresource{literatur.bib}
 \usepackage{stmaryrd}
 \nc\rk{\text{rank}}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{%
+  matrix,%
+  calc,%
+  arrows%
+}
+
+
+%workflow
+\newcommand\TODO[1]
+%{}                             %ignore
+%{#1}                           %print
+{\color{red}{#1}}              %highlight
 
 \begin{document}
 
@@ -43,16 +57,57 @@
     \vspace*{-4.8mm}
     {\rule{15cm}{3pt}\par}
     
-	\vspace{2cm}
+	\vspace{1cm}
 	
-	{\scshape\Large Dr. Xin Fang \par}
+	{\scshape\Large Xin Fang \par}
 	
 	\vspace{1.5cm}
 	
 	{\Large read during \\
     Summer Term 2023 \par}
+    \vspace{1cm}
     
-    \vspace{3cm}
+    \begin{center}
+    \begin{tikzpicture}
+            \matrix[matrix of math nodes,column sep={60pt,between origins},row
+            sep={60pt,between origins},nodes={asymmetrical rectangle}] (s)
+            {
+            &|[name=ka]| \ker \alpha &|[name=kb]| \ker \beta &|[name=kc]| \ker \gamma \\
+            %
+            &|[name=A]| X &|[name=B]| Y &|[name=C]| Z &|[name=01]| 0 \\
+            %
+            |[name=02]| 0 &|[name=A']| X' &|[name=B']| Y' &|[name=C']| Z' \\
+            %
+            &|[name=ca]| \coker \alpha &|[name=cb]| \coker \beta &|[name=cc]| \coker \gamma \\
+            };
+            \draw[->] (ka) edge (A)
+                  (kb) edge (B)
+                  (kc) edge (C)
+                  (A) edge node[auto] {$f$} (B)
+                  (B) edge node[auto] {\(g\)} (C)
+                  (C) edge (01)
+                  (A) edge node[auto] {\(\alpha\)} (A')
+                  (B) edge node[auto] {\(\beta\)} (B')
+                  (C) edge node[auto] {\(\gamma\)} (C')
+                  (02) edge (A')
+                  (A') edge node[auto] {\(f'\)} (B')
+                  (B') edge node[auto] {$g'$} (C')
+                  (A') edge (ca)
+                  (B') edge (cb)
+                  (C') edge (cc)
+            ;
+            \draw[->,black] (ka) edge (kb)
+                           (kb) edge (kc)
+                           (ca) edge (cb)
+                           (cb) edge (cc)
+            ;
+            \draw[->,black,rounded corners,dotted] (kc) -| node[auto,text=black,pos=.7]
+            {\(\partial\)} ($(01.east)+(.5,0)$) |- ($(B)!.35!(B')$) -|
+            ($(02.west)+(-.5,0)$) |- (ca);
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{1cm}
     {\Large written by \\
     \itshape Elias Cleusters \\
     and Felix Lerner}
@@ -71,7 +126,7 @@
 \chapter{Galois theory}
     The goal of this chapter can be summarized as follows:
     
-    Given a polynomial $f(x) = x^n + a_{n-1}x^{n-1} + \dots + a_1x + x_0 \in K[x]$, $K \in \{\Q,\R\}$, determine whether it can be solved by radicals. That means all roots of $f(x)$ can expressed in terms of its coefficients only using $+,-,\cdot,$ \textdiv, $\sqrt[k]{\cdot}$.
+    Given a polynomial $f(x) = x^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0 \in K[x]$, $K \in \{\Q,\R\}$, determine whether it can be solved by radicals. That means all roots of $f(x)$ can expressed in terms of its coefficients only using $+,-,\cdot,$ \textdiv, $\sqrt[k]{\cdot}$.
 
     For $\deg f(x) = 2$, we have the $pq$-formula and for $\deg f(x) \in \{3,4\}$ there are the Cardano-Ferrari formulae. But if $\deg f(x) \geq 5$ for a general $f(x)$ the answer is \textit{no} (Abel-Ruffini theorem). Later Galois gave a criterion on the solvability by radicals using the solvability of the Galois group of the polynomial.
     
@@ -88,8 +143,11 @@
         Given two fields $K$ and $L$, a \textbf{field homomorphism} between them is a ring homomorphism $\varphi: K \rightarrow L$. The kernel of such a field homomorphism is a ($K$-)ideal in the ring $K$, hence either $\ker(\varphi) = \{0\}$ or $\ker(\varphi) = K$. That is to say, either $\varphi$ is the zero map, or $\varphi$ is injective.
         
         To summarize: For $\varphi \neq 0$, $\varphi(K)$ is a subfield of $L$ and $L/\varphi(K)$ is a field extension.
-        
-        Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
+
+        \begin{definition*}
+             Let $L/K$ be a field extension. The $L$ is naturally a $K$-vector space from the inclusion $K \subseteq L$. Such an extension is called \textbf{finite} if $\dim_K L < \infty$. Moreover, $L$ is also a $K$-algebra.
+        \end{definition*}
+       
         
         Let $L_1/K$ and $L_2/K$ be two extensions of $K$. The homomorphisms between the two extensions are exactly the $K$-algebra homomorphisms $\varphi: L_1 \rightarrow L_2$. We denote by $\Hom_K(L_1,L_2)$ the set of all such homomorphisms, and we will call them simply $K$-\textbf{homomorphisms}. Similarly, we have the notion of $K$-isomorphisms.
         
@@ -702,7 +760,7 @@
             \draw[blue] (180:2.6cm) node[fill=white] {$\sigma$};
         \end{tikzpicture}
         \end{center}
-        Next we study the Galois correspondence for $L/\Q$. We have $L = \Q(\sqrt[3]{2},\zeta)$ from \ref{exa:1.19}. The non trivial subgroups of $S_3$ are of order $2$ or $3$. There are four of them, namely:
+        Next, we study the Galois correspondence for $L/\Q$. We have $L = \Q(\sqrt[3]{2},\zeta)$ from \ref{exa:1.19}. The non-trivial subgroups of $S_3$ are of order $2$ or $3$. There are four of them, namely:
         \begin{equation*}
             H_1 = \spitz{(123)}, \quad H_2 = \spitz{(12)}, \quad H_3 = \spitz{(23)}, \quad H_4 = \spitz{(13)}
         \end{equation*}
@@ -1194,13 +1252,7 @@
     {\color{blue} Let $\sigma$ be a generator of $\Gal{L/K}$. It follows from $\sigma^m=\mathrm{id}_L$ that the minimal polynomial of $\sigma$ over $K$ divides $x^m-1$, which splits into linear factors over $K$. Hence $\sigma$ is diagonalizable over $K$. We let $\Lambda$ denote the set of its eigenvalues. We claim that $\Lambda$ is a subgroup of $(\mu_m,\cdot)$. Indeed, if $\lambda_1,\lambda_2\in\Lambda$ then $\lambda_1^{-1},\lambda_1\lambda_2\in\Lambda$ since if $\ell_1,\ell_2$ are eigenvectors associated to eigenvalues $\lambda_1$ and $\lambda_2$, then $\ell_1^{-1}$ and $\ell_1\ell_2$ are eigenvectors having eigenvalues $\lambda_1^{-1}$ and $\lambda_1\lambda_2$ respectively.} {\color{green} Moreover $1 \in \Lambda$.}
     
     {\color{blue} Let $k:=\#\Lambda$. Then any element $\lambda\in\Lambda$ satisfies $\lambda^k=1$. If $k<m$, then $\sigma$ would have order strictly less than $m$. This contradiction forces $k=m$ and $\Lambda=\mu_m$. It follows that there exists $0\neq \ell\in L$ such that $\sigma(\ell)=\zeta^{-1}\ell$. Since $\sigma$ is a $K$-automorphism, applying repeatedly $\sigma$ shows that $\ell$, $\ell^2$, $\ldots$, $\ell^m$ are eigenvectors of $\sigma$ with eigenvalues $\zeta^{-1},\ldots,\zeta^{-(m-1)},\zeta^{-m}=1$.}
-        %There are some inaccuracies in the proof. For a more detailed proof see "Non-vanishing of resolvent" in Moodle.
-%First, since $L/K$ is finite and separable, from the primitive element theorem, we can assume that $L = K(\alpha)$ for some $\alpha \in L$.
-        
-        %The crucial construction is the following Lagrange resolvent: For $\sigma \in \Gal{L/K}$ a generator:
-        %\begin{equation*}
-         %   \ell := \alpha + \zeta \sigma(\alpha) + \zeta^2 \sigma^2(\alpha) + \dots + \zeta^{m-1}\sigma^{m-1}(\alpha)
-       % \end{equation*}
+
         From $\zeta \in K$ and $\sigma(\ell) = \zeta^{-1} \ell$ it follows $\sigma^k(\ell) = \zeta^{-k} \ell$. Now we consider the intermediate field $L/K(\ell)/K$ and look at $\Gal{L/K(\ell)}$ as a subgroup of $\Gal{L/K}$.
         
         Notice that $\sigma,\sigma^2,\dots,\sigma^{m-1}$ do not fix $\ell$, hence they are not in $\Gal{L/K(\ell)}$. It follows from $\Gal{L/K} \cong \Z/m\Z$ that $\Gal{L/K(\ell)}$ is the trivial group and hence $L = K(\ell)$ (Galois correspondence).
@@ -1250,19 +1302,19 @@
     \end{lemma}
 
     \begin{proof}
-    Assume the statement is false, that is to say, there exist different characters $\chi_1,\ldots,\chi_m$ of $G$ which are linearly dependent over $L$. We assume that $m$ is minimal, that is to say, for any $1\leq k<m$, any $k$ characters in $G$ are independent over $L$ (such an $m$ exists since any single character is linearly independent). Then there exists a linear relation $a_1\chi_1+\ldots+a_m\chi_m=0$ with $a_1,\ldots,a_m\in L^\times$. 
+        Assume the statement is false, that is to say, there exist different characters $\chi_1,\ldots,\chi_m$ of $G$ which are linearly dependent over $L$. We assume that $m$ is minimal, that is to say, for any $1\leq k<m$, any $k$ characters in $G$ are independent over $L$ (such an $m$ exists since any single character is linearly independent). Then there exists a linear relation $a_1\chi_1+\ldots+a_m\chi_m=0$ with $a_1,\ldots,a_m\in L^\times$. 
 
-    The linear relation means: for any $g\in G$, 
-    \begin{equation}\label{Eq}
-    a_1\chi_1(g)+\ldots+a_m\chi_m(g)=0.
-    \end{equation} 
-    Since $\chi_1\neq \chi_2$, we choose $h$ such that $\chi_1(h)\neq\chi_2(h)$. Replacing $g$ by $gh$ in \eqref{Eq} and noticing that $\chi_i$ are characters, we obtain:
-    $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_2(h)+\ldots+a_m\chi_m(g)\chi_m(h)=0.$$
-    Multiplying \eqref{Eq} by $\chi_1(h)$ gives
-    $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_1(h)+\ldots+a_m\chi_m(g)\chi_1(h)=0.$$
-    Subtracting the above two identities gives
-    $$a_2(\chi_2(h)-\chi_1(h))\chi_2(g)+\ldots+a_m(\chi_m(h)-\chi_1(h))\chi_m(g)=0.$$
-    Since $\chi_2(h)-\chi_1(h)\neq 0$ and $g$ is an arbitrary element in $G$, we obtain a linear dependency relation of $\chi_2,\ldots,\chi_m$ over $L$, a contradiction.
+        The linear relation means: for any $g\in G$, 
+        \begin{equation}\label{Eq}
+        a_1\chi_1(g)+\ldots+a_m\chi_m(g)=0.
+        \end{equation} 
+        Since $\chi_1\neq \chi_2$, we choose $h$ such that $\chi_1(h)\neq\chi_2(h)$. Replacing $g$ by $gh$ in \eqref{Eq} and noticing that $\chi_i$ are characters, we obtain:
+        $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_2(h)+\ldots+a_m\chi_m(g)\chi_m(h)=0.$$
+        Multiplying \eqref{Eq} by $\chi_1(h)$ gives
+        $$a_1\chi_1(g)\chi_1(h)+a_2\chi_2(g)\chi_1(h)+\ldots+a_m\chi_m(g)\chi_1(h)=0.$$
+        Subtracting the above two identities gives
+        $$a_2(\chi_2(h)-\chi_1(h))\chi_2(g)+\ldots+a_m(\chi_m(h)-\chi_1(h))\chi_m(g)=0.$$
+        Since $\chi_2(h)-\chi_1(h)\neq 0$ and $g$ is an arbitrary element in $G$, we obtain a linear dependency relation of $\chi_2,\ldots,\chi_m$ over $L$, a contradiction.
     \end{proof}
 
 
@@ -1331,24 +1383,19 @@
             
             We name the elements of $S_3$:
             \begin{center}
-            \begin{tabular}{cccccc}
-            $\tau_1=\id$,& $\tau_2=(132)$, &$\tau_3=(123)$, &$\tau_4=(23)$, &$\tau_5=(12)$, &$\tau_6=(13)$.
-            \end{tabular}
+                \begin{tabular}{cccccc}
+                    $\tau_1=\id$,& $\tau_2=(132)$, &$\tau_3=(123)$, &$\tau_4=(23)$, &$\tau_5=(12)$, &$\tau_6=(13)$.
+                \end{tabular}
             \end{center}
-            %\begin{align*}
-             %   \tau_1=\id,& \tau_2=(132), &\tau_3=(123), &\tau_4=(23), &&&&\tau_5=(12), &&&&&\tau_6=(13)
-            %\end{align*}
+
             Applying them to $\ell$ gives 
             \begin{center}
             \begin{tabular}{ccc}
-            $\tau_1(\ell)=\ell$,& $\tau_2(\ell)=\zeta\ell$, &$\tau_3(\ell)=\zeta^2\ell$, \\
-            $\tau_4(\ell)=\omega$, &$\tau_5(\ell)=\zeta\omega$, &$\tau_6(\ell)=\zeta^2\omega$.
+                $\tau_1(\ell)=\ell$,& $\tau_2(\ell)=\zeta\ell$, &$\tau_3(\ell)=\zeta^2\ell$, \\
+                $\tau_4(\ell)=\omega$, &$\tau_5(\ell)=\zeta\omega$, &$\tau_6(\ell)=\zeta^2\omega$.
             \end{tabular}
             \end{center}
-            %\begin{align*}
-            %    &\tau_1(\ell)=\ell, &&\tau_2(\ell)=\zeta\ell, &&&\tau_3(\ell)=\zeta^2\ell\\
-            %    &\tau_4(\ell)=\omega, &&\tau_5(\ell)=\zeta\omega, &&&\tau_6(\ell)=\zeta^2\omega
-            %\end{align*}
+
             where $\omega=x_1+\zeta^2x_2+\zeta x_3$. Now notice that both $u_1:=\ell^3$ and $u_2:=\omega^3$ are fixed by $A_3$-permutations.Hence they are in the fixed field $\Q(x_1,x_2,x_3)^{A_3}$, which is of degree 2 over $\Q$. Therefore they have to satisfy a degree 2 equation:
             $$y^2+py+q=0 \qquad \text{ with } p=-(u_1+u_2),\quad q=u_1u_2$$
             After some computation one finds
@@ -1507,16 +1554,17 @@
             
             We consider the vector space $\C(X)$ whose elements are $\C$-linear combinations of elements in $X$. In notation
             \begin{equation*}
-                \C(X) = \left\{\sum_{i=1}^{k} \lambda_i x_i \ | \ \lambda_i \in \C, x_i \in X \right\}
+                \C(X) = \left\{\sum_{i=1}^{k} \lambda_i e_{x_i} \ | \ \lambda_i \in \C, x_i \in X \right\}
             \end{equation*}
             The vector space $V:= \C(X)$ admits a $G$-rep structure via the map
             \begin{equation*}
             \begin{split}
                 \rho_V: G &\to \GL(V) \\
-                    g &\mapsto \left(x_i \mapsto \rho_X(g)(x_i)\right)
+                    g &\mapsto \left(e_{x_i} \mapsto \rho_X(g)(x_i)\right)
             \end{split}
             \end{equation*}
             Since $\rho_X(g) \in S_X$ it permutes the basis elements of $V$. Hence the linear continuation of $\rho_X(g)$ is in $\GL(V)$.
+            We will often simplify this notation by writing $g$ instead of $e_g$, when this does no lead to confusion.
         \end{example}
         
         We look at some special cases:
@@ -1532,6 +1580,7 @@
             \end{equation*}
             
             where $\perm(\sigma)$ is the permutation matrix of $\sigma$. Clearly $\perm(\sigma) \in \GL_n(\C)$, since $\det(\perm(\sigma)) = \sgn(\sigma)$. Furthermore $\perm(\sigma \circ \tau) = \perm(\sigma) \circ \perm(\tau)$.
+            This is called the \textbf{standard representation}.
             
         \underline{(2): $X=G$:}
         
@@ -1542,7 +1591,7 @@
                 g &\mapsto \round{\sum_{h \in G} \lambda_h h } \mapsto \round{\sum_{h \in G} \lambda_h gh }
             \end{split}
             \end{equation*}
-            Such a representation is called the left regular representation of $G$.
+            Such a representation is called the \textbf{left regular representation} of $G$.
             
         \underline{(3): $X = \{x\}$:}
         
@@ -1553,7 +1602,7 @@
             g &\mapsto \id_\C \mapsto 1
         \end{split}
         \end{equation*}
-        such a representation is called the trivial representation of $G$. It is a one-dimensional representation.
+        such a representation is called the \textbf{trivial representation} of $G$. It is a one-dimensional representation.
         
 \separline{Week 5}
 
@@ -1565,8 +1614,7 @@
         
         We consider the example \ref{exa:2.4} (1) above with $G=S_n$ and $V=\C^n$. Let $W = \spitz{e_1 + \dots + e_n}$ then for any $g \in S_n$, $\rho_V(g)(e_1 + \dots + e_n) = e_1 + \dots + e_n$, hence $\rho_V(g)|_W \in \GL(W)$ and $(W,\rho_V(g)|_W)$ is a subrepresentation of $(V,\rho_V)$.
         
-        Note that for a representation $(V,\rho_V)$, there always two subrepresentations $(\{0\},\rho_V|_{\{0\}})$ and $(V,\rho_V)$.
-        
+        Note that for a representation $(V,\rho_V)$, there are always two subrepresentations $(\{0\},\rho_V|_{\{0\}})$ and $(V,\rho_V)$.
         
         \begin{definition}{Irreducible representation}{2.5}
             A representation $(V,\rho_V) \in \Rep(G)$ is called \textbf{irreducible} if $V$ has \underline{exactly} two subrepresentations.
@@ -1575,7 +1623,7 @@
         \textbf{Examples}:
         \begin{enumerate}
             \item The trivial representation $\rho^{\text{triv}}: G \to \GL(\C), \quad \rho(g) = \id $ is irreducible
-            \item The representation in Example \ref{exa:2.4} (1) is not irreducible.
+            \item The representation in Example \ref{exa:2.4} (1) is not irreducible for $n \geq 2$.
             \item The $0$ representation $\rho_{0}: G \to \GL\round{\{0\}}$ is \textbf{not} irreducible
         \end{enumerate}
     
@@ -2010,6 +2058,7 @@
     \end{split}
     \end{equation*}
     Since $\CF(G) \subseteq \cF(G)$, we can examine its image in $\C[G]$.
+    
     \begin{definition*}{center}
         For a monoid $M$, we denote its center $Z(M) = \{m \in M \ | \ \forall n \in M: mn = nm\}$.
     \end{definition*}
@@ -5081,7 +5130,86 @@
     Next, we will move to study algebra of global dimension $1$. These algebras, their variants and generalizations, stand in a central place in different branches of representation theory and even different domains in mathematics and physics.
 
 \chapter{Hereditary algebras, outlooks}
-    As this is not relevant for the exam this chapter will be delayed a bit.
+    We first go straight into the definition.
+    \begin{definition}{hereditary (erblich)}{5.1}
+        An algebra $A$ is called \textbf{hereditary}, if submodules of a projective module are projective.
+    \end{definition}
+
+    This is the original definition of a hereditary algebra. What is being inherited is the property of being projective.
+
+    \begin{proposition}{}{5.2}
+        The following statements are equivalent
+        \begin{enumerate}
+            \item $A$ is a herediatary $K$-algebra
+            \item $\gldim A \leq 1$
+        \end{enumerate}
+    \end{proposition}
+    Note that, in the definition and the proposition we did not assume that $A$ is a finite-dimensional $\C$-algebra.
+
+    \begin{proof}[Proof of Proposition \ref{prop:5.2}]
+        
+    \end{proof}
+
+    In this last chapter, we study finite-dimensional hereditary algebras.
+
+\section{Jacobson radical}
+    Roughly speaking, the Jacobson radical characterizes the difference between a hereditary and a semisimple algebra.
+
+    Let $A$ be a finite-dimensional $\C$-algebra and $M$ be a finite-dimensional $A$-module.
+
+    \begin{definition}{Jacobson radical}{5.3}
+        The \textbf{Jacobson radical} $\Jac(M)$ of $M$ is defined to be the smallest (w.r.t. inclusion of sets) $A$-submodule of $M$ such that $M/\Jac(M)$ is a semisimple $A$-module.
+    \end{definition}
+
+    In particular, $M$ is semisimple if and only if $\Jac(M) = \{0\}$.
+
+    We give a different characterisation of the Jacobson radical.
+
+    \begin{proposition}{}{5.4}
+        The $A$-module $\Jac(M)$ is the intersection of all $A$-submodules $N$ of $M$ such that $M/N$ is simple. Equivalently,
+        \begin{equation*}
+            \Jac(M) = \{ m \in M \ |  \ \forall S \in A\Mod \text{ simple } \pi: M \twoheadrightarrow S: \pi(m) = 0\}
+        \end{equation*}
+    \end{proposition}
+
+    \begin{proof}
+        
+    \end{proof}
+
+    In particular, we consider the case where $M$ is the regular left $A$-module, i.e. $M=A$.
+
+    It follows from Proposition \ref{prop:3.24} that:
+
+    \begin{equation*}
+        A \text{ is a semisimple algebra} \Leftrightarrow \Jac(A) = \{0\}
+    \end{equation*}
+
+    From the definition, $\Jac(A)$ is a left $A$-module in $A$, hence it is a left ideal in $A$. From the above proposition, we know that $\Jac(A)$ is the intersection of all maximal left ideals in $A$, We now show that it is a right ideal as well.
+
+    \begin{proposition}{}{5.5}
+        $\Jac(A)$ is an ideal of $A$. Hence $A/\Jac(A)$ is a semisimple $\C$-algebra.
+    \end{proposition}
+
+    This ideal $\Jac(A)$ is called the Jacobson radical of $A$. From the Proposition \ref{prop:5.5}, it feels as though $\Jac(A)$ is the "non-semisimple" part of $A$.
+
+    \begin{proof}
+        
+    \end{proof}
+
+    \begin{exercise}{}{24}
+        \begin{enumerate}
+            \item Let $M,N \in A\Mod$ and $\varphi \in \Hom_A(M,N)$, then $\varphi(\Jac(M)) \subseteq \Jac(N)$.
+            \item Deduce that $\Jac(A)\cdot M \subseteq \Jac(M)$
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{definition}{}{5.6}
+        A finite-dimensional $\C$-algebra $A$ is called elementary, if $A/\Jac(A) \cong \C \times \dots \times \C$ as $\C$-algebras. 
+    \end{definition}
+
+    Our first goal of this chapter is to classify finite-dimensional elementary hereditary $\C$-algebras.
+
+\section{From semisimple to hereditary}
     
 \printbibliography
 \end{document}
