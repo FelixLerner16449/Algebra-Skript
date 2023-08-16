@@ -5147,7 +5147,24 @@
     Note that, in the definition and the proposition we did not assume that $A$ is a finite-dimensional $\C$-algebra.
 
     \begin{proof}[Proof of Proposition \ref{prop:5.2}]
-        
+        \underline{"$\Rightarrow$":}
+            Let $M$ be an $A$-module. We show that $\prd(M) \leq 1$. By constructing a projective resolution of $M$ of length $\leq 1$. Let $M = \spitz{m_i \ | \ i \in I}$ for some index set $I$. Then we have an exact sequence
+            \begin{equation*}
+            \xymatrix{
+                0 \ar[r] & \ker \varphi \ar[r] & A^{(I)} \ar[r]^\varphi & M \ar[r] & 0
+            }
+            \end{equation*}
+            where $\varphi(e_i) = m_i$. Since $A$ is hereditary, $\ker \varphi$ is projective and we found a projective resolution of length $\leq 1$.
+            
+        \underline{"$\Leftarrow$":}
+            Let $M$ be a projective $A$-module and $N \subseteq M$. We show that $N$ is projective. For this, we consider the s.e.s. $0 \to N \to M \to M/N \to 0$ and the associated long exact sequence (Corollary \ref{cor:4.35}) for an $A$-module $X$:
+            \begin{equation*}
+            \xymatrix{
+                \dots \ar[r] & \Ext_A^1(M/N,X) \ar[r] & \Ext_A^1(M,X) \ar[r] & \Ext_A^1(N,X) \ar[r] & \Ext_A^2(M/N,X) \ar[r] & \dots
+            }
+            \end{equation*}
+            Since $\gldim A \leq 1$, we have $\prd(M/N) \leq 1$. Taking a projective resolution $0 \to P_1 \to P_0 \to M/N \to 0$ of $M/N$, the long exact sequence of $\Ext$ gives that for any $A$-module $X$, $\Ext_A^2(M/N,X) = \{0\}$, because the $P_i$ are projetive, whence $\Ext^n_A(P_i,X) = \{0\}$ for all $n \geq 1$ and thus then long exact sequence of $\Ext$ has the form $0 \to \Ext_A^2(M/N,X) \to 0$, which means $\Ext_A^2(M/N,X) = \{0\}$.
+            Since $M$ is projective, $\Ext_A^1(M,X) = \{0\}$ (Corollary \ref{cor:4.36}). Hence for any $X$, $\Ext_A^1(N,X) = \{0\}$ with the same argument as above. Applying Corollary \ref{cor:4.36} again shows that $N$ is projective.
     \end{proof}
 
     In this last chapter, we study finite-dimensional hereditary algebras.
@@ -5168,12 +5185,25 @@
     \begin{proposition}{}{5.4}
         The $A$-module $\Jac(M)$ is the intersection of all $A$-submodules $N$ of $M$ such that $M/N$ is simple. Equivalently,
         \begin{equation*}
-            \Jac(M) = \{ m \in M \ |  \ \forall S \in A\Mod \text{ simple } \pi: M \twoheadrightarrow S: \pi(m) = 0\}
+            \Jac(M) = \{ m \in M \ |  \ \forall S \in A\Mod \text{ simple } \forall \pi: M \twoheadrightarrow S: \pi(m) = 0\}
         \end{equation*}
     \end{proposition}
 
     \begin{proof}
+        The equivalence is given by the first Noetherian isomorphism theorem (Homomorphiesatz). We show the above equivalence of sets.
         
+        \underline{"$\subseteq$":}
+            We fix a simple $A$-module $S$ and a surjective homomorphism $\pi: M \to S$. Then $\Jac(M) \cap \ker \pi$ is the kernel of the $A$-module homomorphism
+            \begin{equation*}
+            \begin{split}
+                \varphi: M &\to M/\Jac(M) \oplus S, \\
+                m &\mapsto (\overline{m}, \pi(m))
+            \end{split}
+            \end{equation*}
+            The right-hand side is semisimple from the definition of $\Jac(M)$. Being a submodule, $\im \varphi$ is semisimple. It follows that $M/\Jac(M) \cap \ker \varphi$ is semisimple and hence $\Jac(M) \subseteq \Jac(M) \cap \ker \pi$, i.e. $\Jac(M) \subseteq \ker \pi$.
+
+        \underline{"$\supseteq$":}
+            We take $m \in M \setminus \Jac(M)$, since $M/\Jac(M)$ is semisimple, there exists an isomorphism $\varphi: M/\Jac(M) \to S_1 \oplus \dots \oplus S_k$ where the $S_i$ are simple $A$-modules. Since $m \not \in  \Jac(M)$ its class in $M/\Jac(M)$ is non-zero. Hence there exists an $i$, such that the image of $[m]$ under $\pi_i \circ \varphi$ is non-zero. Therefore $m$ is not contained in the RHS of the equality.
     \end{proof}
 
     In particular, we consider the case where $M$ is the regular left $A$-module, i.e. $M=A$.
@@ -5193,7 +5223,16 @@
     This ideal $\Jac(A)$ is called the Jacobson radical of $A$. From the Proposition \ref{prop:5.5}, it feels as though $\Jac(A)$ is the "non-semisimple" part of $A$.
 
     \begin{proof}
-        
+        We show that $\Jac(A)$ is a right ideal as well, i.e. $\forall x \in A: \Jac(A).x\subseteq \Jac(A)$. From Proposition \ref{prop:5.4}, it suffices to show that for any surjective left $A$-module homomorphism $\pi: A \to S$ with $S$ a simple $A$-module, $\Jac(A).x \subseteq \ker \pi$.
+
+        For this we consider the $A$-module homomorphism $\pi_x: A \to S$ defined by:
+        \begin{equation*}
+        \begin{split}
+            \pi_x: A &\to S \\
+            a &\mapsto \pi(ax)
+        \end{split}
+        \end{equation*}
+        from Exercise \ref{exe:24}, $\pi_x(\Jac(A)) = 0$ ($A \xrightarrow{.x} A$ is an $A$-module homomorphism), hence $\pi(\Jac(A).x) = 0$. Now $A/\Jac(A)$ is a semisimple $A$-module and a $\C$-algebra. Hence it is a semisimple $A/\Jac(A)$ module. This implies that the Jacobson radical is zero and $A/\Jac(A)$ is a semisimple algebra.
     \end{proof}
 
     \begin{exercise}{}{24}
