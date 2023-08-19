@@ -5249,6 +5249,132 @@
     Our first goal of this chapter is to classify finite-dimensional elementary hereditary $\C$-algebras.
 
 \section{From semisimple to hereditary}
+    We use Chapter $3$ Section 1 of \cite{Auslander.1994} as a reference.
+
+    We first introduce the tensor algebra construction, which allows us to go from $\gldim 0 $ to $\gldim 1$.
+
+    Let $A$ be a $\C$-algebra and $M$ be an $A$-bimodule. We define the associated tensor algebra $T_A(M)$. As a vector space, it is:
+    \begin{equation*}
+        T_A(M) := \bigoplus_{k \geq 0} M^{\tens_A k} = \C \oplus M \oplus M \tens_A M \oplus \dots
+    \end{equation*}
+
+    The algebra structure on $T_A(M)$ is given by the concatenation of tensors. For $m_1 \tens \dots \tens m_p \in M^{\tens_A p}$ and $m'_1 \tens \dots \tens m'_q \in M^{\tens_A q}$, we set
+    \begin{equation*}
+        (m_1 \tens \dots \tens m_p) \cdot (m'_1 \tens \dots \tens m'_q) := m_1 \tens \dots \tens m_p \tens m'_1 \tens \dots \tens m'_q \in M^{\tens_A (p+q)}
+    \end{equation*}
+
+    \begin{example}{}{5.7}
+        If $A=\C$ and $M = \C^n$ with a fixed basis $e_1,\dots,e_n$ of $M$, we have $T_A(M) = \C \spitz{e_1,\dots,e_n}$, the non-commutative polynomial algebra in variables $e_1,\dots,e_n$.
+
+        Here $M^{\tens_A k }$ has basis $e_{i_1} \cdot \dots \cdot e_{i_k} := e_{i_1} \tens_A \dots \tens_A e_{i_k}$ with $1 \leq i_1, \dots, i_k \leq n$.
+    \end{example}
+
+    \begin{proposition}{}{5.8}
+        Let $A$ be a finite-dimensional semisimple $\C$-algebra and $M$ be a finite-dimensional $A$-module. Then $T_A(M)$ is hereditary.
+    \end{proposition}
+
+    For example, the non-commutative polynomial algebra $\C \spitz{e_1,\dots,e_n}$ in Example \ref{exa:5.7} is hereditary.
+
+    The most important examples of hereditary algebras come form the path algebra of a quiver.
+
+    \begin{definition}{}{5.9}
+        A (finite) quiver is a finite oriented graph $Q = (Q_0,Q_1,s,t)$ where $Q_0$ is the set of all vertices, $Q_1$ is the set of all (oriented) edges and there are start (or start) and terminal (or target) maps $s,t: Q_1 \to Q_0$, i.e. if $\bullet_1 \xrightarrow{\alpha} \bullet_2 \in Q_1$, then $s(\alpha) = \bullet_1$ and $t(\alpha) = \bullet_2$.
+    \end{definition}
+
+    \begin{example}{}{5.10}
+        The following are examples of quivers:
+        \begin{equation*}
+        \xymatrix @C=15pt {
+            \bullet^1 \ar[r] & \bullet^2 & & \bullet^1 \ar[r] & \bullet^2 \ar[r] & \bullet^3 & & & \bullet^4 \\
+            & & & & & & & \bullet^1 \ar[r] & \bullet^2 \ar[r] \ar[u]  & \bullet^3 & & \bullet \ar@(ul,ur) & & \bullet \ar@(ul,ur) \ar@(ur,dr) \ar@(dr,dl) \ar@(dl,ul)
+        }
+        \end{equation*}
+        There are some more drawn in the notes.
+    \end{example}
+
+    Starting from a equiver we define a semisimple algebra $A$ and an $A$-binmodule $M$ as follows:
+
+    Let $A:=\C^{Q_0}$, a vector space of basis $\{e_i \ | \ i \in Q_0\}$. We define a $\C$-algebra structure on $A$ by requiring the $e_i$'s to be orthogonal idempotents. The unit in $A$ is then given by $1_A:= \sum_{i \in Q_0} e_i$.
+
+    Let $M$ be the $\C$-vector space with basis $Q_1$. We define an $A$-bimodule structure on $M$ by assigning for $e_i,e_j \in A$ and $\alpha \in Q_1$:
+    \begin{equation*}
+        e_j \alpha e_i = \left\{ \begin{array}{cl}
+            \alpha, & \text{if } s(\alpha) \text{ and } t(\alpha) = j  \\
+            0, & \text{otherwise}
+        \end{array}\right.
+    \end{equation*}
+
+    Our next task is to describe $T_A(M)$ with the data defined above.
+
+    We first look at $M$. Since the $e_i$'s are orthogonal idempotents, we have a decomposition of $M$ into its subspaces
+    \begin{equation*}
+        M = \bigoplus_{i,j \in Q_0} e_j M e_i
+    \end{equation*}
+
+    where $e_j M e_i$ is the $\C$-subspace of $M$ spanned by all $\alpha \in Q_1$ with $s(\alpha)$ and $t(\alpha) = j$.
+
+    Next we look at $M \tens_A M$: it has a decomposition into subspaces:
+    \begin{equation*}
+        M \tens_A M = \bigoplus_{i,j,k,l \in Q_0} e_j M e_i \tens_A e_l M e_k
+    \end{equation*}
+
+    Note that if $i \neq l$, then
+    \begin{equation*}
+        e_j M e_i \tens_A e_l M e_k = e_j M \tens_A e_ie_l M e_k = \{0\}  
+    \end{equation*}
+    Therefore we have:
+    \begin{equation*}
+        M \tens_A M = \bigoplus_{i,j,k \in Q_0} e_j M e_i \tens_A e_i M e_k
+    \end{equation*}
+
+    So $M \tens_A M$ has as a basis pairs of elements $(\alpha,\beta) \in Q_1 \times Q_1$ such that $s(\alpha) = t(\beta)$. That is to say, $M \tens_A M$ has as basis directed paths of length $2$ in $Q$.
+
+    This argument works in general, i.e. $M^{\tens_A k}$ has as a basis the directed paths of length $k$ in $Q$. The multiplication in $T_A(M)$ is then just the concatination of paths, if they match and $0$ otherwise.
+
+    \begin{definition}{}{5.11}
+        The path algebra $\C Q$ associtated to the quiver $Q = (Q_0,Q_1,s,t)$ is defined to be the $\C$-algebra $T_A(M)$.
+    \end{definition}
+
+    It is straightforward to see that $\dim_\C T_A(M) < \infty$ if and only if the quiver has no oriented cycles (including loops).
+
+    \begin{example}{}{5.12}
+        \begin{enumerate}
+            \item Let $Q = \xymatrix {e_1 \ar@(ul,ur)^{\alpha}}$, then the only path of length $n$ is going $n$ times along $\alpha$, i.e. $\alpha^n$. It is clear that in this case
+            \begin{equation*}
+                \C Q = T_A(M) \cong \C[\alpha]
+            \end{equation*}
+            \item We look at the quiver $Q = \xymatrix {1 \ar[r]^{\alpha} & 2 \ar[r]^{\beta} & 3}$.
+            The path algebra $\C Q$ is $6$-dimensional and:
+            \begin{itemize}
+                \item $A$ has basis $e_1,e_2,e_3$,
+                \item $M$ has basis $\alpha,\beta$,
+                \item and $M \tens_A M$ has basis $\beta \alpha$.
+            \end{itemize}
+            The multiplication rules in $\C Q$ are:
+            \begin{equation*}
+                \beta \circ \alpha = \beta \alpha \quad \alpha e_1 = e_2 \alpha = \alpha \quad \beta e_2 = e_3 \beta = \beta
+            \end{equation*}
+            We claim that $\C Q \cong B_3$, the $\C$-algebra of lower triangular $3 \times 3$ matrices. We have to send $e_1 \mapsto E_{1,1}$, $e_2 \mapsto E_{2,2}$ and $e_3 \mapsto E_{3,3}$ as they are idempotents. We have no choice but to send $\alpha \mapsto E_{2,1}$ and $\beta \mapsto E_{3,2}$, henc $\beta \alpha \mapsto E_{3,1}$.
+
+            In general, one can easily show that the path algebra associated to the quiver
+            \begin{equation*}
+                \xymatrix {
+                    1 \ar[r] & 2 \ar[r] & \dots \ar[r] & n
+                }
+            \end{equation*}
+            is isomorphic (as $\C$-algebra) to the $\C$-algebra of lower triangular $n \times n$ matrices.
+        \end{enumerate}
+    \end{example}
+
+    \begin{corollary}{}{5.13}
+        Let $Q$ be a finite quiver. The path algebra $\C Q$ is hereditary.
+    \end{corollary}
+
+    \begin{proof}
+        Apply Proposition \ref{prop:5.8} to this special case.
+    \end{proof}
+
+\section{Structure theorems of finite-dimensional algebras}
     
 \printbibliography
 \end{document}
