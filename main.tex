@@ -5375,6 +5375,155 @@
     \end{proof}
 
 \section{Structure theorems of finite-dimensional algebras}
+    We start with certain special algebras.
+    
+    \begin{example}{}{5.14}
+        Let $Q$ be a finite quiver, then $\C Q$ is elementary.
+    \end{example}
+
+    The proof of this statement relies on the following
+    \begin{proposition}{}{5.15}
+        The Jacobson radical
+        \begin{equation*}
+            \Jac(\C Q) = \bigoplus_{k \geq 1} M^{\tens_A k}
+        \end{equation*}
+        Therefore $\C Q/\Jac(\C Q) \cong A$ is isomorphic to $\underbrace{\C \times \dots \times}_{\# Q_0 \text{-times}}$
+    \end{proposition}
+
+    The following theorem due to Gabriel classifies finite-dimensional elementary, hereditary algebras.
+
+    \begin{theorem}{Gabriel}{Gabriel}
+        Let $A$ be a finite-dimensional elementary hereditary $\C$-algebra. There exists a unique finite quiver $Q_A$ such that $A \cong \C Q_A$. Moreover, the vertices of $Q_A$ are simple $A$-modules $S_1,\dots,S_n$ and the number of arrows from $S_i$ to $S_j$ equals to $\dim_\C \Ext_A^1(S_i,S_j)$.
+    \end{theorem}
+
+    Roughly speaking, the quiver $Q_A$ encodes the "extension structure" of the algebra $A$.
+
+    \begin{remark}{}{5.17}
+        The condition of being elementary can be removed by replacing "isomorphism" with "Morita equivalent".
+    \end{remark}
+
+    \begin{theorem}{Gabriel}{Gabriel2}
+        Let $A$ be a finite-dimensional elementary $\C$-algebra. There exists a quiver $Q_A$ and an ideal $J \subseteq \Jac(\C Q_A)^2$ such that $A \cong \C Q_A /J$.
+    \end{theorem}
+
+\section{Representation theory}
+    Let $Q = (Q_0,Q_1,s,t)$ be a finite quiver.
+
+    Without loss of generality we assume $Q_0 = \{1,\dots,n\}$. A representation of the quiver $Q$ is defined to be a $\C Q$-module.
+
+    Let $M$ be a representation of $Q$ with structural map $\rho: \C Q \to \End(M)$. From the defintion of $\C Q$, the $\rho(e_1),\dots,\rho(e_m)$ are orthogonal idempotents in $\End(M)$ with sum $\id_M$. We set $M_i := \Img \rho (e_i)$. The as $\C$-vector spaces $M = M_1 \oplus \dots \oplus M_n$.
+
+    For any $\alpha: i \to j \in Q_1$, since $e_j \alpha e_i = \alpha$, we have that $\rho(\alpha): M_i \to M_j$. So a $\C Q$-module is nothing but the following data:
+
+    \begin{itemize}
+        \item to any vertex $e_i \in Q_0$, we associate a vector space $M_i$
+        \item to any arrow $\alpha: i \to j$, we associate a linear map $M_\alpha: M_i \to M_j$.
+    \end{itemize}
+
+    We call $\underline{\dim} M:= \round{\dim M_1,\dots,\dim M_N} \in \N_0^n$ the \textbf{dimension vector} of $M$.
+
+    \begin{example}{}{5.19}
+        Let $Q = 1 \xrightarrow{\alpha} 2$. We fix $M$ to be a $\C Q$-module of dimension vector $(m,n)$. Then $M$ has form $M_1 \xrightarrow{\varphi} M_2$ with $\dim M_1 = m$ and $\dim M_2 = n$.
+
+        so all such representations of $Q$ are nothing but linear maps between a vector space of dimension $m$ and a vector space of dimension $n$.
+    \end{example}
+
+    Since $\C Q$ is no longer semisimple in general, we are not always able to write a $\C Q$-module into a direct sum of simple modules.
+
+    Indecomposoable modules play the same role in the case as simple modules in the semisimple case ( e.g. rep theory of groups)
+
+    \begin{definition}{}{5.20}
+        Let $A$ be a $\C$-algebra. An $A$-module $M$ is called \textbf{indecomposable}, if it is non-zero and it can not be writte as a direct sum of two non-zero submodules. 
+    \end{definition}
+
+    For example, any simple module is indecomposeable. The indecomposable modules are important since we have the following
+
+    \begin{theorem}{}{Krull-Schmidt}
+        Let $A$ be a finite-dimensional $\C$-algebra and $M$ be a finite-dimensional $A$-module. Then $M$ has a decomposition into a direct sum of indecomposable modules $M = U_1 \oplus \dot \oplus U_r$. If $M = U_1' \oplus \dots \oplus U_s'$ is another such decomposition, then $r=s$ and after renumbering the indices, one has $U_i \cong U_i'$ as $A$-modules.
+    \end{theorem}
+
+    The first question is: \textit{For which finite-dimensional algebra $A$ are there only finitely many indecomposable modules?}
+
+    We will answer the restriction of this question to finite-dimensional modules for quivers.
+
+    \begin{theorem}{Gabriel}{5.22}
+        Let $Q$ be a \textbf{connected} quiver (i.e. the underlying unoriented graph is connected). There are finitely many indecomposable $\C Q$-modules (up to isomorphism) if and only if the underlying unoriented graph of $Q$ is one of the following:
+        \begin{equation*}
+        \begin{split}
+            A_n&: \xymatrix @R=12pt {1 \ar[r] & 2 \ar[r] & \dots \ar[r] & n} \\
+            D_n (n \geq 4) &: \xymatrix @R=12pt {1 \ar[r] & 2 \ar[r] & \dots \ar[r] & n-2 \ar[d] \ar[r] & n \\
+            & & & n-1} \\
+            E_6 &: \xymatrix @R=12pt {1 \ar[r] & 2 \ar[r] & 3 \ar[r] \ar[d] & 5                         \ar[r] & 6 \\
+                                       &   & 4 } \\
+            E_7 &: \xymatrix @R=12pt {1 \ar[r] & 2 \ar[r] & 3 \ar[r] \ar[d] & 5                         \ar[r] & 6 \ar[r] & 7 \\
+                                       &   & 4 } \\
+            E_8 &: \xymatrix @R=12pt {1 \ar[r] & 2 \ar[r] & 3 \ar[r] \ar[d] & 5                         \ar[r] & 6 \ar[r] & 7 \ar[r] & 8\\
+                                       &   & 4 } \\
+        \end{split}
+        \end{equation*}
+    \end{theorem}
+
+    This is called the \textbf{ADE classification} in mathematics. you will see a similar classification in the study of semisimple Lie algebra. There one has to more families, $B_n,C_n$ and two extra ones: $F_4$ and $G_2$.
+
+    Such a classification is usually controlled by a bilinear form and the associated quadratic form.
+
+    for a finite quiver $Q$, we define the following bilinear form on $\Z^{Q_0}$:
+    \begin{equation*}
+    \begin{split}
+        \spitz{-,-}_Q: \Z^{Q_0} \times \Z^{Q_0} &\to \Z \\
+                        (\alpha,\beta) &\mapsto \sum_{i \in Q_0} \alpha_i \beta_i - \sum_{\gamma \in Q_1} \alpha_{t(\gamma)} \beta_{s(\gamma)}
+    \end{split}
+    \end{equation*}
+    the quadratic form is defined by:
+    \begin{equation*}
+    \begin{split}
+        q_Q: \Z^{Q_0} &\to \Z \\
+        \alpha &\mapsto \spitz{\alpha,\alpha}_Q
+    \end{split}
+    \end{equation*}
+
+    \underline{Important observation:}
+    Although $\spitz{-,-}_Q$ depends on the orientation fo the graph, the quadratic form only depends on the underlying unoriented graph.
+
+    \textbf{Example:} Let $Q : 1 \to 2 \to 3$. For $\alpha = (\alpha_1,\alpha_2,\alpha_3), \beta = (\beta_1,\beta_2,\beta_3) \in \Z^{Q_0}$, we have
+    \begin{equation*}
+    \begin{split}
+        \spitz{\alpha,\beta}_Q &= \alpha_1 \beta_1 + \alpha_2 \beta_2 + \alpha_3 \beta_3 - \alpha_2 \beta_1 - \alpha_3 \beta_2 \\
+        q_Q(\alpha) &= \alpha_1^2 + \alpha_2^2 + \alpha_3^2 - \alpha_2 \alpha_1 - \alpha_3 \alpha_2
+    \end{split}
+    \end{equation*}
+    If we were to look at $Q' : 1 \to 2 \leftarrow 3$, we need to replace $\alpha_3 \alpha_2$ by $\alpha_2 \alpha_3$, but they are the same, as $\alpha_i \in \Z$.
+
+    \begin{theorem}{ADE classification}{5.23}
+        Let $Q$ be a finite, connected quiver. Then $q_Q$ is positive definite if and only if the underlying unoriented graph of $Q$ is type $A,D,E$.
+    \end{theorem}
+
+    Let $Q$ be of type $A,D,E$ (also called Dynkin case).
+
+    We define $\Delta_Q:= \curly{\alpha \in \Z^{Q_0} \ | \ \alpha \neq 0, q_Q(\alpha) = 1}$. Elements in $\Delta_Q$ are called roots of $Q$.
+
+    \underline{Properties:}
+    \begin{enumerate}
+        \item $\Delta_Q$ is a finite set (since $q_Q$ is positive definite)
+        \item $\Delta_Q = \Delta_Q^+ \sqcup \Delta_Q^-$ (disjoint union), where $\Delta_Q^+ = \Delta_Q \cap \N^{Q_0}$ and $\Delta_Q^{-} = - \Delta_Q^+$
+    \end{enumerate}
+
+    For example, if $Q: 1 \to 2 \to 3$, then
+    \begin{equation*}
+        \Delta_Q^+ = \curly{(1,0,0),(0,1,0),(0,0,1),(1,1,0),(0,1,1),(1,1,1)}
+    \end{equation*}
+
+    In fact, the indecomposable $\C Q$-modules, when $Q$ is Dynkin, are in bijection with $\Delta_Q^+$. This map is given by $M \mapsto \underline\dim M$.
+
+    For example, the indecomposable modules of $\C Q$ for $Q: 1 \to 2 \to 3$, are (up to isomorphism):
+    \begin{equation*}
+    \xymatrix {
+        \C \ar[r]^0 & 0 \ar[r]^0 & 0 & & 0 \ar[r]^0 & \C \ar[r]^0 & 0 & & 0 \ar[r]^0 & 0 \ar[r]^0 & \C \\
+        \C \ar[r]^\id & \C \ar[r]^0 & 0 & & 0 \ar[r]^0 & \C \ar[r]^\id & \C & & \C \ar[r]^0 & \C \ar[r]^0 & \C
+    }
+    \end{equation*}
+
+    There are deeper relations between quiver representations and Lie Algebra, which can not be covered in a bachelor level lecture. 
     
 \printbibliography
 \end{document}
